@@ -129,3 +129,30 @@ Stage Summary:
 - Gradient overlay ensures text readability while keeping the logo recognizable
 - Frosted-glass (backdrop-blur) treatment on badge, stats card, and secondary button for visual cohesion
 - Works across light/dark mode and mobile/desktop
+
+---
+Task ID: logo-bg-all-pages
+Agent: Z.ai Code (main orchestrator)
+Task: Make the logo a background on ALL pages, not just the landing page
+
+Work Log:
+- Created /home/z/my-project/src/components/logo-background.tsx: a global fixed full-viewport background component using next/image (fill + object-cover) + gradient overlay, with pointer-events-none and aria-hidden so it doesn't interfere with interaction
+- Added <LogoBackground /> to src/app/page.tsx root wrapper (positioned before Navbar, behind all content via -z-10), wrapped root div with `relative`
+- Tuned overlay opacity: from-background/55 via-background/68 to-background/80 (light) / from-background/70 via-background/78 to-background/85 (dark) — initial /85 was too heavy (logo invisible in light mode); reduced so the dark PGSI logo shows through as an ambient background
+- Reverted home-view hero: removed its own logo background (was duplicate), restored standard text colors (muted-foreground), kept hero section with bg-background/70 + backdrop-blur-sm so the logo shows subtly through the hero while staying readable
+- Removed unused Image import from home-view
+- Verified via Agent Browser + VLM across ALL pages:
+  - Home: logo background visible ✓
+  - Materi: logo background visible behind cards ✓
+  - Dashboard: logo background visible ✓
+  - Forum: logo background visible ✓
+  - Detail Materi: logo background visible ✓
+  - Dark mode: logo background visible, text readable ✓
+  - Mobile (390px): logo background visible, content readable ✓
+- Lint passes with 0 errors, no runtime errors
+
+Stage Summary:
+- Logo now appears as a global fixed background across every page (home, materi, detail, dashboard, forum)
+- Single source of truth: src/components/logo-background.tsx, rendered once in page.tsx
+- Gradient overlay balances logo visibility vs content readability
+- Content cards have solid/semi-transparent backgrounds so text stays legible over the image

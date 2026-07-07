@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   ArrowRight,
   BookOpen,
@@ -64,36 +63,22 @@ export function HomeView() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero with logo background */}
-      <section className="relative isolate overflow-hidden border-b border-border">
-        {/* Logo as background */}
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="/logo-pgsi.jpg"
-            alt=""
-            fill
-            priority
-            className="h-full w-full object-cover"
-            sizes="100vw"
-          />
-          {/* Gradient overlay for readability — lighter at top so logo shows */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/65 to-background/90 dark:from-background/55 dark:via-background/75 dark:to-background/93" />
-        </div>
-
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-border/60 bg-background/70 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4 gap-1.5 border border-border/40 bg-background/60 px-3 py-1 backdrop-blur-sm">
+            <Badge variant="secondary" className="mb-4 gap-1.5 px-3 py-1">
               <Zap className="h-3 w-3 text-primary" />
               7 Level · 55+ Materi · Gratis
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-foreground drop-shadow-sm sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               Belajar Coding{" "}
               <span className="bg-gradient-to-r from-red-600 to-rose-400 bg-clip-text text-transparent">
                 dari Nol
               </span>{" "}
               hingga Mahir
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-foreground/80 drop-shadow-sm">
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
               Platform belajar coding lengkap dengan materi terstruktur, quiz interaktif,
               project praktis, dan sertifikat. Mulai perjalanan Anda menjadi web developer hari ini.
             </p>
@@ -110,7 +95,7 @@ export function HomeView() {
                 size="lg"
                 variant="outline"
                 onClick={goMateri}
-                className="w-full border-border/50 bg-background/60 backdrop-blur-sm hover:bg-background/80 sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 <BookOpen className="mr-2 h-4 w-4" />
                 Lihat Materi
@@ -124,10 +109,10 @@ export function HomeView() {
                 { value: "100%", label: "Gratis" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="text-2xl font-bold text-primary drop-shadow-sm sm:text-4xl">
+                  <div className="text-2xl font-bold text-primary sm:text-4xl">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-foreground/70 sm:text-sm">
+                  <div className="text-xs text-muted-foreground sm:text-sm">
                     {stat.label}
                   </div>
                 </div>

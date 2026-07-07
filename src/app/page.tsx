@@ -6,6 +6,7 @@ import { authApi } from "@/lib/api";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { AuthDialog } from "@/components/auth-dialog";
+import { LogoBackground } from "@/components/logo-background";
 import { HomeView } from "@/components/views/home-view";
 import { MateriView } from "@/components/views/materi-view";
 import { DetailView } from "@/components/views/detail-view";
@@ -24,7 +25,8 @@ export default function Home() {
   }, [syncFromHash, setUser]);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col">
+      <LogoBackground />
       <Navbar />
       <main className="flex-1">
         {view === "home" && <HomeView />}
