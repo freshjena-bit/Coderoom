@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   ArrowRight,
   BookOpen,
@@ -72,6 +73,18 @@ export function HomeView() {
 
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 flex justify-center">
+              <div className="relative h-24 w-24 overflow-hidden rounded-2xl ring-1 ring-border/60 shadow-lg sm:h-28 sm:w-28">
+                <Image
+                  src="/logo-pgsi.jpg"
+                  alt="CodeRoom"
+                  width={112}
+                  height={112}
+                  className="h-full w-full object-cover"
+                  priority
+                />
+              </div>
+            </div>
             <Badge variant="secondary" className="mb-4 gap-1.5 px-3 py-1">
               <Zap className="h-3 w-3 text-primary" />
               7 Level · 55+ Materi · Gratis

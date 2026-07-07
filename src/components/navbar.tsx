@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import {
-  Code2,
   Home,
   BookOpen,
   LayoutDashboard,
@@ -13,9 +12,9 @@ import {
   Menu,
   X,
   LogOut,
-  User as UserIcon,
 } from "lucide-react";
 import { useAppStore } from "@/lib/store";
+import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -60,14 +59,11 @@ export function Navbar() {
         {/* Logo */}
         <button
           onClick={() => handleNav("home")}
-          className="flex items-center gap-2 font-bold text-lg transition-opacity hover:opacity-80"
+          className="flex items-center transition-opacity hover:opacity-80"
+          aria-label="CodeRoom - Beranda"
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Code2 className="h-5 w-5" />
-          </div>
-          <span className="hidden sm:inline">
-            Code<span className="text-primary">Room</span>
-          </span>
+          <Logo size="md" showText={true} className="hidden sm:flex" />
+          <Logo size="md" showText={false} className="sm:hidden" />
         </button>
 
         {/* Desktop Nav */}

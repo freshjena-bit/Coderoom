@@ -21,7 +21,8 @@ export const metadata: Metadata = {
   keywords: ["belajar coding", "programming", "HTML", "CSS", "JavaScript", "Node.js", "web development"],
   authors: [{ name: "CodeRoom" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/logo-pgsi.jpg",
+    appleIcon: "/logo-pgsi.jpg",
   },
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useAppStore } from "@/lib/store";
 import { authApi } from "@/lib/api";
 import {
@@ -14,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Mail, Lock, User as UserIcon, Sparkles } from "lucide-react";
+import { Loader2, Mail, Lock, User as UserIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export function AuthDialog() {
@@ -82,10 +83,18 @@ export function AuthDialog() {
     <Dialog open={authDialog !== null} onOpenChange={(open) => !open && closeAuth()}>
       <DialogContent className="sm:max-w-[420px]">
         <DialogHeader>
-          <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-            <Sparkles className="h-6 w-6 text-primary" />
+          <div className="mb-2 flex justify-center">
+            <div className="relative h-16 w-16 overflow-hidden rounded-xl ring-1 ring-border/60 shadow-md">
+              <Image
+                src="/logo-pgsi.jpg"
+                alt="CodeRoom"
+                width={64}
+                height={64}
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
-          <DialogTitle className="text-xl">
+          <DialogTitle className="text-center text-xl">
             {tab === "login" ? "Masuk ke CodeRoom" : "Buat Akun Baru"}
           </DialogTitle>
           <DialogDescription>

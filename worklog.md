@@ -51,3 +51,27 @@ Stage Summary:
 - All features verified with Agent Browser: login, quiz, progress, forum, dark mode, responsive
 - Lint passes with 0 errors, no runtime errors in dev log
 - Demo login: demo@coderoom.id / demo12345
+
+---
+Task ID: logo-integration
+Agent: Z.ai Code (main orchestrator)
+Task: Add user-uploaded logo (IMG-20260707-WA0105.jpg) to the CodeRoom website
+
+Work Log:
+- Analyzed uploaded logo image via VLM: dark-themed graphic with hooded figures, red binary code background, text "DESTRUCTOR IMPLACABLE / PGSI / PENGHANCUR"
+- Copied logo from /home/z/my-project/upload/ to /home/z/my-project/public/logo-pgsi.jpg
+- Created reusable Logo component (src/components/logo.tsx) with 3 sizes (sm/md/lg) and showText option, using next/image with object-cover
+- Integrated Logo into Navbar: replaces Code2 icon, shows image+text on desktop, image-only on mobile
+- Integrated Logo into Footer: replaces Code2 icon in brand section
+- Added large logo (112x112) to Home hero section above the headline
+- Added logo to AuthDialog header (replacing Sparkles icon), centered above title
+- Updated layout.tsx metadata icons to use /logo-pgsi.jpg as favicon
+- Removed unused imports (Code2, UserIcon, Sparkles) from navbar/auth-dialog
+- Verified via Agent Browser + VLM: logo displays correctly in navbar, hero, footer, login dialog — in both light and dark mode, on desktop and mobile
+
+Stage Summary:
+- Logo file: /home/z/my-project/public/logo-pgsi.jpg (257KB)
+- Logo component: src/components/logo.tsx (reusable, 3 sizes)
+- Logo appears in 4 locations: Navbar, Home hero, Footer, Login/Register dialog
+- Favicon updated to use the logo
+- All lint passes, no runtime errors, verified across light/dark mode and mobile/desktop
