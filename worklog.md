@@ -103,3 +103,29 @@ Stage Summary:
 - All CSS variables, component classes, and gradients updated
 - Verified in light mode, dark mode, and across all 5 views (home, materi, detail, dashboard, forum)
 - The amber color retained for "not passed" quiz state and one dashboard stat card for visual contrast
+
+---
+Task ID: logo-as-background
+Agent: Z.ai Code (main orchestrator)
+Task: Make the logo the background of the landing page (hero section)
+
+Work Log:
+- Replaced the home-view hero section: removed the small inline logo card and blur circles
+- Added the logo as a full-bleed background image using next/image with `fill` + `object-cover`
+- Added a gradient overlay (from-background/40 via-background/65 to-background/90) so the logo shows through at the top while keeping text readable at the bottom
+- Initially overlay was too heavy (logo looked like abstract tones); reduced opacity so the PGSI logo (hooded figures, red text) is now recognizable as the background
+- Removed the red mix-blend tint layer for cleaner look
+- Updated text colors for contrast on image: headline uses text-foreground with drop-shadow, paragraph uses text-foreground/80, badge/stats use semi-transparent background with backdrop-blur
+- Stats section wrapped in a frosted-glass card (bg-background/50 + backdrop-blur-md) for readability over the image
+- "Lihat Materi" outline button uses bg-background/60 + backdrop-blur for glass effect
+- Verified via Agent Browser + VLM:
+  - Light mode: PGSI logo (hooded figures, red text) clearly visible as background, text readable ✓
+  - Dark mode: dark stylized graphic with red tones visible as background, text readable ✓
+  - Mobile (390px): logo background visible, text readable, layout stacked properly ✓
+- Lint passes with 0 errors, no runtime errors
+
+Stage Summary:
+- Logo now serves as the background image of the landing page hero section
+- Gradient overlay ensures text readability while keeping the logo recognizable
+- Frosted-glass (backdrop-blur) treatment on badge, stats card, and secondary button for visual cohesion
+- Works across light/dark mode and mobile/desktop

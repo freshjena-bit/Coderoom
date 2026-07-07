@@ -64,39 +64,36 @@ export function HomeView() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
+      {/* Hero with logo background */}
+      <section className="relative isolate overflow-hidden border-b border-border">
+        {/* Logo as background */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/4 top-0 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute right-1/4 bottom-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+          <Image
+            src="/logo-pgsi.jpg"
+            alt=""
+            fill
+            priority
+            className="h-full w-full object-cover"
+            sizes="100vw"
+          />
+          {/* Gradient overlay for readability — lighter at top so logo shows */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/65 to-background/90 dark:from-background/55 dark:via-background/75 dark:to-background/93" />
         </div>
 
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="relative h-24 w-24 overflow-hidden rounded-2xl ring-1 ring-border/60 shadow-lg sm:h-28 sm:w-28">
-                <Image
-                  src="/logo-pgsi.jpg"
-                  alt="CodeRoom"
-                  width={112}
-                  height={112}
-                  className="h-full w-full object-cover"
-                  priority
-                />
-              </div>
-            </div>
-            <Badge variant="secondary" className="mb-4 gap-1.5 px-3 py-1">
+            <Badge variant="secondary" className="mb-4 gap-1.5 border border-border/40 bg-background/60 px-3 py-1 backdrop-blur-sm">
               <Zap className="h-3 w-3 text-primary" />
               7 Level · 55+ Materi · Gratis
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground drop-shadow-sm sm:text-5xl lg:text-6xl">
               Belajar Coding{" "}
               <span className="bg-gradient-to-r from-red-600 to-rose-400 bg-clip-text text-transparent">
                 dari Nol
               </span>{" "}
               hingga Mahir
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-foreground/80 drop-shadow-sm">
               Platform belajar coding lengkap dengan materi terstruktur, quiz interaktif,
               project praktis, dan sertifikat. Mulai perjalanan Anda menjadi web developer hari ini.
             </p>
@@ -104,7 +101,7 @@ export function HomeView() {
               <Button
                 size="lg"
                 onClick={() => (user ? goMateri() : openAuth("register"))}
-                className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 sm:w-auto"
               >
                 {user ? "Lanjut Belajar" : "Mulai Gratis"}
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -113,24 +110,24 @@ export function HomeView() {
                 size="lg"
                 variant="outline"
                 onClick={goMateri}
-                className="w-full sm:w-auto"
+                className="w-full border-border/50 bg-background/60 backdrop-blur-sm hover:bg-background/80 sm:w-auto"
               >
                 <BookOpen className="mr-2 h-4 w-4" />
                 Lihat Materi
               </Button>
             </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-4 sm:gap-8">
+            <div className="mt-12 grid grid-cols-3 gap-4 rounded-2xl border border-border/40 bg-background/50 p-4 backdrop-blur-md sm:gap-8 sm:p-6">
               {[
                 { value: "55+", label: "Materi" },
                 { value: "7", label: "Level" },
                 { value: "100%", label: "Gratis" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="text-2xl font-bold text-primary sm:text-4xl">
+                  <div className="text-2xl font-bold text-primary drop-shadow-sm sm:text-4xl">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-muted-foreground sm:text-sm">
+                  <div className="text-xs text-foreground/70 sm:text-sm">
                     {stat.label}
                   </div>
                 </div>
