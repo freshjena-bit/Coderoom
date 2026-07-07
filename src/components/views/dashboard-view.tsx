@@ -174,7 +174,7 @@ export function DashboardView() {
           label="Progress Keseluruhan"
           value={`${stats.completionRate}%`}
           sub={`${stats.totalMaterials - stats.completedCount} tersisa`}
-          color="emerald"
+          color="rose"
         />
         <StatCard
           icon={Award}
@@ -389,11 +389,11 @@ function StatCard({
   label: string;
   value: string;
   sub: string;
-  color: "primary" | "emerald" | "amber";
+  color: "primary" | "rose" | "amber";
 }) {
   const colorClasses = {
     primary: "bg-primary/10 text-primary",
-    emerald: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    rose: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
     amber: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
   };
 

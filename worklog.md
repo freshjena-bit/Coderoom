@@ -75,3 +75,31 @@ Stage Summary:
 - Logo appears in 4 locations: Navbar, Home hero, Footer, Login/Register dialog
 - Favicon updated to use the logo
 - All lint passes, no runtime errors, verified across light/dark mode and mobile/desktop
+
+---
+Task ID: color-redesign
+Agent: Z.ai Code (main orchestrator)
+Task: Change UI color scheme from green (emerald) to red
+
+Work Log:
+- Updated /home/z/my-project/src/app/globals.css: changed all OKLCH hue values from 160-162 (green) to 25-27 (red) for both :root (light) and .dark (dark) modes
+  - primary: oklch(0.55 0.22 27) light / oklch(0.68 0.2 25) dark — vibrant red
+  - Increased chroma (saturation) for more vivid red: 0.14→0.22 (light), 0.15→0.2 (dark)
+  - Updated all related variables: background, foreground, accent, ring, sidebar, chart colors
+- Fixed hardcoded color classes in components:
+  - home-view.tsx: gradient `to-emerald-400` → `to-rose-400` (red gradient for headline)
+  - detail-view.tsx: `bg-orange-500` → `bg-amber-500` (quiz not-passed badge), `text-orange-500` → `text-amber-600` (contrasts better with red primary)
+  - dashboard-view.tsx: StatCard `emerald` color → `rose` (pinkish-red, complements primary red); kept `amber` for third card for contrast
+- Verified via Agent Browser + VLM across all views:
+  - Home: buttons, badges, gradient text, stats all red ✓
+  - Dashboard: progress bars red, stat icons red/rose/amber ✓
+  - Materi: active pills, progress bars, completed checkmarks red ✓
+  - Detail: section headings, quiz badges, buttons red ✓
+  - Dark mode: red accent on dark background, readable ✓
+- Lint passes with 0 errors, no runtime errors
+
+Stage Summary:
+- Complete color scheme migration from emerald/green to red
+- All CSS variables, component classes, and gradients updated
+- Verified in light mode, dark mode, and across all 5 views (home, materi, detail, dashboard, forum)
+- The amber color retained for "not passed" quiz state and one dashboard stat card for visual contrast

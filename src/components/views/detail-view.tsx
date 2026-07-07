@@ -267,7 +267,7 @@ function QuizSection({
               className={cn(
                 score >= 70
                   ? "bg-primary text-primary-foreground"
-                  : "bg-orange-500 text-white"
+                  : "bg-amber-500 text-white"
               )}
             >
               Skor: {score}%
@@ -358,7 +358,7 @@ function QuizSection({
                 {score >= 70 ? (
                   <span className="text-primary">Lulus!</span>
                 ) : (
-                  <span className="text-orange-500">Belum lulus (min. 70%)</span>
+                  <span className="text-amber-600 dark:text-amber-400">Belum lulus (min. 70%)</span>
                 )}
               </div>
               <Button variant="outline" onClick={handleReset} size="sm">
