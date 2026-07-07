@@ -19,7 +19,7 @@ import { Loader2, Mail, Lock, User as UserIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export function AuthDialog() {
-  const { authDialog, closeAuth, setUser, goDashboard } = useAppStore();
+  const { authDialog, closeAuth, setUser, goDashboard, goAdmin } = useAppStore();
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<"login" | "register">("login");
 
@@ -46,7 +46,8 @@ export function AuthDialog() {
       closeAuth();
       setLoginEmail("");
       setLoginPassword("");
-      goDashboard();
+      if (user.role === "ADMIN") goAdmin();
+      else goDashboard();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Login gagal");
     } finally {
@@ -65,7 +66,8 @@ export function AuthDialog() {
       setRegName("");
       setRegEmail("");
       setRegPassword("");
-      goDashboard();
+      if (user.role === "ADMIN") goAdmin();
+      else goDashboard();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Pendaftaran gagal");
     } finally {

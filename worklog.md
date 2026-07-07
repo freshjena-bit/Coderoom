@@ -156,3 +156,53 @@ Stage Summary:
 - Single source of truth: src/components/logo-background.tsx, rendered once in page.tsx
 - Gradient overlay balances logo visibility vs content readability
 - Content cards have solid/semi-transparent backgrounds so text stays legible over the image
+
+---
+Task ID: admin-dashboard
+Agent: Z.ai Code (main orchestrator)
+Task: Build admin login + admin dashboard (user/material/forum management)
+
+Work Log:
+- Added `role` field (String, default "USER") to User schema in prisma/schema.prisma, pushed to DB
+- Updated prisma/seed.ts: created admin account (admin@coderoom.id / admin12345, role ADMIN), admin replies to a forum post
+- Updated src/lib/auth.ts getCurrentUser to select role; updated login + register API routes to return role
+- Updated SafeUser type in store.ts to include role; added "admin" to ViewName + goAdmin action + hash parser
+- Created src/lib/admin.ts with getCurrentAdmin guard + getAdminStats helper
+- Built admin API routes (all guarded by getCurrentAdmin):
+  - GET /api/admin/stats — overview stats (users, admins, materials, posts, replies, progress, recent users)
+  - GET /api/admin/users — list all users with progress/post counts
+  - PATCH /api/admin/users/[id] — update user role (prevent self-demotion)
+  - DELETE /api/admin/users/[id] — delete user (prevent self-deletion)
+  - GET /api/admin/materials — list materials with completion counts
+  - DELETE /api/admin/materials?id= — delete material
+  - DELETE /api/admin/forum/[id] — delete forum post
+- Added adminApi helpers to src/lib/api.ts
+- Built src/components/views/admin-view.tsx with 4 tabs:
+  - Overview: 4 stat cards + recent users list
+  - Pengguna: searchable user list with role badges, promote/demote + delete (with confirm dialog)
+  - Materi: materials grouped by level with delete (with confirm dialog)
+  - Forum: forum posts with delete (with confirm dialog)
+- Access control: shows "Login Diperlukan" if not logged in, "Akses Ditolak" if logged in but not admin
+- Wired admin view into page.tsx; added "Dashboard Admin" menu item in navbar dropdown + mobile menu (only for ADMIN role)
+- Added admin shield badge on avatar + ADMIN badge in dropdown header for admins
+- Auth dialog: admin users redirected to /admin after login, regular users to /dashboard
+- Updated footer to show both demo + admin credentials
+- Verified via Agent Browser + VLM:
+  - Admin login → redirected to admin dashboard ✓
+  - Overview tab: 4 stat cards (2 users, 55 materials, 3 posts, progress) + recent users ✓
+  - Pengguna tab: 2 users with role badges, promote/demote + delete buttons ✓
+  - Materi tab: materials grouped by level with delete ✓
+  - Forum tab: posts with delete ✓
+  - Delete confirmation dialog works ✓
+  - Regular user accessing /admin → "Akses Ditolak" message ✓
+  - Dark mode renders correctly ✓
+- Restarted dev server to pick up new Prisma client (cached client didn't know about role field)
+- Lint passes with 0 errors
+
+Stage Summary:
+- Admin login: admin@coderoom.id / admin12345
+- Admin dashboard at #/admin with 4 tabs: Overview, Pengguna, Materi, Forum
+- Full CRUD: view/create-promote-demote/delete users, delete materials, delete forum posts
+- Proper access control: admin guard on all admin API routes + client-side access denied screen
+- Admin menu item only visible to admins in navbar dropdown + mobile menu
+- Shield badge indicator on admin avatar

@@ -12,10 +12,12 @@ import {
   Menu,
   X,
   LogOut,
+  ShieldCheck,
 } from "lucide-react";
 import { useAppStore } from "@/lib/store";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,17 +36,18 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const { view, goHome, goMateri, goDashboard, goForum, user, openAuth, setUser } =
+  const { view, goHome, goMateri, goDashboard, goForum, goAdmin, user, openAuth, setUser } =
     useAppStore();
   const { setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleNav = (target: "home" | "materi" | "dashboard" | "forum") => {
+  const handleNav = (target: "home" | "materi" | "dashboard" | "forum" | "admin") => {
     setMobileOpen(false);
     if (target === "home") goHome();
     else if (target === "materi") goMateri();
     else if (target === "dashboard") goDashboard();
     else if (target === "forum") goForum();
+    else if (target === "admin") goAdmin();
   };
 
   const handleLogout = async () => {
@@ -107,11 +110,18 @@ export function Navbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center gap-2 px-2">
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary/15 text-primary text-xs font-semibold">
-                      {user.name.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+                  <div className="relative">
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback className="bg-primary/15 text-primary text-xs font-semibold">
+                        {user.name.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    {user.role === "ADMIN" && (
+                      <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary border-2 border-background">
+                        <ShieldCheck className="h-2 w-2 text-primary-foreground" />
+                      </span>
+                    )}
+                  </div>
                   <span className="hidden sm:inline text-sm font-medium max-w-[100px] truncate">
                     {user.name}
                   </span>
@@ -119,7 +129,14 @@ export function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-52">
                 <div className="px-2 py-1.5">
-                  <p className="text-sm font-medium">{user.name}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-medium">{user.name}</p>
+                    {user.role === "ADMIN" && (
+                      <Badge className="text-[10px] gap-0.5 px-1 py-0 h-4 bg-primary text-primary-foreground">
+                        <ShieldCheck className="h-2.5 w-2.5" /> ADMIN
+                      </Badge>
+                    )}
+                  </div>
                   <p className="text-xs text-muted-foreground truncate">{user.email}</p>
                 </div>
                 <DropdownMenuSeparator />
@@ -131,6 +148,18 @@ export function Navbar() {
                   <BookOpen className="mr-2 h-4 w-4" />
                   Materi Belajar
                 </DropdownMenuItem>
+                {user.role === "ADMIN" && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => handleNav("admin")}
+                      className="text-primary focus:text-primary"
+                    >
+                      <ShieldCheck className="mr-2 h-4 w-4" />
+                      Dashboard Admin
+                    </DropdownMenuItem>
+                  </>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />
@@ -189,6 +218,20 @@ export function Navbar() {
                 {item.label}
               </button>
             ))}
+            {user?.role === "ADMIN" && (
+              <button
+                onClick={() => handleNav("admin")}
+                className={cn(
+                  "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
+                  view === "admin"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted"
+                )}
+              >
+                <ShieldCheck className="h-4 w-4" />
+                Dashboard Admin
+              </button>
+            )}
             {!user && (
               <div className="flex gap-2 pt-2">
                 <Button

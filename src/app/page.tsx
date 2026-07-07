@@ -12,6 +12,7 @@ import { MateriView } from "@/components/views/materi-view";
 import { DetailView } from "@/components/views/detail-view";
 import { DashboardView } from "@/components/views/dashboard-view";
 import { ForumView } from "@/components/views/forum-view";
+import { AdminView } from "@/components/views/admin-view";
 
 export default function Home() {
   const { view, syncFromHash, setUser } = useAppStore();
@@ -34,6 +35,7 @@ export default function Home() {
         {view === "detail" && <DetailView />}
         {view === "dashboard" && <DashboardView />}
         {view === "forum" && <ForumView />}
+        {view === "admin" && <AdminView />}
       </main>
       <Footer />
       <AuthDialog />

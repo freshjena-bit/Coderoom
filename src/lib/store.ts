@@ -7,12 +7,14 @@ export type ViewName =
   | "materi"
   | "detail"
   | "dashboard"
-  | "forum";
+  | "forum"
+  | "admin";
 
 export interface SafeUser {
   id: string;
   name: string;
   email: string;
+  role: string; // "USER" | "ADMIN"
   createdAt: string;
 }
 
@@ -33,6 +35,7 @@ interface AppState {
   goDashboard: () => void;
   goForum: () => void;
   goForumPost: (id: string) => void;
+  goAdmin: () => void;
   goBack: () => void;
 
   setUser: (user: SafeUser | null) => void;
@@ -53,6 +56,7 @@ function parseHash(): Partial<Pick<AppState, "view" | "materialSlug" | "forumPos
     return { view: "materi", materialSlug: null, forumPostId: null };
   }
   if (parts[0] === "dashboard") return { view: "dashboard", materialSlug: null, forumPostId: null };
+  if (parts[0] === "admin") return { view: "admin", materialSlug: null, forumPostId: null };
   if (parts[0] === "forum") {
     if (parts[1]) return { view: "forum", materialSlug: null, forumPostId: parts[1] };
     return { view: "forum", materialSlug: null, forumPostId: null };
@@ -96,6 +100,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   goForumPost: (id: string) => {
     window.location.hash = `/forum/${id}`;
     set({ view: "forum", materialSlug: null, forumPostId: id });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
+  goAdmin: () => {
+    window.location.hash = "/admin";
+    set({ view: "admin", materialSlug: null, forumPostId: null });
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   goBack: () => {
