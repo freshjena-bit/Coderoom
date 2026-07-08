@@ -21,6 +21,7 @@ import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 export function MateriView() {
   const { goDetail, user, openAuth } = useAppStore();
@@ -55,7 +56,7 @@ export function MateriView() {
     );
   }, [allMaterials, search]);
 
-  const levels = [1, 2, 3, 4, 5, 6, 7];
+  const levels = [1, 2, 3, 4, 5, 6, 7, 8];
 
   const getLevelStats = (level: number) => {
     const levelMaterials = allMaterials.filter((m) => m.level === level);
@@ -68,7 +69,28 @@ export function MateriView() {
       openAuth("login");
       return;
     }
+    // Check if material is locked
+    const mat = allMaterials.find((m) => m.slug === slug);
+    if (mat && isMaterialLocked(mat)) {
+      toast.error("Selesaikan materi sebelumnya terlebih dahulu!");
+      return;
+    }
     goDetail(slug);
+  };
+
+  // A material is locked if the previous material (in global order) is not completed
+  // First material is always unlocked
+  const isMaterialLocked = (mat: { level: number; order: number; slug: string }) => {
+    if (!user) return false; // not logged in — let login prompt handle it
+    // Find the previous material in global order (level asc, order asc)
+    const sortedAll = [...allMaterials].sort((a, b) => {
+      if (a.level !== b.level) return a.level - b.level;
+      return a.order - b.order;
+    });
+    const idx = sortedAll.findIndex((m) => m.slug === mat.slug);
+    if (idx <= 0) return false; // first material — never locked
+    const prevMat = sortedAll[idx - 1];
+    return !completedSlugs.has(prevMat.slug);
   };
 
   if (loadingMaterials) {
@@ -209,6 +231,7 @@ export function MateriView() {
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {levelMats.map((mat) => {
                     const isCompleted = completedSlugs.has(mat.slug);
+                    const isLocked = isMaterialLocked(mat);
                     return (
                       <button
                         key={mat.id}
@@ -217,8 +240,10 @@ export function MateriView() {
                       >
                         <Card
                           className={cn(
-                            "h-full transition-all hover:border-primary/40 hover:shadow-md",
-                            isCompleted && "border-primary/30 bg-primary/5"
+                            "h-full transition-all",
+                            isCompleted && "border-primary/30 bg-primary/5",
+                            isLocked && "opacity-60 cursor-not-allowed",
+                            !isLocked && "hover:border-primary/40 hover:shadow-md"
                           )}
                         >
                           <CardContent className="flex items-center gap-3 p-4">
@@ -227,11 +252,15 @@ export function MateriView() {
                                 "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-xl",
                                 isCompleted
                                   ? "bg-primary/15"
+                                  : isLocked
+                                  ? "bg-muted"
                                   : "bg-muted"
                               )}
                             >
                               {isCompleted ? (
                                 <CheckCircle2 className="h-5 w-5 text-primary" />
+                              ) : isLocked ? (
+                                <Lock className="h-4 w-4 text-muted-foreground" />
                               ) : (
                                 mat.icon
                               )}
@@ -245,12 +274,22 @@ export function MateriView() {
                                     Project
                                   </Badge>
                                 )}
+                                {isLocked && (
+                                  <Badge variant="secondary" className="shrink-0 text-xs gap-1">
+                                    <Lock className="h-2.5 w-2.5" />
+                                    Terkunci
+                                  </Badge>
+                                )}
                               </div>
                               <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
-                                {mat.description}
+                                {isLocked
+                                  ? "Selesaikan materi sebelumnya untuk membuka"
+                                  : mat.description}
                               </p>
                             </div>
-                            <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                            {!isLocked && (
+                              <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                            )}
                           </CardContent>
                         </Card>
                       </button>

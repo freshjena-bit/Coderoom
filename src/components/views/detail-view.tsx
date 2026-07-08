@@ -59,6 +59,7 @@ export function DetailView() {
   const { material, prev, next, progress } = data;
   const levelInfo = LEVEL_INFO[material.level];
   const isCompleted = progress?.completed ?? false;
+  const quizPassed = (progress?.quizScore ?? 0) >= PASSING_SCORE;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
@@ -119,7 +120,7 @@ export function DetailView() {
         }}
       />
 
-      {/* Mark complete */}
+      {/* Mark complete — only enabled if quiz passed (>=75%) or already completed */}
       {user && (
         <Card className="mb-8 border-primary/20 bg-primary/5">
           <CardContent className="flex flex-col items-center justify-between gap-4 p-5 sm:flex-row">
@@ -137,7 +138,9 @@ export function DetailView() {
                 <p className="text-sm text-muted-foreground">
                   {isCompleted
                     ? "Anda telah menyelesaikan materi ini."
-                    : "Selesaikan quiz lalu tandai materi ini sebagai selesai."}
+                    : quizPassed
+                    ? "Quiz lulus! Klik untuk menandai materi selesai."
+                    : `Lulus quiz (min. ${PASSING_SCORE}%) untuk menandai materi selesai.`}
                 </p>
               </div>
             </div>
@@ -154,6 +157,7 @@ export function DetailView() {
               }}
               variant={isCompleted ? "outline" : "default"}
               className={cn(!isCompleted && "bg-primary text-primary-foreground hover:bg-primary/90")}
+              disabled={!isCompleted && !quizPassed}
             >
               {isCompleted ? "Batalkan" : "Tandai Selesai"}
             </Button>
@@ -179,17 +183,28 @@ export function DetailView() {
           <div className="hidden sm:block sm:w-[48%]" />
         )}
         {next ? (
-          <Button
-            variant="outline"
-            onClick={() => goDetail(next.slug)}
-            className="justify-end sm:w-[48%]"
-          >
-            <div className="text-right min-w-0">
-              <div className="text-xs text-muted-foreground">Selanjutnya</div>
-              <div className="truncate font-medium">{next.title}</div>
+          user && !isCompleted ? (
+            <div className="sm:w-[48%]">
+              <div className="rounded-lg border border-dashed border-muted-foreground/30 bg-muted/30 p-3 text-center">
+                <p className="text-xs text-muted-foreground">
+                  🔒 Selesaikan & tandai materi ini untuk membuka materi selanjutnya
+                </p>
+                <p className="mt-0.5 truncate text-sm font-medium text-muted-foreground/70">{next.title}</p>
+              </div>
             </div>
-            <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
-          </Button>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => goDetail(next.slug)}
+              className="justify-end sm:w-[48%]"
+            >
+              <div className="text-right min-w-0">
+                <div className="text-xs text-muted-foreground">Selanjutnya</div>
+                <div className="truncate font-medium">{next.title}</div>
+              </div>
+              <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
+            </Button>
+          )
         ) : (
           <Button
             onClick={goDashboard}
