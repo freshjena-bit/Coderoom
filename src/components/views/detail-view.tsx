@@ -6,13 +6,16 @@ import {
   ArrowRight,
   CheckCircle2,
   Circle,
-  Clock,
   Award,
   RefreshCw,
   ChevronRight,
+  Timer,
+  Play,
+  AlertCircle,
 } from "lucide-react";
 import { useAppStore } from "@/lib/store";
-import { materialsApi, progressApi } from "@/lib/api";
+import { materialsApi, progressApi, quizApi } from "@/lib/api";
+import type { QuizPoolQuestion } from "@/lib/api";
 import { LEVEL_INFO } from "@/lib/content-types";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,12 +23,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import type { QuizQuestion } from "@/lib/api";
+
+const TIME_PER_QUESTION = 30;
+const PASSING_SCORE = 75;
 
 export function DetailView() {
   const { materialSlug, goMateri, goDetail, goDashboard, user, openAuth } = useAppStore();
@@ -106,7 +109,7 @@ export function DetailView() {
       {/* Quiz */}
       <QuizSection
         materialId={material.id}
-        questions={material.quiz}
+        materialSlug={material.slug}
         currentScore={progress?.quizScore ?? null}
         isLoggedIn={!!user}
         onRequireLogin={() => openAuth("login")}
@@ -203,53 +206,310 @@ export function DetailView() {
 
 function QuizSection({
   materialId,
-  questions,
+  materialSlug,
   currentScore,
   isLoggedIn,
   onRequireLogin,
   onScoreSubmitted,
 }: {
   materialId: string;
-  questions: QuizQuestion[];
+  materialSlug: string;
   currentScore: number | null;
   isLoggedIn: boolean;
   onRequireLogin: () => void;
   onScoreSubmitted: () => void;
 }) {
-  const [answers, setAnswers] = useState<(number | null)[]>(questions.map(() => null));
-  const [submitted, setSubmitted] = useState(false);
+  const [phase, setPhase] = useState<"idle" | "loading" | "playing" | "finished">("idle");
+  const [questions, setQuestions] = useState<QuizPoolQuestion[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState<(number | null)[]>([]);
+  const [timeLeft, setTimeLeft] = useState(TIME_PER_QUESTION);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const answersRef = useRef<(number | null)[]>([]);
+  const questionsRef = useRef<QuizPoolQuestion[]>([]);
 
-  const allAnswered = answers.every((a) => a !== null);
-  const correctCount = answers.filter((a, i) => a === questions[i].answer).length;
-  const score = Math.round((correctCount / questions.length) * 100);
+  // Keep refs in sync with state
+  useEffect(() => { answersRef.current = answers; }, [answers]);
+  useEffect(() => { questionsRef.current = questions; }, [questions]);
 
-  const handleSubmit = async () => {
+  const totalQuestions = questions.length;
+  const correctCount = answers.filter((a, i) => a === questions[i]?.answer).length;
+  const score = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
+  const passed = score >= PASSING_SCORE;
+
+  // Start quiz — fetch random questions from API
+  const startQuiz = async () => {
     if (!isLoggedIn) {
       onRequireLogin();
       return;
     }
+    setPhase("loading");
+    try {
+      const data = await quizApi.getPool(materialSlug);
+      setQuestions(data.questions);
+      setAnswers(new Array(data.questions.length).fill(null));
+      setCurrentIndex(0);
+      setSelectedAnswer(null);
+      setShowFeedback(false);
+      setTimeLeft(TIME_PER_QUESTION);
+      setPhase("playing");
+    } catch {
+      toast.error("Gagal memuat soal quiz");
+      setPhase("idle");
+    }
+  };
+
+  // Finish quiz and save score — reads from refs to avoid stale closure
+  // MUST be defined before goToNext (which references it)
+  const finishQuiz = useCallback(async () => {
+    setPhase("finished");
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    // Calculate final score from refs (always latest)
+    const finalAnswers = answersRef.current;
+    const finalQuestions = questionsRef.current;
+    const finalCorrect = finalAnswers.filter((a, i) => a === finalQuestions[i]?.answer).length;
+    const finalTotal = finalQuestions.length;
+    const finalScore = finalTotal > 0 ? Math.round((finalCorrect / finalTotal) * 100) : 0;
+
     setSubmitting(true);
     try {
-      await progressApi.update(materialId, { quizScore: score });
-      setSubmitted(true);
+      await progressApi.update(materialId, { quizScore: finalScore });
       onScoreSubmitted();
-      if (score >= 70) {
-        toast.success(`Quiz selesai! Skor: ${score}%`);
+      if (finalScore >= PASSING_SCORE) {
+        toast.success(`Quiz selesai! Skor: ${finalScore}% — Lulus!`);
       } else {
-        toast.info(`Skor: ${score}. Coba lagi ya!`);
+        toast.info(`Skor: ${finalScore}% — Belum lulus (min. ${PASSING_SCORE}%)`);
       }
     } catch {
       toast.error("Gagal menyimpan skor quiz");
     } finally {
       setSubmitting(false);
     }
+  }, [materialId, onScoreSubmitted]);
+
+  // Move to next question or finish
+  const goToNext = useCallback(() => {
+    setShowFeedback(false);
+    setSelectedAnswer(null);
+    setTimeLeft(TIME_PER_QUESTION);
+
+    if (currentIndex + 1 >= totalQuestions) {
+      // Quiz finished — calculate and save score
+      finishQuiz();
+    } else {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  }, [currentIndex, totalQuestions, finishQuiz]);
+
+  // Handle answer selection
+  const handleAnswer = (optionIndex: number) => {
+    if (showFeedback) return;
+    setSelectedAnswer(optionIndex);
+    setAnswers((prev) => {
+      const next = [...prev];
+      next[currentIndex] = optionIndex;
+      return next;
+    });
+    setShowFeedback(true);
+    // Stop timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    // Auto-advance after 1.5s (show feedback)
+    setTimeout(() => {
+      goToNext();
+    }, 1500);
   };
 
-  const handleReset = () => {
-    setAnswers(questions.map(() => null));
-    setSubmitted(false);
-  };
+  // Timer effect — runs when playing and not showing feedback
+  useEffect(() => {
+    if (phase !== "playing" || showFeedback) return;
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          // Time's up — mark as null (wrong) and advance
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+          }
+          setShowFeedback(true);
+          setTimeout(() => goToNext(), 1500);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [phase, currentIndex, showFeedback, goToNext]);
+
+  // ===== IDLE SCREEN (before starting) =====
+  if (phase === "idle") {
+    return (
+      <Card className="mb-8 border-border/60">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <Award className="h-5 w-5 text-primary" />
+            Quiz Materi
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {currentScore !== null && (
+            <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-muted/50 p-3">
+              <Award className="h-5 w-5 text-primary" />
+              <span className="text-sm">
+                Skor terakhir: <span className={cn("font-bold", currentScore >= PASSING_SCORE ? "text-primary" : "text-amber-600 dark:text-amber-400")}>{currentScore}%</span>
+                {currentScore >= PASSING_SCORE ? " (Lulus)" : " (Belum Lulus)"}
+              </span>
+            </div>
+          )}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="rounded-lg border border-border/60 p-3 text-center">
+              <div className="mx-auto mb-1 flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                <AlertCircle className="h-4 w-4 text-primary" />
+              </div>
+              <p className="text-lg font-bold">30</p>
+              <p className="text-xs text-muted-foreground">Soal</p>
+            </div>
+            <div className="rounded-lg border border-border/60 p-3 text-center">
+              <div className="mx-auto mb-1 flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                <Timer className="h-4 w-4 text-primary" />
+              </div>
+              <p className="text-lg font-bold">30s</p>
+              <p className="text-xs text-muted-foreground">Per Soal</p>
+            </div>
+            <div className="rounded-lg border border-border/60 p-3 text-center">
+              <div className="mx-auto mb-1 flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                <CheckCircle2 className="h-4 w-4 text-primary" />
+              </div>
+              <p className="text-lg font-bold">{PASSING_SCORE}%</p>
+              <p className="text-xs text-muted-foreground">Min. Lulus</p>
+            </div>
+          </div>
+          <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 text-sm text-amber-700 dark:text-amber-400">
+            <p className="flex items-center gap-2 font-medium">
+              <AlertCircle className="h-4 w-4" />
+              Penting!
+            </p>
+            <ul className="mt-1.5 space-y-1 text-xs text-amber-700/80 dark:text-amber-400/80">
+              <li>• Soal diacak setiap kali mengulang — tidak bisa mencontek!</li>
+              <li>• Jika waktu habis, soal otomatis lanjut (dijawab salah)</li>
+              <li>• Soal diambil dari semua materi di level yang sama</li>
+            </ul>
+          </div>
+          <Button
+            onClick={startQuiz}
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+            size="lg"
+          >
+            <Play className="mr-2 h-4 w-4" />
+            Mulai Quiz
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // ===== LOADING SCREEN =====
+  if (phase === "loading") {
+    return (
+      <Card className="mb-8 border-border/60">
+        <CardContent className="flex items-center justify-center py-12">
+          <RefreshCw className="mr-2 h-5 w-5 animate-spin text-primary" />
+          <span className="text-muted-foreground">Memuat soal quiz...</span>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // ===== FINISHED SCREEN =====
+  if (phase === "finished") {
+    return (
+      <Card className="mb-8 border-border/60">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between text-lg">
+            <span className="flex items-center gap-2">
+              <Award className="h-5 w-5 text-primary" />
+              Hasil Quiz
+            </span>
+            <Badge
+              className={cn(
+                passed
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-amber-500 text-white"
+              )}
+            >
+              Skor: {score}%
+            </Badge>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          {/* Score circle */}
+          <div className="flex flex-col items-center py-4">
+            <div className={cn(
+              "flex h-24 w-24 items-center justify-center rounded-full border-4",
+              passed ? "border-primary bg-primary/10" : "border-amber-500 bg-amber-500/10"
+            )}>
+              <span className={cn("text-2xl font-bold", passed ? "text-primary" : "text-amber-600 dark:text-amber-400")}>
+                {score}%
+              </span>
+            </div>
+            <p className={cn("mt-3 text-lg font-semibold", passed ? "text-primary" : "text-amber-600 dark:text-amber-400")}>
+              {passed ? "🎉 Lulus!" : "Belum Lulus"}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {correctCount} dari {totalQuestions} soal benar
+            </p>
+            {!passed && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                Minimal {PASSING_SCORE}% untuk lulus. Soal akan diacak saat mengulang.
+              </p>
+            )}
+          </div>
+
+          {/* Progress bar */}
+          <div className="space-y-1.5">
+            <Progress value={score} className="h-3" />
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>0%</span>
+              <span className="font-medium text-primary">{PASSING_SCORE}% (min. lulus)</span>
+              <span>100%</span>
+            </div>
+          </div>
+
+          {/* Retake button */}
+          <Button
+            onClick={startQuiz}
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+            disabled={submitting}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            {submitting ? "Menyimpan..." : passed ? "Coba Lagi" : "Ulangi Quiz"}
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // ===== PLAYING SCREEN (one question at a time) =====
+  const q = questions[currentIndex];
+  if (!q) return null;
+
+  const timerPct = (timeLeft / TIME_PER_QUESTION) * 100;
+  const isCorrect = selectedAnswer === q.answer;
 
   return (
     <Card className="mb-8 border-border/60">
@@ -259,131 +519,111 @@ function QuizSection({
             <Award className="h-5 w-5 text-primary" />
             Quiz Materi
           </CardTitle>
-          {currentScore !== null && !submitted && (
-            <Badge variant="secondary">Skor terakhir: {currentScore}%</Badge>
-          )}
-          {submitted && (
-            <Badge
-              className={cn(
-                score >= 70
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-amber-500 text-white"
-              )}
-            >
-              Skor: {score}%
-            </Badge>
-          )}
+          <Badge variant="secondary">
+            Soal {currentIndex + 1} / {totalQuestions}
+          </Badge>
         </div>
+        {/* Overall progress */}
+        <Progress value={((currentIndex) / totalQuestions) * 100} className="h-1.5" />
       </CardHeader>
-      <CardContent className="space-y-6">
-        {questions.map((q, qi) => {
-          const userAnswer = answers[qi];
-          const isCorrect = userAnswer === q.answer;
-
-          return (
-            <div key={qi} className="space-y-3">
-              <div className="flex gap-2">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                  {qi + 1}
-                </span>
-                <p className="font-medium pt-0.5">{q.question}</p>
-              </div>
-              <RadioGroup
-                value={userAnswer?.toString() ?? ""}
-                onValueChange={(val) => {
-                  if (submitted) return;
-                  setAnswers((prev) => {
-                    const next = [...prev];
-                    next[qi] = Number(val);
-                    return next;
-                  });
-                }}
-                className="space-y-2 pl-8"
-              >
-                {q.options.map((opt, oi) => {
-                  const isUserChoice = userAnswer === oi;
-                  const isCorrectAnswer = q.answer === oi;
-                  let optionClass = "";
-                  if (submitted) {
-                    if (isCorrectAnswer) {
-                      optionClass = "border-primary bg-primary/10 text-primary";
-                    } else if (isUserChoice) {
-                      optionClass = "border-destructive bg-destructive/10 text-destructive";
-                    }
-                  }
-
-                  return (
-                    <Label
-                      key={oi}
-                      htmlFor={`q${qi}-o${oi}`}
-                      className={cn(
-                        "flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors",
-                        optionClass || "border-border hover:bg-muted",
-                        submitted && "cursor-default"
-                      )}
-                    >
-                      <RadioGroupItem
-                        id={`q${qi}-o${oi}`}
-                        value={oi.toString()}
-                        disabled={submitted}
-                      />
-                      <span className="text-sm">{opt}</span>
-                      {submitted && isCorrectAnswer && (
-                        <CheckCircle2 className="ml-auto h-4 w-4 text-primary" />
-                      )}
-                    </Label>
-                  );
-                })}
-              </RadioGroup>
-              {submitted && (
-                <div className={cn(
-                  "ml-8 rounded-lg p-3 text-sm",
-                  isCorrect ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
-                )}>
-                  {isCorrect ? "✓ Benar! " : "✗ Kurang tepat. "}
-                  {q.explanation}
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        {/* Submit / Reset */}
-        <div className="flex items-center justify-between gap-3 pt-2">
-          {submitted ? (
-            <>
-              <div className="flex items-center gap-2 text-sm">
-                <Progress value={score} className="h-2 w-24" />
-                <span className="font-medium">{score}%</span>
-                {score >= 70 ? (
-                  <span className="text-primary">Lulus!</span>
-                ) : (
-                  <span className="text-amber-600 dark:text-amber-400">Belum lulus (min. 70%)</span>
-                )}
-              </div>
-              <Button variant="outline" onClick={handleReset} size="sm">
-                <RefreshCw className="mr-2 h-3.5 w-3.5" />
-                Coba Lagi
-              </Button>
-            </>
-          ) : (
-            <>
-              <p className="text-xs text-muted-foreground">
-                {allAnswered
-                  ? "Semua jawaban siap dikirim"
-                  : `${answers.filter((a) => a !== null).length}/${questions.length} terjawab`}
-              </p>
-              <Button
-                onClick={handleSubmit}
-                disabled={!allAnswered || submitting}
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
-                size="sm"
-              >
-                {submitting ? "Menyimpan..." : "Kirim Jawaban"}
-              </Button>
-            </>
-          )}
+      <CardContent className="space-y-5">
+        {/* Timer bar */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between text-sm">
+            <span className="flex items-center gap-1.5 font-medium text-muted-foreground">
+              <Timer className="h-4 w-4" />
+              Waktu tersisa
+            </span>
+            <span className={cn(
+              "font-bold tabular-nums",
+              timeLeft <= 5 ? "text-destructive" : timeLeft <= 10 ? "text-amber-600 dark:text-amber-400" : "text-primary"
+            )}>
+              {timeLeft}s
+            </span>
+          </div>
+          <Progress
+            value={timerPct}
+            className={cn(
+              "h-2 transition-all",
+              timeLeft <= 5 && "[&>div]:bg-destructive",
+              timeLeft <= 10 && timeLeft > 5 && "[&>div]:bg-amber-500"
+            )}
+          />
         </div>
+
+        {/* Question */}
+        <div className="rounded-lg border border-border/60 p-4">
+          <div className="flex gap-2">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+              {currentIndex + 1}
+            </span>
+            <p className="font-medium pt-0.5 text-base">{q.question}</p>
+          </div>
+        </div>
+
+        {/* Options */}
+        <div className="space-y-2 pl-1">
+          {q.options.map((opt, oi) => {
+            const isCorrectAnswer = q.answer === oi;
+            const isUserChoice = selectedAnswer === oi;
+            let optionClass = "border-border hover:bg-muted hover:border-primary/40";
+
+            if (showFeedback) {
+              if (isCorrectAnswer) {
+                optionClass = "border-primary bg-primary/10 text-primary";
+              } else if (isUserChoice) {
+                optionClass = "border-destructive bg-destructive/10 text-destructive";
+              } else {
+                optionClass = "border-border opacity-50";
+              }
+            }
+
+            return (
+              <button
+                key={oi}
+                onClick={() => handleAnswer(oi)}
+                disabled={showFeedback}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-lg border p-3 text-left transition-all",
+                  optionClass,
+                  !showFeedback && "cursor-pointer"
+                )}
+              >
+                <span className={cn(
+                  "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold",
+                  showFeedback && isCorrectAnswer && "border-primary bg-primary text-primary-foreground",
+                  showFeedback && isUserChoice && !isCorrectAnswer && "border-destructive bg-destructive text-destructive-foreground",
+                  !showFeedback && "border-border"
+                )}>
+                  {String.fromCharCode(65 + oi)}
+                </span>
+                <span className="text-sm flex-1">{opt}</span>
+                {showFeedback && isCorrectAnswer && (
+                  <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Feedback */}
+        {showFeedback && (
+          <div className={cn(
+            "rounded-lg p-3 text-sm",
+            isCorrect ? "bg-primary/10 text-primary" : "bg-destructive/10 text-destructive"
+          )}>
+            {isCorrect ? "✓ Benar!" : selectedAnswer === null ? "⏰ Waktu habis!" : "✗ Salah. "}
+            {" "}
+            {q.explanation}
+          </div>
+        )}
+
+        {/* Auto-advance indicator */}
+        {showFeedback && (
+          <p className="text-center text-xs text-muted-foreground">
+            Lanjut otomatis dalam 1.5 detik...
+          </p>
+        )}
       </CardContent>
     </Card>
   );

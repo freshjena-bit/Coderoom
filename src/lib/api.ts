@@ -117,6 +117,29 @@ export const materialsApi = {
     }>(`/api/materials/${slug}`),
 };
 
+// Quiz
+export interface QuizPoolQuestion {
+  question: string;
+  options: string[];
+  answer: number;
+  explanation: string;
+}
+
+export interface QuizPoolResponse {
+  materialId: string;
+  materialTitle: string;
+  level: number;
+  totalQuestions: number;
+  questions: QuizPoolQuestion[];
+  timePerQuestion: number;
+  passingScore: number;
+}
+
+export const quizApi = {
+  getPool: (slug: string) =>
+    api<QuizPoolResponse>(`/api/quiz/${slug}`),
+};
+
 // Progress
 export const progressApi = {
   get: () =>
