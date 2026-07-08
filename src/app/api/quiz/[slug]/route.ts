@@ -41,7 +41,7 @@ export async function GET(
   // Find the current material
   const material = await db.material.findUnique({
     where: { slug },
-    select: { id: true, level: true, title: true, quiz: true },
+    select: { id: true, level: true, order: true, title: true, quiz: true },
   });
 
   if (!material) {
@@ -54,14 +54,40 @@ export async function GET(
   // Get current user (quiz requires login)
   const user = await getCurrentUser();
 
-  // Pool of question sources: current material + completed materials by this user
-  // This ensures user only gets questions from materials they've actually studied
+  // Pool of question sources:
+  // 1. The current material (always included)
+  // 2. All previous materials in the SAME level (user learns sequentially,
+  //    so materials before the current one are considered studied)
+  // 3. Completed materials from ANY level (explicitly marked done by user)
+  //
+  // This is fair: user only gets quiz questions about content they've seen,
+  // and the last material of a level naturally pools the whole level (→ 30 questions).
+  const questionSourceIds = new Set<string>([material.id]);
   const questionSources: { id: string; title: string; quiz: string }[] = [
     { id: material.id, title: material.title, quiz: material.quiz },
   ];
 
+  // 2. Previous materials in the same level (order < current order, OR lower level)
+  const previousMaterials = await db.material.findMany({
+    where: {
+      OR: [
+        { level: material.level, order: { lt: material.order } },
+        { level: { lt: material.level } },
+      ],
+    },
+    select: { id: true, title: true, quiz: true, level: true, order: true },
+    orderBy: [{ level: "asc" }, { order: "asc" }],
+  });
+
+  for (const m of previousMaterials) {
+    if (!questionSourceIds.has(m.id)) {
+      questionSourceIds.add(m.id);
+      questionSources.push({ id: m.id, title: m.title, quiz: m.quiz });
+    }
+  }
+
+  // 3. Completed materials from other (higher) levels — only if user is logged in
   if (user) {
-    // Get all materials the user has completed (in order of level then order)
     const completedProgress = await db.progress.findMany({
       where: { userId: user.id, completed: true },
       include: {
@@ -71,9 +97,8 @@ export async function GET(
       },
     });
 
-    // Add completed materials (exclude current material to avoid duplication)
+    // Add completed materials not already in the pool
     const completedMaterials = completedProgress
-      .filter((p) => p.material.id !== material.id)
       .map((p) => p.material)
       .sort((a, b) => {
         if (a.level !== b.level) return a.level - b.level;
@@ -81,7 +106,10 @@ export async function GET(
       });
 
     for (const m of completedMaterials) {
-      questionSources.push({ id: m.id, title: m.title, quiz: m.quiz });
+      if (!questionSourceIds.has(m.id)) {
+        questionSourceIds.add(m.id);
+        questionSources.push({ id: m.id, title: m.title, quiz: m.quiz });
+      }
     }
   }
 

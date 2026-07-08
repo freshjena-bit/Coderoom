@@ -405,10 +405,10 @@ function QuizSection({
               Penting!
             </p>
             <ul className="mt-1.5 space-y-1 text-xs text-amber-700/80 dark:text-amber-400/80">
-              <li>• Soal diambil dari materi ini + materi yang sudah kamu selesaikan</li>
+              <li>• Soal diambil dari materi ini + materi-materi sebelumnya yang sudah kamu pelajari</li>
+              <li>• Makin jauh belajar, makin banyak soal quiz (maks. 30 soal)</li>
               <li>• Soal diacak setiap kali mengulang — tidak bisa mencontek!</li>
               <li>• Jika waktu habis, soal otomatis lanjut (dijawab salah)</li>
-              <li>• Selesaikan lebih banyak materi untuk dapat pool soal lebih banyak!</li>
             </ul>
           </div>
           <Button
