@@ -75,12 +75,6 @@ export function AuthDialog() {
     }
   };
 
-  const fillDemo = () => {
-    setLoginEmail("demo@coderoom.id");
-    setLoginPassword("demo12345");
-    setTab("login");
-  };
-
   return (
     <Dialog open={authDialog !== null} onOpenChange={(open) => !open && closeAuth()}>
       <DialogContent className="sm:max-w-[420px]">
@@ -158,13 +152,6 @@ export function AuthDialog() {
                   "Masuk"
                 )}
               </Button>
-              <button
-                type="button"
-                onClick={fillDemo}
-                className="w-full text-center text-xs text-muted-foreground hover:text-primary transition-colors"
-              >
-                Gunakan akun demo →
-              </button>
             </form>
           </TabsContent>
 

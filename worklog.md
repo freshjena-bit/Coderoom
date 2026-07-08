@@ -243,3 +243,39 @@ Stage Summary:
 - All 6 tables migrated: User, Session, Material, Progress, ForumPost, ForumReply
 - All data seeded successfully (2 users incl admin, 55 materials, 3 forum posts)
 - All features verified working: auth, materials, quiz, progress, forum, admin dashboard
+
+---
+Task ID: remove-demo-account
+Agent: Z.ai Code (main orchestrator)
+Task: Delete demo account and remove all demo credentials from frontend
+
+Work Log:
+- Deleted demo user (demo@coderoom.id / Siswa Demo) from MySQL database via direct SQL (cascaded to Progress, ForumPost, ForumReply, Session)
+- Updated prisma/seed.ts: removed demo user creation, kept only admin user; all forum posts now created by admin; reply goes to first post; removed demo credentials from console output
+- Removed "Gunakan akun demo →" button and fillDemo() function from src/components/auth-dialog.tsx
+- Removed "Akun demo:" credentials block (demo@coderoom.id / demo12345 + admin@coderoom.id / admin12345) from src/components/footer.tsx
+- Removed "Login admin: admin@coderoom.id / admin12345" hint from admin-view.tsx access-denied screen
+- Grep verified: NO references to demo@coderoom, demo12345, "akun demo", "Gunakan akun", "Siswa Demo" remain anywhere in src/ or prisma/
+- Re-seeded database: now only 1 user (admin@coderoom.id, role ADMIN)
+- Restarted dev server to clear any cached sessions
+- Verified via API:
+  - Login with demo@coderoom.id → 401 "Email atau password salah" ✓ (correctly rejected)
+  - Login with admin@coderoom.id → 200 success ✓
+  - Register new user → role USER (not admin) ✓
+  - Regular user accessing /api/admin/stats → 403 "Akses ditolak" ✓
+- Verified via Agent Browser + VLM:
+  - Footer: no demo credentials visible ✓
+  - Login dialog: no "Gunakan akun demo" button, only Masuk/Daftar tabs + Masuk button ✓
+  - Demo login attempt → red error toast "Email atau password salah" ✓
+  - Admin dashboard Overview: "Total Pengguna: 1 (1 admin)", only Admin CodeRoom in recent users ✓
+  - Admin dashboard Pengguna tab: only Admin CodeRoom listed ✓
+- Cleaned up test user created during verification
+
+Stage Summary:
+- Demo account (Siswa Demo / demo@coderoom.id) permanently deleted from MySQL database
+- Seed script no longer creates demo user — only admin account on re-seed
+- All demo credential displays removed from frontend: footer, login dialog, admin access-denied screen
+- Login with demo credentials now correctly fails with "Email atau password salah"
+- Only admin account exists: admin@coderoom.id / admin12345 (role ADMIN)
+- Regular users can still register and get USER role, but cannot access admin features
+- Lint passes with 0 errors

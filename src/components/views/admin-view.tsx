@@ -75,10 +75,6 @@ export function AdminView() {
         <p className="mt-2 text-muted-foreground">
           Halaman ini khusus untuk admin. Akun Anda ({user.email}) tidak memiliki akses admin.
         </p>
-        <p className="mt-3 text-xs text-muted-foreground">
-          Login admin: <code className="rounded bg-muted px-1.5 py-0.5">admin@coderoom.id</code> /{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5">admin12345</code>
-        </p>
         <Button variant="outline" onClick={goHome} className="mt-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Kembali ke Beranda

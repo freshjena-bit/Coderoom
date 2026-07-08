@@ -86,15 +86,6 @@ export function Footer() {
                 <Mail className="h-4 w-4" />
               </a>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">
-              Akun demo:<br />
-              <code className="rounded bg-muted px-1 py-0.5">demo@coderoom.id</code> /{" "}
-              <code className="rounded bg-muted px-1 py-0.5">demo12345</code>
-              <br />
-              <span className="text-[10px]">Admin:</span>{" "}
-              <code className="rounded bg-muted px-1 py-0.5">admin@coderoom.id</code> /{" "}
-              <code className="rounded bg-muted px-1 py-0.5">admin12345</code>
-            </p>
           </div>
         </div>
 

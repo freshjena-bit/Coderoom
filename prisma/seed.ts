@@ -15,17 +15,6 @@ async function main() {
   await db.user.deleteMany();
   console.log("  ✓ Cleaned existing data");
 
-  // Create demo user
-  const demoUser = await db.user.create({
-    data: {
-      name: "Siswa Demo",
-      email: "demo@coderoom.id",
-      password: hashPassword("demo12345"),
-      role: "USER",
-    },
-  });
-  console.log(`  ✓ Created demo user: ${demoUser.email} (password: demo12345)`);
-
   // Create admin user
   const adminUser = await db.user.create({
     data: {
@@ -35,7 +24,7 @@ async function main() {
       role: "ADMIN",
     },
   });
-  console.log(`  ✓ Created admin user: ${adminUser.email} (password: admin12345)`);
+  console.log(`  ✓ Created admin user: ${adminUser.email}`);
 
   // Insert all materials
   const allMaterials = [...contentLevels1to3, ...contentLevels4to7];
@@ -85,26 +74,24 @@ async function main() {
     },
   ];
 
-  for (let i = 0; i < posts.length; i++) {
+  for (const post of posts) {
     await db.forumPost.create({
       data: {
-        ...posts[i],
-        // Admin answers the first post, demo user creates the rest
-        userId: i === 0 ? adminUser.id : demoUser.id,
+        ...post,
+        userId: adminUser.id,
       },
     });
   }
   console.log(`  ✓ Created ${posts.length} demo forum posts`);
 
-  // Add a demo reply (admin replies to the second post)
-  const secondPost = await db.forumPost.findFirst({
+  // Add a reply (admin replies to the first post)
+  const firstPost = await db.forumPost.findFirst({
     orderBy: { createdAt: "asc" },
-    skip: 1,
   });
-  if (secondPost) {
+  if (firstPost) {
     await db.forumReply.create({
       data: {
-        postId: secondPost.id,
+        postId: firstPost.id,
         userId: adminUser.id,
         content:
           "Coba gunakan perintah `npx kill-port 3000` di terminal untuk menghentikan proses yang menggunakan port 3000. Setelah itu jalankan lagi `npm run dev`.",
@@ -115,7 +102,6 @@ async function main() {
 
   console.log("\n✅ Seeding complete!");
   console.log(`   Total materials: ${allMaterials.length}`);
-  console.log(`   User login:  demo@coderoom.id / demo12345`);
   console.log(`   Admin login: admin@coderoom.id / admin12345`);
 }
 
