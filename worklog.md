@@ -310,3 +310,45 @@ Stage Summary:
 - README.md with full documentation included
 - .env.example with placeholder credentials for setup
 - GitHub token removed from git config after push
+
+---
+Task ID: vercel-supabase
+Agent: Z.ai Code (main orchestrator)
+Task: Add Vercel deployment support + switch to Supabase (PostgreSQL) database
+
+Work Log:
+- Downloaded PostgreSQL 17 .deb packages (postgresql-17, postgresql-client-17, postgresql-common, postgresql-client-common) via apt-get download
+- Extracted all to /home/z/postgres/ without root install
+- Checked ldd — no missing libraries needed (unlike MariaDB)
+- Initialized PostgreSQL cluster with initdb (user: postgres, trust auth)
+- Created config: listen on 127.0.0.1:5432, unix socket at /home/z/pg-run, shared_buffers 32MB
+- Started PostgreSQL with setsid + subshell pattern (same as MariaDB)
+- Created database coderoom + user coderoom/coderoom_pass
+- Created /home/z/postgres/ensure-postgres.sh (auto-start script, like ensure-mariadb.sh)
+- Updated prisma/schema.prisma: provider mysql -> postgresql; added directUrl; changed @db.LongText -> @db.Text (PostgreSQL doesn't have LongText)
+- Updated .env: DATABASE_URL + DIRECT_URL with postgresql:// connection string
+- Updated .env.example: added Supabase connection string format with both Transaction URL (port 6543, pooling) and Session URL (port 5432, direct)
+- Ran db:push — created 6 tables in PostgreSQL successfully
+- Ran seed — 1 admin user + 55 materials + 3 forum posts + 1 reply migrated to PostgreSQL
+- Updated scripts/dev.sh: replaced ensure-mariadb.sh with ensure-postgres.sh; loads DATABASE_URL + DIRECT_URL + SESSION_SECRET from .env
+- Created scripts/postinstall.sh — generates Prisma client (runs on Vercel after install)
+- Updated next.config.ts: added serverExternalPackages for @prisma/client (Vercel serverless compatibility); removed webpack config that broke Turbopack
+- Updated package.json: added vercel-build, postinstall, seed scripts; simplified build script to "prisma generate && next build"
+- Created vercel.json: framework nextjs, buildCommand bun run vercel-build, installCommand bun install
+- Updated README.md: comprehensive Vercel + Supabase deployment guide (3 steps: create Supabase DB, setup schema, deploy to Vercel)
+- Restarted dev server with PostgreSQL — all features work
+- Verified via direct psql queries: 6 tables, 1 admin, 55 materials ✓
+- Verified via Agent Browser: admin login, dashboard, materi detail, forum all load correctly with PostgreSQL ✓
+- Lint passes with 0 errors
+- Committed and pushed to GitHub (commit 3d55518)
+
+Stage Summary:
+- Database: PostgreSQL 17 running on 127.0.0.1:5432 (local) / Supabase (production)
+- Connection: postgresql://coderoom:coderoom_pass@127.0.0.1:5432/coderoom
+- Vercel deployment files: vercel.json, scripts/postinstall.sh, vercel-build script
+- Prisma schema: provider=postgresql, with directUrl for Supabase pooling
+- README updated with full Vercel + Supabase deployment guide
+- All 6 tables + data migrated from MariaDB to PostgreSQL
+- App fully functional on PostgreSQL (verified all pages)
+- MariaDB still running but no longer used (can be stopped later)
+- GitHub repo updated: https://github.com/freshjena-bit/Coderoom
