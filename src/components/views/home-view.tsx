@@ -73,7 +73,7 @@ export function HomeView() {
             </Badge>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               Belajar Cyber & IT{" "}
-              <span className="bg-gradient-to-r from-red-600 to-rose-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-violet-600 to-fuchsia-400 bg-clip-text text-transparent">
                 dari Nol
               </span>{" "}
               hingga Mahir

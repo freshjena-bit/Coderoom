@@ -174,14 +174,14 @@ export function DashboardView() {
           label="Progress Keseluruhan"
           value={`${stats.completionRate}%`}
           sub={`${stats.totalMaterials - stats.completedCount} tersisa`}
-          color="rose"
+          color="fuchsia"
         />
         <StatCard
           icon={Award}
           label="Rata-rata Quiz"
           value={`${avgScore}%`}
           sub={`${quizPassed.length} quiz lulus`}
-          color="amber"
+          color="cyan"
         />
       </div>
 
@@ -389,12 +389,12 @@ function StatCard({
   label: string;
   value: string;
   sub: string;
-  color: "primary" | "rose" | "amber";
+  color: "primary" | "fuchsia" | "cyan";
 }) {
   const colorClasses = {
     primary: "bg-primary/10 text-primary",
-    rose: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
-    amber: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    fuchsia: "bg-fuchsia-500/10 text-fuchsia-600 dark:text-fuchsia-400",
+    cyan: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
   };
 
   return (

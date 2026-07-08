@@ -175,15 +175,15 @@ function OverviewTab() {
       icon: BookOpen,
       label: "Total Materi",
       value: stats.totalMaterials,
-      sub: "7 level",
-      color: "rose",
+      sub: "8 level",
+      color: "fuchsia",
     },
     {
       icon: MessageSquare,
       label: "Postingan Forum",
       value: stats.totalForumPosts,
       sub: `${stats.totalForumReplies} balasan`,
-      color: "amber",
+      color: "cyan",
     },
     {
       icon: TrendingUp,
