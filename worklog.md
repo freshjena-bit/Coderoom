@@ -352,3 +352,43 @@ Stage Summary:
 - App fully functional on PostgreSQL (verified all pages)
 - MariaDB still running but no longer used (can be stopped later)
 - GitHub repo updated: https://github.com/freshjena-bit/Coderoom
+
+---
+Task ID: cyber-1-3
+Agent: general-purpose (cyber content generator)
+Task: Generate cybersecurity learning content for Levels 1-3 (Dasar Cyber, Jaringan, Kriptografi)
+
+Work Log:
+- Read worklog.md for context
+- Overwrote /home/z/my-project/prisma/content-levels-1-3.ts with cyber content
+- Wrote 23 materials (5 Dasar Cyber + 9 Jaringan + 9 Kriptografi) with markdown content and 3 quiz questions each
+- Fixed 4 typos where `"question":` keys were missing the leading quote (`question":` → `"question":`) in Digital Signature and PKI materials
+- Verified file with TypeScript parser (0 parse diagnostics) and tsx runtime import (23 materials load successfully)
+- Verified spec compliance: all 23 materials match the exact title, slug, icon, order, isProject required by task
+- Verified no duplicate slugs across all levels
+- Verified each material: starts with `# Title` heading, has at least 2 `##` sections, has at least 1 fenced code block
+- Verified each quiz: 3 questions, exactly 4 options, valid answer index (0-3), explanation present
+- Verified no type errors in our file (full project tsc check shows 0 errors originating from content-levels-1-3.ts)
+- Average 640 words of content per material (~14,700 total words)
+
+Stage Summary:
+- File: /home/z/my-project/prisma/content-levels-1-3.ts
+- Export: contentLevels1to3 (MaterialData[])
+- 23 materials total, all in Bahasa Indonesia, cybersecurity topic
+- Level 1 (Dasar Cyber, 5 materials): Pengenalan Cybersecurity, CIA Triad, Jenis Ancaman Cyber, Etika Hacker & Legalitas (UU ITE), Lab Setup Kali Linux
+- Level 2 (Jaringan, 9 materials): Dasar Jaringan, OSI Model, TCP/IP, DNS & HTTP, Port & Services (nmap), Wireshark, Firewall & IDS (iptables/Snort), VPN & Proxy (WireGuard), Project Network Analysis
+- Level 3 (Kriptografi, 9 materials): Pengenalan Kriptografi, Symmetric (AES-GCM), Asymmetric (RSA/ECC/DH), Hash (SHA/bcrypt), Digital Signature (RSA-PSS/Ed25519), PKI & Certificate (Let's Encrypt/CT), Password Security (argon2id/MFA), Steganography (LSB), Project Encrypt/Decrypt Tool (hybrid AES+RSA CLI)
+- All content includes real shell commands (bash), Python code examples, and accurate technical explanations
+- Legal/etika warnings included (UU ITE Pasal 30, responsible disclosure, izin tertulis for pentest)
+
+---
+Task ID: cyber-4-7
+Agent: general-purpose (cyber content generator)
+Task: Generate cybersecurity content for Levels 4-7
+
+Work Log:
+- Wrote /home/z/my-project/prisma/content-levels-4-7.ts with cyber content
+- 30 materials (10 Web Security + 8 Ethical Hacking + 7 Forensik + 6 Project Akhir)
+
+Stage Summary:
+- 30 materials, all in Bahasa Indonesia, cybersecurity topic

@@ -24,22 +24,22 @@ const features = [
   {
     icon: Brain,
     title: "Quiz Interaktif",
-    desc: "Uji pemahaman dengan quiz di setiap materi. Dapatkan feedback langsung.",
+    desc: "Uji pemahaman cybersecurity dengan quiz di setiap materi. Dapatkan feedback langsung.",
   },
   {
     icon: Rocket,
     title: "Project Nyata",
-    desc: "Bangun 7+ project praktis dari landing page hingga e-commerce.",
+    desc: "Bangun 7+ project praktis: dari network analysis hingga build a honeypot.",
   },
   {
     icon: Award,
     title: "Sertifikat",
-    desc: "Dapatkan sertifikat resmi setelah menyelesaikan semua materi.",
+    desc: "Dapatkan sertifikat resmi setelah menyelesaikan semua materi cybersecurity.",
   },
   {
     icon: Users,
     title: "Forum Diskusi",
-    desc: "Diskusi dengan sesama peserta, tanya jawab, dan berbagi ilmu.",
+    desc: "Diskusi dengan sesama peserta, tanya jawab, dan berbagi ilmu keamanan siber.",
   },
   {
     icon: Target,
@@ -69,18 +69,18 @@ export function HomeView() {
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="secondary" className="mb-4 gap-1.5 px-3 py-1">
               <Zap className="h-3 w-3 text-primary" />
-              7 Level · 55+ Materi · Gratis
+              7 Level · 54 Materi · Gratis
             </Badge>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Belajar Coding{" "}
+              Belajar Cybersecurity{" "}
               <span className="bg-gradient-to-r from-red-600 to-rose-400 bg-clip-text text-transparent">
                 dari Nol
               </span>{" "}
               hingga Mahir
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              Platform belajar coding lengkap dengan materi terstruktur, quiz interaktif,
-              project praktis, dan sertifikat. Mulai perjalanan Anda menjadi web developer hari ini.
+              Platform belajar cybersecurity lengkap dengan materi terstruktur, quiz interaktif,
+              project praktis, dan sertifikat. Mulai perjalanan Anda menjadi cybersecurity professional hari ini.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button
@@ -104,7 +104,7 @@ export function HomeView() {
 
             <div className="mt-12 grid grid-cols-3 gap-4 rounded-2xl border border-border/40 bg-background/50 p-4 backdrop-blur-md sm:gap-8 sm:p-6">
               {[
-                { value: "55+", label: "Materi" },
+                { value: "54", label: "Materi" },
                 { value: "7", label: "Level" },
                 { value: "100%", label: "Gratis" },
               ].map((stat) => (
@@ -125,9 +125,9 @@ export function HomeView() {
       {/* Features */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl">Kenapa CodeRoom?</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Kenapa CyberRoom?</h2>
           <p className="mt-4 text-muted-foreground">
-            Semua yang Anda butuhkan untuk belajar coding dengan cara yang menyenangkan dan efektif
+            Semua yang Anda butuhkan untuk belajar cybersecurity dengan cara yang menyenangkan dan efektif
           </p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -215,7 +215,7 @@ export function HomeView() {
               step: "03",
               icon: Trophy,
               title: "Bangun & Dapatkan Sertifikat",
-              desc: "Kerjakan project akhir dan dapatkan sertifikat sebagai web developer.",
+              desc: "Kerjakan project akhir dan dapatkan sertifikat sebagai cybersecurity professional.",
             },
           ].map((item) => (
             <div key={item.step} className="relative">
@@ -241,10 +241,10 @@ export function HomeView() {
           </div>
           <Trophy className="mx-auto h-10 w-10 text-primary-foreground" />
           <h2 className="mt-4 text-2xl font-bold text-primary-foreground sm:text-3xl">
-            Siap Menjadi Web Developer?
+            Siap Menjadi Cybersecurity Professional?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-primary-foreground/80">
-            Bergabung dengan ribuan peserta lainnya. Mulai belajar coding hari ini, gratis!
+            Bergabung dengan ribuan peserta lainnya. Mulai belajar cybersecurity hari ini, gratis!
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button

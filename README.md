@@ -1,11 +1,11 @@
-# 🏠 CodeRoom — Belajar Coding dari Nol
+# 🛡️ CyberRoom — Belajar Cybersecurity dari Nol
 
-Platform belajar coding interaktif dengan materi terstruktur, quiz, project, dan sertifikat. Dibangun dengan Next.js 16, TypeScript, Tailwind CSS, dan PostgreSQL (Supabase).
+Platform belajar cybersecurity interaktif dengan materi terstruktur, quiz, project, dan sertifikat. Dibangun dengan Next.js 16, TypeScript, Tailwind CSS, dan PostgreSQL (Supabase).
 
 ## ✨ Fitur
 
 - 🏠 **Beranda** — Landing page dengan logo background, hero section, dan roadmap 7 level
-- 📚 **Materi Belajar** — 55+ materi dalam 7 level (Dasar, HTML, CSS, JavaScript, Backend, Database, Project Akhir)
+- 📚 **Materi Belajar** — 54 materi cybersecurity dalam 7 level (Dasar Cyber, Jaringan, Kriptografi, Web Security, Ethical Hacking, Forensik, Project Akhir)
 - 📖 **Detail Materi** — Konten markdown dengan code highlighting + quiz interaktif (3 soal per materi)
 - 👤 **Dashboard User** — Progress tracking, achievements, dan sertifikat
 - 🛡️ **Dashboard Admin** — Kelola pengguna, materi, dan forum (admin only)
@@ -195,14 +195,14 @@ vercel.json               # Vercel deployment config
 
 | Level | Topik | Jumlah Materi |
 |-------|-------|---------------|
-| 1 | Dasar | 5 |
-| 2 | HTML | 9 |
-| 3 | CSS | 9 |
-| 4 | JavaScript | 12 |
-| 5 | Backend (Node.js) | 8 |
-| 6 | Database | 6 |
+| 1 | Dasar Cyber | 5 |
+| 2 | Jaringan | 9 |
+| 3 | Kriptografi | 9 |
+| 4 | Web Security | 10 |
+| 5 | Ethical Hacking | 8 |
+| 6 | Forensik & Malware | 7 |
 | 7 | Project Akhir | 6 |
-| **Total** | | **55 materi** |
+| **Total** | | **54 materi** |
 
 Setiap materi dilengkapi:
 - 📝 Konten markdown dengan contoh kode
@@ -243,4 +243,4 @@ MIT License — bebas digunakan untuk pembelajaran.
 
 ---
 
-Dibuat dengan ❤️ untuk komunitas belajar coding Indonesia.
+Dibuat dengan ❤️ untuk komunitas belajar cybersecurity Indonesia.

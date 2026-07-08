@@ -96,7 +96,7 @@ export function MateriView() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold sm:text-4xl">Materi Belajar</h1>
         <p className="mt-2 text-muted-foreground">
-          7 level pembelajaran, 55+ materi. Klik materi untuk mulai belajar.
+          7 level pembelajaran, 54 materi cybersecurity. Klik materi untuk mulai belajar.
         </p>
       </div>
 

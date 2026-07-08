@@ -2,3996 +2,4695 @@ import { MaterialData } from "../src/lib/content-types";
 
 export const contentLevels1to3: MaterialData[] = [
   // ============================================
-  // LEVEL 1 - DASAR
+  // LEVEL 1 - DASAR CYBER
   // ============================================
   {
     level: 1,
     order: 1,
-    title: "Pengenalan Coding",
-    slug: "pengenalan-coding",
-    description: "Mengenal apa itu coding, bahasa pemrograman, dan mengapa belajar coding penting di era digital.",
-    icon: "💡",
+    title: "Pengenalan Cybersecurity",
+    slug: "pengenalan-cybersecurity",
+    description: "Mengenal apa itu cybersecurity, mengapa penting, dan peran seorang cybersecurity professional.",
+    icon: "🛡️",
     isProject: false,
-    content: `# Pengenalan Coding
+    content: `# Pengenalan Cybersecurity
 
-**Coding** atau pemrograman adalah proses menulis instruksi yang dapat dipahami oleh komputer menggunakan bahasa pemrograman. Instruksi ini disebut **kode**, dan ketika dijalankan, komputer akan melakukan tugas sesuai kode yang ditulis.
+**Cybersecurity** atau keamanan siber adalah praktik melindungi sistem, jaringan, dan data dari serangan digital. Tujuannya adalah memastikan **confidentiality**, **integrity**, dan **availability** informasi (CIA Triad).
 
-## Mengapa Belajar Coding?
+## Mengapa Cybersecurity Penting?
 
-Di era digital, hampir semua aspek kehidupan melibatkan teknologi. Belajar coding memberikan kamu kemampuan untuk:
+Di era digital, hampir semua aspek kehidupan terhubung ke internet. Tanpa keamanan siber yang baik:
 
-- **Membuat aplikasi** dan website sendiri
-- **Memecahkan masalah** secara logis dan terstruktur
-- **Berkarir** di bidang teknologi yang terus berkembang
-- **Mengotomatisasi** tugas-tugas berulang
+- **Data pribadi** dapat dicuri dan disalahgunakan
+- **Sistem perusahaan** dapat dirusak atau dihentikan
+- **Infrastruktur kritikal** (listrik, bank, kesehatan) dapat lumpuh
+- **Kerugian finansial** akibat serangan bisa sangat besar
 
-## Bahasa Pemrograman
-
-Ada banyak bahasa pemrograman, masing-masing dirancang untuk tujuan berbeda:
+## Tipe Serangan Umum
 
 \`\`\`text
-JavaScript  → Web frontend & backend
-Python      → Data science, AI, automation
-Java        → Android, enterprise apps
-C++         → Game, system programming
+Phishing      → Email palsu untuk mencuri kredensial
+Malware       → Software berbahaya (virus, trojan, ransomware)
+DDoS          → Membanjiri server dengan traffic hingga down
+SQL Injection → Menyisipkan kode SQL berbahaya di form input
+MITM          → Penyadap di tengah komunikasi dua pihak
 \`\`\`
 
-## Cara Komputer Membaca Kode
+## Peran Cybersecurity Professional
 
-Komputer hanya memahami **0 dan 1** (binary). Bahasa pemrograman adalah jembatan antara manusia dan komputer. Prosesnya:
+Seorang ahli keamanan siber bertugas:
 
-1. Kamu menulis kode dalam bahasa tingkat tinggi (misal JavaScript)
-2. **Compiler** atau **interpreter** menerjemahkan kode ke bahasa mesin
-3. Komputer menjalankan instruksi tersebut
+1. **Mendeteksi** celah keamanan sebelum hacker memanfaatkannya
+2. **Mempertahankan** sistem dari serangan
+3. **Merespons** insiden dengan cepat
+4. **Mengedukasi** pengguna tentang ancaman
 
-## Tips untuk Pemula
+## Etika dalam Cybersecurity
 
-- Mulai dari **dasar**, jangan terburu-buru
-- **Latihan** setiap hari, bahkan hanya 30 menit
-- Jangan takut **salah** — error adalah bagian dari belajar
-- Bangun **proyek kecil** untuk mempraktikkan teori
+> Seorang cybersecurity professional WAJIB bekerja dalam koridor hukum dan etika. Menyerang sistem tanpa izin adalah kejahatan, meskipun tujuannya "hanya untuk belajar".
 
-> "Cara terbaik belajar coding adalah dengan menulis kode." — Prinsip utama belajar pemrograman`,
+Selalu dapatkan **izin tertulis** sebelum melakukan pengujian keamanan pada sistem manapun.
+
+## Tips Memulai
+
+- Kuasai **dasar jaringan** dan sistem operasi
+- Buat **lab sendiri** dengan virtual machine
+- Ikuti platform seperti **HackTheBox** dan **TryHackMe**
+- Baca berita keamanan terbaru setiap hari`,
     quiz: [
       {
-        question: "Apa yang dimaksud dengan coding?",
+        question: "Apa tujuan utama dari cybersecurity?",
         options: [
-          "Proses merakit komputer",
-          "Proses menulis instruksi untuk komputer menggunakan bahasa pemrograman",
-          "Proses mendesain tampilan website",
-          "Proses mengelola database"
+          "Membuat website lebih cepat",
+          "Melindungi sistem, jaringan, dan data dari serangan digital",
+          "Mengelola database perusahaan",
+          "Mendesain antarmuka pengguna"
         ],
         answer: 1,
-        explanation: "Coding adalah menulis instruksi (kode) menggunakan bahasa pemrograman agar komputer dapat melakukan tugas tertentu."
+        explanation: "Cybersecurity bertujuan melindungi sistem, jaringan, dan data dari ancaman digital dengan memastikan CIA Triad (Confidentiality, Integrity, Availability)."
       },
       {
-        question: "Mengapa komputer membutuhkan compiler atau interpreter?",
+        question: "Manakah yang termasuk jenis serangan cyber?",
         options: [
-          "Untuk membuat website lebih cepat",
-          "Untuk menerjemahkan bahasa tingkat tinggi ke bahasa mesin (binary)",
-          "Untuk menyimpan data di database",
-          "Untuk mendesain antarmuka pengguna"
+          "Phishing - email palsu untuk mencuri kredensial",
+          "Compiling - mengubah kode jadi executable",
+          "Caching - menyimpan data sementara",
+          "Routing - mengarahkan traffic jaringan"
+        ],
+        answer: 0,
+        explanation: "Phishing adalah teknik serangan sosial di mana pelaku mengirim email palsu untuk menipu korban memberikan kredensial atau informasi sensitif."
+      },
+      {
+        question: "Apa prinsip etika yang paling penting dalam cybersecurity?",
+        options: [
+          "Serang dulu sebelum diserang",
+          "Dapatkan izin tertulis sebelum menguji sistem orang lain",
+          "Semua sistem boleh diuji asal untuk belajar",
+          "Jangan pernah melaporkan celah yang ditemukan"
         ],
         answer: 1,
-        explanation: "Komputer hanya memahami binary (0 dan 1). Compiler/interpreter menerjemahkan kode bahasa tingkat tinggi ke bahasa mesin."
-      },
-      {
-        question: "Bahasa pemrograman mana yang paling tepat untuk pengembangan web frontend?",
-        options: ["Python", "C++", "JavaScript", "Java"],
-        answer: 2,
-        explanation: "JavaScript adalah bahasa utama untuk web frontend karena didukung oleh semua browser modern."
+        explanation: "Etika tertinggi dalam cybersecurity adalah mendapatkan izin tertulis sebelum melakukan pengujian. Menyerang sistem tanpa izin adalah kejahatan."
       }
     ]
   },
   {
     level: 1,
     order: 2,
-    title: "Cara Kerja Website",
-    slug: "cara-kerja-website",
-    description: "Memahami arsitektur web: client, server, HTTP, dan peran browser dalam menampilkan halaman.",
+    title: "CIA Triad",
+    slug: "cia-triad",
+    description: "Tiga pilar fundamental keamanan informasi: Confidentiality, Integrity, dan Availability.",
+    icon: "🎯",
+    isProject: false,
+    content: `# CIA Triad
+
+**CIA Triad** adalah model paling fundamental dalam keamanan informasi. Tiga pilar ini menjadi pedoman dalam mendesain, mengevaluasi, dan menerapkan kontrol keamanan pada setiap sistem.
+
+## Tiga Pilar CIA
+
+\`\`\`text
+C - Confidentiality (Kerahasiaan)
+I - Integrity        (Integritas)
+A - Availability     (Ketersediaan)
+\`\`\`
+
+### 1. Confidentiality
+
+Memastikan data hanya dapat diakses oleh pihak yang berwenang. Contoh implementasi:
+
+- **Enkripsi** data saat disimpan (at rest) dan saat dikirim (in transit)
+- **Access control** berbasis peran (RBAC)
+- **Autentikasi** kuat (MFA, biometrik)
+
+Pelanggaran confidentiality terjadi saat data bocor, misalnya akibat **data breach** atau phishing.
+
+### 2. Integrity
+
+Memastikan data tidak diubah tanpa otorisasi. Data harus akurat dan dapat dipercaya. Contoh:
+
+- **Hash function** (SHA-256) untuk mendeteksi perubahan
+- **Digital signature** untuk verifikasi pengirim
+- **Version control** dan audit log
+
+Pelanggaran integrity terjadi saat attacker mengubah data, misalnya memodifikasi nilai transfer bank atau mengganti konten artikel berita.
+
+### 3. Availability
+
+Memastikan sistem dan data tersedia saat dibutuhkan oleh pengguna yang sah. Contoh:
+
+- **Backup** rutin dan disaster recovery
+- **Redundansi** server dan load balancer
+- **Mitigasi DDoS** dengan rate limiting dan CDN
+
+Pelanggaran availability terjadi pada serangan **DDoS**, ransomware, atau pemadaman server.
+
+## Contoh Kasus
+
+\`\`\`text
+Kasus                | Pilar yang dilanggar
+-------------------- | --------------------
+Data breach email    | Confidentiality
+Manipulasi nilai ujian| Integrity
+Ransomware lockdown  | Availability
+Phishing password    | Confidentiality
+\`\`\`
+
+## Trade-off Antar Pilar
+
+Kadang kita harus bertrade-off. Misalnya: **enkripsi kuat** meningkatkan confidentiality, tetapi bisa menurunkan availability jika kunci hilang (data tidak bisa dibaca). Tugas security engineer adalah menyeimbangkan sesuai kebutuhan bisnis dan risiko.
+
+## Contoh Kode: Verifikasi Integrity dengan Hash
+
+\`\`\`python
+import hashlib
+
+data = "Transfer 1.000.000 ke rekening 12345"
+hash_value = hashlib.sha256(data.encode()).hexdigest()
+print(f"Data : {data}")
+print(f"Hash : {hash_value}")
+# Jika data berubah 1 karakter, hash berubah total
+\`\`\`
+
+Inilah mengapa hash digunakan untuk mendeteksi modifikasi data.`,
+    quiz: [
+      {
+        question: "Apa kepanjangan dari CIA dalam CIA Triad?",
+        options: [
+          "Central Intelligence Agency",
+          "Confidentiality, Integrity, Availability",
+          "Cyber Internet Access",
+          "Cryptographic Identity Algorithm"
+        ],
+        answer: 1,
+        explanation: "Dalam konteks keamanan informasi, CIA Triad adalah Confidentiality (kerahasiaan), Integrity (integritas), dan Availability (ketersediaan)."
+      },
+      {
+        question: "Serangan DDoS paling melanggar pilar CIA yang mana?",
+        options: [
+          "Confidentiality",
+          "Integrity",
+          "Availability",
+          "Authentication"
+        ],
+        answer: 2,
+        explanation: "DDoS membuat sistem tidak bisa diakses oleh pengguna sah, sehingga melanggar Availability (ketersediaan)."
+      },
+      {
+        question: "Teknik mana yang paling tepat menjaga Integrity data?",
+        options: [
+          "Backup harian",
+          "Load balancer",
+          "Hash function untuk verifikasi",
+          "Firewall rules"
+        ],
+        answer: 2,
+        explanation: "Hash function menghasilkan fingerprint data. Jika data berubah, hash berubah — sehingga modifikasi dapat dideteksi."
+      }
+    ]
+  },
+  {
+    level: 1,
+    order: 3,
+    title: "Jenis Ancaman Cyber",
+    slug: "jenis-ancaman-cyber",
+    description: "Mengklasifikasikan ancaman siber: malware, social engineering, network attack, dan web attack.",
+    icon: "⚠️",
+    isProject: false,
+    content: `# Jenis Ancaman Cyber
+
+Ancaman siber sangat beragam. Memahami klasifikasinya membantu kita memilih kontrol keamanan yang tepat. Kita akan kelompokkan menjadi 4 kategori utama.
+
+## 1. Malware
+
+**Malware** (malicious software) adalah program berbahaya yang dijalankan di sistem korban.
+
+\`\`\`text
+Virus     → Menempel di file lain, butuh host
+Worm      → Mandiri, menyebar via jaringan
+Trojan    → Menyamar sebagai program sah
+Ransomware→ Mengenkripsi data, minta tebusan
+Spyware   → Memata-matai aktivitas korban
+Rootkit   → Bersembunyi di level kernel
+\`\`\`
+
+## 2. Social Engineering
+
+Serangan yang menargetkan **manusia**, bukan sistem. Manusia adalah titik lemah terbesar.
+
+- **Phishing** — email/SMS palsu yang menyamar sebagai entitas terpercaya
+- **Spear phishing** — phishing yang ditargetkan ke individu spesifik
+- **Pretexting** — membuat skenario palsu untuk mendapatkan info
+- **Baiting** — USB/CD berbahaya ditinggal di lokasi umum
+
+## 3. Network Attack
+
+Serangan pada lapisan jaringan.
+
+\`\`\`bash
+# Contoh: MITM dengan ARP spoofing (hanya di lab pribadi!)
+sudo arpspoof -i eth0 -t 192.168.1.10 192.168.1.1
+sudo arpspoof -i eth0 -t 192.168.1.1 192.168.1.10
+\`\`\`
+
+- **MITM (Man-in-the-Middle)** — penyadapan komunikasi
+- **DDoS** — membanjiri server hingga down
+- **Port scanning** — menemukan layanan terbuka (nmap)
+- **Packet sniffing** — membaca traffic jaringan
+
+## 4. Web Application Attack
+
+- **SQL Injection** — menyisipkan SQL di input form
+- **XSS (Cross-Site Scripting)** — menyisipkan script di halaman web
+- **CSRF** — memaksa korban melakukan aksi tanpa sadar
+- **LFI/RFI** — menyertakan file lokal/remote berbahaya
+
+## Contoh SQL Injection
+
+\`\`\`text
+Input username: admin' OR '1'='1
+Input password: x' OR '1'='1
+
+Query jadi:
+SELECT * FROM users WHERE username='admin' OR '1'='1' AND password='x' OR '1'='1'
+\`\`\`
+
+Karena \`'1'='1'\` selalu true, attacker login tanpa password yang benar.
+
+## Kill Chain Attack
+
+Anatomi serangan umumnya mengikuti pola:
+
+1. **Reconnaissance** — mengumpulkan info target
+2. **Weaponization** — membuat payload
+3. **Delivery** — mengirim payload (email, USB, web)
+4. **Exploitation** — memanfaatkan celah
+5. **Installation** — memasang backdoor
+6. **C2 (Command & Control)** — kontrol jarak jauh
+7. **Action on Objective** — eksekusi tujuan akhir
+
+Memutus satu titik saja sudah bisa menggagalkan serangan.`,
+    quiz: [
+      {
+        question: "Manakah malware yang meminta tebusan untuk mengembalikan akses data?",
+        options: [
+          "Virus",
+          "Trojan",
+          "Ransomware",
+          "Spyware"
+        ],
+        answer: 2,
+        explanation: "Ransomware mengenkripsi data korban dan meminta tebusan (umumnya cryptocurrency) untuk memberikan kunci dekripsi."
+      },
+      {
+        question: "Apa perbedaan phishing dan spear phishing?",
+        options: [
+          "Phishing lewat email, spear phishing lewat SMS",
+          "Phishing massal, spear phishing ditargetkan ke individu spesifik",
+          "Phishing mencuri data, spear phishing merusak sistem",
+          "Tidak ada perbedaan"
+        ],
+        answer: 1,
+        explanation: "Phishing dikirim massal ke banyak orang, sedangkan spear phishing dirancang khusus untuk satu individu/organisasi tertentu setelah riset."
+      },
+      {
+        question: "Pada kill chain, tahap pertama yang dilakukan attacker adalah?",
+        options: [
+          "Exploitation",
+          "Installation",
+          "Reconnaissance",
+          "Action on Objective"
+        ],
+        answer: 2,
+        explanation: "Reconnaissance adalah tahap pengumpulan informasi tentang target sebelum serangan, biasanya pasif untuk menghindari deteksi."
+      }
+    ]
+  },
+  {
+    level: 1,
+    order: 4,
+    title: "Etika Hacker & Legalitas",
+    slug: "etika-hacker-legalitas",
+    description: "Memahami klasifikasi hacker (white/gray/black hat), UU ITE Indonesia, dan kode etik profesi.",
+    icon: "⚖️",
+    isProject: false,
+    content: `# Etika Hacker & Legalitas
+
+Bisa membobol sistem **tidak** berarti boleh membobolnya. Etika dan hukum adalah batas yang membedakan seorang profesional keamanan dari penjahat cyber.
+
+## Klasifikasi Hacker
+
+\`\`\`text
+White Hat  → Hacker etis, izin resmi, melaporkan celah
+Black Hat  → Penjahat, tanpa izin, merusak/mencuri
+Gray Hat   → Mencari celah tanpa izin, tapi melaporkan
+Red Hat    → Membalas serangan black hat (kontroversial)
+Blue Hat   → Outsourced tester untuk produk sebelum rilis
+\`\`\`
+
+Hanya **White Hat** yang legal dan etis. Gray Hat tetap melanggar hukum meskipun niatnya baik.
+
+## Kode Etik Hacker Etis (EC-Council)
+
+1. **Keep private & confidential information** — jangan sebarkan data
+2. **Disclose vulnerabilities responsibly** — lapor ke vendor dulu
+3. **Protect infrastructure** — jangan meninggalkan backdoor
+4. **Stay within scope** — hanya uji yang diizinkan
+5. **Maintain competence** — terus belajar
+6. **Respect privacy** — privasi korban uji tetap dihormati
+
+## Dasar Hukum di Indonesia
+
+\`\`\`text
+UU No. 11/2008 (ITE) — diubah UU 19/2016 & UU 1/2024
+Pasal 27: konten ilegal (SARA, cabul, pemerasan)
+Pasal 30: akses ilegal & intercept (maks 12 tahun / 12 miliar)
+Pasal 33: manipulasi data (maks 12 tahun / 12 miliar)
+Pasal 35: akses ilegal untuk keuntungan (maks 12 tahun)
+
+UU No. 27/2022 Pelindungan Data Pribadi (PDP)
+\`\`\`
+
+Konsekuensi sangat berat — penjara hingga **12 tahun** dan denda miliaran rupiah.
+
+## Responsible Disclosure
+
+Bila menemukan celah di sistem orang lain, alur yang benar:
+
+\`\`\`text
+1. Temukan celah SECARA TIDAK SENGAJA
+2. Jangan eksploitasi lebih lanjut
+3. Jangan akses data orang lain
+4. Dokumentasikan dengan baik (PoC)
+5. Hubungi vendor/security team secara privat
+6. Beri waktu 90 hari untuk perbaikan
+7. Publikasikan setelah patch dirilis
+\`\`\`
+
+Program **Bug Bounty** (HackerOne, Bugcrowd, Intigriti) adalah jalur legal untuk mendapat imbalan dengan menemukan celah di perusahaan yang membuka program.
+
+## Syarat Pentest Legal
+
+Untuk melakukan penetration testing secara legal:
+
+- **Surat izin tertulis** dari pemilik sistem (Scope of Work)
+- **Kontrak** yang jelas tentang batasan (rules of engagement)
+- **Waktu** pengujian yang disepakati
+- **Lingkup IP/domain** yang boleh diuji
+- **Dilarang** mengakses data produksi sensitif
+
+## Kasus Nyata
+
+Banyak hacker "iseng" yang berakhir dipenjara karena merasa "hanya mencoba". Di Indonesia, beberapa kasus membobol situs pemerintah "untuk pamer" berakhir dengan tuntutan UU ITE. **Niat tidak menghapuskan unsur pidana.**
+
+> Aturan emas: **Jika tidak ada izin tertulis, jangan lakukan.**`,
+    quiz: [
+      {
+        question: "Apa perbedaan utama White Hat dan Black Hat hacker?",
+        options: [
+          "White Hat lebih pintar dari Black Hat",
+          "White Hat bekerja dengan izin dan etis, Black Hat tanpa izin untuk kejahatan",
+          "White Hat hanya di siang hari, Black Hat di malam hari",
+          "White Hat pakai Windows, Black Hat pakai Linux"
+        ],
+        answer: 1,
+        explanation: "Perbedaannya pada izin dan etika: White Hat bekerja resmi dan melaporkan celah, Black Hat bekerja tanpa izin untuk mencuri atau merusak."
+      },
+      {
+        question: "Di Indonesia, ancaman hukum maksimal untuk akses ilegal sistem (Pasal 30 UU ITE)?",
+        options: [
+          "6 bulan penjara",
+          "2 tahun penjara",
+          "12 tahun penjara + denda miliaran",
+          "Tidak ada ancaman pidana"
+        ],
+        answer: 2,
+        explanation: "Pasal 30 UU ITE mengancam pidana hingga 12 tahun penjara dan/atau denda hingga Rp 12 miliar untuk akses ilegal dan intersepsi."
+      },
+      {
+        question: "Apa langkah pertama yang benar setelah menemukan celah di situs orang lain?",
+        options: [
+          "Langsung publikasikan ke media sosial",
+          "Eksploitasi untuk membuktikan dampaknya",
+          "Hubungi security team vendor secara privat dan beri waktu perbaikan",
+          "Jual celah tersebut di dark web"
+        ],
+        answer: 2,
+        explanation: "Responsible disclosure: hubungi vendor secara privat, beri waktu (umumnya 90 hari) untuk memperbaiki sebelum publikasi."
+      }
+    ]
+  },
+  {
+    level: 1,
+    order: 5,
+    title: "Lab Setup - Kali Linux",
+    slug: "lab-setup-kali-linux",
+    description: "Menyiapkan lab keamanan pribadi dengan VirtualBox dan Kali Linux untuk praktik aman.",
+    icon: "🐧",
+    isProject: false,
+    content: `# Lab Setup - Kali Linux
+
+Sebelum mempelajari teknik keamanan, kita butuh **lab pribadi** — lingkungan terisolasi untuk praktik tanpa melanggar hukum. Yang paling populer adalah **Kali Linux** di virtual machine.
+
+## Mengapa Virtual Machine?
+
+- **Isolasi** — terpisah dari host OS, tidak bisa rusak
+- **Snapshot** — bisa kembali ke kondisi bersih
+- **Multi-OS** — bisa jalankan target Linux & Windows bersamaan
+- **Legal** — semua praktik di jaringan internal sendiri
+
+## Tools yang Dibutuhkan
+
+\`\`\`text
+1. VirtualBox  (gratis) → virtualbox.org
+   atau VMware Workstation Player (gratis untuk non-komersial)
+2. Kali Linux ISO → kali.org/get-kali
+3. Target VM: Metasploitable 2, DVWA, Windows 7/10 (trial)
+\`\`\`
+
+## Membuat VM Kali Linux
+
+1. Buka VirtualBox → klik **New**
+2. Name: \`Kali-Linux\`, Type: **Linux**, Version: **Debian 64-bit**
+3. RAM minimal **4 GB** (rekomendasi 8 GB)
+4. Disk **40 GB** (dynamically allocated)
+5. Settings → Network → **NAT Network** (lebih realistis untuk lab)
+6. Mount ISO Kali, boot, install
+
+## Update & Konfigurasi Awal
+
+Setelah login (default: \`kali / kali\`), jalankan:
+
+\`\`\`bash
+# Update repositori dan sistem
+sudo apt update && sudo apt full-upgrade -y
+
+# Install tools tambahan
+sudo apt install -y guake terminator seclists cherrytree
+
+# Aktifkan service database Metasploit
+sudo systemctl enable --now postgresql
+sudo msfdb init
+
+# Cek tools yang sudah terpasang
+nmap --version
+burpsuite --version 2>/dev/null || echo "Burp Suite: siap"
+\`\`\`
+
+## Tools Wajib di Kali
+
+\`\`\`text
+nmap          → Port scanner & network discovery
+wireshark     → Sniffer traffic jaringan
+metasploit    → Framework exploit
+burpsuite     → Web proxy & security testing
+john/hashcat  → Password cracker
+sqlmap        → Automated SQL injection
+hydra         → Brute force login
+aircrack-ng   → WiFi security testing
+nikto         → Web server scanner
+gobuster      → Directory brute force
+\`\`\`
+
+## Menyiapkan Target Lab
+
+Buat VM target yang **sengaja rentan** untuk latihan:
+
+\`\`\`bash
+# Download Metasploitable 2 (Linux rentan)
+wget https://sourceforge.net/projects/metasploitable/files/Metasploitable-Linux-2.0.0.zip
+
+# Atau gunakan DVWA (Damn Vulnerable Web App) di Docker
+docker run -d -p 80:80 vulnerables/web-dvwa
+\`\`\`
+
+## Tips Belajar di Lab
+
+- **Snapshot** VM sebelum eksperimen — kalau rusak, restore 1 menit
+- **Patok IP** target di NAT Network (mis. 192.168.56.0/24)
+- **Dokumentasi** setiap langkah di CherryTree atau Obsidian
+- **Jangan** pernah hubungkan lab ke internet publik tanpa firewall
+- **Hapus** data sensitif dari snapshot sebelum share
+
+## Verifikasi Lab Berfungsi
+
+\`\`\`bash
+# Dari Kali, scan IP target
+ip addr show                    # cek IP sendiri
+sudo nmap -sn 192.168.56.0/24   # discover host
+sudo nmap -sV 192.168.56.102    # service version detection
+\`\`\`
+
+Jika berhasil menemukan port terbuka di VM target, lab kamu siap dipakai untuk mempelajari tingkat selanjutnya.`,
+    quiz: [
+      {
+        question: "Mengapa praktik cybersecurity sebaiknya dilakukan di virtual machine?",
+        options: [
+          "Karena lebih cepat dari komputer asli",
+          "Agar terisolasi dari host, aman dari kerusakan, dan bisa di-snapshot",
+          "Karena VM tidak bisa dihack",
+          "Karena murah"
+        ],
+        answer: 1,
+        explanation: "VM memberikan isolasi dari host OS, fitur snapshot untuk rollback cepat, dan jaringan internal yang terkontrol — semua praktik menjadi aman dan legal."
+      },
+      {
+        question: "Manakah tool yang TIDAK tersedia secara default di Kali Linux?",
+        options: [
+          "nmap",
+          "metasploit-framework",
+          "Microsoft Office",
+          "wireshark"
+        ],
+        answer: 2,
+        explanation: "Kali Linux berisi tools keamanan seperti nmap, metasploit, wireshark. Microsoft Office adalah aplikasi perkantoran komersial yang tidak tersedia default."
+      },
+      {
+        question: "Perintah apa untuk mendeteksi versi service pada port terbuka dengan nmap?",
+        options: [
+          "nmap -sn target",
+          "nmap -sV target",
+          "nmap -Pn target",
+          "nmap -p 80 target"
+        ],
+        answer: 1,
+        explanation: "Flag \`-sV\` (service version detection) membuat nmap mengeksplorasi port terbuka dan menebak versi service yang berjalan."
+      }
+    ]
+  },
+
+  // ============================================
+  // LEVEL 2 - JARINGAN
+  // ============================================
+  {
+    level: 2,
+    order: 1,
+    title: "Dasar Jaringan Komputer",
+    slug: "dasar-jaringan-komputer",
+    description: "Konsep dasar jaringan: IP address, subnet, gateway, MAC address, dan topologi.",
     icon: "🌐",
     isProject: false,
-    content: `# Cara Kerja Website
+    content: `# Dasar Jaringan Komputer
 
-Setiap kali kamu membuka sebuah website, terjadi serangkaian proses di balik layar yang melibatkan **client**, **server**, dan jaringan internet. Memahami proses ini penting sebelum mulai membangun web.
+Jaringan komputer adalah fondasi dari internet dan sebagian besar serangan siber. Sebelum bisa menyerang atau mempertahankan jaringan, kamu harus memahami cara kerjanya.
 
-## Client dan Server
+## Konsep Dasar
 
-Website bekerja dengan model **client-server**:
-
-- **Client**: Perangkat kamu (laptop, HP) yang menjalankan **browser** seperti Chrome atau Firefox. Browser bertugas meminta dan menampilkan halaman web.
-- **Server**: Komputer khusus yang menyimpan file website dan merespons permintaan dari client. Server selalu menyala dan terhubung ke internet.
-
-## Alur Permintaan HTTP
-
-Ketika kamu mengetik URL di browser, terjadi langkah-langkah berikut:
+**Jaringan komputer** adalah kumpulan perangkat yang saling terhubung untuk berkomunikasi dan berbagi sumber daya. Perangkat diidentifikasi dengan:
 
 \`\`\`text
-1. Browser mencari alamat IP via DNS
-2. Browser mengirim request HTTP ke server
-3. Server memproses request dan mencari file
-4. Server mengirim response (HTML, CSS, JS) ke browser
-5. Browser merender halaman web untuk ditampilkan
+MAC Address → alamat fisik kartu jaringan (XX:XX:XX:XX:XX:XX)
+IP Address  → alamat logis di jaringan (192.168.1.10)
+Hostname    → nama yang dibaca manusia (server01.local)
 \`\`\`
 
-**HTTP** (HyperText Transfer Protocol) adalah aturan komunikasi antara client dan server. Saat aman, digunakan **HTTPS** yang datanya dienkripsi.
+## IPv4 dan Subnetting
 
-## DNS: Buku Telepon Internet
+IPv4 adalah 32-bit, ditulis dalam 4 oktet:
 
-Manusia mengingat nama domain seperti \`google.com\`, tapi komputer butuh **alamat IP** berupa angka seperti \`142.250.190.46\`. **DNS** (Domain Name System) menerjemahkan nama domain ke alamat IP.
+\`\`\`text
+192.168.1.10/24
+│         │  │
+│         │  └── Subnet mask = 24 bit pertama adalah network
+│         └───── Host = 1.10
+└─────────────── Network = 192.168.1.0
+\`\`\`
 
-## Teknologi Frontend vs Backend
+Rumus jumlah host: \`2^(32-prefix) - 2\`. Untung /24: \`2^8 - 2 = 254 host\`.
 
-Pengembangan web dibagi menjadi dua bagian besar:
+## Kelas IP (Public vs Private)
 
-- **Frontend**: Bagian yang dilihat user di browser. Teknologinya: **HTML** (struktur), **CSS** (tampilan), **JavaScript** (interaktivitas).
-- **Backend**: Bagian di server yang mengelola data dan logika. Teknologinya: **Node.js**, **Python**, **PHP**, dan **database** seperti MySQL atau PostgreSQL.
+\`\`\`text
+PRIVATE (untuk LAN, tidak di-route di internet):
+  10.0.0.0/8        (10.0.0.0 - 10.255.255.255)
+  172.16.0.0/12     (172.16.0.0 - 172.31.255.255)
+  192.168.0.0/16    (192.168.0.0 - 192.168.255.255)
 
-## Tips Memahami Arsitektur Web
+PUBLIC  → selain di atas, di-route di internet
 
-- Coba buka **DevTools** (F12) di browser, lihat tab **Network** untuk melihat request yang terjadi
-- Perhatikan bahwa setiap gambar, file CSS, dan JS adalah request terpisah
-- Pahami bahwa frontend berjalan di browser, backend berjalan di server
+LOOPBACK → 127.0.0.0/8 (localhost)
+\`\`\`
 
-> Memahami alur request-response adalah fondasi penting sebelum mendalami web development.`,
-    quiz: [
-      {
-        question: "Apa peran browser dalam arsitektur web?",
-        options: [
-          "Menyimpan data user secara permanen",
-          "Berperan sebagai client yang meminta dan menampilkan halaman web",
-          "Menjalankan kode backend",
-          "Mengelola database server"
-        ],
-        answer: 1,
-        explanation: "Browser adalah client yang mengirim request HTTP ke server dan merender response (HTML/CSS/JS) untuk ditampilkan ke user."
-      },
-      {
-        question: "Apa fungsi DNS dalam internet?",
-        options: [
-          "Mengenkripsi data antara client dan server",
-          "Menyimpan file website",
-          "Menerjemahkan nama domain menjadi alamat IP",
-          "Menjalankan JavaScript di server"
-        ],
-        answer: 2,
-        explanation: "DNS (Domain Name System) berfungsi seperti buku telepon yang menerjemahkan nama domain (mis. google.com) menjadi alamat IP numerik."
-      },
-      {
-        question: "Manakah yang termasuk teknologi frontend?",
-        options: [
-          "MySQL dan PostgreSQL",
-          "Node.js dan Express",
-          "HTML, CSS, dan JavaScript",
-          "Python dan Django"
-        ],
-        answer: 2,
-        explanation: "Frontend berjalan di browser dan menggunakan HTML (struktur), CSS (tampilan), dan JavaScript (interaktivitas)."
-      }
-    ]
-  },
-  {
-    level: 1,
-    order: 3,
-    title: "Instalasi VS Code",
-    slug: "instalasi-vscode",
-    description: "Langkah instalasi Visual Studio Code, pengenalan interface, dan ekstensi wajib untuk web developer.",
-    icon: "📦",
-    isProject: false,
-    content: `# Instalasi VS Code
+## Komponen Jaringan
 
-**Visual Studio Code (VS Code)** adalah code editor gratis buatan Microsoft yang paling populer di kalangan developer. Editor ini ringan, cepat, dan punya ekosistem ekstensi yang sangat kaya.
+- **Switch** → menghubungkan perangkat di LAN yang sama (Layer 2)
+- **Router** → menghubungkan jaringan berbeda (Layer 3)
+- **Firewall** → menyaring traffic berdasarkan aturan
+- **Gateway** → pintu keluar ke jaringan lain
+- **Modem** → mengubah sinyal ISP jadi data jaringan
 
-## Mengapa VS Code?
-
-VS Code dipilih banyak developer karena:
-
-- **Gratis** dan open source
-- **Ringan** dan cepat dibuka
-- Dukungan **ekstensi** untuk berbagai bahasa
-- **Integrated terminal** tanpa pindah aplikasi
-- **Git integration** bawaan
-- **IntelliSense** (autocomplete cerdas)
-
-## Langkah Instalasi
-
-Berikut cara instalasi VS Code di berbagai sistem operasi:
+## Cek Informasi Jaringan di Linux
 
 \`\`\`bash
-# Windows
-# 1. Download installer dari https://code.visualstudio.com
-# 2. Jalankan VSCodeUserSetup.exe
-# 3. Ikuti wizard instalasi
+# Lihat IP dan interface
+ip addr show
 
-# macOS
-# 1. Download .zip dari website resmi
-# 2. Ekstrak dan pindahkan ke folder Applications
-# Atau via Homebrew:
-brew install --cask visual-studio-code
+# Lihat tabel routing (gateway)
+ip route
 
-# Linux (Debian/Ubuntu)
-sudo apt install ./<file>.deb
+# Cek koneksi ke host
+ping -c 4 8.8.8.8
+
+# Lihat MAC address tetangga (ARP table)
+ip neigh
+
+# Resolve DNS
+dig google.com +short
 \`\`\`
 
-## Mengenal Interface
+## NAT (Network Address Translation)
 
-Setelah dibuka, kamu akan melihat beberapa bagian utama:
-
-- **Activity Bar** (kiri): Ikon untuk Explorer, Search, Source Control, Run, Extensions
-- **Side Bar**: Navigasi file dan folder
-- **Editor**: Tempat menulis kode
-- **Terminal** (bawah): Jalankan perintah, tekan \`Ctrl + \\\`\` (backtick)
-- **Status Bar** (bawah): Info branch Git, bahasa, baris/kolom
-
-## Ekstensi Wajib untuk Web Developer
-
-Buka tab Extensions (\`Ctrl+Shift+X\`) dan install:
+NAT menerjemahkan IP private menjadi IP public agar bisa internetan. Inilah yang membuat semua perangkat di rumahmu bisa online meski cuma 1 IP public dari ISP.
 
 \`\`\`text
-1. Live Server         → Preview HTML otomatis di browser
-2. Prettier            → Auto-format kode
-3. ESLint              → Cek error JavaScript
-4. Auto Rename Tag     → Rename tag HTML berpasangan
-5. Path Intellisense   → Autocomplete path file
+192.168.1.10 (laptop)  ─┐
+192.168.1.11 (HP)      ─┼─→ Router ──→ 103.x.x.x (IP public ISP) ──→ Internet
+192.168.1.12 (TV)      ─┘
 \`\`\`
 
-## Shortcut Penting
+## Topologi Umum
 
-Hafalkan shortcut berikut agar lebih produktif:
+\`\`\`text
+Star       → semua perangkat ke switch pusat
+Mesh       → tiap perangkat saling terhubung (banyak kabel)
+Bus        → satu kabel backbone (lama)
+Ring       → melingkar, token passing
+\`\`\`
 
-- \`Ctrl + P\`: Cari file cepat
-- \`Ctrl + Shift + P\`: Command Palette
-- \`Ctrl + \\\`\`: Buka terminal
-- \`Ctrl + B\`: Toggle side bar
-- \`Alt + ↑/↓\`: Pindah baris ke atas/bawah
+## Cara Data Mengalir
 
-> Investasi waktu mempelajari shortcut akan sangat menghemat waktumu sebagai developer.`,
+Saat kamu membuka \`https://google.com\`:
+
+1. **DNS** resolve \`google.com\` → IP (mis. 142.250.x.x)
+2. Browser membuka **TCP connection** ke IP:443 (3-way handshake)
+3. **TLS handshake** untuk enkripsi
+4. **HTTP request** dikirim: \`GET / HTTP/1.1\`
+5. Server balas dengan **HTTP response** (HTML, status 200)
+6. Browser **render** halaman
+
+Ini yang akan kita bedah di materi-materi selanjutnya.`,
     quiz: [
       {
-        question: "Apa kegunaan ekstensi Live Server di VS Code?",
+        question: "Manakah rentang IP PRIVATE yang valid?",
         options: [
-          "Menjalankan server backend Node.js",
-          "Mempreview halaman HTML otomatis di browser saat file disimpan",
-          "Mengelola database",
-          "Mengcompile kode TypeScript"
+          "8.8.8.0/24",
+          "192.168.1.0/24",
+          "172.32.0.0/12",
+          "203.130.0.0/16"
         ],
         answer: 1,
-        explanation: "Live Server membuka halaman HTML di browser dan otomatis me-refresh saat file disimpan, sangat membantu saat development frontend."
+        explanation: "192.168.0.0/16 adalah range private. 8.8.8.0 (Google DNS) dan 203.x adalah IP public, sedangkan 172.32.0.0 di luar rentang 172.16.0.0/12."
       },
       {
-        question: "Shortcut apa yang digunakan untuk membuka terminal di VS Code?",
-        options: ["Ctrl + P", "Ctrl + Shift + P", "Ctrl + ` (backtick)", "Ctrl + B"],
-        answer: 2,
-        explanation: "Tekan Ctrl + ` (backtick) untuk membuka integrated terminal di VS Code tanpa pindah aplikasi."
-      },
-      {
-        question: "Mengapa VS Code banyak dipilih developer?",
+        question: "Pada subnet 192.168.10.0/24, berapa jumlah host yang dapat digunakan?",
         options: [
-          "Karena berbayar dan eksklusif",
-          "Karena ringan, gratis, dan punya banyak ekstensi",
-          "Karena hanya mendukung satu bahasa pemrograman",
-          "Karena tidak punya terminal bawaan"
+          "256",
+          "254",
+          "128",
+          "62"
         ],
         answer: 1,
-        explanation: "VS Code gratis, ringan, cepat, dan punya ekosistem ekstensi yang kaya untuk berbagai bahasa pemrograman."
-      }
-    ]
-  },
-  {
-    level: 1,
-    order: 4,
-    title: "Struktur Folder Proyek",
-    slug: "struktur-folder-proyek",
-    description: "Belajar menyusun struktur folder proyek yang rapi dan mengikuti best practice web development.",
-    icon: "📁",
-    isProject: false,
-    content: `# Struktur Folder Proyek
-
-Struktur folder yang rapi adalah ciri khas proyek yang sehat. Mengatur file dengan baik membuat proyek **mudah dipelihara**, **mudah dicari**, dan **kolaboratif** bersama developer lain.
-
-## Mengapa Struktur Folder Penting?
-
-Bayangkan proyek dengan ratusan file bercampur aduk di satu folder — pasti pusing. Struktur folder yang baik memberi:
-
-- **Keterbacaan**: Developer baru cepat paham letak file
-- **Maintainability**: Mudah update dan debug
-- **Kolaborasi**: Tim bisa bekerja tanpa konflik
-- **Scaling**: Proyek tetap rapi saat berkembang
-
-## Struktur Folder Website Sederhana
-
-Berikut contoh struktur proyek website statis:
-
-\`\`\`text
-my-website/
-├── index.html
-├── about.html
-├── contact.html
-├── css/
-│   ├── style.css
-│   └── responsive.css
-├── js/
-│   ├── main.js
-│   └── utils.js
-├── images/
-│   ├── logo.png
-│   └── hero.jpg
-└── assets/
-    ├── fonts/
-    └── icons/
-\`\`\`
-
-## Prinsip Penataan Folder
-
-Beberapa prinsip yang harus dipegang:
-
-1. **Pisahkan berdasarkan jenis** — file CSS, JS, dan gambar di folder terpisah
-2. **Gunakan nama deskriptif** — \`style.css\` lebih jelas dari \`s.css\`
-3. **Huruf kecil dan kebab-case** — \`about-us.html\` bukan \`AboutUs.html\`
-4. **Hindari spasi** — gunakan tanda hubung (\`-\`) sebagai pemisah
-5. **Satu file, satu tanggung jawab** — pisahkan logika besar ke file kecil
-
-## File Penting yang Sering Ada
-
-Beberapa file umum di hampir setiap proyek:
-
-\`\`\`text
-README.md       → Dokumentasi proyek
-.gitignore      → File/folder yang diabaikan Git
-index.html      → Halaman utama website
-package.json    → Konfigurasi proyek Node.js
-\`\`\`
-
-## Tips untuk Pemula
-
-- Buat struktur folder **di awal** sebelum mulai coding
-- **Konsisten** dengan konvensi penamaan
-- Jangan buat folder terlalu dalam (maksimal 3-4 level)
-- **Dokumentasikan** struktur di \`README.md\` agar tim paham
-
-> Struktur folder yang baik adalah investasi jangka panjang untuk proyekmu.`,
-    quiz: [
-      {
-        question: "Apa prinsip terbaik dalam memberi nama file proyek?",
-        options: [
-          "Gunakan huruf besar dan spasi",
-          "Gunakan huruf kecil dengan kebab-case dan hindari spasi",
-          "Gunakan angka acak agar unik",
-          "Gunakan nama sependek mungkin meski tidak jelas"
-        ],
-        answer: 1,
-        explanation: "Penamaan file terbaik menggunakan huruf kecil dengan kebab-case (mis. about-us.html) dan menghindari spasi agar konsisten dan URL-friendly."
+        explanation: "Rumusnya 2^(32-24) - 2 = 256 - 2 = 254 host. Dikurangi 2 karena alamat network (192.168.10.0) dan broadcast (192.168.10.255) tidak bisa dipakai host."
       },
       {
-        question: "Mengapa file CSS, JS, dan gambar sebaiknya dipisah ke folder berbeda?",
+        question: "Apa fungsi NAT (Network Address Translation)?",
         options: [
-          "Agar ukuran proyek lebih kecil",
-          "Agar mudah dicari, dipelihara, dan dikelola sesuai jenisnya",
-          "Karena browser hanya mau membaca dari folder terpisah",
-          "Agar proyek terlihat lebih kompleks"
+          "Mempercepat koneksi internet",
+          "Menerjemahkan IP private ke IP public agar bisa internetan",
+          "Memblokir serangan DDoS",
+          "Mengenkripsi traffic jaringan"
         ],
         answer: 1,
-        explanation: "Memisahkan file berdasarkan jenis membuat proyek rapi, mudah dicari, dan mudah dipelihara seiring berkembangnya proyek."
-      },
-      {
-        question: "Apa fungsi file .gitignore dalam proyek?",
-        options: [
-          "Mendokumentasikan struktur proyek",
-          "Menentukan file/folder yang diabaikan oleh Git",
-          "Menyimpan dependency proyek",
-          "Menjadi halaman utama website"
-        ],
-        answer: 1,
-        explanation: ".gitignore mendaftar file/folder (seperti node_modules atau .env) yang tidak ingin dilacak dan di-commit oleh Git."
-      }
-    ]
-  },
-  {
-    level: 1,
-    order: 5,
-    title: "Dasar Git & GitHub",
-    slug: "dasar-git-github",
-    description: "Mengenal Git sebagai version control system dan GitHub untuk kolaborasi serta menyimpan kode online.",
-    icon: "🔀",
-    isProject: false,
-    content: `# Dasar Git & GitHub
-
-**Git** adalah sistem **version control** yang melacak perubahan kode seiring waktu. **GitHub** adalah platform online untuk menyimpan dan berkolaborasi pada proyek Git. Keduanya wajib dikuasai developer modern.
-
-## Apa Itu Version Control?
-
-Version control adalah sistem yang mencatat setiap perubahan pada file. Manfaatnya:
-
-- **Riwayat lengkap**: Tahu siapa mengubah apa dan kapan
-- **Rollback**: Kembali ke versi sebelumnya jika ada bug
-- **Branching**: Bekerja pada fitur baru tanpa ganggu kode utama
-- **Kolaborasi**: Banyak orang kerja pada proyek yang sama
-
-## Konsep Dasar Git
-
-Beberapa istilah penting yang harus dipahami:
-
-- **Repository (repo)**: Folder proyek yang dilacak Git
-- **Commit**: Snapshot perubahan dengan pesan deskriptif
-- **Branch**: Cabang independen untuk pengembangan paralel
-- **Remote**: Versi repo di server (mis. GitHub)
-
-## Perintah Git Dasar
-
-Berikut perintah Git yang paling sering dipakai:
-
-\`\`\`bash
-# Inisialisasi repo baru di folder saat ini
-git init
-
-# Clone repo dari GitHub
-git clone https://github.com/user/repo.git
-
-# Lihat status perubahan
-git status
-
-# Tambahkan semua perubahan ke staging
-git add .
-
-# Commit dengan pesan
-git commit -m "Tambah halaman about"
-
-# Kirim commit ke remote
-git push origin main
-
-# Ambil perubahan terbaru dari remote
-git pull origin main
-\`\`\`
-
-## Alur Kerja Standar
-
-Workflow harian developer dengan Git biasanya seperti ini:
-
-\`\`\`text
-1. git pull         → Ambil update terbaru
-2. Edit kode        → Buat perubahan
-3. git add .        → Stage perubahan
-4. git commit -m    → Simpan dengan pesan
-5. git push         → Kirim ke GitHub
-\`\`\`
-
-## Git vs GitHub
-
-Banyak yang bingung membedakan keduanya:
-
-- **Git**: Tool di komputermu untuk melacak perubahan (offline)
-- **GitHub**: Layanan cloud untuk menyimpan repo dan kolaborasi (online)
-
-> Analogi: Git seperti kamera yang mengambil foto, GitHub seperti album foto online tempat menyimpan dan berbagi foto-foto tersebut.
-
-## Tips Commit yang Baik
-
-- Pesan commit harus **deskriptif** dan **jelas**
-- Gunakan **imperatif**: "Tambah fitur login" bukan "Menambah fitur login"
-- **Commit kecil dan sering** lebih baik dari commit besar sekali
-- Jangan commit file **sensitif** seperti password atau API key`,
-    quiz: [
-      {
-        question: "Apa perbedaan utama antara Git dan GitHub?",
-        options: [
-          "Git dan GitHub adalah hal yang sama",
-          "Git adalah tool version control di komputer, GitHub adalah platform online untuk menyimpan dan berkolaborasi repo",
-          "Git adalah platform online, GitHub adalah tool di komputer",
-          "Git untuk backend, GitHub untuk frontend"
-        ],
-        answer: 1,
-        explanation: "Git adalah version control system yang berjalan lokal di komputermu, sedangkan GitHub adalah layanan cloud untuk hosting dan berkolaborasi pada repository Git."
-      },
-      {
-        question: "Perintah apa yang digunakan untuk mengirim commit lokal ke repository remote?",
-        options: ["git pull", "git add", "git commit", "git push"],
-        answer: 3,
-        explanation: "git push mengirim commit dari repo lokal ke repo remote (mis. GitHub). git pull sebaliknya, menarik perubahan dari remote ke lokal."
-      },
-      {
-        question: "Apa fungsi perintah 'git commit -m pesan'?",
-        options: [
-          "Mengirim perubahan ke GitHub",
-          "Menyimpan snapshot perubahan dengan pesan deskriptif",
-          "Menghapus file yang diubah",
-          "Membuat branch baru"
-        ],
-        answer: 1,
-        explanation: "git commit -m menyimpan snapshot dari perubahan yang sudah di-stage (git add) dengan pesan deskriptif sebagai catatan versi."
-      }
-    ]
-  },
-
-  // ============================================
-  // LEVEL 2 - HTML
-  // ============================================
-  {
-    level: 2,
-    order: 1,
-    title: "Pengenalan HTML",
-    slug: "pengenalan-html",
-    description: "Mengenal HTML sebagai bahasa markup untuk membuat struktur halaman web dan elemen dasarnya.",
-    icon: "📄",
-    isProject: false,
-    content: `# Pengenalan HTML
-
-**HTML** (HyperText Markup Language) adalah bahasa standar untuk membuat struktur halaman web. HTML bukan bahasa pemrograman, melainkan **bahasa markup** yang menggunakan **tag** untuk menandai elemen.
-
-## Apa Itu HTML?
-
-HTML mendeskripsikan **struktur** halaman web menggunakan elemen-elemen. Browser membaca HTML dan menampilkannya sebagai halaman web. HTML terdiri dari serangkaian **elemen** yang dibungkus dengan **tag**.
-
-## Struktur Dokumen HTML
-
-Setiap halaman HTML memiliki struktur dasar seperti ini:
-
-\`\`\`html
-<!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8">
-    <title>Halaman Pertamaku</title>
-  </head>
-  <body>
-    <h1>Hello, World!</h1>
-    <p>Ini paragraf pertamaku.</p>
-  </body>
-</html>
-\`\`\`
-
-Penjelasan setiap bagian:
-
-- \`<!DOCTYPE html>\`: Memberitahu browser ini HTML5
-- \`<html>\`: Elemen root yang membungkus semua konten
-- \`<head>\`: Berisi metadata (judul, charset, dll) yang tidak tampil
-- \`<title>\`: Judul halaman yang tampil di tab browser
-- \`<body>\`: Berisi semua konten yang tampil di halaman
-
-## Anatomi Elemen HTML
-
-Sebuah elemen HTML umumnya terdiri dari **tag pembuka**, **konten**, dan **tag penutup**:
-
-\`\`\`text
-<p>Halo, ini paragraf</p>
-^                 ^
-|                 |
-tag pembuka    tag penutup (dengan /)
-\`\`\`
-
-Beberapa elemen tidak punya penutup, disebut **void element**, seperti \`<img>\`, \`<br>\`, dan \`<input>\`.
-
-## Atribut HTML
-
-Elemen bisa punya **atribut** untuk memberi informasi tambahan:
-
-\`\`\`html
-<a href="https://google.com">Klik di sini</a>
-<img src="foto.jpg" alt="Foto profil">
-\`\`\`
-
-- \`href\`: URL tujuan link
-- \`src\`: Sumber gambar
-- \`alt\`: Teks alternatif jika gambar gagal dimuat
-
-## Cara Mencoba HTML
-
-1. Buka **VS Code**, buat file \`index.html\`
-2. Ketik kode di atas dan simpan
-3. Klik kanan → **Open with Live Server**
-4. Browser akan terbuka dan menampilkan halamanmu
-
-> HTML adalah tulang punggung web. Tanpa HTML, tidak ada halaman web yang bisa ditampilkan browser.`,
-    quiz: [
-      {
-        question: "Apa kepanjangan dari HTML?",
-        options: [
-          "High Text Machine Language",
-          "HyperText Markup Language",
-          "Hyperlink Text Management Language",
-          "Home Tool Markup Language"
-        ],
-        answer: 1,
-        explanation: "HTML adalah HyperText Markup Language, bahasa markup standar untuk membuat struktur halaman web."
-      },
-      {
-        question: "Tag mana yang berisi konten yang akan ditampilkan di halaman browser?",
-        options: ["<head>", "<title>", "<body>", "<meta>"],
-        answer: 2,
-        explanation: "Tag <body> berisi semua konten yang akan ditampilkan di halaman web, sedangkan <head> berisi metadata yang tidak tampil."
-      },
-      {
-        question: "Manakah yang termasuk void element (tanpa tag penutup)?",
-        options: ["<p>", "<div>", "<img>", "<span>"],
-        answer: 2,
-        explanation: "<img> adalah void element yang tidak punya tag penutup. Begitu juga <br>, <hr>, dan <input>."
+        explanation: "NAT menerjemahkan IP private (yang tidak di-route internet) menjadi IP public milik router, sehingga perangkat di LAN bisa mengakses internet."
       }
     ]
   },
   {
     level: 2,
     order: 2,
-    title: "Heading & Paragraph",
-    slug: "heading-paragraph",
-    description: "Menggunakan tag heading h1-h6 dan paragraf untuk menyusun teks pada halaman web.",
-    icon: "📝",
+    title: "OSI Model",
+    slug: "osi-model",
+    description: "7 lapisan OSI Model sebagai kerangka konseptual komunikasi jaringan.",
+    icon: "📚",
     isProject: false,
-    content: `# Heading & Paragraph
+    content: `# OSI Model
 
-**Heading** dan **paragraph** adalah elemen dasar untuk menampilkan teks di halaman web. Heading digunakan untuk judul dan subjudul, sementara paragraf untuk blok teks.
+**OSI Model** (Open Systems Interconnection) adalah model 7 lapisan yang menjelaskan bagaimana data berpindah dari satu komputer ke komputer lain. Walaupun implementasi nyatanya TCP/IP yang dipakai, OSI tetap jadi rujukan untuk debugging.
 
-## Tag Heading
+## 7 Lapisan OSI
 
-HTML menyediakan 6 level heading, dari \`<h1>\` (terbesar) hingga \`<h6>\` (terkecil):
-
-\`\`\`html
-<h1>Heading Level 1 - Paling Penting</h1>
-<h2>Heading Level 2</h2>
-<h3>Heading Level 3</h3>
-<h4>Heading Level 4</h4>
-<h5>Heading Level 5</h5>
-<h6>Heading Level 6 - Terkecil</h6>
+\`\`\`text
+No | Layer         | Fungsi                    | Contoh
+---|---------------|---------------------------|------------------------
+7  | Application   | Antarmuka untuk aplikasi  | HTTP, FTP, DNS, SMTP
+6  | Presentation  | Enkripsi, kompresi, format| SSL/TLS, JPEG, ASCII
+5  | Session       | Membuka/menutup sesi      | NetBIOS, RPC
+4  | Transport     | Reliabilitas, port        | TCP, UDP
+3  | Network       | Routing antar jaringan    | IP, ICMP, Router
+2  | Data Link     | Frame, MAC, switch        | Ethernet, Wi-Fi, ARP
+1  | Physical      | Bit di kabel/udara        | Kabel UTP, fiber, radio
 \`\`\`
 
-## Aturan Penggunaan Heading
+Mnemonik untuk mengingat (dari bawah ke atas): **Please Do Not Throw Sausage Pizza Away**.
 
-- Gunakan **hanya satu \`<h1>\`** per halaman (judul utama)
-- Urutkan heading secara **hirarkis**: h1 → h2 → h3, jangan loncat
-- Heading membantu **SEO** dan **accessibility** (screen reader)
-- Jangan gunakan heading hanya untuk **memperbesar teks** — gunakan CSS untuk styling
+## Cara Data Mengalir
 
-## Tag Paragraf
+Saat browser mengirim request HTTP, data melewati semua lapisan:
 
-Tag \`<p>\` digunakan untuk menulis paragraf teks:
-
-\`\`\`html
-<p>HTML adalah bahasa markup untuk membuat halaman web.
-Setiap paragraf akan otomatis diberi jarak oleh browser.</p>
-
-<p>Ini paragraf kedua, terpisah dari paragraf pertama.</p>
+\`\`\`text
+[Pengirim]                              [Penerima]
+Application  ─┐                  ┌── Application
+Presentation  │   Encapsulation  │   Presentation
+Session       │   = menambah     │   Session
+Transport     │   header tiap    │   Transport
+Network       │   lapisan        │   Network
+Data Link     │                  │   Data Link
+Physical      ─┘                  └── Physical
+         → [ kabel / udara ] →
 \`\`\`
 
-## Formatting Teks
+Setiap lapisan menambahkan **header** sendiri (encapsulation). Di penerima, header dilepas satu per satu (decapsulation).
 
-HTML menyediakan tag untuk memformat teks:
+## Contoh Encapsulation
 
-\`\`\`html
-<p>Teks <strong>tebal</strong> dan <em>miring</em>.</p>
-<p>Teks <b>bold</b> dan <i>italic</i> (tanpa makna semantik).</p>
-<p>Teks <u>bergaris bawah</u>, <s>dicoret</s>.</p>
-<p>Rumus: H<sub>2</sub>O, E = mc<sup>2</sup>.</p>
+\`\`\`text
+Data "GET / HTTP/1.1"
+   ↓ [Layer 4 TCP header]    → TCP segment (port 80 → port 443)
+   ↓ [Layer 3 IP header]     → IP packet (192.168.1.5 → 142.250.x.x)
+   ↓ [Layer 2 Ethernet hdr]  → Frame (MAC A → MAC B)
+   ↓ [Layer 1 bit]           → sinyal listrik di kabel
 \`\`\`
 
-Perbedaan penting:
+## PDU (Protocol Data Unit) per Lapisan
 
-- \`<strong>\`: Penekanan **penting** (tampil tebal)
-- \`<b>\`: Hanya tebal tanpa makna semantik
-- \`<em>\`: Penekanan (tampil miring)
-- \`<i>\`: Hanya miring tanpa makna semantik
-
-## Line Break dan Horizontal Rule
-
-\`\`\`html
-<p>Baris pertama<br>Baris kedua</p>
-<hr>
-<p>Setelah garis pemisah</p>
+\`\`\`text
+Layer  | PDU Name
+-------|----------
+4      | Segment (TCP) / Datagram (UDP)
+3      | Packet
+2      | Frame
+1      | Bit
 \`\`\`
 
-- \`<br>\`: Pindah baris tanpa membuat paragraf baru
-- \`<hr>\`: Garis horizontal pemisah
+## Layer yang Sering Diserang
 
-## Contoh Lengkap
+- **Layer 2** → ARP spoofing, MAC flooding, VLAN hopping
+- **Layer 3** → IP spoofing, ICMP flood, routing attack
+- **Layer 4** → SYN flood, port scan, UDP flood
+- **Layer 7** → SQL Injection, XSS, DDoS aplikasi
 
-\`\`\`html
-<article>
-  <h1>Belajar HTML</h1>
-  <p>HTML adalah fondasi dari setiap halaman web.</p>
+## Tools per Layer
 
-  <h2>Apa itu Heading?</h2>
-  <p>Heading membantu menyusun struktur konten secara <em>hirarkis</em>.</p>
+\`\`\`bash
+# Layer 2 - ARP scan
+sudo arp-scan --localnet
 
-  <h2>Apa itu Paragraf?</h2>
-  <p>Paragraf adalah blok teks yang terpisah oleh <strong>jarak otomatis</strong>.</p>
-</article>
+# Layer 3 - ping & traceroute
+ping -c 4 8.8.8.8
+traceroute 8.8.8.8
+
+# Layer 4 - nmap (port scan)
+nmap -sS 192.168.1.0/24
+
+# Layer 7 - HTTP request
+curl -v https://example.com
 \`\`\`
 
-> Gunakan heading dan paragraf dengan benar untuk membuat konten yang rapi dan mudah dibaca.`,
+## Perbedaan dengan TCP/IP Model
+
+\`\`\`text
+OSI Model        TCP/IP Model
+----------       ------------
+Application   ─┐
+Presentation   ├─► Application
+Session       ─┤
+Transport     ──► Transport
+Network       ──► Internet
+Data Link     ─┐
+Physical      ─┴─► Network Access
+\`\`\`
+
+TCP/IP menggabungkan Application+Presentation+Session jadi satu, dan Data Link+Physical jadi Network Access. TCP/IP inilah yang dipakai internet nyata.
+
+## Tips Debugging
+
+Saat troubleshooting, mulai dari bawah:
+
+1. **Layer 1** — kabel nancap? WiFi nyala?
+2. **Layer 2** — MAC address kelihatan? \`ip link\`
+3. **Layer 3** — IP benar? Bisa ping gateway? \`ping 192.168.1.1\`
+4. **Layer 4** — port bisa diakses? \`nmap -p 80 target\`
+5. **Layer 7** — service merespons? \`curl http://target\`
+
+Pendekatan ini menghemat waktu dan menemukan akar masalah lebih cepat.`,
     quiz: [
       {
-        question: "Berapa banyak level heading yang tersedia di HTML?",
-        options: ["3 level (h1, h2, h3)", "5 level (h1-h5)", "6 level (h1-h6)", "Tidak terbatas"],
-        answer: 2,
-        explanation: "HTML menyediakan 6 level heading dari <h1> (terbesar/penting) hingga <h6> (terkecil)."
+        question: "Pada OSI Model, layer mana yang bertanggung jawab atas routing antar jaringan?",
+        options: [
+          "Layer 2 (Data Link)",
+          "Layer 3 (Network)",
+          "Layer 4 (Transport)",
+          "Layer 7 (Application)"
+        ],
+        answer: 1,
+        explanation: "Layer 3 (Network) menangani logical addressing (IP) dan routing antar jaringan. Router bekerja di layer ini."
       },
       {
-        question: "Tag mana yang sebaiknya digunakan untuk penekanan penting (bukan sekadar tebal)?",
-        options: ["<b>", "<strong>", "<u>", "<br>"],
-        answer: 1,
-        explanation: "<strong> memiliki makna semantik 'penting' (tampil tebal), sedangkan <b> hanya membuat teks tebal tanpa makna khusus."
+        question: "HTTP, DNS, dan FTP bekerja di layer OSI mana?",
+        options: [
+          "Layer 4",
+          "Layer 5",
+          "Layer 6",
+          "Layer 7"
+        ],
+        answer: 3,
+        explanation: "Protokol aplikasi seperti HTTP, DNS, FTP, SMTP bekerja di Layer 7 (Application), lapisan teratas OSI yang berinteraksi langsung dengan software."
       },
       {
-        question: "Berapa banyak tag <h1> yang sebaiknya digunakan dalam satu halaman?",
-        options: ["Beberapa, sesuai kebutuhan", "Hanya satu", "Maksimal 3", "Bebas"],
-        answer: 1,
-        explanation: "Sebaiknya hanya ada satu <h1> per halaman karena ini adalah judul utama dan penting untuk SEO serta accessibility."
+        question: "Apa PDU (Protocol Data Unit) di Layer 4 Transport?",
+        options: [
+          "Bit",
+          "Frame",
+          "Packet",
+          "Segment"
+        ],
+        answer: 3,
+        explanation: "Layer 4 Transport menggunakan istilah Segment (untuk TCP) atau Datagram (untuk UDP) sebagai PDU."
       }
     ]
   },
   {
     level: 2,
     order: 3,
-    title: "Link",
-    slug: "html-link",
-    description: "Membuat hyperlink dengan tag <a> untuk menghubungkan halaman dan sumber daya web.",
-    icon: "🔗",
+    title: "TCP/IP Protocol",
+    slug: "tcp-ip-protocol",
+    description: "Model TCP/IP: perbedaan TCP vs UDP, three-way handshake, dan protokol inti internet.",
+    icon: "🔌",
     isProject: false,
-    content: `# Link
+    content: `# TCP/IP Protocol
 
-**Link** (hyperlink) adalah elemen yang membuat web saling terhubung. Tanpa link, web hanyalah halaman terpisah. Tag \`<a>\` (anchor) digunakan untuk membuat link di HTML.
+**TCP/IP** adalah protokol inti yang menjalankan internet. Berbeda dengan OSI yang teoritis, TCP/IP adalah model praktis yang benar-benar digunakan.
 
-## Dasar Tag Anchor
+## 4 Lapisan TCP/IP
 
-Link dibuat dengan tag \`<a>\` dan atribut \`href\` yang berisi URL tujuan:
-
-\`\`\`html
-<a href="https://google.com">Kunjungi Google</a>
-<a href="about.html">Halaman About</a>
-<a href="mailto:hello@email.com">Kirim Email</a>
+\`\`\`text
+Layer              | Contoh Protokol
+------------------ | ------------------------------
+Application        | HTTP, HTTPS, DNS, SSH, FTP, SMTP
+Transport          | TCP, UDP
+Internet           | IP, ICMP, ARP
+Network Access     | Ethernet, Wi-Fi, PPP
 \`\`\`
 
-## Jenis Link
+## TCP vs UDP
 
-### 1. External Link
+Dua protokol transport utama dengan karakteristik berbeda:
 
-Link ke website lain (selalu gunakan \`https://\`):
-
-\`\`\`html
-<a href="https://github.com">GitHub</a>
+\`\`\`text
+Aspek        | TCP                    | UDP
+-------------|------------------------|---------------------
+Koneksi      | Connection-oriented    | Connectionless
+Reliability  | Reliabel (ack, retry)  | Tidak reliabel
+Urutan       | Terjamin               | Tidak terjamin
+Kecepatan    | Lebih lambat           | Lebih cepat
+Overhead     | Besar (header 20 byte) | Kecil (header 8 byte)
+Use case     | Web, email, file       | Streaming, game, DNS, VoIP
 \`\`\`
 
-### 2. Internal Link
+## TCP Three-Way Handshake
 
-Link ke halaman lain di dalam proyekmu:
+Sebelum data dikirim, TCP membuat koneksi dengan 3 langkah:
 
-\`\`\`html
-<a href="about.html">Tentang Kami</a>
-<a href="products/detail.html">Detail Produk</a>
+\`\`\`text
+Client                          Server
+  |                                |
+  | ---- SYN (seq=x) ------------> |   1. Client minta koneksi
+  |                                |
+  | <--- SYN-ACK (seq=y, ack=x+1)- |   2. Server setuju & balas
+  |                                |
+  | ---- ACK (ack=y+1) ----------> |   3. Client konfirmasi
+  |                                |
+  | === DATA dua arah ===========> |
 \`\`\`
 
-### 3. Anchor Link
+Inilah yang dimanfaatkan serangan **SYN flood** — attacker kirim banyak SYN tapi tidak balas ACK, server menunggu hingga resource habis.
 
-Link ke bagian tertentu di halaman yang sama (gunakan \`id\`):
+## Menutup Koneksi: Four-Way Handshake
 
-\`\`\`html
-<a href="#section-2">Lompat ke Section 2</a>
-
-<h2 id="section-2">Section 2</h2>
+\`\`\`text
+Client                          Server
+  | ---- FIN ..................-->|
+  | <--- ACK ...................--|
+  | <--- FIN ...................--|
+  | ---- ACK ..................-->|
 \`\`\`
 
-## Atribut Target
+## Protokol Inti Lainnya
 
-Atribut \`target\` mengatur cara link dibuka:
-
-\`\`\`html
-<!-- Buka di tab yang sama (default) -->
-<a href="page.html" target="_self">Buka di sini</a>
-
-<!-- Buka di tab baru -->
-<a href="page.html" target="_blank">Buka di tab baru</a>
+\`\`\`text
+ICMP → Ping, traceroute, error reporting
+ARP  → IP → MAC resolution (Layer 2/3)
+DHCP → Pemberian IP otomatis
+NAT  → Translasi IP private ke public
 \`\`\`
 
-Untuk link external dengan \`target="_blank"\`, tambahkan \`rel="noopener"\` demi keamanan:
+## Melihat Koneksi Aktif di Linux
 
-\`\`\`html
-<a href="https://example.com" target="_blank" rel="noopener noreferrer">
-  Link Aman
-</a>
+\`\`\`bash
+# Lihat semua koneksi TCP
+ss -t -a
+
+# Lihat koneksi dengan PID proses
+sudo ss -t -p
+
+# Lihat koneksi UDP
+ss -u -a
+
+# Statistik per protokol
+netstat -s | head -40
 \`\`\`
 
-## Link sebagai Tombol
+## Contoh: Capture TCP Handshake dengan tcpdump
 
-Link juga bisa berisi elemen lain seperti gambar:
-
-\`\`\`html
-<a href="home.html">
-  <img src="logo.png" alt="Logo">
-</a>
+\`\`\`bash
+# Capture 3-way handshake ke port 80
+sudo tcpdump -i eth0 -n 'tcp port 80 and (tcp[tcpflags] & tcp-syn != 0 or tcp[tcpflags] & tcp-ack != 0)' -c 10
 \`\`\`
 
-## Tips Accessibility
+## Numbering & Port
 
-- Gunakan **teks deskriptif**, hindari "klik di sini"
-- Pastikan link terlihat berbeda dari teks biasa (biru/garis bawah)
-- Untuk link eksternal, pertimbangkan ikon external link
-- \`alt\` pada gambar dalam link membantu screen reader
+TCP/UDP menggunakan **port** (0-65535) untuk membedakan service:
 
-\`\`\`html
-<!-- Buruk -->
-<p>Klik <a href="about.html">di sini</a> untuk info.</p>
-
-<!-- Baik -->
-<p>Pelajari <a href="about.html">tentang kami</a> lebih lanjut.</p>
+\`\`\`text
+0-1023    → Well-known ports (HTTP=80, HTTPS=443, SSH=22, DNS=53)
+1024-49151→ Registered ports (aplikasi umum)
+49152+    → Dynamic/ephemeral ports (klien sementara)
 \`\`\`
 
-> Link adalah jantung dari web. Gunakan dengan bijak agar navigasi pengguna nyaman.`,
+## Kapan Pilih TCP vs UDP?
+
+| Kebutuhan               | Pilih |
+|-------------------------|-------|
+| Harus sampai semua data | TCP   |
+| Latensi rendah > reliabilitas | UDP |
+| Stream video live       | UDP   |
+| Transfer file           | TCP   |
+| DNS query               | UDP   |
+| DNS zone transfer       | TCP   |
+
+## State TCP Yang Penting
+
+\`\`\`text
+LISTEN      → Server menunggu koneksi
+SYN_SENT    → Client kirim SYN, tunggu SYN-ACK
+SYN_RECV    → Server kirim SYN-ACK, tunggu ACK
+ESTABLISHED → Koneksi aktif
+TIME_WAIT   → Menunggu setelah close (2*MSL)
+CLOSE_WAIT  → Remote close, lokal belum close
+\`\`\`
+
+Banyak koneksi di \`CLOSE_WAIT\` atau \`TIME_WAIT\` adalah indikator masalah aplikasi (connection leak).`,
     quiz: [
       {
-        question: "Atribut apa yang menentukan URL tujuan pada tag <a>?",
-        options: ["src", "href", "link", "url"],
-        answer: 1,
-        explanation: "Atribut href (hypertext reference) pada tag <a> berisi URL tujuan link."
-      },
-      {
-        question: "Bagaimana cara membuat link terbuka di tab baru?",
+        question: "Apa urutan paket yang benar pada TCP three-way handshake?",
         options: [
-          "Tambahkan atribut target='_blank'",
-          "Tambahkan atribut new='true'",
-          "Tambahkan atribut tab='new'",
-          "Tidak bisa dilakukan di HTML"
-        ],
-        answer: 0,
-        explanation: "Atribut target='_blank' membuat link terbuka di tab/jendela baru. Untuk link eksternal, tambahkan rel='noopener' demi keamanan."
-      },
-      {
-        question: "Bagaimana cara membuat link ke bagian tertentu di halaman yang sama?",
-        options: [
-          "Gunakan href='section-name'",
-          "Gunakan href='#id-element' di mana id-element adalah id elemen tujuan",
-          "Gunakan href='@section'",
-          "Tidak mungkin di HTML"
+          "FIN, ACK, SYN",
+          "SYN, SYN-ACK, ACK",
+          "SYN, ACK, FIN",
+          "ACK, SYN, SYN-ACK"
         ],
         answer: 1,
-        explanation: "Tambahkan atribut id pada elemen tujuan, lalu gunakan href='#id-element' untuk berpindah ke bagian tersebut."
+        explanation: "Client kirim SYN, server balas SYN-ACK (mengonfirmasi + ikut sinkronisasi), client kirim ACK. Setelah itu koneksi ESTABLISHED."
+      },
+      {
+        question: "Manakah protokol yang TEPAT menggunakan UDP?",
+        options: [
+          "HTTP web request",
+          "SSH remote login",
+          "DNS query (umumnya)",
+          "SMTP email transfer"
+        ],
+        answer: 2,
+        explanation: "DNS query umumnya pakai UDP karena paket kecil dan butuh respons cepat. HTTP, SSH, SMTP butuh reliabilitas sehingga pakai TCP. (Zone transfer DNS pakai TCP.)"
+      },
+      {
+        question: "Serangan SYN flood memanfaatkan celah di fase apa?",
+        options: [
+          "DNS resolution",
+          "Three-way handshake (setelah SYN, attacker tidak balas ACK)",
+          "TLS handshake",
+          "Four-way handshake penutupan"
+        ],
+        answer: 1,
+        explanation: "Attacker kirim banyak SYN tapi tidak balas ACK, server menyimpan half-open connection hingga backlog penuh dan tidak bisa menerima koneksi baru."
       }
     ]
   },
   {
     level: 2,
     order: 4,
-    title: "Gambar",
-    slug: "html-gambar",
-    description: "Menampilkan gambar dengan tag <img>, format gambar, dan pentingnya atribut alt.",
-    icon: "🖼️",
+    title: "DNS & HTTP",
+    slug: "dns-http",
+    description: "Cara kerja DNS resolving nama domain dan protokol HTTP untuk komunikasi web.",
+    icon: "🔗",
     isProject: false,
-    content: `# Gambar
+    content: `# DNS & HTTP
 
-Gambar membuat halaman web lebih menarik dan informatif. HTML menggunakan tag \`<img>\` untuk menampilkan gambar, yang merupakan **void element** (tanpa tag penutup).
+DNS dan HTTP adalah dua protokol paling terlihat di internet. Memahami keduanya krusial untuk web security dan debugging jaringan.
 
-## Dasar Tag Image
+## DNS (Domain Name System)
 
-Tag \`<img>\` membutuhkan dua atribut utama:
+**DNS** menerjemahkan nama domain yang dibaca manusia (\`google.com\`) menjadi IP address (\`142.250.193.78\`). Tanpa DNS, kita harus hafal IP tiap situs.
 
-\`\`\`html
-<img src="foto.jpg" alt="Foto pemandangan gunung">
-\`\`\`
-
-- \`src\`: Sumber/path file gambar (wajib)
-- \`alt\`: Teks alternatif (wajib untuk accessibility)
-
-## Path Gambar
-
-Sumber gambar bisa berupa path relatif, absolut, atau URL:
-
-\`\`\`html
-<!-- Path relatif, folder yang sama -->
-<img src="logo.png" alt="Logo">
-
-<!-- Path relatif, folder berbeda -->
-<img src="images/hero.jpg" alt="Hero image">
-<img src="../assets/icon.png" alt="Icon">
-
-<!-- URL eksternal -->
-<img src="https://example.com/image.jpg" alt="External image">
-\`\`\`
-
-## Atribut Alt yang Penting
-
-Atribut \`alt\` sangat penting karena beberapa alasan:
-
-1. **Accessibility**: Screen reader membacanya untuk pengguna tunanetra
-2. **SEO**: Membantu mesin pencari memahami gambar
-3. **Fallback**: Ditampilkan jika gambar gagal dimuat
-
-\`\`\`html
-<!-- Baik: deskriptif -->
-<img src="chart.jpg" alt="Grafik penjualan kuartal 1 2024">
-
-<!-- Buruk: tidak membantu -->
-<img src="chart.jpg" alt="gambar">
-
-<!-- Dekoratif: pakai alt kosong -->
-<img src="divider.png" alt="">
-\`\`\`
-
-## Ukuran Gambar
-
-Atur ukuran gambar dengan atribut \`width\` dan \`height\` (idealnya via CSS):
-
-\`\`\`html
-<img src="photo.jpg" alt="Photo" width="300" height="200">
-\`\`\`
-
-## Format Gambar Umum
+## Hierarki DNS
 
 \`\`\`text
-JPEG/JPG → Foto, banyak warna, lossy compression
-PNG      → Logo, butuh transparansi, lossless
-GIF      → Animasi sederhana, 256 warna
-SVG      → Vector, scalable, untuk ikon
-WebP     → Modern, ukuran kecil, mendukung transparansi
+Root server (.)         → 13 cluster global
+  └─ TLD (.com, .id, .org)
+       └─ Authoritative (contoh.com)
+            └─ Subdomain (www.contoh.com)
 \`\`\`
 
-## Figure dan Figcaption
+## Proses Resolusi DNS
 
-Untuk gambar dengan caption, gunakan \`<figure>\` dan \`<figcaption>\`:
-
-\`\`\`html
-<figure>
-  <img src="mountain.jpg" alt="Pegunungan saat sunset">
-  <figcaption>Pegunungan Indah saat Sunset, foto oleh John.</figcaption>
-</figure>
+\`\`\`text
+1. User ketik "example.com" di browser
+2. OS cek cache lokal & /etc/hosts
+3. Query ke Resolver ISP (umumnya 8.8.8.8 / 1.1.1.1)
+4. Resolver tanya Root → beri NS TLD .com
+5. Resolver tanya TLD .com → beri NS example.com
+6. Resolver tanya NS example.com → dapat IP
+7. IP dikembalikan ke browser
+8. Browser buka koneksi ke IP tersebut
 \`\`\`
 
-## Tips Optimasi Gambar
+## Jenis Record DNS
 
-- **Kompres** gambar sebelum upload (gunakan TinyPNG atau Squoosh)
-- Pilih **format yang tepat**: JPEG untuk foto, PNG untuk logo
-- Gunakan **SVG** untuk ikon agar tajam di semua resolusi
-- Sediakan **alt text** yang deskriptif untuk setiap gambar bermakna
-- Pertimbangkan **lazy loading** untuk performa:
-
-\`\`\`html
-<img src="heavy.jpg" alt="Heavy" loading="lazy">
+\`\`\`text
+A     → domain → IPv4
+AAAA  → domain → IPv6
+CNAME → alias ke domain lain
+MX    → mail server
+TXT   → text bebas (SPF, DKIM, verifikasi)
+NS    → name server otoritatif
+SOA   → start of authority
+PTR   → reverse (IP → domain)
 \`\`\`
 
-> Gambar yang dioptimasi membuat website lebih cepat dan ramah pengguna.`,
+## Tools DNS
+
+\`\`\`bash
+# Query A record
+dig example.com +short
+dig @8.8.8.8 example.com A
+
+# Query MX record (mail)
+dig example.com MX
+
+# Reverse lookup IP → domain
+dig -x 8.8.8.8 +short
+
+# Trace path resolusi
+dig +trace example.com
+
+# DNS enumeration
+dig axfr @ns1.example.com example.com   # zone transfer (sering disabled)
+\`\`\`
+
+## HTTP (HyperText Transfer Protocol)
+
+**HTTP** adalah protokol aplikasi untuk web. Komunikasinya berbasis request-response.
+
+## Struktur HTTP Request
+
+\`\`\`text
+GET /api/users HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0
+Accept: application/json
+Authorization: Bearer eyJhbGc...
+Cookie: session=abc123
+
+(body kosong untuk GET)
+\`\`\`
+
+## Struktur HTTP Response
+
+\`\`\`text
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 42
+Set-Cookie: session=abc123; HttpOnly; Secure
+
+{"id":1,"name":"Andi"}
+\`\`\`
+
+## HTTP Methods
+
+\`\`\`text
+GET     → ambil data (idempotent)
+POST    → buat data baru
+PUT     → update seluruh resource
+PATCH   → update sebagian
+DELETE  → hapus
+OPTIONS → cek method yang didukung (CORS preflight)
+HEAD    → header saja, tanpa body
+\`\`\`
+
+## HTTP Status Codes
+
+\`\`\`text
+1xx Informational
+2xx Success       (200 OK, 201 Created, 204 No Content)
+3xx Redirect      (301, 302, 304 Not Modified)
+4xx Client error  (400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 429 Too Many)
+5xx Server error  (500 Internal, 502 Bad Gateway, 503 Service Unavailable)
+\`\`\`
+
+## HTTPS = HTTP + TLS
+
+\`\`\`text
+HTTP  → port 80, plaintext (bisa disadap)
+HTTPS → port 443, terenkripsi TLS
+
+Man in the Middle di HTTPS → lihat metadata saja (SNI, timing, ukuran)
+Man in the Middle di HTTP  → bisa baca semua isi termasuk password
+\`\`\`
+
+## Praktik: curl untuk Inspeksi HTTP
+
+\`\`\`bash
+# Lihat header response
+curl -I https://example.com
+
+# Lihat seluruh request & response
+curl -v https://example.com 2>&1 | head -50
+
+# Kirim POST dengan JSON
+curl -X POST https://api.example.com/users \\
+  -H "Content-Type: application/json" \\
+  -d '{"name":"Andi","email":"andi@mail.com"}'
+
+# Pakai custom Host header (untuk virtual host testing)
+curl -H "Host: internal.local" http://target-ip/
+\`\`\`
+
+## Ancaman Umum DNS
+
+- **DNS hijacking** — ubah record untuk redirect ke situs palsu
+- **DNS poisoning** — masukkan record palsu ke cache resolver
+- **DNS tunneling** — ekstraksi data lewat query DNS
+- **Subdomain takeover** — klaim subdomain yang CNAME ke service tidak terpakai
+
+## Ancaman Umum HTTP
+
+- **HTTP downgrade** → paksa HTTPS ke HTTP
+- **Clickjacking** → iframe + X-Frame-Options hilang
+- **CSRF** → POST pakai cookie korban
+- **Insecure deserialization** → objek dari body di-deserialize
+
+Header keamanan penting: \`Strict-Transport-Security\`, \`Content-Security-Policy\`, \`X-Content-Type-Options\`, \`X-Frame-Options\`.`,
     quiz: [
       {
-        question: "Mengapa atribut alt pada tag <img> sangat penting?",
+        question: "Record DNS mana yang menerjemahkan nama domain ke IPv6 address?",
         options: [
-          "Untuk menentukan ukuran gambar",
-          "Untuk accessibility (screen reader), SEO, dan fallback jika gambar gagal dimuat",
-          "Untuk mengubah format gambar",
-          "Untuk membuat animasi gambar"
+          "A record",
+          "AAAA record",
+          "CNAME record",
+          "MX record"
         ],
         answer: 1,
-        explanation: "Alt text dibaca screen reader untuk tunanetra, membantu SEO, dan ditampilkan jika gambar gagal dimuat."
+        explanation: "AAAA record (quad-A) memetakan domain ke IPv6 128-bit. A record untuk IPv4, CNAME alias ke domain lain, MX untuk mail server."
       },
       {
-        question: "Format gambar apa yang paling cocok untuk logo dengan transparansi?",
-        options: ["JPEG", "PNG", "BMP", "TIFF"],
-        answer: 1,
-        explanation: "PNG mendukung transparansi dan lossless compression, cocok untuk logo. SVG juga bagus untuk logo vector."
-      },
-      {
-        question: "Tag mana yang digunakan untuk membungkus gambar dengan caption?",
+        question: "HTTP status code 401 berarti?",
         options: [
-          "<picture> dengan <caption>",
-          "<figure> dengan <figcaption>",
-          "<image> dengan <text>",
-          "<media> dengan <description>"
+          "Forbidden (akses ditolak meski login)",
+          "Unauthorized (perlu autentikasi)",
+          "Not Found",
+          "Bad Request"
         ],
         answer: 1,
-        explanation: "Gunakan <figure> untuk membungkus gambar dan <figcaption> untuk caption. Ini semantic HTML yang benar."
+        explanation: "401 Unauthorized = client belum autentikasi (perlu login/token). 403 Forbidden = sudah autentikasi tapi tidak punya hak, 404 = resource tidak ada."
+      },
+      {
+        question: "Mengapa HTTPS lebih aman daripada HTTP?",
+        options: [
+          "HTTPS pakai port 443 yang tidak bisa disadap",
+          "HTTPS mengenkripsi isi komunikasi dengan TLS",
+          "HTTPS otomatis memblokir SQL injection",
+          "HTTPS membuat website lebih cepat"
+        ],
+        answer: 1,
+        explanation: "HTTPS = HTTP di atas TLS. TLS mengenkripsi payload sehingga MITM hanya bisa melihat metadata (SNI, ukuran, timing) bukan isi termasuk password."
       }
     ]
   },
   {
     level: 2,
     order: 5,
-    title: "List",
-    slug: "html-list",
-    description: "Membuat daftar dengan unordered list (ul), ordered list (ol), dan description list (dl).",
-    icon: "📋",
+    title: "Port & Services",
+    slug: "port-services",
+    description: "Memahami port, service umum, dan teknik port scanning dengan nmap untuk pemetaan jaringan.",
+    icon: "🚪",
     isProject: false,
-    content: `# List
+    content: `# Port & Services
 
-**List** digunakan untuk menampilkan kumpulan item secara terstruktur. HTML menyediakan beberapa jenis list: **unordered**, **ordered**, dan **description list**.
+Setiap service jaringan berjalan di **port** tertentu. Mengenali port dan service yang berjalan adalah langkah pertama dalam reconnaissance jaringan.
 
-## Unordered List
+## Apa itu Port?
 
-\`<ul>\` (unordered list) membuat daftar **tanpa urutan** (bullet point):
+**Port** adalah angka 16-bit (0-65535) yang mengidentifikasi service spesifik di sebuah host. Analoginya: IP address = alamat gedung, port = nomor kamar.
 
-\`\`\`html
-<ul>
-  <li>Apel</li>
-  <li>Pisang</li>
-  <li>Mangga</li>
-</ul>
+\`\`\`text
+192.168.1.10:22   → SSH service
+192.168.1.10:80   → HTTP web server
+192.168.1.10:443  → HTTPS web server
+192.168.1.10:3306 → MySQL database
 \`\`\`
 
-Hasilnya berupa bullet point. Cocok untuk item yang urutannya tidak penting.
+## Klasifikasi Port
 
-## Ordered List
-
-\`<ol>\` (ordered list) membuat daftar **berurutan** (angka):
-
-\`\`\`html
-<ol>
-  <li>Bangun pagi</li>
-  <li>Mandi</li>
-  <li>Sarapan</li>
-  <li>Berangkat kerja</li>
-</ol>
+\`\`\`text
+0 - 1023      → Well-known (butuh root untuk bind)
+1024 - 49151  → Registered
+49152 - 65535 → Dynamic / ephemeral (klien sementara)
 \`\`\`
 
-Hasilnya berupa nomor 1, 2, 3, dst. Cocok untuk langkah atau ranking.
+## Port & Service Umum
 
-## Atribut pada Ordered List
-
-\`\`\`html
-<!-- Mulai dari angka tertentu -->
-<ol start="5">
-  <li>Item kelima</li>
-  <li>Item keenam</li>
-</ol>
-
-<!-- Urutan terbalik -->
-<ol reversed>
-  <li>Item</li>
-  <li>Item</li>
-</ol>
-
-<!-- Ubah tipe penomoran -->
-<ol type="A">  <!-- A, B, C -->
-<ol type="a">  <!-- a, b, c -->
-<ol type="I">  <!-- I, II, III -->
+\`\`\`text
+Port  | Protokol | Service
+------|----------|-------------------------
+20/21 | TCP      | FTP (file transfer)
+22    | TCP      | SSH (remote shell aman)
+23    | TCP      | Telnet (remote shell plaintext)
+25    | TCP      | SMTP (mail submission)
+53    | UDP/TCP  | DNS
+80    | TCP      | HTTP
+110   | TCP      | POP3 (mail)
+143   | TCP      | IMAP (mail)
+161   | UDP      | SNMP (network management)
+389   | TCP      | LDAP
+443   | TCP      | HTTPS
+445   | TCP      | SMB (Windows file share)
+3306  | TCP      | MySQL / MariaDB
+3389  | TCP      | RDP (Windows remote desktop)
+5432  | TCP      | PostgreSQL
+6379  | TCP      | Redis
+8080  | TCP      | HTTP alternate
 \`\`\`
 
-## List Bersarang (Nested)
+## Mengapa Memetakan Port?
 
-List bisa berisi list lain untuk membuat struktur hirarkis:
+- **Reconnaissance** — service apa yang mungkin punya celah
+- **Inventory** — dokumentasi service yang berjalan
+- **Hardening** — menemukan port tidak perlu yang harus ditutup
+- **Compliance** — audit regulasi
 
-\`\`\`html
-<ul>
-  <li>Buah
-    <ul>
-      <li>Apel</li>
-      <li>Pisang</li>
-    </ul>
-  </li>
-  <li>Sayur
-    <ul>
-      <li>Bayam</li>
-      <li>Wortel</li>
-    </ul>
-  </li>
-</ul>
+## Nmap: Tool Port Scanner
+
+\`\`\`bash
+# Scan 1000 port paling umum
+nmap 192.168.1.10
+
+# Scan semua 65535 port
+nmap -p- 192.168.1.10
+
+# Scan range port tertentu
+nmap -p 1-1024 192.168.1.10
+
+# Service version detection
+nmap -sV 192.168.1.10
+
+# OS detection
+sudo nmap -O 192.168.1.10
+
+# Scan stealth (SYN scan, perlu root)
+sudo nmap -sS 192.168.1.10
+
+# UDP scan (lambat)
+sudo nmap -sU 192.168.1.10
 \`\`\`
 
-## Description List
+## State Port
 
-\`<dl>\` (description list) untuk pasangan **istilah-deskripsi**:
-
-\`\`\`html
-<dl>
-  <dt>HTML</dt>
-  <dd>Bahasa markup untuk struktur halaman web</dd>
-
-  <dt>CSS</dt>
-  <dd>Bahasa untuk styling halaman web</dd>
-
-  <dt>JavaScript</dt>
-  <dd>Bahasa pemrograman untuk interaktivitas web</dd>
-</dl>
+\`\`\`text
+open      → service menerima koneksi
+closed    → port bisa diakses tapi tidak ada service
+filtered  → firewall/IDS memblokir, nmap tidak yakin
+unfiltered → bisa akses tapi tidak tahu open/closed
 \`\`\`
 
-- \`<dl>\`: Description list
-- \`<dt>\`: Term (istilah)
-- \`<dd>\`: Description (deskripsi)
+## Scan Cepat & Agresif
 
-## Kapan Menggunakan Jenis List Mana?
+\`\`\`bash
+# Fast scan, top 100 ports
+nmap -F 192.168.1.10
 
-| Jenis | Kapan Dipakai |
-|-------|---------------|
-| \`<ul>\` | Item tanpa urutan penting (fitur, opsi) |
-| \`<ol>\` | Langkah berurutan, ranking, instruksi |
-| \`<dl>\` | Glossary, FAQ, pasangan istilah-definisi |
+# Aggressive: OS + version + script + traceroute
+nmap -A 192.168.1.10
 
-## Tips Penting
+# Scan banyak host sekaligus (CIDR)
+nmap 192.168.1.0/24
 
-- \`<li>\` **harus** berada di dalam \`<ul>\` atau \`<ol>\`
-- Jangan gunakan list hanya untuk indentasi — gunakan CSS
-- List bawaan browser punya padding/margin, atur via CSS
-- Untuk menu navigasi, gunakan \`<ul>\` di dalam \`<nav>\`
-
-\`\`\`html
-<nav>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+# Output ke file untuk analisis
+nmap -oN scan.txt -oX scan.xml 192.168.1.10
 \`\`\`
 
-> List adalah salah satu elemen HTML paling sering digunakan. Kuasai baik-baik!`,
+## NSE (Nmap Scripting Engine)
+
+Nmap punya ratusan script untuk deteksi celah spesifik:
+
+\`\`\`bash
+# Deteksi versi & celah
+nmap --script vuln 192.168.1.10
+
+# Brute force SMB
+nmap --script smb-brute 192.168.1.10
+
+# Enumerate SMB shares
+nmap --script smb-enum-shares 192.168.1.10
+
+# Deteksi default credentials MySQL
+nmap --script mysql-empty-password 192.168.1.10
+\`\`\`
+
+## Etika & Legalitas Scanning
+
+\`\`\`text
+✓ Scan jaringan sendiri / lab pribadi
+✓ Scan dengan izin tertulis dari pemilik
+✓ Scan bug bounty program (di scope)
+
+✗ Scan random IP publik
+✗ Scan infrastruktur kritikal tanpa izin
+✗ Scan target yang tidak kamu miliki
+\`\`\`
+
+Port scanning tanpa izin **bisa dianggap ilegal** di banyak yurisdiksi, termasuk Indonesia (UU ITE Pasal 30).
+
+## Cara Service Listen
+
+\`\`\`bash
+# Lihat service yang listen di Linux
+sudo ss -tlnp
+sudo netstat -tlnp
+
+# Lihat service + PID
+sudo lsof -i -P -n | grep LISTEN
+\`\`\`
+
+Output menunjukkan port, protocol, dan proses yang memilikinya — penting untuk hardening.
+
+## Hardening: Tutup Port Tidak Perlu
+
+1. Identifikasi semua service yang listen
+2. Tanyakan: apakah service ini dibutuhkan?
+3. Jika tidak → matikan service-nya (\`systemctl disable\`)
+4. Jika ya tapi hanya lokal → bind ke \`127.0.0.1\` bukan \`0.0.0.0\`
+5. Filter dengan firewall (ufw/iptables) untuk akses eksternal`,
     quiz: [
       {
-        question: "Tag mana yang digunakan untuk membuat daftar dengan urutan nomor (1, 2, 3)?",
-        options: ["<ul>", "<ol>", "<li>", "<dl>"],
-        answer: 1,
-        explanation: "<ol> (ordered list) membuat daftar berurutan dengan nomor. <ul> untuk daftar tanpa urutan (bullet)."
-      },
-      {
-        question: "Apa fungsi tag <dd> dalam description list?",
+        question: "Berapa port default untuk SSH dan HTTPS secara berurutan?",
         options: [
-          "Mendefinisikan istilah",
-          "Mendefinisikan deskripsi dari istilah",
-          "Membuat daftar terurut",
-          "Membuat bullet point"
+          "80 dan 443",
+          "22 dan 443",
+          "22 dan 80",
+          "21 dan 443"
         ],
         answer: 1,
-        explanation: "Dalam <dl>, <dt> berisi istilah dan <dd> berisi deskripsi/definisi dari istilah tersebut."
+        explanation: "SSH default di port 22, HTTPS di port 443. HTTP di 80, FTP di 21, MySQL di 3306."
       },
       {
-        question: "Pilih struktur list bersarang yang benar.",
+        question: "Apa perbedaan nmap -sS dan nmap -sT?",
         options: [
-          "<ul><li>Item<ul><li>Sub-item</li></ul></li></ul>",
-          "<li><ul>Item</ul></li>",
-          "<ul><ul><li>Item</li></ul></ul>",
-          "<li>Item<li>Sub-item</li></li>"
+          "Tidak ada perbedaan",
+          "-sS SYN scan (stealth), -sT full TCP connect scan",
+          "-sS untuk UDP, -sT untuk TCP",
+          "-sS lebih lambat dari -sT"
         ],
-        answer: 0,
-        explanation: "List bersarang diletakkan di dalam <li>, bukan langsung di dalam <ul>. Struktur yang benar: <ul><li>...<ul>...</ul></li></ul>."
+        answer: 1,
+        explanation: "-sS adalah SYN scan yang tidak menyelesaikan handshake (stealth, butuh root). -sT melakukan full TCP connect sehingga tercatat di log aplikasi."
+      },
+      {
+        question: "Apa arti state port \"filtered\" pada hasil nmap?",
+        options: [
+          "Port terbuka dan ada service",
+          "Port tertutup tapi tidak ada firewall",
+          "Firewall/IDS memblokir, nmap tidak bisa tentukan open/closed",
+          "Port tidak ada di host"
+        ],
+        answer: 2,
+        explanation: "Filtered berarti packet difilter oleh firewall/IDS sehingga nmap tidak bisa menentukan apakah port open atau closed. Perlu scan alternatif (UDP, source port 53, dll)."
       }
     ]
   },
   {
     level: 2,
     order: 6,
-    title: "Table",
-    slug: "html-table",
-    description: "Membuat tabel data dengan table, tr, td, th, thead, tbody, dan caption.",
-    icon: "📊",
+    title: "Wireshark Basics",
+    slug: "wireshark-basics",
+    description: "Menggunakan Wireshark untuk capture, filter, dan analisis packet jaringan.",
+    icon: "🦈",
     isProject: false,
-    content: `# Table
+    content: `# Wireshark Basics
 
-**Table** digunakan untuk menampilkan data tabular — data dalam baris dan kolom. HTML menyediakan elemen \`<table>\` beserta elemen pendukungnya.
+**Wireshark** adalah network protocol analyzer paling populer. Ia membaca setiap packet yang lewat di interface dan menampilkannya secara visual — sangat penting untuk debugging, forensik, dan keamanan.
 
-## Struktur Dasar Tabel
+## Konsep Capture
 
-Tabel terdiri dari **baris** (\`<tr>\`) dan **sel** (\`<td>\`):
+Wireshark bekerja dengan **promiscuous mode** — membaca semua packet di interface, bukan hanya yang ditujukan ke MAC sendiri. Di Wi-Fi, bisa juga **monitor mode** untuk menangkap semua traffic di udara.
 
-\`\`\`html
-<table>
-  <tr>
-    <td>Baris 1, Kolom 1</td>
-    <td>Baris 1, Kolom 2</td>
-  </tr>
-  <tr>
-    <td>Baris 2, Kolom 1</td>
-    <td>Baris 2, Kolom 2</td>
-  </tr>
-</table>
+\`\`\`text
+[Komputer A] ──→ [Switch] ──→ [Komputer B]
+                    ↓
+              [Wireshark di komputer C]
+              (perlu port mirror / hub / ARP spoof untuk lihat traffic A-B)
 \`\`\`
 
-## Header Sel dengan th
+## Memulai Capture
 
-\`<th>\` (table header) untuk sel header, biasanya tampil **tebal dan tengah**:
+\`\`\`bash
+# Capturing dengan tshark (Wireshark CLI)
+sudo tshark -i eth0 -c 100 -w capture.pcap
 
-\`\`\`html
-<table>
-  <tr>
-    <th>Nama</th>
-    <th>Umur</th>
-    <th>Kota</th>
-  </tr>
-  <tr>
-    <td>Andi</td>
-    <td>25</td>
-    <td>Jakarta</td>
-  </tr>
-  <tr>
-    <td>Budi</td>
-    <td>30</td>
-    <td>Bandung</td>
-  </tr>
-</table>
+# Capturing dengan filter
+sudo tshark -i eth0 -f "tcp port 80" -w http.pcap
+
+# Membaca file pcap
+tshark -r capture.pcap -Y "http.request.method == GET"
 \`\`\`
 
-## Struktur Semantik: thead, tbody, tfoot
+## Filter Capturing (BPF)
 
-Untuk tabel yang baik, gunakan \`<thead>\`, \`<tbody>\`, dan \`<tfoot>\`:
+**BPF (Berkeley Packet Filter)** dipakai saat capture — efisien karena filter di kernel level:
 
-\`\`\`html
-<table>
-  <caption>Daftar Karyawan</caption>
-  <thead>
-    <tr>
-      <th>Nama</th>
-      <th>Posisi</th>
-      <th>Gaji</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Andi</td>
-      <td>Developer</td>
-      <td>Rp 10.000.000</td>
-    </tr>
-    <tr>
-      <td>Budi</td>
-      <td>Designer</td>
-      <td>Rp 8.000.000</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="2">Total</td>
-      <td>Rp 18.000.000</td>
-    </tr>
-  </tfoot>
-</table>
+\`\`\`bash
+host 192.168.1.10              # traffic ke/dari host ini
+src host 192.168.1.10         # hanya yang dari host ini
+dst port 443                   # hanya tujuan port 443
+tcp port 22                    # traffic SSH
+not arp and not dns           # kecualikan ARP dan DNS
+tcp[tcpflags] & tcp-syn != 0  # hanya SYN packet
 \`\`\`
 
-- \`<caption>\`: Judul tabel
-- \`<thead>\`: Header tabel
-- \`<tbody>\`: Isi tabel
-- \`<tfoot>\`: Footer tabel (biasanya total/ringkasan)
+## Display Filter (Wireshark)
 
-## Merged Cells: colspan & rowspan
+Display filter lebih powerful, dipakai setelah capture:
 
-Atribut \`colspan\` dan \`rowspan\` untuk menggabung sel:
+\`\`\`text
+# Lapisan protokol
+http                      → hanya HTTP
+tcp                       → hanya TCP
+dns                       → hanya DNS
 
-\`\`\`html
-<table border="1">
-  <tr>
-    <th colspan="2">Header gabungan 2 kolom</th>
-  </tr>
-  <tr>
-    <td rowspan="2">Sel gabungan 2 baris</td>
-    <td>Sel biasa</td>
-  </tr>
-  <tr>
-    <td>Sel biasa</td>
-  </tr>
-</table>
+# Field spesifik
+http.request.method == "POST"
+http.host contains "google"
+ip.addr == 192.168.1.10
+tcp.port == 443
+tcp.flags.syn == 1
+
+# Kombinasi dengan and/or/not
+http and ip.addr == 192.168.1.10
+tcp.port == 80 or tcp.port == 443
+not arp and not icmp
 \`\`\`
 
-- \`colspan="2"\`: Gabung 2 kolom
-- \`rowspan="2"\`: Gabung 2 baris
+## Anatomi Tampilan Wireshark
 
-## Tips Membuat Tabel yang Baik
-
-- Selalu gunakan \`<th>\` untuk header (membantu accessibility)
-- Pisahkan struktur dengan \`<thead>\`, \`<tbody>\`, \`<tfoot>\`
-- Beri \`<caption>\` untuk menjelaskan isi tabel
-- **Jangan** gunakan tabel untuk layout halaman — gunakan CSS Flexbox/Grid
-- Styling tabel (border, padding) via CSS, bukan atribut \`border\`
-
-\`\`\`html
-<!-- Hindari: atribut border (usang) -->
-<table border="1" cellpadding="5">
-
-<!-- Sebaiknya: gunakan CSS -->
-<table class="data-table">
+\`\`\`text
++----------------------------------------------------+
+| Filter: http                                       |
++----------------------------------------------------+
+| No | Time | Source | Destination | Protocol | Info |
+| 1  | 0.01 | .5     | .1          | TCP      | SYN |
+| 2  | 0.02 | .1     | .5          | TCP      | SYN-ACK |
++----------------------------------------------------+
+| Packet Detail (tree):
+|   ▸ Frame 1: 66 bytes
+|   ▸ Ethernet II: src MAC, dst MAC
+|   ▸ IP: src 192.168.1.5, dst 192.168.1.10
+|   ▸ TCP: src port 54321, dst port 80, SYN
++----------------------------------------------------+
+| Packet Bytes (hex+ascii):
+|   0000  45 00 00 3c 1c 46 40 00  E.. <..@.         |
++----------------------------------------------------+
 \`\`\`
 
-> Tabel cocok untuk data tabular. Jangan disalahgunakan untuk layout!`,
+## Studi Kasus: Analisis HTTP Login
+
+\`\`\`text
+1. Filter: http.request.method == "POST"
+2. Cari request ke /login
+3. Klik kanan → Follow → HTTP Stream
+4. Lihat body request:
+   POST /login HTTP/1.1
+   ...
+   username=admin&password=secret123
+\`\`\`
+
+Inilah mengapa **HTTPS wajib** — di HTTP, password terbaca plaintext di Wireshark!
+
+## Analisis Serangan: SYN Flood
+
+\`\`\`text
+1. Capture saat ada SYN flood (lab)
+2. Filter: tcp.flags.syn == 1 and tcp.flags.ack == 0
+3. Lihat apakah puluhan SYN/detik dari IP yang sama
+4. Bandingkan jumlah SYN vs SYN-ACK → indikasi flood
+\`\`\`
+
+## Statistik Berguna
+
+\`\`\`text
+Statistics → Capture File Properties → jumlah packet
+Statistics → Protocol Hierarchy     → komposisi protokol
+Statistics → Conversations          → siapa ngobrol dengan siapa
+Statistics → Endpoints              → IP/MAC pengirim terbanyak
+Statistics → IO Graphs              → grafik traffic per detik
+\`\`\`
+
+## Praktik: Capture Login di Lab DVWA
+
+\`\`\`bash
+# Di Kali, mulai capture
+sudo tshark -i eth0 -w dvwa.pcap &
+
+# Buka browser, login ke DVWA via HTTP
+curl -c cookies.txt -d "username=admin&password=password" \\
+  http://192.168.56.102/login.php
+
+# Stop capture
+sudo pkill tshark
+
+# Analisis password yang terkirim
+tshark -r dvwa.pcap -Y 'http.request.method == "POST"' \\
+  -T fields -e http.file_data | grep -i password
+\`\`\`
+
+## Tips Analisis Forensik
+
+- **Time** — kapan serangan terjadi?
+- **Source** — IP attacker, ASN, geolokasi
+- **Pattern** — apakah ada otomasi (cron, repeat)?
+- **Beacon** — apakah ada koneksi periodik ke IP mencurigakan (C2)?
+- **Exfiltration** — upload data besar ke host asing?
+
+## Etika Capture
+
+Hanya capture traffic di **jaringan yang kamu punya izin**. Menangkap traffic WiFi publik atau jaringan kantor tanpa izin **ilegal** (UU ITE).`,
     quiz: [
       {
-        question: "Tag apa yang digunakan untuk membuat sel header pada tabel?",
-        options: ["<td>", "<th>", "<tr>", "<thead>"],
-        answer: 1,
-        explanation: "<th> (table header) membuat sel header yang biasanya tampil tebal dan rata tengah, penting untuk accessibility."
-      },
-      {
-        question: "Apa fungsi atribut colspan pada sel tabel?",
+        question: "Apa perbedaan BPF filter dan Display filter di Wireshark?",
         options: [
-          "Menggabungkan beberapa baris",
-          "Menggabungkan beberapa kolom menjadi satu sel",
-          "Mengatur warna sel",
-          "Mengatur lebar tabel"
+          "Tidak ada, sama saja",
+          "BPF saat capture (kernel level), Display filter setelah capture (UI)",
+          "BPF untuk UDP, Display untuk TCP",
+          "BPF lebih lambat dari Display"
         ],
         answer: 1,
-        explanation: "colspan menggabungkan beberapa kolom menjadi satu sel horizontal. rowspan sebaliknya, menggabungkan baris."
+        explanation: "BPF (capture filter) bekerja di kernel saat packet ditangkap — efisien. Display filter bekerja di UI Wireshark pada packet yang sudah ditangkap — lebih fleksibel."
       },
       {
-        question: "Pernyataan mana yang benar tentang penggunaan tabel?",
+        question: "Filter Wireshark yang benar untuk hanya menampilkan HTTP POST request?",
         options: [
-          "Tabel sebaiknya digunakan untuk layout halaman",
-          "Tabel hanya untuk menampilkan data tabular, bukan untuk layout",
-          "Tabel tidak boleh memiliki header",
-          "Tabel harus selalu diberi border tebal"
+          "http.method == post",
+          "http.request.method == \"POST\"",
+          "http post",
+          "filter http post"
         ],
         answer: 1,
-        explanation: "Tabel ditujukan untuk data tabular. Untuk layout halaman, gunakan CSS Flexbox atau Grid yang lebih fleksibel."
+        explanation: "Field yang benar adalah \`http.request.method\` dengan nilai string \"POST\" (case-sensitive, gunakan tanda kutip)."
+      },
+      {
+        question: "Apa risih keamanan utama protokol HTTP terhadap Wireshark?",
+        options: [
+          "HTTP tidak bisa di-capture Wireshark",
+          "Password dan data terkirim plaintext, terbaca di Wireshark",
+          "HTTP otomatis memblokir Wireshark",
+          "HTTP membuat Wireshark crash"
+        ],
+        answer: 1,
+        explanation: "HTTP tidak terenkripsi sehingga siapa yang capture traffic (MITM) bisa membaca isi termasuk password. Inilah alasan utama HTTPS wajib."
       }
     ]
   },
   {
     level: 2,
     order: 7,
-    title: "Form",
-    slug: "html-form",
-    description: "Membuat form interaktif dengan form, input, label, textarea, select, dan button.",
-    icon: "📋",
+    title: "Firewall & IDS",
+    slug: "firewall-ids",
+    description: "Cara kerja firewall, IDS/IPS, dan implementasi dengan iptables/ufw serta Snort/Suricata.",
+    icon: "🧱",
     isProject: false,
-    content: `# Form
+    content: `# Firewall & IDS
 
-**Form** adalah elemen penting untuk menerima input dari pengguna — mulai dari login, registrasi, pencarian, hingga upload file. HTML menyediakan berbagai elemen form yang powerful.
+Firewall dan IDS/IPS adalah dua lapis pertahanan utama jaringan. Firewall mencegah, IDS mendeteksi.
 
-## Struktur Dasar Form
+## Firewall
 
-Form dibungkus dengan tag \`<form>\` dan elemen input di dalamnya:
+**Firewall** menyaring packet berdasarkan aturan (rules). Bekerja di Layer 3/4 (IP/port) atau Layer 7 (aplikasi, untuk next-gen firewall).
 
-\`\`\`html
-<form action="/submit" method="POST">
-  <label for="name">Nama:</label>
-  <input type="text" id="name" name="name">
-
-  <button type="submit">Kirim</button>
-</form>
+\`\`\`text
+Tipe Firewall:
+┌────────────────┬──────────────────────────────────┐
+| Packet Filter  | Cek header IP/TCP/UDP, allow/deny |
+| Stateful       | Ingat state koneksi (NEW, ESTABLISHED) |
+| Proxy          | Perantara aplikasi (HTTP/SOCKS proxy) |
+| NGFW           | + DPI, IPS, threat intel |
+└────────────────┴──────────────────────────────────┘
 \`\`\`
 
-- \`action\`: URL tujuan pengiriman data
-- \`method\`: HTTP method (\`GET\` atau \`POST\`)
+## Netfilter & iptables
 
-## Jenis Input
+Linux memakai **netfilter** (kernel) yang dikontrol via \`iptables\` atau \`nftables\`. \`ufw\` adalah wrapper sederhana.
 
-HTML5 menyediakan banyak \`type\` input:
+### iptables — 4 tabel utama
 
-\`\`\`html
-<input type="text" placeholder="Teks biasa">
-<input type="email" placeholder="email@contoh.com">
-<input type="password" placeholder="Password">
-<input type="number" min="0" max="100">
-<input type="date">
-<input type="checkbox">
-<input type="radio" name="gender">
-<input type="file">
-<input type="color">
-<input type="range" min="0" max="10">
+\`\`\`text
+filter  → aturan allow/drop packet (default)
+nat     → translasi IP/port
+mangle  → modifikasi header
+raw     → sebelum conntrack
 \`\`\`
 
-## Label yang Benar
+### Chain (urutan evaluasi)
 
-Selalu gunakan \`<label>\` dan kaitkan dengan input via \`for\` dan \`id\`:
-
-\`\`\`html
-<label for="email">Email:</label>
-<input type="email" id="email" name="email">
+\`\`\`text
+INPUT    → packet masuk ke host ini
+OUTPUT   → packet keluar dari host ini
+FORWARD → packet lewat (router/gateway)
+PREROUTING → sebelum routing (DNAT)
+POSTROUTING → setelah routing (SNAT)
 \`\`\`
 
-Ini penting untuk **accessibility** — klik label akan fokus ke input.
+## Contoh Aturan iptables
 
-## Textarea untuk Teks Panjang
+\`\`\`bash
+# Lihat aturan aktif
+sudo iptables -L -n -v
 
-\`<textarea>\` untuk input multi-baris:
+# Allow loopback
+sudo iptables -A INPUT -i lo -j ACCEPT
 
-\`\`\`html
-<label for="bio">Bio:</label>
-<textarea id="bio" name="bio" rows="4" cols="40"></textarea>
+# Allow established connections
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Allow SSH (port 22) dari subnet tertentu
+sudo iptables -A INPUT -p tcp -s 192.168.1.0/24 --dport 22 -j ACCEPT
+
+# Allow HTTP dan HTTPS
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Drop sisanya (default deny)
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+
+# Simpan aturan
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
 \`\`\`
 
-## Select (Dropdown)
+## ufw (Uncomplicated Firewall)
 
-\`<select>\` untuk pilihan dropdown:
+Lebih mudah untuk pemula:
 
-\`\`\`html
-<label for="country">Negara:</label>
-<select id="country" name="country">
-  <option value="id">Indonesia</option>
-  <option value="my">Malaysia</option>
-  <option value="sg">Singapura</option>
-</select>
+\`\`\`bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable
+sudo ufw status verbose
 \`\`\`
 
-## Radio dan Checkbox
+## IDS vs IPS
 
-\`\`\`html
-<!-- Radio: pilih satu -->
-<fieldset>
-  <legend>Jenis Kelamin:</legend>
-  <input type="radio" id="male" name="gender" value="male">
-  <label for="male">Laki-laki</label>
-  <input type="radio" id="female" name="gender" value="female">
-  <label for="female">Perempuan</label>
-</fieldset>
+\`\`\`text
+IDS (Intrusion Detection System)
+  → Pasif, hanya melaporkan ke log/SIEM
+  → Contoh: Snort di mode passive
 
-<!-- Checkbox: pilih banyak -->
-<label>
-  <input type="checkbox" name="subscribe" value="yes">
-  Berlangganan newsletter
-</label>
+IPS (Intrusion Prevention System)
+  → Aktif, memblokir + melaporkan
+  → Inline di traffic path
+  → Contoh: Snort inline, Suricata IPS mode
 \`\`\`
 
-## Atribut Penting Input
+## Snort — Rule-Based IDS
 
-\`\`\`html
-<input type="text"
-  name="username"
-  placeholder="Masukkan username"
-  required
-  minlength="3"
-  maxlength="20"
-  pattern="[A-Za-z]+"
-  value="default">
+Format rule Snort:
+
+\`\`\`text
+action proto src_ip src_port -> dst_ip dst_port (options)
 \`\`\`
 
-- \`placeholder\`: Hint teks
-- \`required\`: Wajib diisi
-- \`minlength\`/\`maxlength\`: Panjang min/maks
-- \`pattern\`: Regex validasi
-- \`value\`: Nilai default
+Contoh rule deteksi SSH brute force:
 
-## Button dan Submit
-
-\`\`\`html
-<button type="submit">Kirim</button>
-<button type="reset">Reset</button>
-<button type="button">Tombol Biasa</button>
+\`\`\`text
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Brute Force Attempt"; \
+  threshold:type both, track by_src, count 5, seconds 60; \
+  sid:1000001; rev:1;)
 \`\`\`
 
-## Tips Membuat Form yang Baik
+Artinya: alert jika ada 5+ koneksi SSH dalam 60 detik dari IP yang sama.
 
-- Selalu gunakan \`<label>\` untuk setiap input
-- Atur \`name\` pada setiap input (penting untuk backend)
-- Gunakan \`type\` yang sesuai (\`email\`, \`number\`, \`date\`) untuk validasi bawaan
-- Tambahkan \`required\` pada field wajib
-- Validasi sisi **server** tetap perlu, jangan andalkan HTML saja
+## Suricata — IDS/IPS Modern
 
-> Form adalah gerbang interaksi user dengan aplikasi. Buatlah yang ramah dan mudah digunakan.`,
+\`\`\`bash
+# Update rules
+sudo suricata-update
+
+# Jalankan sebagai IDS
+sudo suricata -i eth0
+
+# Jalankan sebagai IPS (inline, NFQ)
+sudo suricata --runmode workers -q 0 -q 1
+
+# Cek log alert
+tail -f /var/log/suricata/fast.log
+\`\`\`
+
+## Tipe Deteksi IDS
+
+\`\`\`text
+Signature-based → cocokkan pattern (seperti antivirus)
+Anomaly-based   → deteksi perilaku abnormal (baseline deviation)
+Heuristic       → rule + ML ringan
+\`\`\`
+
+## Contoh: Deteksi Nmap Scan
+
+\`\`\`text
+alert tcp $EXTERNAL_NET any -> $HOME_NET any \
+  (msg:"Nmap TCP SYN Scan"; flags:S; \
+   detection_filter:track by_src, count 30, seconds 5; \
+   sid:2000001;)
+\`\`\`
+
+Rule ini alert bila satu IP kirim 30+ SYN dalam 5 detik — pola khas nmap -sS.
+
+## SIEM (Security Info & Event Mgmt)
+
+IDS menghasilkan alert tapi harus dikumpulkan dan dianalisis. **SIEM** (Splunk, ELK, Wazuh) menggabungkan log dari banyak sumber:
+
+\`\`\`text
+Sources:
+  - Firewall logs
+  - IDS alerts
+  - Authentication logs
+  - Endpoint EDR
+  - Web server access log
+  - DNS queries
+
+Output: dashboard, alerting, threat hunting
+\`\`\`
+
+## Evasion Teknik Attacker
+
+\`\`\`text
+Fragmentation → pecah packet supaya bypass signature
+Encoding      → URL encode, base64, unicode
+Timing        → slow scan, low rate
+Tunneling     → ssh/ICMP/DNS tunnel
+Spoofing      → palsukan source IP
+\`\`\`
+
+Inilah mengapa pertahanan harus **multi-layered**: firewall + IDS + EDR + anomaly detection + threat intel.
+
+## Best Practice Hardening
+
+1. **Default deny** — blok semua, allow yang perlu
+2. **Least privilege** — hanya port/IP/service yang dibutuhkan
+3. **Log everything** — simpan log ke server terpisah
+4. **Update rules** — IDS rule harian dari emerging threats
+5. **Test** — uji aturan dengan attack simulation (atomic red team)`,
     quiz: [
       {
-        question: "Atribut apa pada <form> yang menentukan URL tujuan pengiriman data?",
-        options: ["method", "action", "url", "target"],
-        answer: 1,
-        explanation: "Atribut action menentukan URL tujuan pengiriman data form, sedangkan method menentukan HTTP method (GET/POST)."
-      },
-      {
-        question: "Mengapa penting menggunakan tag <label> dengan atribut for yang cocok dengan id input?",
+        question: "Apa perbedaan utama IDS dan IPS?",
         options: [
-          "Hanya untuk styling",
-          "Untuk accessibility dan agar klik label otomatis fokus ke input",
-          "Tidak penting, hanya estetika",
-          "Untuk mengirim data form"
+          "IDS pakai AI, IPS pakai rules",
+          "IDS pasif (lapor), IPS aktif (blokir + lapor)",
+          "IDS untuk network, IPS untuk host",
+          "IDS lebih baru dari IPS"
         ],
         answer: 1,
-        explanation: "Label yang di-link via for-id membantu screen reader dan membuat klik label otomatis fokus ke input terkait, meningkatkan accessibility."
+        explanation: "IDS hanya mendeteksi dan melaporkan (pasif). IPS bekerja inline dan aktif memblokir traffic yang mencurigakan."
       },
       {
-        question: "Manakah perbedaan utama antara radio button dan checkbox?",
+        question: "Pada iptables, chain mana yang memproses packet yang lewat dari jaringan lain ke jaringan lain (router)?",
         options: [
-          "Radio untuk pilih banyak, checkbox untuk pilih satu",
-          "Radio untuk pilih satu dalam grup, checkbox untuk pilih banyak",
-          "Tidak ada perbedaan",
-          "Radio hanya untuk teks, checkbox untuk angka"
+          "INPUT",
+          "OUTPUT",
+          "FORWARD",
+          "PREROUTING"
         ],
-        answer: 1,
-        explanation: "Radio button dengan name yang sama memungkinkan memilih satu opsi, sedangkan checkbox memungkinkan memilih beberapa opsi sekaligus."
+        answer: 2,
+        explanation: "FORWARD memproses packet yang melewati host (bukan ditujukan ke host itu sendiri). INPUT untuk packet ke host, OUTPUT dari host."
+      },
+      {
+        question: "Prinsip \"default deny\" pada firewall berarti?",
+        options: [
+          "Blokir semua traffic, hanya allow yang eksplisit diizinkan",
+          "Allow semua traffic, blokir yang berbahaya",
+          "Tidak pakai firewall",
+          "Hanya blokir traffic dari internet"
+        ],
+        answer: 0,
+        explanation: "Default deny = default policy DROP, lalu hanya port/service yang dibutuhkan yang di-allow secara eksplisit. Lebih aman daripada default allow."
       }
     ]
   },
   {
     level: 2,
     order: 8,
-    title: "Semantic HTML",
-    slug: "semantic-html",
-    description: "Menggunakan elemen semantic seperti header, nav, main, article, section, dan footer untuk struktur bermakna.",
-    icon: "🏛️",
+    title: "VPN & Proxy",
+    slug: "vpn-proxy",
+    description: "Konsep VPN vs Proxy, enkripsi tunnel, dan use case keamanan masing-masing.",
+    icon: "🔒",
     isProject: false,
-    content: `# Semantic HTML
+    content: `# VPN & Proxy
 
-**Semantic HTML** berarti menggunakan elemen yang **bermakna** sesuai fungsinya, bukan sekadar \`<div>\` untuk segalanya. Semantic HTML meningkatkan **accessibility**, **SEO**, dan **keterbacaan kode**.
+VPN dan Proxy keduanya menjadi perantara traffic, tapi dengan tujuan dan tingkat keamanan berbeda. Pahami perbedaannya agar tidak salah pilih.
 
-## Mengapa Semantic HTML Penting?
+## Apa itu Proxy?
 
-Bayangkan struktur dengan \`<div>\` semua:
+**Proxy** adalah server perantara yang meneruskan request client ke server tujuan. Yang terlihat oleh server tujuan adalah IP proxy, bukan IP client.
 
-\`\`\`html
-<div class="header">
-  <div class="nav">...</div>
-</div>
-<div class="main">...</div>
-<div class="footer">...</div>
+\`\`\`text
+[Client] → [Proxy] → [Server tujuan]
+            ↑
+       IP proxy terlihat
+       sebagai pengirim
 \`\`\`
 
-Dibanding dengan semantic HTML:
+## Tipe Proxy
 
-\`\`\`html
-<header>
-  <nav>...</nav>
-</header>
-<main>...</main>
-<footer>...</footer>
+\`\`\`text
+Forward Proxy  → mewakili client (mis. Squid, web filter)
+Reverse Proxy  → mewakili server (mis. Nginx, Cloudflare)
+Transparent    → client tidak tahu lewat proxy
+Anonymous      → sembunyikan IP client
+SOCKS5         → proxy generik, semua protokol TCP
+HTTP Proxy     → hanya HTTP/HTTPS
 \`\`\`
 
-Kedua versi tampil sama di browser, tapi versi semantic lebih **bermakna** untuk:
+## Apa itu VPN?
 
-- **Screen reader** — pengguna tunanetra mendapat struktur jelas
-- **Search engine** — Google lebih paham kontenmu
-- **Developer** — kode lebih mudah dibaca dan dipelihara
+**VPN (Virtual Private Network)** membuat tunnel terenkripsi antara client dan VPN server. SEMUA traffic (aplikasi apa pun) melewati tunnel dan terenkripsi.
 
-## Elemen Semantic Utama
-
-### Header
-
-\`<header>\` berisi judul atau navigasi pengantar:
-
-\`\`\`html
-<header>
-  <h1>Nama Website</h1>
-  <nav>...</nav>
-</header>
+\`\`\`text
+[Client] ════encrypted tunnel════ [VPN Server] → [Internet]
+         ↑
+    semua traffic aplikasi
+    terenkripsi end-to-end ke VPN server
 \`\`\`
 
-### Nav
+## Perbedaan VPN vs Proxy
 
-\`<nav>\` khusus untuk **navigasi utama**:
-
-\`\`\`html
-<nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about">About</a></li>
-  </ul>
-</nav>
+\`\`\`text
+Aspek         | Proxy               | VPN
+--------------|---------------------|---------------------
+Enkripsi      | Tidak (kecuali HTTPS| Ya, semua traffic
+Aplikasi      | Per-app (browser)   | Sistem-wide
+Lapisan OSI   | Layer 7 (HTTP) / 5 (SOCKS) | Layer 3 (tunnel)
+Anonimitas    | Sembunyikan IP      | Sembunyikan IP + enkripsi
+Performance   | Lebih cepat         | Ada overhead enkripsi
+Use case      | Filter, bypass geo  | Keamanan WiFi publik, remote akses
 \`\`\`
 
-### Main
+## Protokol VPN Umum
 
-\`<main>\` berisi **konten utama** halaman (hanya satu per halaman):
-
-\`\`\`html
-<main>
-  <h1>Judul Halaman</h1>
-  <p>Konten utama...</p>
-</main>
+\`\`\`text
+OpenVPN     → open source, UDP/TCP, sangat aman, cross-platform
+WireGuard   → modern, ringan, performa tinggi, sedikit kode
+IPsec/IKEv2 → native di banyak OS, cocok untuk mobile
+L2TP/IPsec  → kombinasi, agak tua
+PPTP        → JANGAN pakai, sudah tidak aman
+SSTP        → Microsoft, over HTTPS
 \`\`\`
 
-### Section
+## Setup WireGuard di Linux
 
-\`<section>\` untuk pengelompokan tematik konten:
+\`\`\`bash
+# Install WireGuard
+sudo apt install -y wireguard
 
-\`\`\`html
-<section>
-  <h2>Layanan Kami</h2>
-  <p>Deskripsi layanan...</p>
-</section>
+# Generate keypair server
+wg genkey | tee server_private.key | wg pubkey > server_public.key
+
+# Buat config /etc/wireguard/wg0.conf
+cat << EOF | sudo tee /etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = \$(cat server_private.key)
+Address = 10.0.0.1/24
+ListenPort = 51820
+
+[Peer]
+# Client
+PublicKey = <client_public_key>
+AllowedIPs = 10.0.0.2/32
+EOF
+
+# Aktifkan forwarding & nat
+echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+sudo iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o eth0 -j MASQUERADE
+
+# Jalankan
+sudo wg-quick up wg0
+sudo systemctl enable wg-quick@wg0
+sudo wg show
 \`\`\`
 
-### Article
+## Konfigurasi Client WireGuard
 
-\`\`<article>\` untuk konten **mandiri** seperti blog post:
+\`\`\`text
+[Interface]
+PrivateKey = <client_private_key>
+Address = 10.0.0.2/24
+DNS = 1.1.1.1
 
-\`\`\`html
-<article>
-  <h2>Judul Artikel</h2>
-  <p>Isi artikel...</p>
-  <time datetime="2024-01-15">15 Januari 2024</time>
-</article>
+[Peer]
+PublicKey = <server_public_key>
+Endpoint = server-ip:51820
+AllowedIPs = 0.0.0.0/0    # semua traffic via VPN
+PersistentKeepalive = 25
 \`\`\`
 
-### Aside
+## Reverse Proxy dengan Nginx
 
-\`<aside>\` untuk konten sampingan (sidebar, iklan, related):
+\`\`\`nginx
+server {
+    listen 80;
+    server_name app.example.com;
 
-\`\`\`html
-<aside>
-  <h3>Artikel Terkait</h3>
-  <ul>...</ul>
-</aside>
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
 \`\`\`
 
-### Footer
+Manfaat reverse proxy:
+- **Load balancing** — distribusi ke beberapa backend
+- **TLS termination** — sertifikat di proxy, backend plain HTTP
+- **Rate limiting** — anti brute force
+- **WAF** — modSecurity di depan aplikasi
+- **Caching** — simpan response statis
 
-\`<footer>\` untuk footer halaman (copyright, link, info):
+## Use Case Keamanan
 
-\`\`\`html
-<footer>
-  <p>&copy; 2024 Perusahaan Saya. All rights reserved.</p>
-</footer>
+\`\`\`text
+VPN:
+  ✓ Akses jaringan kantor dari rumah
+  ✓ Aman di WiFi publik (kafe, bandara)
+  ✓ Bypass sensor internet
+  ✓ Sembunyikan traffic dari ISP
+
+Proxy:
+  ✓ Filter konten web (sekolah, kantor)
+  ✓ Caching bandwidth
+  ✓ Anonymizer (hati-hati, banyak proxy gratis curi data!)
+  ✓ Burp Suite untuk web pentest
 \`\`\`
 
-## Contoh Struktur Lengkap
+## Bahaya VPN/Proxy Gratis
 
-\`\`\`html
-<body>
-  <header>
-    <h1>Blog Saya</h1>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/blog">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
+Banyak VPN gratis:
+- **Logging** traffic kamu untuk dijual
+- **Inject** iklan ke halaman
+- **Botnet** — pakai device kamu sebagai exit node
+- **Malware** — installer bawa trojan
 
-  <main>
-    <article>
-      <h2>Belajar HTML Semantic</h2>
-      <time datetime="2024-01-15">15 Jan 2024</time>
-      <p>Isi artikel...</p>
-    </article>
+Aturan: **jika produk gratis, kamu yang menjadi produk**.
 
-    <aside>
-      <h3>Tentang Penulis</h3>
-      <p>Profil singkat...</p>
-    </aside>
-  </main>
+## Tunneling dengan SSH (Bonus)
 
-  <footer>
-    <p>&copy; 2024 Blog Saya</p>
-  </footer>
-</body>
+SSH bisa jadi proxy SOCKS instan:
+
+\`\`\`bash
+# SOCKS5 proxy di localhost:1080
+ssh -D 1080 user@server.com
+
+# Browser set proxy SOCKS5 ke 127.0.0.1:1080
+# Sekarang traffic browser lewat server.com
+\`\`\`
+
+## Deteksi VPN/Proxy (Sudut Defender)
+
+\`\`\`text
+- IP reputation database (MaxMind, IPinfo)
+- ASN check (data center ASN = curiga)
+- Multiple users dari 1 IP
+- Timezone mismatch (IP di AS, device timezone Asia)
+- WebRTC IP leak
+- DNS leak (DNS query tidak lewat VPN)
+\`\`\`
+
+Tidak ada cara 100% memblokir VPN, tapi lapisan deteksi ini mempersempit ruang.`,
+    quiz: [
+      {
+        question: "Apa perbedaan mendasar VPN dan Proxy?",
+        options: [
+          "VPN lebih cepat dari proxy",
+          "VPN mengenkripsi semua traffic sistem, proxy hanya per-app dan biasanya tidak enkripsi",
+          "VPN gratis, proxy berbayar",
+          "Tidak ada perbedaan"
+        ],
+        answer: 1,
+        explanation: "VPN mengenkripsi semua traffic di level sistem (Layer 3) dan tunnel. Proxy biasanya per-aplikasi (browser) dan tidak mengenkripsi (kecuali HTTPS)."
+      },
+      {
+        question: "Protokol VPN manakah yang TIDAK boleh dipakai karena sudah tidak aman?",
+        options: [
+          "WireGuard",
+          "OpenVPN",
+          "PPTP",
+          "IPsec/IKEv2"
+        ],
+        answer: 2,
+        explanation: "PPTP punya banyak celah kriptografi (MS-CHAPv2 bisa di-crack). WireGuard, OpenVPN, dan IPsec/IKEv2 masih aman dipakai."
+      },
+      {
+        question: "Apa peran reverse proxy seperti Nginx di depan aplikasi web?",
+        options: [
+          "Mengenkripsi traffic client",
+          "Mewakili server: load balancing, TLS termination, rate limiting, WAF",
+          "Menyembunyikan IP client",
+          "Menggantikan firewall"
+        ],
+        answer: 1,
+        explanation: "Reverse proxy mewakili server: menerima request publik, distribusikan ke backend, terminasi TLS, batasi rate, dan bisa tempel WAF. Berbeda dari forward proxy yang mewakili client."
+      }
+    ]
+  },
+  {
+    level: 2,
+    order: 9,
+    title: "Project: Network Analysis",
+    slug: "project-network-analysis",
+    description: "Proyek akhir Level 2: lakukan network reconnaissance lengkap pada lab target dan buat laporan.",
+    icon: "📊",
+    isProject: true,
+    content: `# Project: Network Analysis
+
+Saatnya menggabungkan semua yang telah dipelajari di Level 2 untuk melakukan **network reconnaissance** dan analisis lengkap terhadap sebuah lab target, layaknya pentester junior pertama kali mendapat engagement.
+
+## Tujuan Proyek
+
+Setelah menyelesaikan proyek ini, kamu mampu:
+
+1. Melakukan **host discovery** di subnet target
+2. **Port scanning** dan service detection dengan nmap
+3. **Capture traffic** dan analisis dengan Wireshark
+4. **Identifikasi ancaman** dari hasil analisis
+5. Membuat **laporan profesional** dengan rekomendasi hardening
+
+## Persiapan Lab
+
+\`\`\`text
+1. Kali Linux VM (attacker)   IP: 192.168.56.5
+2. Metasploitable 2 VM (target) IP: 192.168.56.102
+3. DVWA di Docker (target)      IP: 192.168.56.103
+4. Jaringan: VirtualBox NAT Network 192.168.56.0/24
+\`\`\`
+
+Pastikan semua VM bisa saling ping sebelum mulai.
+
+## Tahap 1 — Host Discovery
+
+\`\`\`bash
+# Scan seluruh subnet untuk temukan host aktif
+sudo nmap -sn 192.168.56.0/24 -oN hosts.txt
+
+# Atau pakai arp-scan (lebih cepat di LAN)
+sudo arp-scan --localnet
+\`\`\`
+
+**Deliverable**: daftar IP aktif dengan MAC address dan vendor.
+
+## Tahap 2 — Port Scan Detail
+
+\`\`\`bash
+# Full port scan + service version + OS detection + default scripts
+nmap -p- -sV -O -sC -T4 -oA fullscan 192.168.56.102
+
+# Simpan dalam 3 format sekaligus (normal, XML, grepable)
+\`\`\`
+
+**Deliverable**: tabel port → service → versi → OS yang terdeteksi.
+
+Contoh hasil yang diharapkan:
+
+\`\`\`text
+PORT     STATE SERVICE  VERSION
+21/tcp   open  ftp      vsftpd 2.3.4
+22/tcp   open  ssh      OpenSSH 4.7p1
+23/tcp   open  telnet   Linux telnetd
+25/tcp   open  smtp     Postfix smtpd
+53/tcp   open  domain   ISC BIND 9.4.2
+80/tcp   open  http     Apache 2.2.8
+445/tcp  open  netbios  Samba smbd
+1524/tcp open  bindshell Metasploitable root shell
+3306/tcp open  mysql    MySQL 5.0.51a
+5432/tcp open  postgres PostgreSQL 8.3.0
+\`\`\`
+
+## Tahap 3 — Vulnerability Identification
+
+\`\`\`bash
+# Pakai NSE script vuln untuk identifikasi cepat
+nmap --script vuln 192.168.56.102 -oN vulnscan.txt
+
+# Cek CVE spesifik dari service yang ditemukan
+searchsploit vsftpd 2.3.4
+searchsploit samba 3.0
+\`\`\`
+
+**Deliverable**: tabel service → CVE → severity → apakah ada exploit publik.
+
+## Tahap 4 — Traffic Capture & Analysis
+
+\`\`\`bash
+# Mulai capture sambil berinteraksi dengan target
+sudo tshark -i eth0 -w project.pcap &
+
+# Lakukan aktivitas:
+curl http://192.168.56.102/
+curl -d "username=admin&password=admin" http://192.168.56.102/login.php
+telnet 192.168.56.102 23  # coba default cred
+
+# Stop capture
+sudo pkill tshark
+\`\`\`
+
+Lalu analisis:
+
+\`\`\`bash
+# Lihat protocol hierarchy
+tshark -r project.pcap -q -z io,phs
+
+# Lihat konversation teratas
+tshark -r project.pcap -q -z conv,tcp
+
+# Cari password plaintext yang terkirim
+tshark -r project.pcap -Y 'http.request.method == "POST"' \\
+  -T fields -e http.file_data | sort -u
+\`\`\`
+
+**Deliverable**: ringkasan traffic per protokol + bukti password plaintext (jika ada).
+
+## Tahap 5 — Anomali Detection
+
+Cari pola mencurigakan di capture:
+
+\`\`\`text
+- Apakah ada SYN scan? (banyak SYN tanpa ACK dari 1 IP)
+- Apakah ada brute force SSH? (banyak failed login di /var/log/auth.log target)
+- Apakah ada DNS tunneling? (query sangat panjang/aneh)
+- Apakah ada cleartext protocol sensitif? (FTP, Telnet, HTTP login)
+\`\`\`
+
+## Tahap 6 — Laporan Akhir
+
+Susun laporan Markdown dengan struktur:
+
+\`\`\`markdown
+# Network Analysis Report
+
+## 1. Ringkasan Eksekutif
+- Target: 192.168.56.0/24
+- Tanggal: [tanggal]
+- Metode: nmap, tshark, manual analysis
+
+## 2. Inventaris Aset
+| IP | MAC | OS | Open Ports |
+
+## 3. Temuan Kerentanan
+| Port | Service | Version | CVE | Severity |
+
+## 4. Bukti Traffic
+- Screenshot Wireshark
+- Filter yang dipakai
+- PoC password plaintext
+
+## 5. Rekomendasi Hardening
+1. Update vsftpd 2.3.4 (backdoor CVE-2011-2523)
+2. Matikan Telnet (pakai SSH)
+3. Pakai HTTPS untuk DVWA
+4. Default deny firewall
+5. ...
+
+## 6. Kesimpulan
+\`\`\`
+
+## Kriteria Self-Assessment
+
+Cek kemampuanmu:
+
+- [ ] Berhasil menemukan minimal 5 host aktif
+- [ ] Mendeteksi minimal 10 port terbuka
+- [ ] Mengidentifikasi minimal 3 kerentanan dengan CVE
+- [ ] Capture minimal 1000 packet dan analisis protokol
+- [ ] Menemukan minimal 1 contoh data sensitif di plaintext
+- [ ] Laporan lengkap dengan screenshot bukti
+- [ ] Minimal 5 rekomendasi hardening yang actionable
+
+## Konsep yang Diuji
+
+Proyek ini menggabungkan:
+
+- **OSI & TCP/IP** — memahami di lapisan apa packet bergerak
+- **DNS & HTTP** — analisis request/response web
+- **Port & Services** — kenali service dari nomor port
+- **Wireshark** — display filter, follow stream, statistics
+- **Firewall & IDS** — usul aturan pencegahan
+- **VPN & Proxy** — usul arsitektur aman
+
+## Tantangan Tambahan (Opsional)
+
+1. **Coba exploit** satu celah dengan Metasploit (di lab pribadi!) — misalnya \`vsftpd 2.3.4 backdoor\`
+2. **Setup Suricata** di Kali dan ulangi scan, lihat apakah terdeteksi
+3. **Buat aturan firewall** ufw untuk blok port berbahaya yang ditemukan
+4. **Visualisasikan** hasil scan dengan \` Legion\` atau \`Maltego\`
+
+> Catatan etika: Semua aktivitas HANYA di lab pribadi yang kamu miliki. Jangan pernah scan jaringan orang lain tanpa izin tertulis.`,
+    quiz: [
+      {
+        question: "Urutan tahapan network analysis yang paling logis?",
+        options: [
+          "Laporan → Scan → Discovery → Capture",
+          "Host discovery → Port scan → Vuln ID → Capture → Laporan",
+          "Capture → Laporan → Discovery → Scan",
+          "Vuln ID → Discovery → Laporan → Scan"
+        ],
+        answer: 1,
+        explanation: "Mulai dari luas ke sempit: temukan host dulu, lalu scan port tiap host, identifikasi kerentanan, capture untuk bukti, terakhir buat laporan."
+      },
+      {
+        question: "Pada nmap, flag apa yang menyimpan output dalam 3 format sekaligus (normal, XML, grepable)?",
+        options: [
+          "-oN",
+          "-oX",
+          "-oG",
+          "-oA"
+        ],
+        answer: 3,
+        explanation: "Flag \`-oA basename\` menyimpan output dalam 3 format: .nmap (normal), .xml (XML), .gnmap (grepable). Praktis untuk analisis lanjutan."
+      },
+      {
+        question: "Apa yang harus ada di bagian Rekomendasi Hardening laporan pentest?",
+        options: [
+          "Daftar tools yang dipakai",
+          "Langkah konkret perbaikan tiap temuan, prioritas, dan referensi CVE",
+          "Biaya proyek",
+          "Skor mahasiswa"
+        ],
+        answer: 1,
+        explanation: "Rekomendasi harus actionable: untuk tiap temuan, berikan langkah konkret (update versi X, matikan port Y, ganti protocol Z), dengan prioritas dan referensi CVE/patch."
+      }
+    ]
+  },
+
+  // ============================================
+  // LEVEL 3 - KRIPTOGRAFI
+  // ============================================
+  {
+    level: 3,
+    order: 1,
+    title: "Pengenalan Kriptografi",
+    slug: "pengenalan-kriptografi",
+    description: "Sejarah, konsep dasar, dan terminologi kriptografi: plaintext, ciphertext, key, algoritma.",
+    icon: "🔐",
+    isProject: false,
+    content: `# Pengenalan Kriptografi
+
+**Kriptografi** adalah ilmu dan seni mengamankan informasi dengan mengubahnya menjadi bentuk yang tidak bisa dibaca tanpa kunci. Kriptografi sudah dipakai sejak zaman Romawi dan masih jadi fondasi keamanan digital.
+
+## Sejarah Singkat
+
+\`\`\`text
+~50 SM  → Caesar Cipher (substitusi alfabet, geser 3)
+800 M   → Al-Kindi menemukan frequency analysis (broke Caesar)
+1586    → Vigenère Cipher (polialfabetis, "le chiffre indéchiffrable")
+1854    → Playfair Cipher (substitusi digram)
+WWII    → Enigma (Jerman) dikalahkan Alan Turing di Bletchley Park
+1949    → Shannon: "Communication Theory of Secrecy Systems"
+1976    → Diffie-Hellman key exchange (revolusi public-key)
+1977    → RSA algoritma & DES standar
+2001    → AES menggantikan DES
+\`\`\`
+
+## Terminologi Dasar
+
+\`\`\`text
+Plaintext  → pesan asli yang bisa dibaca ("HALO DUNIA")
+Ciphertext → pesan terenkripsi ("KDOC GRQLD")
+Key (Kunci)→ rahasia untuk enkripsi/dekripsi
+Cipher     → algoritma enkripsi
+Encrypt    → proses plaintext → ciphertext
+Decrypt    → proses ciphertext → plaintext
+Cryptanalysis → upaya memecahkan tanpa key
+Kerckhoffs's Principle → keamanan ada pada key, bukan algoritma
+\`\`\`
+
+## Prinsip Kerckhoffs
+
+> Sistem kriptografi harus tetap aman meskipun semua detail algoritmanya publik. Keamanan hanya bergantung pada kerahasiaan **key**.
+
+Inilah mengapa AES, RSA, SHA — semua algoritma publik. Tidak ada "security by obscurity" yang baik.
+
+## Caesar Cipher — Contoh Klasik
+
+Geser tiap huruf 3 posisi:
+
+\`\`\`text
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+↓
+D E F G H I J K L M N O P Q R S T U V W X Y Z A B C
+
+HELLO → KHOOR
+\`\`\`
+
+Implementasi Python:
+
+\`\`\`python
+def caesar_encrypt(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - base + shift) % 26 + base)
+        else:
+            result += char
+    return result
+
+def caesar_decrypt(text, shift):
+    return caesar_encrypt(text, -shift)
+
+cipher = caesar_encrypt("HELLO WORLD", 3)
+print(cipher)              # KHOOR ZRUOG
+print(caesar_decrypt(cipher, 3))  # HELLO WORLD
+\`\`\`
+
+Caesar cipher sangat lemah — hanya 26 kemungkinan key, bisa di-brute force dalam milidetik.
+
+## Tipe Modern Kriptografi
+
+\`\`\`text
+1. Symmetric   → 1 key untuk encrypt & decrypt (AES, DES)
+2. Asymmetric  → pasangan key public & private (RSA, ECC)
+3. Hash        → satu arah, tidak bisa didekripsi (SHA-256)
+4. Digital Sig → tanda tangan dengan asymmetric + hash
+5. Key Exchange→ tukar key aman via channel publik (Diffie-Hellman)
+\`\`\`
+
+## Aplikasi Kriptografi di Dunia Nyata
+
+\`\`\`text
+HTTPS/TLS        → enkripsi web browsing
+SSH              → remote shell aman
+VPN              → tunnel terenkripsi
+Email PGP/S-MIME → enkripsi email
+Signal/WhatsApp  → end-to-end chat encryption
+Blockchain       → hash transaksi + signature
+Password storage → hash (bcrypt, argon2)
+Digital cert     → identitas situs via PKI
+\`\`\`
+
+## Aturan Emas
+
+\`\`\`text
+1. Jangan pernah buat algoritma kriptografi sendiri untuk produksi
+2. Pakai library yang sudah teruji (OpenSSL, libsodium, BouncyCastle)
+3. Jangan hardcode key di source code
+4. Key management > algoritma kuat (key bocor = game over)
+5. Selalu pakai mode operasi yang aman (GCM, CBC-MAC) bukan ECB
+6. IV/nonce harus unik dan acak, JANGAN reuse
+\`\`\`
+
+## Layer of Cryptography
+
+\`\`\`text
+Mathematics → Number theory, finite fields, elliptic curves
+Algorithms  → AES, RSA, SHA-256, ECDH
+Protocols   → TLS, SSH, IPsec, Signal protocol
+Applications→ Browser, VPN, banking, messaging
+\`\`\`
+
+## Cryptanalysis (Serangan Kriptografi)
+
+\`\`\`text
+Brute force      → coba semua key
+Frequency analysis → analisis pola huruf (untuk klasik)
+Known-plaintext  → punya plaintext & ciphertext-nya
+Chosen-plaintext → bisa pilih plaintext untuk di-encrypt
+Side-channel     → ukur power/time/EM untuk tebak key
+Quantum          → Shor's algorithm mengancam RSA & ECC
+\`\`\`
+
+Inilah mengapa kita perlu **post-quantum cryptography** — algoritma yang tahan serangan komputer kuantum.
+
+## Yang Akan Dipelajari di Level Ini
+
+Level 3 akan membahas secara mendalam:
+
+1. **Symmetric encryption** (AES, mode operasi)
+2. **Asymmetric encryption** (RSA, ECC, key exchange)
+3. **Hash function** (SHA, MD5, collision)
+4. **Digital signature** (RSA sig, DSA, ECDSA)
+5. **PKI & certificate** (CA, X.509, TLS)
+6. **Password security** (salt, bcrypt, argon2)
+7. **Steganography** (sembunyikan data di media)
+8. **Project: encrypt/decrypt tool**`,
+    quiz: [
+      {
+        question: "Apa yang dimaksud dengan Kerckhoffs's Principle?",
+        options: [
+          "Algoritma kriptografi harus dirahasiakan",
+          "Sistem tetap aman meski algoritma publik, keamanan ada pada key",
+          "Key harus sependek mungkin",
+          "Setiap sistem harus pakai algoritma sendiri"
+        ],
+        answer: 1,
+        explanation: "Kerckhoffs's Principle: keamanan sistem kriptografi hanya bergantung pada kerahasiaan key, bukan algoritma. Inilah dasar kriptografi modern — algoritma publik, key rahasia."
+      },
+      {
+        question: "Mengapa Caesar Cipher tidak aman?",
+        options: [
+          "Karena menggunakan huruf alfabet",
+          "Hanya 26 kemungkinan key, mudah di-brute force",
+          "Karena sudah sangat lama",
+          "Karena tidak bisa di-decrypt"
+        ],
+        answer: 1,
+        explanation: "Caesar Cipher hanya punya 26 kemungkinan shift (0-25), sehingga brute force dalam milidetik. Frequency analysis juga langsung memecahkannya."
+      },
+      {
+        question: "Manakah yang BUKAN tipe kriptografi modern?",
+        options: [
+          "Symmetric encryption",
+          "Asymmetric encryption",
+          "Hash function",
+          "Caesar encryption"
+        ],
+        answer: 3,
+        explanation: "Caesar Cipher adalah kriptografi klasik, bukan modern. Symmetric (AES), Asymmetric (RSA), dan Hash (SHA-256) adalah kriptografi modern."
+      }
+    ]
+  },
+  {
+    level: 3,
+    order: 2,
+    title: "Symmetric Encryption",
+    slug: "symmetric-encryption",
+    description: "Kriptografi simetris: AES, mode operasi (ECB/CBC/GCM), dan implementasi praktis.",
+    icon: "🔑",
+    isProject: false,
+    content: `# Symmetric Encryption
+
+**Symmetric encryption** menggunakan **satu key yang sama** untuk enkripsi dan dekripsi. Inilah tipe kriptografi paling cepat dan paling banyak dipakai untuk enkripsi data dalam jumlah besar.
+
+## Karakteristik
+
+\`\`\`text
+Kecepatan    : Cepat (10-100x lebih cepat dari asymmetric)
+Key          : Sama untuk encrypt & decrypt (shared secret)
+Distribusi   : Sulit — harus kirim key via channel aman
+Use case     : Enkripsi file, disk, database, traffic TLS (setelah handshake)
+\`\`\`
+
+## Algoritma Symmetric Populer
+
+\`\`\`text
+AES-128/192/256 → Standar sejak 2001, sangat aman, paling umum
+ChaCha20        → Stream cipher, cepat di mobile (no AES-NI)
+3DES            → Lama, sudah deprecated (2024 discontinue)
+DES             → 56-bit, TIDAK AMAN, jangan pakai
+Blowfish        → 64-bit block, sudah tua
+Twofish         → Finalis AES, masih aman
+\`\`\`
+
+## Block Cipher vs Stream Cipher
+
+\`\`\`text
+Block Cipher → enkripsi per blok (AES: 128-bit/block)
+              butuh "mode operasi" untuk data > 1 blok
+
+Stream Cipher → enkripsi per byte/bit, XOR dengan keystream
+               (ChaCha20, RC4 [deprecated])
+\`\`\`
+
+## Mode Operasi AES
+
+Mode menentukan cara blok-blok dirangkai. **Pilih mode yang AMAN**:
+
+\`\`\`text
+ECB  → JANGAN PAKAI! Pattern plaintext kelihatan di ciphertext
+CBC  → OK dengan IV acak, tapi tidak ada integritas
+CTR  → OK, parallelisable, tapi hati-hati nonce reuse
+GCM  → REKOMENDASI! Enkripsi + otentikasi (AEAD)
+CCM  → OK, dipakai di wireless (WPA2)
+\`\`\`
+
+## Bahaya ECB Mode
+
+ECB mengenkripsi tiap blok identik → hasilnya identik. Pattern gambar tetap kelihatan:
+
+\`\`\`text
+Plaintext  (gambar penguin):  ▓▓▓▒▒▒▓▓▓
+                            ▓▓▒▒░░▒▒▓▓
+                            ▓▒▒░█░░▒▓
+
+Ciphertext ECB:              ◆◆◆◇◇◇◆◆◆
+                            ◆◆◇◇○○◇◇◆◆
+                            ◆◇◇○■○○◇◆   ← pattern penguin masih kelihatan!
+\`\`\`
+
+## Implementasi AES-GCM dengan Python (cryptography)
+
+\`\`\`python
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+import os
+
+# Generate key (256-bit) dan nonce (96-bit)
+key = AESGCM.generate_key(bit_length=256)
+nonce = os.urandom(12)
+aesgcm = AESGCM(key)
+
+# Encrypt
+plaintext = b"Halo, ini pesan rahasia dari Andi"
+ciphertext = aesgcm.encrypt(nonce, plaintext, associated_data=None)
+print("Ciphertext (hex):", ciphertext.hex())
+
+# Decrypt
+decrypted = aesgcm.decrypt(nonce, ciphertext, associated_data=None)
+print("Decrypted:", decrypted.decode())
+\`\`\`
+
+GCM memberikan **enkripsi + otentikasi (AEAD)** — jika ciphertext dimodifikasi, decrypt akan error. Ini penting untuk mencegah tampering.
+
+## Implementasi AES-CBC dengan OpenSSL CLI
+
+\`\`\`bash
+# Generate key & IV
+KEY=$(openssl rand -hex 32)   # 256-bit
+IV=$(openssl rand -hex 16)    # 128-bit
+
+# Encrypt file
+echo "Pesan rahasia" > pesan.txt
+openssl enc -aes-256-cbc -K "$KEY" -iv "$IV" \\
+  -in pesan.txt -out pesan.enc
+
+# Decrypt
+openssl enc -d -aes-256-cbc -K "$KEY" -iv "$IV" \\
+  -in pesan.enc -out pesan.dec
+cat pesan.dec
+
+# Lihat hasil hexdump
+xxd pesan.enc
+\`\`\`
+
+## Permasalahan Distribusi Key
+
+Karena sender & receiver butuh key yang sama, bagaimana cara mengirim key tanpa disadap?
+
+\`\`\`text
+Solusi:
+1. Asymmetric encryption untuk kirim symmetric key (hybrid encryption)
+   → TLS pakai cara ini: RSA/ECDH tukar key, lalu AES untuk data
+
+2. Diffie-Hellman Key Exchange
+   → Dua pihak setuju shared secret tanpa pernah kirim via channel
+
+3. Pre-shared key (PSK)
+   → VPN WireGuard pakai ini; tapi butuh pertemuan fisik/secure channel
+
+4. Key Derivation Function (KDF)
+   → Password → key (PBKDF2, scrypt, argon2)
 \`\`\`
 
 ## Aturan Penting
 
-- Satu halaman hanya **satu \`<main>\`** dan idealnya **satu \`<h1>\`**
-- \`<section>\` biasanya punya **heading** di dalamnya
-- \`<article>\` harus bisa **berdiri sendiri** (RSS, copy-paste)
-- \`<header>\` dan \`<footer>\` bisa ada beberapa (per section)
-- Tetap gunakan \`<div>\` untuk styling bila tidak ada elemen semantic yang cocok
+\`\`\`text
+1. IV/nonce HARUS unik per key. Reuse = catastrophic failure (CTR/GCM)
+2. Jangan pakai ECB kecuali untuk enkripsi 1 block saja
+3. Pakai AEAD (GCM, ChaCha20-Poly1305) supaya ada integritas
+4. Jangan reuse key untuk banyak session
+5. Rotate key secara berkala
+6. Key storage: HSM/KMS, bukan file plaintext
+\`\`\`
 
-> Semantic HTML bukan sekadar tren — ini cara membuat web yang lebih baik untuk semua.`,
-    quiz: [
-      {
-        question: "Apa manfaat utama menggunakan semantic HTML?",
-        options: [
-          "Membuat halaman lebih cepat dimuat",
-          "Meningkatkan accessibility, SEO, dan keterbacaan kode",
-          "Mengurangi ukuran file HTML",
-          "Mengganti fungsi CSS"
-        ],
-        answer: 1,
-        explanation: "Semantic HTML memberi makna pada struktur: membantu screen reader (accessibility), search engine (SEO), dan developer membaca kode."
-      },
-      {
-        question: "Elemen semantic mana yang tepat untuk konten artikel blog yang mandiri?",
-        options: ["<section>", "<div>", "<article>", "<aside>"],
-        answer: 2,
-        explanation: "<article> untuk konten mandiri yang bisa berdiri sendiri seperti blog post, berita, atau komentar. <section> untuk pengelompokan tematik."
-      },
-      {
-        question: "Berapa jumlah elemen <main> yang ideal dalam satu halaman?",
-        options: ["Tidak boleh ada", "Satu", "Maksimal 3", "Bebas"],
-        answer: 1,
-        explanation: "Satu halaman sebaiknya hanya punya satu <main> yang berisi konten utama, sesuai spec HTML5."
-      }
-    ]
-  },
-  {
-    level: 2,
-    order: 9,
-    title: "Project: Landing Page",
-    slug: "project-landing-page",
-    description: "Proyek membangun landing page sederhana dengan HTML semantic, gambar, link, dan form.",
-    icon: "🚀",
-    isProject: true,
-    content: `# Project: Landing Page
-
-Saatnya mengaplikasikan semua yang telah kamu pelajari di Level 2! Kamu akan membangun **landing page** utuh menggunakan HTML semantic. Proyek ini menguji pemahaman tentang struktur HTML, heading, link, gambar, list, dan form.
-
-## Tujuan Proyek
-
-Bangun landing page untuk produk/layanan fiktif. Contoh: kursus online, aplikasi mobile, atau jasa digital. Halaman harus mencakup semua elemen HTML yang telah dipelajari.
-
-## Spesifikasi
-
-Landing page harus memiliki bagian berikut:
-
-1. **Header** dengan logo dan navigasi
-2. **Hero section** — judul besar, deskripsi, dan tombol CTA
-3. **Features section** — daftar fitur dengan ikon (3-6 fitur)
-4. **Pricing section** — tabel harga paket
-5. **Testimonial section** — kutipan pelanggan
-6. **Contact form** — form pendaftaran/kontak
-7. **Footer** dengan link dan copyright
-
-## Struktur File
-
-Buat struktur folder berikut:
+## Brute Force Estimasi Waktu
 
 \`\`\`text
-landing-page/
-├── index.html
-├── css/
-│   └── style.css        (kosong dulu, akan diisi Level 3)
-└── images/
-    ├── logo.png
-    ├── hero.jpg
-    └── feature-icon.svg
+Key size | Kombinasi       | Estimasi brute force (10^18 ops/detik)
+---------|-----------------|----------------------------------------
+56-bit   | 7.2 × 10^16     | beberapa menit (DES)
+128-bit  | 3.4 × 10^38     | ~10 miliar tahun
+192-bit  | 6.3 × 10^57     | tidak feasible
+256-bit  | 1.2 × 10^77     | tidak feasible (lebih banyak dari atom di alam semesta)
 \`\`\`
 
-## Kerangka Kode Awal
+AES-256 aman bahkan dari komputer kuantum (Grover hanya mengurangi efektif ke 128-bit).
 
-Berikut kerangka yang bisa kamu kembangkan:
+## Stream Cipher: ChaCha20-Poly1305
 
-\`\`\`html
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nama Produk - Solusi Modern</title>
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <img src="images/logo.png" alt="Logo Produk" width="120">
-    <nav>
-      <ul>
-        <li><a href="#features">Fitur</a></li>
-        <li><a href="#pricing">Harga</a></li>
-        <li><a href="#contact">Kontak</a></li>
-      </ul>
-    </nav>
-  </header>
+Alternatif AES untuk perangkat tanpa AES-NI (mobile lama, IoT):
 
-  <!-- Hero Section -->
-  <section id="hero">
-    <h1>Solusi Terbaik untuk Kebutuhanmu</h1>
-    <p>Deskripsi singkat tentang produk dan manfaatnya.</p>
-    <a href="#contact" target="_blank" rel="noopener">Coba Gratis</a>
-  </section>
+\`\`\`python
+from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
+import os
 
-  <!-- Features Section -->
-  <section id="features">
-    <h2>Fitur Unggulan</h2>
-    <ul>
-      <li>Fitur 1: Deskripsi singkat</li>
-      <li>Fitur 2: Deskripsi singkat</li>
-      <li>Fitur 3: Deskripsi singkat</li>
-    </ul>
-  </section>
+key = ChaCha20Poly1305.generate_key()
+nonce = os.urandom(12)
+cipher = ChaCha20Poly1305(key)
 
-  <!-- Pricing Section -->
-  <section id="pricing">
-    <h2>Paket Harga</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Fitur</th>
-          <th>Basic</th>
-          <th>Pro</th>
-          <th>Enterprise</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Storage</td>
-          <td>1 GB</td>
-          <td>10 GB</td>
-          <td>Unlimited</td>
-        </tr>
-        <tr>
-          <td>Harga/bulan</td>
-          <td>Rp 50.000</td>
-          <td>Rp 150.000</td>
-          <td>Rp 500.000</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- Contact Form -->
-  <section id="contact">
-    <h2>Hubungi Kami</h2>
-    <form action="/submit" method="POST">
-      <label for="name">Nama:</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="message">Pesan:</label>
-      <textarea id="message" name="message" rows="4"></textarea>
-
-      <button type="submit">Kirim</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 Nama Produk. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+ct = cipher.encrypt(nonce, b"pesan rahasia", None)
+pt = cipher.decrypt(nonce, ct, None)
 \`\`\`
 
-## Konsep yang Diuji
+## Use Case Modern
 
-Proyek ini mengharuskanmu menerapkan:
+- **HTTPS/TLS** → AES-GCM atau ChaCha20-Poly1305 untuk session
+- **Disk encryption** → AES-XTS (BitLocker, LUKS, FileVault)
+- **Database** → AES-GCM per cell/row
+- **Messaging** → Signal Protocol: AES-CBC + HMAC (sebelum Double Ratchet)
+- **VPN** → WireGuard pakai ChaCha20Poly1305
 
-- **Semantic HTML**: \`<header>\`, \`<nav>\`, \`<section>\`, \`<footer>\`
-- **Heading hirarkis**: \`<h1>\` untuk judul utama, \`<h2>\` untuk section
-- **Link**: internal (\`#features\`) dan external
-- **Gambar**: dengan \`alt\` yang deskriptif
-- **List**: \`<ul>\` untuk navigasi dan fitur
-- **Table**: untuk perbandingan harga
-- **Form**: dengan berbagai \`type\` input dan \`<label>\`
+## Yang Harus Diingat
 
-## Tantangan Tambahan
-
-Selesai dengan dasar? Coba tantangan berikut:
-
-1. Tambahkan **testimonial section** dengan \`<article>\` untuk setiap testimoni
-2. Tambahkan **FAQ section** dengan \`<dl>\` (description list)
-3. Sertakan **gambar** di hero section dan setiap fitur
-4. Tambahkan **metadata SEO** di \`<head>\`: \`<meta name="description">\`
-5. Validasi HTML di [W3C Validator](https://validator.w3.org/)
-
-## Kriteria Penilaian Diri
-
-- ✅ Semua elemen semantic digunakan dengan benar
-- ✅ Setiap input form punya \`<label>\` dan \`name\`
-- ✅ Semua gambar punya \`alt\` deskriptif
-- ✅ Heading tersusun hirarkis (h1 → h2 → h3)
-- ✅ Tidak ada elemen \`<div>\` yang seharusnya elemen semantic
-- ✅ Kode rapi dan ter-indentasi konsisten
-
-> Proyek ini adalah fondasi portofoliomu. Di Level 3, kita akan percantik dengan CSS!`,
+> "Don't roll your own crypto." Pakai library standar: \`cryptography\` (Python), \`libsodium\`, \`BouncyCastle\` (Java), \`ring\` (Rust).`,
     quiz: [
       {
-        question: "Apa elemen semantic yang tepat untuk bagian navigasi utama di landing page?",
-        options: ["<div class='nav'>", "<nav>", "<menu>", "<navigation>"],
-        answer: 1,
-        explanation: "<nav> adalah elemen semantic khusus untuk navigasi utama, membantu accessibility dan SEO."
-      },
-      {
-        question: "Mengapa setiap input di form landing page harus punya <label>?",
+        question: "Mengapa mode ECB tidak boleh dipakai untuk enkripsi data lebih dari 1 blok?",
         options: [
-          "Agar tampilan form lebih cantik",
-          "Untuk accessibility dan agar klik label otomatis fokus ke input",
-          "Karena tanpa label form tidak bisa submit",
-          "Tidak penting, hanya formalitas"
+          "Karena ECB lambat",
+          "Karena blok plaintext identik menghasilkan ciphertext identik, pattern kelihatan",
+          "Karena ECB butuh key lebih panjang",
+          "Karena ECB hanya untuk stream cipher"
         ],
         answer: 1,
-        explanation: "Label yang di-link via for-id membantu screen reader dan membuat klik label otomatis fokus ke input, meningkatkan usability dan accessibility."
+        explanation: "ECB mengenkripsi tiap blok independen. Blok plaintext yang sama → ciphertext yang sama, sehingga pattern (misal gambar) masih kelihatan di ciphertext. Pakai CBC/CTR/GCM."
       },
       {
-        question: "Apa elemen terbaik untuk menampilkan perbandingan paket harga di landing page?",
-        options: ["<ul>", "<table>", "<div>", "<section>"],
-        answer: 1,
-        explanation: "Perbandingan paket harga adalah data tabular (baris-kolom), jadi <table> dengan <thead>, <tbody> adalah pilihan tepat."
-      }
-    ]
-  },
-
-  // ============================================
-  // LEVEL 3 - CSS
-  // ============================================
-  {
-    level: 3,
-    order: 1,
-    title: "Dasar CSS",
-    slug: "dasar-css",
-    description: "Mengenal CSS, cara menambahkannya ke HTML, dan sintaks dasar selector-property-value.",
-    icon: "🎨",
-    isProject: false,
-    content: `# Dasar CSS
-
-**CSS** (Cascading Style Sheets) adalah bahasa untuk mendesain tampilan halaman web. Jika HTML adalah **struktur**, maka CSS adalah **gaya** — warna, font, layout, animasi, dan lain-lain.
-
-## Apa Itu CSS?
-
-CSS bekerja dengan **memilih elemen** HTML lalu **menerapkan style**. Tanpa CSS, halaman web terlihat polos seperti dokumen notepad. Dengan CSS, kamu bisa membuat web yang indah dan modern.
-
-## Cara Menambahkan CSS ke HTML
-
-Ada 3 cara menggunakan CSS:
-
-### 1. Inline CSS (tidak disarankan)
-
-Style langsung di atribut \`style\` elemen:
-
-\`\`\`html
-<p style="color: blue; font-size: 18px;">Teks biru besar</p>
-\`\`\`
-
-### 2. Internal CSS
-
-CSS di tag \`<style>\` dalam \`<head>\`:
-
-\`\`\`html
-<head>
-  <style>
-    p {
-      color: blue;
-      font-size: 18px;
-    }
-  </style>
-</head>
-\`\`\`
-
-### 3. External CSS (paling disarankan)
-
-CSS di file \`.css\` terpisah, di-link via \`<link>\`:
-
-\`\`\`html
-<head>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-\`\`\`
-
-**Kenapa external?** Karena bisa dipakai banyak halaman, lebih mudah dipelihara, dan browser bisa cache file.
-
-## Sintaks Dasar CSS
-
-\`\`\`css
-selector {
-  property: value;
-}
-\`\`\`
-
-Contoh:
-
-\`\`\`css
-h1 {
-  color: #ff0000;
-  font-size: 32px;
-  text-align: center;
-}
-
-p {
-  color: #333333;
-  line-height: 1.6;
-}
-\`\`\`
-
-- **Selector**: \`h1\`, \`p\` — elemen apa yang di-style
-- **Property**: \`color\`, \`font-size\` — apa yang diubah
-- **Value**: \`#ff0000\`, \`32px\` — nilai properti
-- **Declaration block**: antara \`{ }\`
-- **Declaration**: satu pasang property:value (diakhiri \`;\`)
-
-## Komentar CSS
-
-\`\`\`css
-/* Ini komentar satu baris */
-
-/*
-  Komentar
-  multi-baris
-*/
-\`\`\`
-
-## Cascading: Aturan Prioritas
-
-CSS namanya **Cascading** karena style bisa ditimpa. Aturan prioritas:
-
-1. **Inline** (\`style="..."\`) — tertinggi
-2. **Internal & External** — urutan deklarasi terakhir menang
-3. **Specificity** — selector lebih spesifik menang (\`#id\` > \`.class\` > \`tag\`)
-4. \`!important\` — paling tinggi (tapi hindari)
-
-\`\`\`css
-p { color: black; }
-.text { color: blue; }       /* menang: class lebih spesifik */
-#intro { color: red; }       /* menang: id paling spesifik */
-\`\`\`
-
-## Contoh Lengkap
-
-\`\`\`css
-/* Reset margin default browser */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-/* Style heading */
-h1 {
-  color: #2c3e50;
-  text-align: center;
-}
-
-/* Style paragraf */
-p {
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto 20px;
-}
-\`\`\`
-
-## Tips untuk Pemula
-
-- Selalu gunakan **external CSS** untuk proyek nyata
-- Akhiri setiap deklarasi dengan **titik koma** (\`;\`)
-- Gunakan ** komentar** untuk dokumentasi
-- **Hindari** \`!important\` kecuali sangat perlu
-- Cek tampilan di browser setiap perubahan
-
-> CSS adalah seni. Banyak berlatih, banyak bereksperimen, maka kamu akan jago!`,
-    quiz: [
-      {
-        question: "Apa cara terbaik menambahkan CSS ke proyek web?",
+        question: "Mode AES yang direkomendasikan karena memberikan enkripsi + otentikasi (AEAD)?",
         options: [
-          "Inline CSS di setiap elemen",
-          "Internal CSS di tag <style>",
-          "External CSS di file .css terpisah yang di-link dari HTML",
-          "Tidak perlu CSS, biarkan browser default"
+          "ECB",
+          "CBC",
+          "GCM",
+          "CTR"
         ],
         answer: 2,
-        explanation: "External CSS paling disarankan karena bisa dipakai banyak halaman, mudah dipelihara, dan bisa di-cache browser."
+        explanation: "GCM (Galois/Counter Mode) adalah AEAD — selain enkripsi, juga otentikasi ciphertext. Jika ciphertext diubah, dekripsi gagal. Mencegah tampering."
       },
       {
-        question: "Dalam sintaks CSS, apa yang disebut 'selector'?",
+        question: "Masalah utama distribusi key pada symmetric encryption?",
         options: [
-          "Atribut HTML",
-          "Bagian yang menentukan elemen HTML mana yang akan di-style",
-          "Nilai properti CSS",
-          "Nama file CSS"
+          "Key terlalu pendek",
+          "Key yang sama untuk encrypt/decrypt harus dikirim via channel aman",
+          "Algoritma terlalu lambat",
+          "Key harus di-update setiap detik"
         ],
         answer: 1,
-        explanation: "Selector adalah bagian sebelum { } yang menentukan elemen HTML mana yang akan diberi style, misalnya 'h1' atau '.class'."
-      },
-      {
-        question: "Urutan prioritas CSS dari tertinggi ke terendah adalah...",
-        options: [
-          "External > Internal > Inline",
-          "Inline > External > Internal",
-          "Inline > Internal & External (dengan specificity)",
-          "Tag selector > class selector > ID selector"
-        ],
-        answer: 2,
-        explanation: "Inline CSS paling tinggi, lalu internal/external bergantung specificity (#id > .class > tag) dan urutan deklarasi."
-      }
-    ]
-  },
-  {
-    level: 3,
-    order: 2,
-    title: "Selector",
-    slug: "css-selector",
-    description: "Menguasai berbagai jenis selector: type, class, ID, attribute, dan combinators.",
-    icon: "🎯",
-    isProject: false,
-    content: `# Selector
-
-**Selector** adalah pola untuk memilih elemen HTML yang akan di-style. Menguasai selector adalah kunci untuk menulis CSS yang efisien dan tepat sasaran.
-
-## Type Selector (Tag)
-
-Memilih berdasarkan nama tag HTML:
-
-\`\`\`css
-p {
-  color: #333;
-}
-
-h1, h2, h3 {
-  font-family: Georgia, serif;
-}
-
-a {
-  color: blue;
-  text-decoration: none;
-}
-\`\`\`
-
-## Class Selector
-
-Memilih elemen dengan class tertentu, diawali **titik** (\`.\`):
-
-\`\`\`css
-.button {
-  background-color: blue;
-  padding: 10px 20px;
-}
-
-.card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-\`\`\`
-
-Gunakan di HTML:
-
-\`\`\`html
-<button class="button">Klik</button>
-<div class="card">Konten card</div>
-\`\`\`
-
-Satu elemen bisa punya beberapa class:
-
-\`\`\`html
-<button class="button primary">Klik</button>
-\`\`\`
-
-## ID Selector
-
-Memilih elemen dengan ID tertentu, diawali **hash** (\`#\`):
-
-\`\`\`css
-#header {
-  background-color: #333;
-  color: white;
-}
-\`\`\`
-
-\`\`\`html
-<header id="header">...</header>
-\`\`\`
-
-> **Penting**: ID harus **unik** per halaman. Untuk style berulang, gunakan class, bukan ID.
-
-## Universal Selector
-
-Memilih **semua elemen**, dengan \`*\`:
-
-\`\`\`css
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-\`\`\`
-
-## Attribute Selector
-
-Memilih berdasarkan atribut:
-
-\`\`\`css
-/* Semua elemen dengan atribut type */
-[type] { border: 1px solid #ccc; }
-
-/* Input type text spesifik */
-[type="text"] { padding: 8px; }
-
-/* Link yang membuka tab baru */
-[target="_blank"] { color: red; }
-\`\`\`
-
-## Combinators
-
-### Descendant (spasi)
-
-Memilih **semua turunan**:
-
-\`\`\`css
-/* Semua <a> di dalam <nav> */
-nav a {
-  color: white;
-}
-\`\`\`
-
-### Child (>)
-
-Memilih **anak langsung** saja:
-
-\`\`\`css
-/* Hanya <li> anak langsung <ul> */
-ul > li {
-  list-style: none;
-}
-\`\`\`
-
-### Adjacent Sibling (+)
-
-Memilih elemen **tepat setelah** elemen lain:
-
-\`\`\`css
-/* Paragraf tepat setelah h1 */
-h1 + p {
-  font-size: 1.2em;
-  color: gray;
-}
-\`\`\`
-
-### General Sibling (~)
-
-Memilih **semua saudara** setelah elemen:
-
-\`\`\`css
-h2 ~ p {
-  margin-top: 10px;
-}
-\`\`\`
-
-## Pseudo-class
-
-Memilih elemen berdasarkan **state**:
-
-\`\`\`css
-a:link { color: blue; }       /* link belum dikunjungi */
-a:visited { color: purple; }  /* link sudah dikunjungi */
-a:hover { color: red; }       /* saat di-hover */
-a:active { color: orange; }   /* saat diklik */
-
-li:first-child { font-weight: bold; }
-li:last-child { border-bottom: none; }
-li:nth-child(odd) { background: #f4f4f4; }
-\`\`\`
-
-## Pseudo-element
-
-Memilih **bagian** elemen:
-
-\`\`\`css
-p::first-letter { font-size: 2em; }
-p::first-line { font-weight: bold; }
-
-/* Tambah konten sebelum/sesudah */
-.quote::before { content: '"'; }
-.quote::after { content: '"'; }
-\`\`\`
-
-## Specificity (Kekhususan)
-
-Ketika beberapa selector memilih elemen yang sama, yang **lebih spesifik** menang:
-
-\`\`\`text
-ID        = 100
-Class     = 10
-Tag       = 1
-\`\`\`
-
-Contoh:
-
-\`\`\`css
-#header .nav a { }  /* 100 + 10 + 1 = 111 */
-.nav a { }          /* 10 + 1 = 11 */
-a { }               /* 1 */
-\`\`\`
-
-## Tips Menulis Selector
-
-- **Gunakan class** sebagai pondasi styling (paling fleksibel)
-- Hindari **ID** untuk styling (terlalu spesifik, susah di-override)
-- Jangan selector **terlalu panjang** (\`.nav ul li a span\`) — susah dipelihara
-- Manfaatkan **pseudo-class** (\`:hover\`, \`:nth-child\`) untuk interaktivitas
-- Beri nama class **deskriptif** (\`.user-card\` bukan \`.box1\`)
-
-> Selector yang tepat = CSS yang efisien. Pelajari baik-baik!`,
-    quiz: [
-      {
-        question: "Apa simbol yang digunakan untuk memilih elemen berdasarkan class?",
-        options: ["# (hash)", ". (titik)", "* (bintang)", "> (lebih besar dari)"],
-        answer: 1,
-        explanation: "Class selector diawali titik (mis. .button). ID selector diawali hash (#header)."
-      },
-      {
-        question: "Apa perbedaan descendant selector (spasi) dan child selector (>)?",
-        options: [
-          "Tidak ada perbedaan",
-          "Descendant memilih semua turunan, child hanya anak langsung",
-          "Child memilih semua turunan, descendant hanya anak langsung",
-          "Keduanya memilih elemen di luar parent"
-        ],
-        answer: 1,
-        explanation: "Descendant (spasi) memilih semua turunan di semua level. Child (>) hanya memilih anak langsung dari parent."
-      },
-      {
-        question: "Pseudo-class mana yang aktif saat user mengarahkan kursor ke elemen?",
-        options: [":active", ":hover", ":focus", ":visited"],
-        answer: 1,
-        explanation: ":hover aktif saat kursor di atas elemen. :active saat diklik, :focus saat elemen terfokus, :visited untuk link yang sudah dikunjungi."
+        explanation: "Karena sender & receiver pakai key yang sama, key harus dibagikan via channel aman — inilah masalah distribusi key. Dipecahkan dengan asymmetric crypto (hybrid) atau Diffie-Hellman."
       }
     ]
   },
   {
     level: 3,
     order: 3,
-    title: "Warna & Font",
-    slug: "warna-font",
-    description: "Mengatur warna, background, font-family, font-size, dan tipografi pada halaman web.",
-    icon: "🌈",
+    title: "Asymmetric Encryption",
+    slug: "asymmetric-encryption",
+    description: "Kriptografi asimetris: RSA, ECC, Diffie-Hellman key exchange, dan konsep public/private key.",
+    icon: "🗝️",
     isProject: false,
-    content: `# Warna & Font
+    content: `# Asymmetric Encryption
 
-**Warna** dan **font** adalah dua aspek terpenting dalam desain web. Kombinasi yang baik membuat halaman terlihat profesional dan nyaman dibaca.
+**Asymmetric encryption** (public-key cryptography) menggunakan **sepasang key**: **public key** untuk enkripsi, **private key** untuk dekripsi. Inilah revolusi terbesar dalam kriptografi modern.
 
-## Cara Mendefinisikan Warna
-
-CSS mendukung beberapa format warna:
-
-\`\`\`css
-/* Named colors */
-color: red;
-color: tomato;
-color: cornflowerblue;
-
-/* HEX (paling umum) */
-color: #ff0000;     /* merah */
-color: #f00;        /* singkatan #ff0000 */
-color: #ff0000ff;   /* dengan alpha (transparansi) */
-
-/* RGB */
-color: rgb(255, 0, 0);
-color: rgba(255, 0, 0, 0.5);  /* alpha 0.5 */
-
-/* HSL (hue, saturation, lightness) */
-color: hsl(0, 100%, 50%);
-color: hsla(0, 100%, 50%, 0.5);
-\`\`\`
-
-## Properti Warna
-
-\`\`\`css
-.card {
-  color: #333;                    /* warna teks */
-  background-color: #f4f4f4;      /* warna background */
-  border: 1px solid #ddd;         /* warna border */
-}
-\`\`\`
-
-## Font Family
-
-Properti \`font-family\` mengatur jenis font:
-
-\`\`\`css
-body {
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  font-family: "Times New Roman", Georgia, serif;
-}
-
-.code {
-  font-family: "Courier New", monospace;
-}
-\`\`\`
-
-Browser akan coba font pertama, jika tidak ada, coba berikutnya. Selalu sediakan **fallback** (\`sans-serif\`, \`serif\`, \`monospace\`).
-
-## Kategori Font
+## Konsep Dasar
 
 \`\`\`text
-serif      → Times New Roman, Georgia (memiliki kaki)
-sans-serif → Arial, Helvetica, Roboto (tanpa kaki)
-monospace  → Courier New, Consolas (lebar sama)
-cursive    → Comic Sans, Brush Script
-fantasy    → Impact, fantasy fonts
+Public Key  → dibagikan ke siapa pun (untuk encrypt / verify signature)
+Private Key → RAHASIA, hanya pemilik (untuk decrypt / sign)
+
+Sifat matematis:
+  - Tidak bisa derive private key dari public key (komputasi sangat mahal)
+  - Apa yang di-encrypt dengan public key, hanya private key yang bisa decrypt
 \`\`\`
 
-## Font Size
+## Manfaat utama
 
-\`\`\`css
-h1 { font-size: 32px; }     /* pixel (fix) */
-h2 { font-size: 2em; }      /* relatif terhadap parent */
-p { font-size: 1rem; }      /* relatif terhadap root (html) */
-.small { font-size: 0.875rem; }
+1. **Tidak perlu kirim shared secret** — solved key distribution problem
+2. **Digital signature** — bukti otentik & non-repudiation
+3. **Key exchange aman** — Diffie-Hellman
+
+## Algoritma Asymmetric Populer
+
+\`\`\`text
+RSA        → Faktorisasi bilangan besar (2048/4096-bit)
+ECC        → Elliptic Curve (256-bit ≈ RSA 3072-bit, lebih ringkas)
+DH/DHE     → Diffie-Hellman key exchange
+ECDH       → Versi ECC dari Diffie-Hellman
+DSA/ECDSA  → Untuk signature (bukan encryption)
+EdDSA/Ed25519 → Modern signature, sangat cepat & aman
 \`\`\`
 
-- **px**: pixel absolut (16px = 1rem default)
-- **em**: relatif ke parent (bisa compound)
-- **rem**: relatif ke root (lebih konsisten)
+## RSA — Contoh Konseptual
 
-## Font Weight dan Style
+\`\`\`text
+1. Pilih 2 prime besar p, q (mis. 1024-bit each)
+2. n = p × q          (modulus)
+3. φ(n) = (p-1)(q-1)
+4. Pilih e (umumnya 65537) → public exponent
+5. d = e^(-1) mod φ(n) → private exponent
 
-\`\`\`css
-h1 { font-weight: bold; }      /* atau 700 */
-h2 { font-weight: 600; }       /* semi-bold */
-p { font-weight: normal; }     /* atau 400 */
+Public key  = (n, e)
+Private key = (n, d)
 
-em { font-style: italic; }
-strong { font-style: normal; font-weight: bold; }
+Encrypt: c = m^e mod n
+Decrypt: m = c^d mod n
 \`\`\`
 
-## Text Properties
+Keamanan RSA bergantung pada kesulitan **faktorisasi** n menjadi p dan q. Dengan n 2048-bit, faktorisasi belum feasible secara komersial.
 
-\`\`\`css
-p {
-  text-align: justify;         /* left, right, center, justify */
-  text-decoration: underline;  /* none, line-through, overline */
-  text-transform: uppercase;   /* lowercase, capitalize */
-  letter-spacing: 1px;         /* jarak antar huruf */
-  word-spacing: 2px;           /* jarak antar kata */
-  line-height: 1.6;            /* jarak antar baris */
-  text-indent: 20px;           /* indentasi baris pertama */
-}
+## Implementasi RSA dengan Python
+
+\`\`\`python
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import hashes
+
+# Generate keypair (4096-bit untuk produksi)
+private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+public_key = private_key.public_key()
+
+# Encrypt dengan public key
+pesan = b"Ini pesan rahasia untuk pemilik private key"
+ciphertext = public_key.encrypt(
+    pesan,
+    padding.OAEP(
+        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+        algorithm=hashes.SHA256(),
+        label=None
+    )
+)
+print("Ciphertext (hex):", ciphertext.hex()[:40], "...")
+
+# Decrypt dengan private key
+plaintext = private_key.decrypt(
+    ciphertext,
+    padding.OAEP(
+        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+        algorithm=hashes.SHA256(),
+        label=None
+    )
+)
+print("Decrypted:", plaintext.decode())
 \`\`\`
 
-## Menggunakan Google Fonts
+## Diffie-Hellman Key Exchange
 
-Tambahkan \`<link>\` di \`<head>\`:
+Dua pihak bisa setuju shared secret **tanpa pernah mengirimnya**:
 
-\`\`\`html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+\`\`\`text
+Alice & Bob setuju: prime p, generator g (publik)
+
+Alice: pilih a (rahasia), kirim A = g^a mod p
+Bob:   pilih b (rahasia), kirim B = g^b mod p
+
+Alice hitung: s = B^a mod p
+Bob   hitung: s = A^b mod p
+
+Keduanya dapat s yang sama! s = g^(ab) mod p
+Eavesdropper tahu A, B, g, p — tapi tidak bisa hitung a atau b (discrete log problem).
 \`\`\`
 
-Lalu pakai di CSS:
+## ECC (Elliptic Curve Cryptography)
 
-\`\`\`css
-body {
-  font-family: 'Roboto', sans-serif;
-}
+ECC memberikan keamanan sama dengan key yang jauh lebih kecil:
 
-h1 {
-  font-family: 'Playfair Display', serif;
-}
+\`\`\`text
+Symmetric | RSA        | ECC
+80-bit    | 1024-bit   | 160-bit
+128-bit   | 3072-bit   | 256-bit
+256-bit   | 15360-bit  | 512-bit
 \`\`\`
 
-## Contoh Tipografi Lengkap
+ECC cocok untuk perangkat dengan resource terbatas (IoT, mobile, smart card). Kurva populer: \`secp256k1\` (Bitcoin), \`Curve25519\` (Signal, SSH).
 
-\`\`\`css
-body {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #2d3748;
-  background-color: #ffffff;
-}
+## Hybrid Encryption (Yang Dipakai TLS)
 
-h1, h2, h3 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  color: #1a202c;
-  line-height: 1.2;
-}
+Karena symmetric cepat tapi susah distribusi key, dan asymmetric lambat tapi selesaikan distribusi → gabungkan keduanya:
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-
-a {
-  color: #3182ce;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
+\`\`\`text
+1. Client & server lakukan TLS handshake (asymmetric / ECDH)
+2. Hasilnya: shared secret → turunkan symmetric key (AES-256)
+3. Semua data selanjutnya di-encrypt dengan symmetric key
+4. Asymmetric hanya untuk handshake (< 1 detik)
 \`\`\`
 
-## Tips Desain
+Inilah yang dipakai HTTPS setiap kali kamu buka web.
 
-- Gunakan **maksimal 2-3 font** per halaman
-- **Kontras warna** cukup (teks gelap di bg terang, atau sebaliknya)
-- Gunakan **rem** untuk font-size (aksesibilitas)
-- **Line-height** 1.4-1.8 paling nyaman dibaca
-- Tes dengan **Color Contrast Checker** untuk aksesibilitas
+## Generasi Key Pair dengan OpenSSL
 
-> Tipografi yang baik adalah 90% dari desain web yang baik.`,
+\`\`\`bash
+# Generate RSA private key 2048-bit
+openssl genrsa -out private.pem 2048
+
+# Extract public key
+openssl rsa -in private.pem -pubout -out public.pem
+
+# Lihat detail private key
+openssl rsa -in private.pem -text -noout | head -20
+
+# Generate ECDSA key (curve prime256v1)
+openssl ecparam -name prime256v1 -genkey -noout -out ec-private.pem
+
+# Generate Ed25519 key
+openssl genpkey -algorithm Ed25519 -out ed25519.pem
+\`\`\`
+
+## Use Case Asymmetric
+
+\`\`\`text
+HTTPS/TLS handshake → ECDHE-RSA untuk key exchange + signature
+SSH                 → RSA/Ed25519 untuk autentikasi server & user
+PGP/GPG email       → RSA/ECC untuk encrypt & sign email
+Git commit signing  → Ed25519 atau RSA
+Code signing        → Microsoft Authenticode, Apple codesign
+SSL/TLS certificate → RSA/ECDSA untuk sign cert oleh CA
+Crypto wallet       → secp256k1 (ECC) di Bitcoin/Ethereum
+\`\`\`
+
+## Ancaman Kuantum
+
+Komputer kuantum dengan algoritma **Shor** bisa memecahkan:
+- Faktorisasi (RSA) → cepat
+- Discrete log (DH, ECC) → cepat
+
+\`\`\`text
+Status saat ini:
+- RSA-2048 masih aman (komputer kuantum belum cukup besar)
+- Tapi "harvest now, decrypt later" menjadi ancaman jangka panjang
+- NIST sudah standardisasi algoritma post-quantum:
+  - ML-KEM (Kyber) untuk key encapsulation
+  - ML-DSA (Dilithium) untuk signature
+- TLS 1.3 + post-quantum hybrid sudah diuji (Chrome, Cloudflare)
+\`\`\`
+
+## Aturan Penting
+
+\`\`\`text
+1. Private key JANGAN PERNAH dibagikan, bahkan ke admin
+2. Pakai key size yang aman: RSA ≥ 2048 (≥ 4096 untuk jangka panjang)
+3. Untuk ECC, pakai kurva standar (Curve25519, secp256r1)
+4. Selalu pakai padding scheme yang aman (OAEP, PSS) — bukan "textbook RSA"
+5. Rotate key secara berkala (rekomendasi 1-2 tahun untuk cert)
+6. Revoke key yang dicurigai bocor (CRL, OCSP)
+7. Untuk encryption > panjang block, pakai hybrid (asymmetric + symmetric)
+\`\`\`
+
+## RSA dalam Bash (Encrypt File Kecil)
+
+\`\`\`bash
+# Encrypt dengan public key (max ~245 byte untuk RSA-2048 OAEP-SHA256)
+echo "Pesan rahasia pendek" | openssl pkeyutl -encrypt \\
+  -pubin -inkey public.pem \\
+  -pkeyopt rsa_padding_mode:oaep \\
+  -pkeyopt rsa_oaep_md:sha256 \\
+  -out pesan.enc
+
+# Decrypt dengan private key
+openssl pkeyutl -decrypt \\
+  -inkey private.pem \\
+  -pkeyopt rsa_padding_mode:oaep \\
+  -pkeyopt rsa_oaep_md:sha256 \\
+  -in pesan.enc
+\`\`\``,
     quiz: [
       {
-        question: "Format warna mana yang paling umum digunakan di CSS?",
-        options: ["Named colors (red, blue)", "HEX (#ff0000)", "RGB (rgb(255,0,0))", "HSL"],
-        answer: 1,
-        explanation: "HEX (#rrggbb) paling umum karena ringkas dan didukung luas. RGB/HSL juga populer terutama saat butuh alpha."
-      },
-      {
-        question: "Apa perbedaan em dan rem untuk font-size?",
+        question: "Pada asymmetric encryption, key mana yang dipakai untuk MENDEKRIPSI pesan?",
         options: [
-          "Tidak ada perbedaan",
-          "em relatif terhadap parent, rem relatif terhadap root (html)",
-          "rem lebih besar dari em",
-          "em hanya untuk heading, rem untuk paragraf"
+          "Public key",
+          "Private key",
+          "Shared secret",
+          "Session key"
         ],
         answer: 1,
-        explanation: "em relatif terhadap font-size parent (bisa compound). rem relatif terhadap root html, lebih konsisten dan dipakai untuk font-size."
+        explanation: "Pesan yang di-encrypt dengan public key hanya bisa di-decrypt dengan private key yang sesuai. Inilah inti asymmetric crypto."
       },
       {
-        question: "Berapa line-height ideal untuk keterbacaan teks body?",
-        options: ["0.8 - 1.0", "1.4 - 1.8", "2.5 - 3.0", "5.0 atau lebih"],
+        question: "Apa keuntungan utama ECC dibandingkan RSA?",
+        options: [
+          "ECC lebih mudah dihitung manual",
+          "ECC memberi keamanan setara dengan ukuran key jauh lebih kecil",
+          "ECC tidak butuh key pair",
+          "ECC tidak bisa dipecahkan komputer kuantum"
+        ],
         answer: 1,
-        explanation: "Line-height 1.4-1.8 paling nyaman dibaca. Terlalu rapat (1.0) sulit dibaca, terlalu renggang (3.0) memutus aliran."
+        explanation: "ECC-256 ≈ RSA-3072 dalam keamanan. Key lebih kecil = bandwidth & storage lebih efisien, cocok untuk mobile/IoT. ECC tetap rentan komputer kuantum (Shor)."
+      },
+      {
+        question: "Apa masalah yang dipecahkan oleh Diffie-Hellman Key Exchange?",
+        options: [
+          "Enkripsi pesan panjang",
+          "Tukar shared secret via channel publik tanpa pernah mengirimnya",
+          "Signature dokumen",
+          "Komputasi kuantum"
+        ],
+        answer: 1,
+        explanation: "DH memungkinkan dua pihak setuju shared secret tanpa pernah mengirimnya melalui channel — eavesdropper yang dengarkan tidak bisa dapat secret tersebut."
       }
     ]
   },
   {
     level: 3,
     order: 4,
-    title: "Margin & Padding",
-    slug: "margin-padding",
-    description: "Memahami box model: content, padding, border, margin, dan cara mengaturnya.",
-    icon: "📐",
+    title: "Hash Function",
+    slug: "hash-function",
+    description: "Hash function satu arah: MD5, SHA, collision resistance, dan aplikasi praktis.",
+    icon: "#️⃣",
     isProject: false,
-    content: `# Margin & Padding
+    content: `# Hash Function
 
-Setiap elemen HTML adalah **kotak** (box). Memahami **box model** — terdiri dari content, padding, border, dan margin — adalah kunci untuk membuat layout yang rapi.
+**Hash function** adalah fungsi satu arah yang mengubah input apa saja menjadi **output dengan panjang tetap** (fingerprint). Hash bukan enkripsi — tidak bisa di-\"decrypt\".
 
-## Box Model
-
-Setiap elemen punya 4 lapisan:
+## Properti Hash yang Baik
 
 \`\`\`text
-┌─────────────────────────────────┐
-│           margin                │
-│  ┌───────────────────────────┐  │
-│  │         border            │  │
-│  │  ┌─────────────────────┐  │  │
-│  │  │      padding        │  │  │
-│  │  │  ┌───────────────┐  │  │  │
-│  │  │  │   content     │  │  │  │
-│  │  │  └───────────────┘  │  │  │
-│  │  └─────────────────────┘  │  │
-│  └───────────────────────────┘  │
-└─────────────────────────────────┘
+1. Deterministic  → input sama, output selalu sama
+2. Fixed output   → panjang output tetap (mis. SHA-256 = 256 bit)
+3. Fast           → komputasi cepat
+4. One-way        → tidak bisa derive input dari output (preimage resistant)
+5. Avalanche      → 1 bit berubah → output berubah total
+6. Collision-free → susah cari 2 input yang sama output-nya
 \`\`\`
 
-- **Content**: Isi elemen (teks, gambar)
-- **Padding**: Ruang **di dalam** border (antara content dan border)
-- **Border**: Garis tepi elemen
-- **Margin**: Ruang **di luar** border (antar elemen)
+## Algoritma Hash Populer
 
-## Padding
-
-\`\`\`css
-.box {
-  padding: 20px;              /* semua sisi */
-  padding: 10px 20px;         /* vertikal horizontal */
-  padding: 10px 20px 30px 40px;  /* atas kanan bawah kiri */
-  /* atau per sisi */
-  padding-top: 10px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-}
+\`\`\`text
+Algoritma   | Panjang (bit) | Status
+------------|---------------|------------------
+MD5         | 128           | BROKEN, jangan untuk security
+SHA-1       | 160           | BROKEN (2017, SHAttered), deprecated
+SHA-256     | 256           | AMAN, standar saat ini
+SHA-512     | 512           | AMAN, untuk long-term
+SHA-3       | 224/256/384/512| AMAN, struktur berbeda (sponge)
+BLAKE2/3    | variable      | AMAN, sangat cepat
+RIPEMD-160  | 160           | OK (dipakai Bitcoin address)
 \`\`\`
 
-Urutan singkatan: **atas → kanan → bawah → kiri** (searah jarum jam dari atas).
+## Contoh Hash dengan Python
 
-## Margin
+\`\`\`python
+import hashlib
 
-\`\`\`css
-.box {
-  margin: 20px;
-  margin: 10px 20px;
-  margin: 0 auto;             /* center horizontal (butuh width) */
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
+# SHA-256
+data1 = b"Halo Dunia"
+data2 = b"Halo Dunia."   # hanya tambah titik
+
+h1 = hashlib.sha256(data1).hexdigest()
+h2 = hashlib.sha256(data2).hexdigest()
+
+print(f"Hash 1: {h1}")
+print(f"Hash 2: {h2}")
+# Walaupun beda 1 karakter, hash berubah TOTAL
 \`\`\`
 
-## Border
+Output:
 
-\`\`\`css
-.box {
-  border: 1px solid #ddd;     /* width style color */
-  border: 2px dashed blue;
-
-  /* atau per properti */
-  border-width: 2px;
-  border-style: solid;
-  border-color: #333;
-
-  /* per sisi */
-  border-top: 1px solid #ddd;
-  border-radius: 8px;          /* sudut membulat */
-}
+\`\`\`text
+Hash 1: 0a4d55a8d778e5022fab701977c5d840bbc486d0f28a8c8b9b19c6b8c8b1a3a8
+Hash 2: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
 \`\`\`
 
-## Box Sizing Penting!
+## Hash di CLI
 
-Secara default, \`width\` dan \`height\` hanya mengukur **content**. Padding dan border **menambah** ukuran total. Ini bikin pusing.
+\`\`\`bash
+# Hash file dengan SHA-256
+sha256sum file.txt
+# Output: <hash>  file.txt
 
-\`\`\`css
-/* Default (susah diprediksi) */
-.box {
-  width: 200px;
-  padding: 20px;
-  border: 5px solid;
-  /* total width = 200 + 40 + 10 = 250px */
-}
+# MD5 (hanya untuk integritas non-security)
+md5sum file.txt
 
-/* Solusi: border-box */
-.box {
-  box-sizing: border-box;
-  width: 200px;
-  padding: 20px;
-  border: 5px solid;
-  /* total width = 200px (padding & border termasuk) */
-}
+# SHA-1
+sha1sum file.txt
+
+# Hash string
+echo -n "password" | sha256sum
+echo -n "password" | md5sum
 \`\`\`
 
-Praktik terbaik: terapkan \`border-box\` ke **semua elemen**:
+## Aplikasi Hash
 
-\`\`\`css
-* {
-  box-sizing: border-box;
-}
+\`\`\`text
+1. Integrity check     → bandingkan hash file yang dikirim & diterima
+2. Password storage    → simpan hash password, bukan plaintext
+3. Digital signature   → sign hash dokumen, bukan dokumen langsung
+4. Blockchain          → hash block sebelumnya di block berikutnya
+5. Git commit          → SHA-1 dari tree + parent + author
+6. File deduplication  → file dengan hash sama = file sama
+7. Bloom filter        → struktur data probabilistik
+8. HMAC                → keyed hash untuk otentikasi pesan
+9. Proof-of-Work       → Bitcoin mining = cari nonce dengan hash < target
 \`\`\`
 
-## Margin Collapse
+## HMAC (Hash-based MAC)
 
-Margin vertikal **berdekatan** kadang **menyatu** (bukan bertambah):
+\`\`\`python
+import hmac, hashlib
 
-\`\`\`css
-.box1 { margin-bottom: 30px; }
-.box2 { margin-top: 20px; }
+key = b"secret-key-shared"
+message = b"Transfer 1.000.000 ke rekening 12345"
+
+# HMAC-SHA256
+signature = hmac.new(key, message, hashlib.sha256).hexdigest()
+print(f"HMAC: {signature}")
+
+# Verifikasi di sisi penerima
+expected = hmac.new(key, message, hashlib.sha256).hexdigest()
+is_valid = hmac.compare_digest(signature, expected)
+print(f"Valid: {is_valid}")
 \`\`\`
 
-Jarak antar box1 dan box2 = **30px** (bukan 50px), karena yang lebih besar menang. Ini disebut **margin collapse**. Hanya terjadi pada margin vertikal, tidak horizontal.
+HMAC dipakai untuk memastikan **pesan tidak dimodifikasi** dan **beneran dari pengirim yang punya key**. Dipakai di JWT (HMAC-SHA256), API signature (Stripe, AWS), IPsec.
 
-## Contoh Implementasi
+## Password Hashing (Beda dengan Hash Biasa!)
 
-\`\`\`css
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+Hash biasa (SHA-256) **TERLALU CEPAT** untuk password. Attacker bisa brute force miliaran password/detik dengan GPU. Untuk password, pakai **slow hash** dengan **salt**:
 
-.card {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 20px auto;     /* center horizontal */
-  background: white;
-}
+\`\`\`python
+# JANGAN GINI:
+import hashlib
+password_hash = hashlib.sha256("password123".encode()).hexdigest()
+# Attacker dengan rainbow table langsung tahu password-nya
 
-.card-title {
-  margin-bottom: 12px;
-  font-size: 1.25rem;
-}
+# GINI:
+import bcrypt
+# bcrypt otomatis generate salt & include di hash
+hashed = bcrypt.hashpw("password123".encode(), bcrypt.gensalt(rounds=12))
+print(hashed)  # $2b$12$xxxxx...
 
-.card-text {
-  margin-bottom: 16px;
-  line-height: 1.6;
-}
-
-.card-button {
-  padding: 10px 20px;
-  background: blue;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
+# Verifikasi
+is_valid = bcrypt.checkpw("password123".encode(), hashed)
+print(f"Valid: {is_valid}")
 \`\`\`
 
-## Tips
+Algoritma password hashing yang direkomendasikan (lihat juga materi Password Security):
+\`\`\`text
+bcrypt       → populer, rounds 12+ (cost factor)
+scrypt       → memory-hard
+argon2id     → PINNED! Pemenang Password Hashing Competition 2015
+PBKDF2       → fallback, iterasi 600.000+
+\`\`\`
 
-- **Reset** margin dan padding default di awal dengan \`* { margin: 0; padding: 0; }\`
-- Selalu pakai **\`box-sizing: border-box\`**
-- Gunakan **margin** untuk jarak **antar** elemen, **padding** untuk jarak **dalam** elemen
-- Untuk center horizontal: \`margin: 0 auto;\` (butuh \`width\`)
-- Hindari margin negatif kecuali benar-benar perlu
+## Collision Attack
 
-> Box model adalah konsep paling fundamental di CSS. Pahami baik-baik!`,
+**Collision** = dua input berbeda menghasilkan hash sama.
+
+\`\`\`text
+MD5 collision (2004): dihasilkan dalam beberapa detik
+  → MD5 tidak boleh untuk signature/cert
+
+SHA-1 collision (2017, SHAttered):
+  → 2 PDF berbeda, hash SHA-1 sama
+  → Google bikin, butuh 6.500 tahun CPU
+
+SHA-256 collision: belum ditemukan, secara teoretis 2^128 operasi
+\`\`\`
+
+## Birthday Paradox
+
+Mengapa collision lebih mudah dari preimage?
+
+\`\`\`text
+Preimage attack  : cari input untuk hash tertentu → 2^n operasi
+Birthday attack  : cari 2 input dengan hash sama → 2^(n/2) operasi
+
+Untuk SHA-256:
+  Preimage: 2^256 operasi (tidak feasible)
+  Birthday: 2^128 operasi (masih sangat sulit)
+\`\`\`
+
+Inilah mengapa SHA-256 dianggap aman — bahkan serangan birthday pun tidak feasible.
+
+## Hash untuk Integrity
+
+\`\`\`bash
+# Download ISO + cek hash dari server resmi
+wget https://cdimage.kali.org/current/kali-linux.iso
+wget https://cdimage.kali.org/current/SHA256SUMS
+
+# Verifikasi
+sha256sum -c SHA256SUMS 2>/dev/null | grep kali-linux.iso
+# Output: kali-linux.iso: OK
+\`\`\`
+
+Jika hash cocok, file tidak dimodifikasi (mis. oleh MITM saat download). Inilah mengapa situs serius selalu publikasikan checksum.
+
+## Aturan Penting
+
+\`\`\`text
+1. JANGAN pakai MD5 atau SHA-1 untuk tujuan security baru
+2. Untuk integrity umum: SHA-256 atau SHA-3
+3. Untuk password: argon2id / bcrypt / scrypt (BUKAN SHA-256 langsung)
+4. Untuk HMAC: HMAC-SHA256 atau HMAC-SHA512
+5. Untuk signature: pakai SHA-256+ dengan RSA-PSS atau ECDSA
+6. Jangan bandingkan hash dengan == (timing attack); pakai hmac.compare_digest
+\`\`\`
+
+## Hash vs Encryption
+
+\`\`\`text
+Encryption → dua arah, bisa di-decrypt dengan key
+Hash       → satu arah, TIDAK bisa di-reverse
+
+Tujuan:
+  Encryption = confidentiality (kerahasiaan)
+  Hash       = integrity (integritas)
+\`\`\``,
     quiz: [
       {
-        question: "Apa perbedaan margin dan padding?",
+        question: "Apa perbedaan mendasar hash function dan encryption?",
         options: [
-          "Tidak ada perbedaan",
-          "Margin ruang di luar border (antar elemen), padding ruang di dalam border (antara content dan border)",
-          "Margin ruang dalam, padding ruang luar",
-          "Margin hanya untuk teks, padding untuk gambar"
+          "Hash lebih cepat dari encryption",
+          "Hash satu arah (tidak bisa reverse), encryption dua arah (bisa decrypt dengan key)",
+          "Hash punya key, encryption tidak",
+          "Tidak ada perbedaan"
         ],
         answer: 1,
-        explanation: "Margin adalah ruang di luar border (antar elemen). Padding adalah ruang di dalam border (antara content dan border)."
+        explanation: "Hash bersifat satu arah — tidak bisa di-reverse. Encryption dua arah — bisa di-decrypt dengan key yang sesuai. Hash untuk integrity, encryption untuk confidentiality."
       },
       {
-        question: "Apa efek dari 'box-sizing: border-box'?",
+        question: "Mengapa MD5 dan SHA-1 tidak boleh dipakai untuk tujuan security?",
         options: [
-          "Menghapus border elemen",
-          "Padding dan border ikut dihitung dalam width/height",
-          "Membuat elemen berbentuk kotak",
-          "Menghilangkan padding"
+          "Karena algoritmanya tertutup",
+          "Karena sudah ditemukan collision attack (dua input berbeda, hash sama)",
+          "Karena terlalu lambat",
+          "Karena panjangnya tidak tetap"
         ],
         answer: 1,
-        explanation: "Dengan border-box, padding dan border termasuk dalam width/height yang ditentukan, membuat ukuran elemen lebih mudah diprediksi."
+        explanation: "MD5 collision bisa dibuat dalam detik, SHA-1 collision dibuktikan Google 2017 (SHAttered). Collision memungkinkan attacker buat dokumen palsu dengan hash sama — berbahaya untuk signature/cert."
       },
       {
-        question: "Urutan nilai pada shorthand 'margin: 10px 20px 30px 40px' adalah...",
+        question: "Mengapa hash cepat seperti SHA-256 tidak ideal untuk penyimpanan password?",
         options: [
-          "kanan atas bawah kiri",
-          "atas kanan bawah kiri",
-          "atas bawah kiri kanan",
-          "kiri atas kanan bawah"
+          "Karena SHA-256 sudah deprecated",
+          "Karena attacker bisa brute force miliaran password/detik dengan GPU",
+          "Karena SHA-256 menghasilkan output terlalu panjang",
+          "Karena SHA-256 bisa di-decrypt"
         ],
         answer: 1,
-        explanation: "Shorthand margin/padding urutannya searah jarum jam dari atas: atas → kanan → bawah → kiri."
+        explanation: "SHA-256 dirancang cepat — bagus untuk integrity, tapi buruk untuk password karena attacker bisa brute force miliaran tebakan/detik. Gunakan slow hash + salt: bcrypt, scrypt, argon2."
       }
     ]
   },
   {
     level: 3,
     order: 5,
-    title: "Flexbox",
-    slug: "flexbox",
-    description: "Menggunakan CSS Flexbox untuk layout satu dimensi yang fleksibel dan responsif.",
-    icon: "📦",
+    title: "Digital Signature",
+    slug: "digital-signature",
+    description: "Tanda tangan digital: cara kerja, RSA/ECDSA signature, dan penerapan untuk otentikasi & non-repudiation.",
+    icon: "✍️",
     isProject: false,
-    content: `# Flexbox
+    content: `# Digital Signature
 
-**Flexbox** (Flexible Box Layout) adalah sistem layout CSS modern untuk menyusun elemen dalam **satu dimensi** (baris atau kolom). Flexbox sangat powerful untuk navbar, card, dan layout sederhana.
+**Digital signature** adalah padanan kriptografis dari tanda tangan fisik. Ia memberikan tiga jaminan: **otentikasi**, **integritas**, dan **non-repudiation**.
 
 ## Konsep Dasar
 
-Flexbox melibatkan dua peran:
+Signature dibuat dengan **private key**, diverifikasi dengan **public key** — kebalikan dari enkripsi.
 
-- **Flex container**: elemen parent dengan \`display: flex\`
-- **Flex items**: anak-anak langsung dari container
+\`\`\`text
+[Signer]
+  1. Hash dokumen → digest
+  2. Encrypt digest dengan PRIVATE key → signature
+  3. Kirim: dokumen + signature
 
-\`\`\`css
-.container {
-  display: flex;
-}
+[Verifier]
+  1. Hash dokumen yang diterima → digest1
+  2. Decrypt signature dengan PUBLIC key → digest2
+  3. Bandingkan: digest1 == digest2?
+  4. Jika sama → signature valid (dokumen asli & tidak diubah)
 \`\`\`
 
-\`\`\`html
-<div class="container">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-</div>
+## Tiga Jaminan
+
+\`\`\`text
+Authentication → pembuktian pengirim adalah pemilik private key
+Integrity     → dokumen tidak berubah sejak di-sign
+Non-repudiation → signer tidak bisa menyangkal telah menandatangani
 \`\`\`
 
-## Flex Direction
+## Algoritma Signature Populer
 
-Mengatur arah utama (main axis):
-
-\`\`\`css
-.container {
-  display: flex;
-  flex-direction: row;            /* default: kiri ke kanan */
-  flex-direction: row-reverse;    /* kanan ke kiri */
-  flex-direction: column;         /* atas ke bawah */
-  flex-direction: column-reverse; /* bawah ke atas */
-}
+\`\`\`text
+RSA-PSS       → signature RSA dengan padding probabilistik (rekomendasi)
+RSA-PKCS1v15  → versi lama, masih dipakai tapi PSS lebih aman
+DSA           → Digital Signature Algorithm (lama, deprecated)
+ECDSA         → versi ECC dari DSA (secp256r1, secp256k1)
+EdDSA/Ed25519 → modern, deterministik, cepat, REKOMENDASI
+Schnorr       → dasar banyak algoritma modern (Taproot Bitcoin)
 \`\`\`
 
-## Justify Content (Main Axis)
+## Implementasi dengan Python
 
-Mengatur alignment item pada **main axis**:
+\`\`\`python
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import hashes, serialization
 
-\`\`\`css
-.container {
-  display: flex;
-  justify-content: flex-start;     /* default: di awal */
-  justify-content: flex-end;       /* di akhir */
-  justify-content: center;         /* di tengah */
-  justify-content: space-between;  /* rata, jarak sama antar item */
-  justify-content: space-around;   /* jarak sama, termasuk tepi */
-  justify-content: space-evenly;   /* jarak benar-benar sama */
-}
+# Generate keypair
+private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+public_key = private_key.public_key()
+
+# Dokumen yang akan di-sign
+dokumen = b"Kontrak: Transfer 1.000.000 ke rekening 12345 pada 1 Jan 2025"
+
+# Buat signature dengan PRIVATE key
+signature = private_key.sign(
+    dokumen,
+    padding.PSS(
+        mgf=padding.MGF1(hashes.SHA256()),
+        salt_length=padding.PSS.MAX_LENGTH
+    ),
+    hashes.SHA256()
+)
+print(f"Signature (hex): {signature.hex()[:60]}...")
+
+# Verifikasi dengan PUBLIC key
+try:
+    public_key.verify(
+        signature,
+        dokumen,
+        padding.PSS(
+            mgf=padding.MGF1(hashes.SHA256()),
+            salt_length=padding.PSS.MAX_LENGTH
+        ),
+        hashes.SHA256()
+    )
+    print("✓ Signature VALID — dokumen asli & tidak diubah")
+except Exception:
+    print("✗ Signature TIDAK VALID")
+
+# Coba verifikasi dokumen yang dimodifikasi
+dokumen_palsu = b"Kontrak: Transfer 1.000.000.000 ke rekening 99999"
+try:
+    public_key.verify(
+        signature,
+        dokumen_palsu,
+        padding.PSS(
+            mgf=padding.MGF1(hashes.SHA256()),
+            salt_length=padding.PSS.MAX_LENGTH
+        ),
+        hashes.SHA256()
+    )
+    print("✓ VALID")
+except Exception:
+    print("✗ Dokumen dimodifikasi — signature TIDAK valid")
 \`\`\`
 
-## Align Items (Cross Axis)
+## Ed25519 — Signature Modern
 
-Mengatur alignment item pada **cross axis**:
+\`\`\`python
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
-\`\`\`css
-.container {
-  display: flex;
-  align-items: stretch;       /* default: penuhi tinggi */
-  align-items: flex-start;    /* di atas */
-  align-items: flex-end;      /* di bawah */
-  align-items: center;        /* di tengah */
-  align-items: baseline;      /* berdasarkan baseline teks */
-}
+# Generate & sign
+private_key = Ed25519PrivateKey.generate()
+public_key = private_key.public_key()
+
+dokumen = b"Dokumen penting"
+signature = private_key.sign(dokumen)
+
+# Verifikasi
+try:
+    public_key.verify(signature, dokumen)
+    print("✓ Valid")
+except Exception:
+    print("✗ Invalid")
 \`\`\`
 
-## Flex Wrap
+Ed25519 lebih cepat, deterministik (signature sama untuk input sama), dan tidak punya masalah random nonce seperti ECDSA.
 
-Secara default, item tidak wrap (bisa meluap). Aktifkan wrap:
+## Signature dengan OpenSSL CLI
 
-\`\`\`css
-.container {
-  display: flex;
-  flex-wrap: nowrap;   /* default */
-  flex-wrap: wrap;     /* pindah baris jika tidak muat */
-  flex-wrap: wrap-reverse;
-}
+\`\`\`bash
+# Generate Ed25519 keypair
+openssl genpkey -algorithm Ed25519 -out private.pem
+openssl pkey -in private.pem -pubout -out public.pem
+
+# Sign file
+openssl pkeyutl -sign -inkey private.pem \\
+  -rawin -in dokumen.txt -out sig.bin
+
+# Verify
+openssl pkeyutl -verify -pubin -inkey public.pem \\
+  -rawin -in dokumen.txt -sigfile sig.bin
+
+# Untuk RSA, sign hash SHA-256
+openssl dgst -sha256 -sign private.pem -out sig.bin dokumen.txt
+openssl dgst -sha256 -verify public.pem -signature sig.bin dokumen.txt
 \`\`\`
 
-## Gap
+## Aplikasi Digital Signature
 
-Jarak antar item tanpa perlu margin:
-
-\`\`\`css
-.container {
-  display: flex;
-  gap: 16px;            /* jarak antar item */
-  row-gap: 10px;        /* jarak antar baris */
-  column-gap: 20px;     /* jarak antar kolom */
-}
+\`\`\`text
+HTTPS certificate → CA sign public key situs (X.509)
+Email PGP/GPG     → sign email agar penerima tahu asli dari pengirim
+Git commit        → sign commit dengan GPG/SSH key
+Code signing      → sign executable (Microsoft Authenticode, Apple)
+PDF document      → sign PDF dengan cert (Adobe, DocuSign)
+Blockchain tx     → ECDSA sign transaksi (Bitcoin, Ethereum)
+JWT (RS256)       → token otentikasi yang di-sign
+Software update   → sign update package (apt, yum)
 \`\`\`
 
-## Properti Flex Item
+## Verifikasi Cert TLS di Browser
 
-Setiap item flex bisa diatur:
+Saat buka \`https://example.com\`:
 
-\`\`\`css
-.item {
-  flex-grow: 1;       /* tumbuh mengisi ruang */
-  flex-shrink: 0;     /* tidak menyusut */
-  flex-basis: 200px;  /* ukuran awal */
-  /* shorthand */
-  flex: 1;            /* flex: 1 1 0 */
-  flex: 0 0 200px;    /* fix 200px */
-  flex: 1 1 auto;     /* default */
-}
+\`\`\`text
+1. Server kirim cert (public key + identitas + signature CA)
+2. Browser cek signature dengan CA public key (sudah pre-install)
+3. Jika valid → cert asli dari CA yang dipercaya
+4. Browser pakai public key server untuk TLS handshake
+5. Setelah handshake → komunikasi di-encrypt dengan symmetric key
 
-/* align individual */
-.item-special {
-  align-self: center;
-}
+Sertifikat = public key + metadata + signature CA
 \`\`\`
 
-## Contoh: Center Vertical & Horizontal
+## Difference: Sign vs Encrypt
 
-\`\`\`css
-.center-box {
-  display: flex;
-  justify-content: center;   /* horizontal */
-  align-items: center;       /* vertikal */
-  height: 100vh;
-}
+\`\`\`text
+Encryption → public key encrypt, private key decrypt
+             tujuan: confidentiality
+
+Signature  → private key sign, public key verify
+             tujuan: authentication + integrity
+
+Signcrypt  → gabung keduanya (sign dulu, lalu encrypt)
+             tujuan: confidentiality + authentication + non-repudiation
 \`\`\`
 
-## Contoh: Navbar
+Pesan yang hanya di-encrypt TIDAK menjamin pengirim asli (siapa saja bisa encrypt dengan public key recipient). Pesan yang hanya di-sign TIDAK menjamin kerahasiaan (siapa saja bisa verify dan baca).
 
-\`\`\`css
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  background: #2c3e50;
-  color: white;
-}
+## Aturan Penting
 
-.nav-links {
-  display: flex;
-  gap: 24px;
-  list-style: none;
-}
+\`\`\`text
+1. Selalu hash dulu sebelum sign (jangan sign dokumen besar langsung)
+2. Pakai padding scheme aman: PSS untuk RSA, bukan PKCS1v15
+3. Untuk ECDSA, gunakan deterministic nonce (RFC 6979) atau pakai EdDSA
+4. Pisahkan key untuk encrypt vs sign (jangan pakai key yang sama)
+5. Verifikasi signature SEBELUM memproses pesan
+6. Gunakan compare_digest untuk perbandingan (hindari timing attack)
+7. Rotate signing key secara berkala
+8. Revoke key yang dicurigai kompromi (CRL/OCSP)
 \`\`\`
 
-\`\`\`html
-<nav class="navbar">
-  <div class="logo">MyApp</div>
-  <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-</nav>
+## Tanda Tangan di Dunia Nyata: PGP Email
+
+\`\`\`bash
+# Generate GPG key
+gpg --gen-key
+
+# Sign file
+gpg --output doc.sig --sign doc.txt
+
+# Verify & extract
+gpg --output doc.txt --decrypt doc.sig
+
+# Clearsign (signature di akhir dokumen terbaca)
+gpg --clearsign doc.txt
+
+# Export public key untuk dibagikan
+gpg --armor --export user@email.com > public.asc
+
+# Import public key orang lain
+gpg --import public.asc
 \`\`\`
 
-## Contoh: Card Grid Sederhana
+## Verifikasi Signature dengan Timing-Safe Comparison
 
-\`\`\`css
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
+\`\`\`python
+import hmac
 
-.card {
-  flex: 1 1 250px;  /* basis 250px, bisa tumbuh */
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
+# JANGAN gini (timing attack possible)
+# if signature_received == signature_expected: ...
+
+# Gini:
+is_valid = hmac.compare_digest(signature_received, signature_expected)
 \`\`\`
 
-## Tips
-
-- Flexbox untuk layout **satu dimensi** (baris ATAU kolom)
-- Untuk **dua dimensi** (baris DAN kolom), gunakan **CSS Grid**
-- \`gap\` lebih praktis daripada margin untuk jarak antar item
-- Center horizontal+vertikal: \`justify-content: center; align-items: center;\`
-- Untuk navbar: \`justify-content: space-between\` paling sering dipakai
-
-> Flexbox adalah senjata utama web developer modern. Wajib kuasai!`,
+Perbandingan \`==\` bisa bocor informasi waktu eksekusi (string match berhenti saat mismatch pertama). \`compare_digest\` selalu scan penuh.`,
     quiz: [
       {
-        question: "Properti apa yang mengatur alignment flex item pada main axis?",
-        options: ["align-items", "justify-content", "flex-direction", "align-self"],
-        answer: 1,
-        explanation: "justify-content mengatur alignment item pada main axis. align-items pada cross axis."
-      },
-      {
-        question: "Apa efek dari 'flex-direction: column'?",
+        question: "Pada digital signature, key mana yang dipakai untuk MENANDATANGANI dokumen?",
         options: [
-          "Item tersusun horizontal kiri ke kanan",
-          "Item tersusun vertikal atas ke bawah",
-          "Item menyusut",
-          "Item berpindah ke kanan"
+          "Public key",
+          "Private key",
+          "Session key",
+          "Symmetric key"
         ],
         answer: 1,
-        explanation: "flex-direction: column menyusun item dari atas ke bawah (vertikal). Defaultnya row (horizontal kiri ke kanan)."
+        explanation: "Signature dibuat dengan private key (hanya pemilik yang bisa), diverifikasi dengan public key (siapa saja bisa verifikasi). Kebalikan dari enkripsi asimetris."
       },
       {
-        question: "Cara terbaik memberi jarak antar item di flexbox modern?",
+        question: "Manfaat utama digital signature yang TIDAK dimiliki enkripsi biasa?",
         options: [
-          "Margin negatif pada setiap item",
-          "Properti gap pada container",
-          "Padding pada container",
-          "Border pada setiap item"
+          "Confidentiality",
+          "Non-repudiation (penanda tidak bisa menyangkal)",
+          "Kecepatan",
+          "Kompresi"
         ],
         answer: 1,
-        explanation: "Properti gap pada container lebih praktis daripada margin, otomatis memberi jarak antar item tanpa masalah margin collapse."
+        explanation: "Non-repudiation: karena hanya private key pemilik yang bisa sign, pemilik tidak bisa menyangkal telah menandatangani. Enkripsi biasa tidak memberi ini."
+      },
+      {
+        "question": "Mengapa dokumen harus di-hash dulu sebelum di-sign (bukan di-sign langsung)?",
+        "options": [
+          "Karena hash lebih aman dari signature",
+          "Agar signature ukurannya kecil & algoritma signature bisa untuk dokumen berukuran berapa pun",
+          "Karena hash lebih cepat",
+          "Karena tanpa hash signature tidak valid"
+        ],
+        answer: 1,
+        explanation: "Algoritma signature (RSA, ECDSA) dibatasi ukuran input (mis. RSA-2048 ≤ 245 byte). Hash dokumen jadi digest tetap (32 byte untuk SHA-256), lalu digest di-sign. Praktis & efisien."
       }
     ]
   },
   {
     level: 3,
     order: 6,
-    title: "Grid",
-    slug: "css-grid",
-    description: "Menggunakan CSS Grid untuk layout dua dimensi yang powerful: baris dan kolom.",
-    icon: "🔲",
+    title: "PKI & Certificate",
+    slug: "pki-certificate",
+    description: "Public Key Infrastructure: Certificate Authority, X.509, dan rantai kepercayaan TLS.",
+    icon: "📜",
     isProject: false,
-    content: `# Grid
+    content: `# PKI & Certificate
 
-**CSS Grid** adalah sistem layout **dua dimensi** — bisa mengatur **baris dan kolom** sekaligus. Grid lebih powerful dari Flexbox untuk layout kompleks seperti halaman utuh.
+**PKI (Public Key Infrastructure)** adalah sistem yang mengelola pasangan key, sertifikat, dan otoritas kepercayaan agar komunikasi asimetris bisa dipakai massal. Tanpa PKI, tidak ada HTTPS seperti sekarang.
 
-## Konsep Dasar
-
-\`\`\`css
-.container {
-  display: grid;
-}
-\`\`\`
-
-Grid container memiliki:
-
-- **Column**: kolom vertikal
-- **Row**: baris horizontal
-- **Cell**: perpotongan kolom dan baris
-- **Gap**: jarak antar cell
-
-## Mendefinisikan Kolom dan Baris
-
-\`\`\`css
-.grid {
-  display: grid;
-  grid-template-columns: 200px 200px 200px;  /* 3 kolom fix */
-  grid-template-columns: 1fr 1fr 1fr;        /* 3 kolom sama */
-  grid-template-columns: repeat(3, 1fr);     /* singkatan */
-  grid-template-columns: 200px 1fr 1fr;      /* mix */
-
-  grid-template-rows: 100px 100px;           /* 2 baris fix */
-}
-\`\`\`
-
-**fr** (fraction) = unit fraksi ruang yang tersedia.
-
-## Gap
-
-\`\`\`css
-.grid {
-  display: grid;
-  gap: 20px;
-  row-gap: 16px;
-  column-gap: 24px;
-}
-\`\`\`
-
-## Auto-fit dan Minmax
-
-Layout responsif tanpa media query:
-
-\`\`\`css
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-\`\`\`
-
-- \`auto-fit\`: jumlah kolom menyesuaikan lebar container
-- \`minmax(250px, 1fr)\`: minimal 250px, maksimal 1fr
-
-Ini membuat **grid otomatis responsif**!
-
-## Menempatkan Item
-
-\`\`\`css
-.item-a {
-  grid-column: 1 / 3;   /* dari garis kolom 1 ke 3 (2 kolom) */
-  grid-row: 1 / 2;      /* dari garis baris 1 ke 2 (1 baris) */
-}
-
-.item-b {
-  grid-column: 3 / 4;
-  grid-row: 1 / 3;      /* 2 baris */
-}
-
-/* shorthand */
-.item-c {
-  grid-area: 2 / 1 / 3 / 4;  /* row-start / col-start / row-end / col-end */
-}
-\`\`\`
-
-## Grid Template Areas
-
-Cara visual menyusun layout:
-
-\`\`\`css
-.layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: 60px 1fr 40px;
-  grid-template-areas:
-    "header header"
-    "sidebar main"
-    "footer footer";
-  min-height: 100vh;
-}
-
-.header { grid-area: header; }
-.sidebar { grid-area: sidebar; }
-.main { grid-area: main; }
-.footer { grid-area: footer; }
-\`\`\`
-
-\`\`\`html
-<div class="layout">
-  <header class="header">Header</header>
-  <aside class="sidebar">Sidebar</aside>
-  <main class="main">Main Content</main>
-  <footer class="footer">Footer</footer>
-</div>
-\`\`\`
-
-Hasilnya: layout lengkap dengan header full width, sidebar kiri, main kanan, footer full width.
-
-## Alignment
-
-\`\`\`css
-.grid {
-  display: grid;
-  justify-items: start;   /* alignment horizontal item dalam cell */
-  align-items: center;    /* alignment vertikal */
-
-  justify-content: center;  /* alignment grid dalam container */
-  align-content: center;
-
-  /* shorthand */
-  place-items: center;      /* align & justify items sekaligus */
-}
-\`\`\`
-
-## Contoh: Photo Gallery Responsif
-
-\`\`\`css
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 20px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-\`\`\`
-
-## Contoh: Card Grid 3 Kolom
-
-\`\`\`css
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-@media (max-width: 768px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-}
-\`\`\`
-
-## Flexbox vs Grid
+## Komponen PKI
 
 \`\`\`text
-Flexbox → Satu dimensi (baris ATAU kolom)
-         Cocok: navbar, button group, card row
-Grid    → Dua dimensi (baris DAN kolom)
-         Cocok: page layout, gallery, dashboard
+CA (Certificate Authority) → terbitkan & sign sertifikat
+RA (Registration Authority) → verifikasi identitas pemohon
+VA (Validation Authority)  → cek status revoke (OCSP, CRL)
+Subscriber   → pemilik cert (website, organisasi)
+Relying Party → pihak yang percaya cert (browser, OS)
+Certificate  → dokumen X.509 berisi public key + identitas + signature CA
 \`\`\`
 
-Aturan praktis:
+## Struktur Sertifikat X.509
 
-- **Navbar, button group, centering** → Flexbox
-- **Page layout, gallery, complex grid** → CSS Grid
-- Bisa **dikombinasikan** — Grid untuk layout utama, Flexbox untuk komponen
+\`\`\`text
+Version              : v3
+Serial Number        : 0x...
+Signature Algorithm  : sha256WithRSAEncryption
+Issuer               : CN=Let's Encrypt R3, O=Let's Encrypt, C=US
+Validity
+  Not Before         : 2025-01-01 00:00:00 UTC
+  Not After          : 2025-04-01 00:00:00 UTC
+Subject              : CN=example.com, O=Example Inc, C=ID
+Subject Public Key   : RSA 2048-bit (atau ECDSA P-256)
+Extension            : SAN (Subject Alternative Names) - example.com, www.example.com
+Signature            : <signature CA pada field di atas>
+\`\`\`
 
-## Tips
+## Rantai Kepercayaan (Chain of Trust)
 
-- Gunakan \`fr\` untuk kolom fleksibel, \`px\` untuk fix
-- \`auto-fit\` + \`minmax\` untuk grid responsif tanpa media query
-- \`grid-template-areas\` untuk layout yang "visual" dan mudah dibaca
-- Bisa kombinasikan dengan Flexbox di level item
+\`\`\`text
+[Root CA]  ← pre-install di browser/OS
+   │
+   │ sign
+   ↓
+[Intermediate CA]
+   │
+   │ sign
+   ↓
+[Leaf Cert (website)]
 
-> Grid adalah layout tool paling powerful di CSS. Kuasai untuk layout kompleks!`,
+Browser memverifikasi: leaf → intermediate → root (yang sudah dipercaya)
+\`\`\`
+
+Root CA disimpan offline (HSM) demi keamanan. Intermediate CA sehari-hari dipakai untuk sign leaf cert.
+
+## Cara Browser Memverifikasi HTTPS Cert
+
+\`\`\`text
+1. Server kirim: leaf cert + intermediate cert(s)
+2. Browser cek:
+   a. Signature intermediate ditandatangani root CA (terpercaya)
+   b. Signature leaf ditandatangani intermediate
+   c. Subject / SAN cocok dengan hostname yang dikunjungi
+   d. Tanggal sekarang dalam range validity
+   e. Cert tidak di-revoke (CRL/OCSP)
+3. Jika semua valid → ikon gembok hijau di browser
+4. Jika gagal → warning "Connection not secure"
+\`\`\`
+
+## Inspeksi Sertifikat dengan OpenSSL
+
+\`\`\`bash
+# Lihat detail cert yang dipresentasikan server
+openssl s_client -connect example.com:443 -showcerts </dev/null
+
+# Download & decode cert
+echo | openssl s_client -connect example.com:443 2>/dev/null \\
+  | openssl x509 -text -noout | head -40
+
+# Cek tanggal kedaluwarsa
+echo | openssl s_client -connect example.com:443 2>/dev/null \\
+  | openssl x509 -noout -dates
+
+# Verifikasi rantai sertifikat
+openssl verify -CAfile chain.pem cert.pem
+\`\`\`
+
+## Jenis Validasi Certificate
+
+\`\`\`text
+DV (Domain Validation)    → hanya bukti punya domain (email DNS)
+                             umumnya gratis (Let's Encrypt)
+OV (Organization Val.)    → CA verifikasi organisasi (lebih ketat)
+EV (Extended Validation)  → verifikasi mendalam, dulu tampil nama di browser
+                             sekarang banyak dihapus dari UI
+\`\`\`
+
+## Membuat Self-Signed Cert (untuk Lab)
+
+\`\`\`bash
+# Generate key + self-signed cert
+openssl req -x509 -newkey rsa:2048 -nodes \\
+  -keyout key.pem -out cert.pem -days 365 \\
+  -subj "/C=ID/ST=Jakarta/L=Jakarta/O=MyLab/CN=localhost" \\
+  -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+
+# Lihat detail
+openssl x509 -in cert.pem -text -noout
+
+# Pakai dengan nginx
+# ssl_certificate cert.pem;
+# ssl_certificate_key key.pem;
+\`\`\`
+
+Self-signed cert akan memunculkan warning di browser karena tidak ditandatangani CA yang dipercaya.
+
+## Mendapatkan Cert Gratis dengan Let's Encrypt
+
+\`\`\`bash
+# Install certbot
+sudo apt install -y certbot python3-certbot-nginx
+
+# Dapatkan cert untuk domain (butuh DNS mengarah ke server)
+sudo certbot --nginx -d example.com -d www.example.com
+
+# Auto-renew (sudah ter-setup cron)
+sudo systemctl status certbot.timer
+
+# Renew manual test
+sudo certbot renew --dry-run
+\`\`\`
+
+Let's Encrypt cert berlaku 90 hari — pendek untuk mendorong automasi renewal.
+
+## CRL dan OCSP — Cek Status Revoke
+
+\`\`\`text
+CRL (Cert Revocation List)
+  → CA publikasikan list cert yang di-revoke
+  → file besar, lambat update
+
+OCSP (Online Cert Status Protocol)
+  → browser query real-time ke CA: "cert ini masih valid?"
+  → cepat tapi privacy concern (CA tahu situs yang dikunjungi)
+
+OCSP Stapling
+  → server sertifikat menempel OCSP response sendiri
+  → client tidak perlu query OCSP langsung
+\`\`\`
+
+## Alasan Revoke Sertifikat
+
+\`\`\`text
+1. Private key dicurigai bocor/compromised
+2. Sertifikat dikeluarkan secara keliru (mis. untuk domain yang tidak dimiliki)
+3. CA dilanggar (mis. DigiNotar 2011 — bangkrut)
+4. Pemohon minta revoke (sebelum expiry)
+\`\`\`
+
+Kasus terkenal: **DigiNotar 2011** — hacker dapat issuing cert untuk *.google.com, *.yahoo.com, dll. Digunakan untuk MITM pada 300.000+ pengguna Iran. DigiNotar akhirnya bangkrut.
+
+## Certificate Transparency (CT)
+
+Untuk mencegah CA menerbitkan cert tanpa sepengetahuan pemilik domain, **CT Log** dipakai:
+
+\`\`\`text
+- Setiap cert yang diterbitkan HARUS dicatat di log publik
+- Domain owner bisa monitor: apakah ada cert untuk domain saya yang tidak saya minta?
+- Browser Chrome mewajibkan CT untuk semua cert sejak 2018
+
+Cek: https://crt.sh/?q=example.com
+\`\`\`
+
+## Mutual TLS (mTLS)
+
+TLS biasa: client verifikasi server. **mTLS**: server juga verifikasi client (client juga punya cert).
+
+\`\`\`text
+Use case mTLS:
+  - Internal API service-to-service
+  - Zero Trust network
+  - Bank, fintech, enterprise
+  - IoT device authentication
+\`\`\`
+
+Konfigurasi nginx mTLS:
+
+\`\`\`nginx
+server {
+    listen 443 ssl;
+    ssl_certificate     server.crt;
+    ssl_certificate_key server.key;
+    ssl_client_certificate ca.crt;
+    ssl_verify_client on;
+    ssl_verify_depth 2;
+}
+\`\`\`
+
+## Best Practice
+
+\`\`\`text
+1. Pakai Let's Encrypt atau CA berbayar terpercaya (jangan self-signed di produksi)
+2. RSA-2048 atau ECDSA P-256 (lebih hemat)
+3. Aktifkan OCSP stapling
+4. Auto-renew dengan cron/timer
+5. Monitor CT log untuk domain kamu
+6. Revoke segera jika private key bocor
+7. HSTS header untuk paksa HTTPS
+8. Disable TLS 1.0/1.1, gunakan TLS 1.2/1.3
+9. Sertifikat wildcard (domain.com + *.domain.com) hati-hati — kalau bocor, semua subdomain
+\`\`\``,
     quiz: [
       {
-        question: "Apa perbedaan utama CSS Grid dan Flexbox?",
-        options: [
-          "Tidak ada perbedaan",
-          "Grid untuk dua dimensi (baris dan kolom), Flexbox untuk satu dimensi",
-          "Flexbox lebih powerful dari Grid",
-          "Grid hanya untuk gambar, Flexbox untuk teks"
+        "question": "Apa peran Certificate Authority (CA) dalam PKI?",
+        "options": [
+          "Menyimpan private key semua user",
+          "Menerbitkan dan menandatangani sertifikat yang mengikat public key dengan identitas",
+          "Mengenkripsi traffic HTTPS",
+          "Memblokir situs berbahaya"
         ],
         answer: 1,
-        explanation: "Grid mengatur baris dan kolom sekaligus (dua dimensi). Flexbox hanya satu dimensi (baris ATAU kolom)."
+        explanation: "CA memverifikasi identitas pemohon, lalu menerbitkan sertifikat yang berisi public key pemohon beserta signature CA. Browser mempercayai cert karena mempercayai CA."
       },
       {
-        question: "Apa fungsi unit 'fr' di CSS Grid?",
-        options: [
-          "Pixel fix",
-          "Fraction (fraksi) dari ruang yang tersedia",
-          "Font-relative unit",
-          "Frame per detik"
+        "question": "Mengapa Let's Encrypt certificate berlaku hanya 90 hari (relatif pendek)?",
+        "options": [
+          "Karena Let's Encrypt tidak aman",
+          "Untuk mendorong automasi renewal & membatasi dampak jika key bocor",
+          "Karena CA gratis tidak boleh lama",
+          "Karena standar X.509 membatasi 90 hari"
         ],
         answer: 1,
-        explanation: "fr (fraction) adalah unit fraksi dari ruang yang tersisa. 1fr 1fr 1fr berarti tiga kolom dengan ukuran sama."
+        explanation: "Masa pendek mendorong admin setup auto-renew (lebih sehat operationally) dan memperkecil window kerusakan jika cert/private key compromised. Standar X.509 sendiri mengizinkan masa berlaku apa pun."
       },
       {
-        question: "Cara membuat grid responsif otomatis tanpa media query?",
-        options: [
-          "grid-template-columns: 1fr 1fr 1fr",
-          "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))",
-          "grid-template-columns: auto auto auto",
-          "display: flex; flex-wrap: wrap"
+        "question": "Apa fungsi Certificate Transparency (CT)?",
+        "options": [
+          "Enkripsi cert dengan transparan",
+          "Log publik semua cert yang diterbitkan, sehingga domain owner bisa deteksi cert yang tidak dia minta",
+          "Membuat cert gratis",
+          "Mempercepat validasi TLS"
         ],
         answer: 1,
-        explanation: "repeat(auto-fit, minmax(250px, 1fr)) membuat jumlah kolom menyesuaikan lebar container otomatis, dengan minimum 250px per kolom."
+        explanation: "CT mengharuskan setiap cert yang diterbitkan dicatat di log publik yang dapat diaudit. Pemilik domain bisa cek (mis. crt.sh) apakah ada cert palsu untuk domainnya."
       }
     ]
   },
   {
     level: 3,
     order: 7,
-    title: "Animation",
-    slug: "css-animation",
-    description: "Membuat animasi dengan transition, transform, dan @keyframes untuk halaman interaktif.",
-    icon: "✨",
+    title: "Password Security",
+    slug: "password-security",
+    description: "Penyimpanan password yang aman: salt, slow hash (bcrypt/argon2), policy, dan serangan brute force.",
+    icon: "👁️",
     isProject: false,
-    content: `# Animation
+    content: `# Password Security
 
-**Animasi CSS** membuat halaman web terasa hidup dan interaktif. Ada dua cara utama: **transition** untuk perubahan halus, dan **@keyframes** untuk animasi kompleks.
+Password adalah bentuk autentikasi paling umum, dan paling banyak disalahgunakan. Memahami cara menyimpan & memproteksi password adalah keterampilan inti seorang developer maupun security engineer.
 
-## Transition
-
-\`transition\` membuat perubahan property **halus** saat ada trigger (hover, click, dll):
-
-\`\`\`css
-.button {
-  background-color: blue;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: darkblue;
-}
-\`\`\`
-
-Saat di-hover, warna berubah **halus** selama 0.3 detik, bukan mendadak.
-
-### Sintaks Transition
-
-\`\`\`css
-.box {
-  /* Satu property */
-  transition: transform 0.3s ease;
-
-  /* Beberapa property */
-  transition: background-color 0.3s, transform 0.5s, opacity 0.2s;
-
-  /* Shorthand lengkap */
-  transition: property duration timing-function delay;
-
-  /* Contoh */
-  transition: all 0.3s ease-in-out 0.1s;
-}
-\`\`\`
-
-### Timing Functions
+## Mengapa Password Tidak Boleh Disimpan Plain?
 
 \`\`\`text
-ease        → default, mulai lambat, cepat, akhir lambat
-linear      → kecepatan konstan
-ease-in     → mulai lambat, akhir cepat
-ease-out    → mulai cepat, akhir lambat
-ease-in-out → mulai & akhir lambat
-cubic-bezier(...) → custom curve
+Risiko simpan plaintext:
+- Database bocor → semua password terbuka
+- Admin/insider bisa baca password user
+- User yang pakai password sama di banyak situs → semua akun mereka jebol
+
+Solusi: simpan HASH password, bukan password-nya
 \`\`\`
 
-## Transform
+## Masalah Hash Biasa
 
-\`transform\` mengubah elemen tanpa mengganggu layout:
-
-\`\`\`css
-.box {
-  /* Translate (pindah) */
-  transform: translateX(50px);
-  transform: translateY(-20px);
-  transform: translate(50px, 20px);
-
-  /* Scale (skala) */
-  transform: scale(1.5);
-  transform: scaleX(2);
-  transform: scale(0.5);
-
-  /* Rotate (putar) */
-  transform: rotate(45deg);
-  transform: rotate(-90deg);
-
-  /* Skew (miring) */
-  transform: skew(20deg, 10deg);
-
-  /* Kombinasi */
-  transform: translate(50px, 0) rotate(45deg) scale(1.2);
-}
-\`\`\`
-
-> **Penting**: Gunakan \`transform\` dan \`opacity\` untuk animasi — keduanya **performant** karena tidak trigger layout ulang.
-
-## Hover Effect Populer
-
-\`\`\`css
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.image {
-  transition: transform 0.5s ease;
-  overflow: hidden;
-}
-
-.image:hover img {
-  transform: scale(1.1);
-}
-\`\`\`
-
-## @keyframes Animation
-
-Untuk animasi berulang atau kompleks, gunakan \`@keyframes\`:
-
-\`\`\`css
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.ball {
-  animation: bounce 1s ease-in-out infinite;
-}
-\`\`\`
-
-### Sintaks Animation
-
-\`\`\`css
-.element {
-  animation: name duration timing-function delay iteration-count direction fill-mode play-state;
-}
-
-/* Contoh */
-.spinner {
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-\`\`\`
-
-### Properti Animation
+Hash cepat (SHA-256) sangat buruk untuk password karena:
 
 \`\`\`text
-animation-name         → nama @keyframes
-animation-duration     → durasi (1s, 500ms)
-animation-timing-function → ease, linear, dll
-animation-delay        → jeda sebelum mulai
-animation-iteration-count → angka atau infinite
-animation-direction    → normal, reverse, alternate
-animation-fill-mode    → forwards, backwards, both
+GPU modern (RTX 4090) bisa ~ 6 miliar SHA-256/detik
+Dictionary 10 juta password → di-hash semua dalam 0.002 detik
 \`\`\`
 
-## Contoh Animasi Loading
+## Rainbow Table
 
-\`\`\`css
-.loader {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
+Pre-computed table hash untuk password umum. Attacker tinggal lookup, bukan compute.
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+\`\`\`text
+password123 → ef92b739ba...
+letmein     → 0f35993969...
+admin       → 8c6976e5b5...
+
+Bila database leak berisi hash tanpa salt:
+  attacker lookup → dapat password asli dalam detik
 \`\`\`
 
-## Fade In Saat Page Load
+## Solusi: Salt
 
-\`\`\`css
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+**Salt** adalah string acak yang ditambahkan ke password sebelum di-hash. Salt disimpan bersama hash (tidak perlu rahasia).
 
-.hero {
-  animation: fadeIn 1s ease-out;
-}
+\`\`\`text
+Hash( password + salt ) = stored_hash
+
+Salt membuat:
+  - Password sama → hash berbeda (tiap user punya salt unik)
+  - Rainbow table tidak bisa dipakai (harus compute ulang per salt)
+  - Brute force harus per-user (tidak bisa batch)
 \`\`\`
 
-## Pulse Animation
+## Slow Hash — Slow Down Attacker
 
-\`\`\`css
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
+Karena attacker brute force per guess, kita buat tiap hash lambat:
 
-.notification {
-  animation: pulse 2s ease-in-out infinite;
-}
+\`\`\`text
+SHA-256     : ~ 6 miliar/detik di GPU
+bcrypt(12)  : ~ 100/detik di GPU (60 juta kali lebih lambat!)
+argon2id    : bahkan lebih lambat + memory-hard
 \`\`\`
 
-## Tips Performa
+Algoritma password hashing yang direkomendasikan:
 
-- Animasikan hanya **\`transform\`** dan **\`opacity\`** untuk performa terbaik
-- Hindari animasi \`width\`, \`height\`, \`top\`, \`left\` (trigger layout)
-- Gunakan \`will-change\` untuk elemen yang akan dianimasi:
-  \`\`\`css
-  .animated { will-change: transform; }
-  \`\`\`
-- Jangan berlebihan — terlalu banyak animasi bikin pusing
-
-## Tips UX
-
-- Durasi **200-500ms** paling natural untuk micro-interaction
-- Gunakan **ease-out** untuk feedback (cepat lalu melambat)
-- Sediakan \`prefers-reduced-motion\` untuk accessibility:
-
-\`\`\`css
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+\`\`\`text
+1. argon2id  → PINNED! Pemenang Password Hashing Competition 2015
+              memory-hard, tahan GPU/ASIC
+2. bcrypt    → populer, cost factor (10-12 minimal, 14+ lebih aman)
+3. scrypt    → memory-hard, alternative argon2
+4. PBKDF2    → fallback, iterasi 600.000+ (OWASP 2023)
 \`\`\`
 
-> Animasi yang tepat membuat web terasa premium. Tapi jangan berlebihan!`,
+## Implementasi dengan Python (bcrypt)
+
+\`\`\`python
+import bcrypt
+
+# Saat user register
+password = "passwordSaya123"
+# bcrypt.generate_salt(rounds) → salt + cost
+salt = bcrypt.gensalt(rounds=12)
+hashed = bcrypt.hashpw(password.encode(), salt)
+print(hashed)
+# Output: $2b$12$<22-char-salt><31-char-hash>
+
+# Simpan 'hashed' di database (string)
+
+# Saat user login
+input_password = "passwordSaya123"
+is_valid = bcrypt.checkpw(input_password.encode(), hashed.encode())
+print(f"Login valid: {is_valid}")
+
+# Bila password salah
+is_valid_wrong = bcrypt.checkpw("salah".encode(), hashed.encode())
+print(f"Login salah: {is_valid_wrong}")
+\`\`\`
+
+Format bcrypt: \`$2b$<cost>$<salt 22 char><hash 31 char>\`. Cost menentukan iterasi \`2^cost\`.
+
+## Implementasi dengan argon2id (lebih modern)
+
+\`\`\`python
+from argon2 import PasswordHasher, Type
+
+ph = PasswordHasher(
+    time_cost=3,        # iterasi
+    memory_cost=65536,  # 64 MB RAM
+    parallelism=4,      # thread
+    type=Type.ID        # argon2id (hybrid)
+)
+
+# Hash
+hashed = ph.hash("passwordSaya123")
+print(hashed)
+# $argon2id$v=19$m=65536,t=3,p=4$<salt>$<hash>
+
+# Verify
+try:
+    ph.verify(hashed, "passwordSaya123")
+    print("✓ Valid")
+except Exception:
+    print("✗ Invalid")
+
+# Cek perlu rehash (kalau parameter upgrade)
+if ph.check_needs_rehash(hashed):
+    new_hash = ph.hash("passwordSaya123")
+    # update database
+\`\`\`
+
+## Password Policy yang Baik
+
+\`\`\`text
+✓ Minimal 12 karakter (NIST 800-63B)
+✓ Izinkan karakter apa saja (termasuk emoji, unicode)
+✓ Jangan pakai rule kompleksitas berlebihan (P@ssw0rd! umum)
+✓ Cek password terhadap breach database (HaveIBeenPwned API)
+✓ MFA/2FA untuk akun sensitif
+✓ Rate limit login (mis. 5 percobaan/menit)
+✓ Lockout setelah N kali gagal, dengan unlock manual
+✓ Password manager yang direkomendasikan (Bitwarden, 1Password)
+
+✗ Jangan pakai pertanyaan keamanan (nama ibu, dll)
+✗ Jangan expire password berkala tanpa alasan (NIST 2017)
+✗ Jangan batasi panjang maksimal (sampai ratusan char)
+\`\`\`
+
+## Serangan Password Umum
+
+\`\`\`text
+Brute force    → coba semua kombinasi (a, aa, ab, ...)
+Dictionary     → coba kata umum (rockyou.txt: 14 juta password)
+Hybrid         → dictionary + variasi (password123, P@ssword)
+Credential stuffing → pakai pasangan email:password dari breach lain
+Phishing       → tipu user untuk input password di situs palsu
+Keylogger      → malware rekam ketikan
+Spraying       → 1 password umum dicoba ke banyak akun
+\`\`\`
+
+## Cara Memeriksa Password Bocor (k-anonymity)
+
+\`\`\`python
+import requests, hashlib
+
+def check_password_breach(password):
+    sha1 = hashlib.sha1(password.encode()).hexdigest().upper()
+    prefix, suffix = sha1[:5], sha1[5:]
+    # Hanya kirim prefix → server tidak tahu password kita
+    r = requests.get(f"https://api.pwnedpasswords.com/range/{prefix}")
+    for line in r.text.splitlines():
+        s, count = line.split(":")
+        if s == suffix:
+            return int(count)
+    return 0
+
+count = check_password_breach("password123")
+print(f"Ditemukan di {count} breach")  # jutaan
+\`\`\`
+
+Pendekatan **k-anonymity** — client hanya kirim 5 char pertama hash, server kembalikan semua suffix yang cocok. Server tidak pernah tahu password penuh.
+
+## MFA (Multi-Factor Authentication)
+
+\`\`\`text
+Factor 1: Something you KNOW  (password, PIN)
+Factor 2: Something you HAVE  (HP, token hardware, YubiKey)
+Factor 3: Something you ARE   (biometrik: sidik jari, wajah)
+
+MFA = minta minimal 2 factor
+
+Tipe MFA:
+- SMS OTP          → tidak direkomendasikan (SIM swap, interception)
+- TOTP (Authenticator) → Google Auth, Authy, dll (RFC 6238)
+- Push notification → approve di HP ( WhatsApp, banking)
+- Hardware key      → YubiKey, FIDO2/WebAuthn (PALING AMAN)
+- Biometric         → FaceID, fingerprint (convenient)
+\`\`\`
+
+## Implementasi TOTP di Python
+
+\`\`\`python
+import pyotp, qrcode
+
+# Generate secret untuk user (simpan di DB)
+secret = pyotp.random_base32()
+print(f"Secret: {secret}")
+
+# User scan QR ini di Google Authenticator
+uri = pyotp.totp.TOTP(secret).provisioning_uri(
+    name="user@example.com", issuer_name="MyApp"
+)
+img = qrcode.make(uri)
+img.save("qr.png")
+
+# Verifikasi saat login
+totp = pyotp.TOTP(secret)
+code = input("Masukkan kode 6 digit: ")
+if totp.verify(code):
+    print("✓ MFA valid")
+else:
+    print("✗ Kode salah atau kedaluwarsa (30 detik)")
+\`\`\`
+
+## Common Pitfalls
+
+\`\`\`text
+1. Simpan password di log (access log, error log)
+2. Kirim password plain via email
+3. Pakai MD5/SHA1 untuk password (BROKEN)
+4. Pakai SHA-256 tanpa salt
+5. Pakai salt statis (sama untuk semua user) → masih bisa rainbow table per app
+6. Limit password length (sebenarnya hash fixed-length, jadi bebas)
+7. Reset password via email link yang tidak expire
+8. Trust client-side hashing (selalu hash juga di server)
+9. Pakai "security questions" yang bisa ditebak
+\`\`\`
+
+## Aturan Emas Developer
+
+\`\`\`text
+1. Selalu hash password dengan argon2id / bcrypt (BUKAN SHA-256/MD5)
+2. Salt unik per user (bcrypt/argon2 otomatis)
+3. Pilih cost factor yang membuat tiap hash ~250ms di server production
+4. Bandingkan dengan timing-safe comparison
+5. Jangan expose info "username atau password salah" → pilih satu pesan generik
+6. Implement rate limit + lockout
+7. Sediakan MFA untuk akun sensitif
+8. Test breach detection (HaveIBeenPwned API)
+9. Penalti: buat hash lama bisa di-upgrade saat user login (check_needs_rehash)
+\`\`\``,
     quiz: [
       {
-        question: "Apa perbedaan transition dan @keyframes animation?",
+        question: "Apa fungsi salt pada password hashing?",
         options: [
-          "Tidak ada perbedaan",
-          "Transition untuk perubahan halus saat trigger (hover), @keyframes untuk animasi kompleks berurutan",
-          "Transition lebih cepat dari @keyframes",
-          "@keyframes hanya untuk gambar"
+          "Mempercepat proses hashing",
+          "Mencegah rainbow table & membuat password sama menghasilkan hash berbeda",
+          "Mengenkripsi password agar bisa didecrypt",
+          "Memendekkan password"
         ],
         answer: 1,
-        explanation: "Transition membuat perubahan property halus saat ada trigger (hover/focus). @keyframes untuk animasi berurutan dengan banyak step, bisa berulang."
+        explanation: "Salt unik per user membuat password identik menghasilkan hash berbeda, dan mencegah penggunaan rainbow table (harus recompute per salt). Salt tidak perlu rahasia, biasanya disimpan bersama hash."
       },
       {
-        question: "Properti mana yang paling performant untuk animasi CSS?",
+        question: "Mengapa SHA-256 tidak direkomendasikan untuk penyimpanan password?",
         options: [
-          "width dan height",
-          "top dan left",
-          "transform dan opacity",
-          "margin dan padding"
+          "Karena SHA-256 sudah deprecated",
+          "Karena terlalu cepat — GPU bisa brute force miliaran hash/detik",
+          "Karena SHA-256 menghasilkan hash panjang",
+          "Karena SHA-256 tidak deterministik"
+        ],
+        answer: 1,
+        explanation: "SHA-256 dirancang cepat (bagus untuk integrity). Untuk password, ini malah jadi kelemahan: attacker bisa menebak miliaran password/detik. Pakai bcrypt/argon2 yang sengaja dibuat lambat."
+      },
+      {
+        question: "Tipe MFA manakah yang PALING aman dari serangan phishing?",
+        options: [
+          "SMS OTP",
+          "Email OTP",
+          "Hardware security key (FIDO2/WebAuthn, YubiKey)",
+          "Push notification ke HP"
         ],
         answer: 2,
-        explanation: "transform dan opacity paling performant karena diproses di GPU dan tidak trigger layout ulang. Hindari animasi width/height/top/left."
-      },
-      {
-        question: "Apa fungsi 'animation-iteration-count: infinite'?",
-        options: [
-          "Membuat animasi berjalan sekali",
-          "Membuat animasi berulang tanpa henti",
-          "Membatasi animasi 100 kali",
-          "Menghentikan animasi"
-        ],
-        answer: 1,
-        explanation: "infinite membuat animasi berulang tanpa henti. Bisa juga diisi angka tertentu (mis. 3) untuk animasi berjalan sebanyak itu."
+        explanation: "FIDO2/WebAuthn (YubiKey dll) resistant terhadap phishing karena signature terikat ke origin (domain) yang benar — fake site tidak bisa dapat signature valid. SMS bisa SIM-swapped, push bisa fatigue attack."
       }
     ]
   },
   {
     level: 3,
     order: 8,
-    title: "Responsive Design",
-    slug: "responsive-design",
-    description: "Membuat website responsif dengan media queries, mobile-first, dan viewport meta tag.",
-    icon: "📱",
+    title: "Steganography",
+    slug: "steganography",
+    description: "Seni menyembunyikan data di dalam media: LSB image, audio, dan deteksi steganografi.",
+    icon: "🖼️",
     isProject: false,
-    content: `# Responsive Design
+    content: `# Steganography
 
-**Responsive design** memastikan website terlihat baik di **semua perangkat** — desktop, tablet, dan HP. Dengan lebih dari 50% pengunjung dari mobile, ini wajib dikuasai.
+Berbeda dengan kriptografi yang **menyembunyikan isi** pesan, **steganography** menyembunyikan **eksistensi** pesan itu sendiri. Pesan ditampilkan sebagai hal lain (gambar, audio, video) yang tidak mencurigakan.
 
-## Viewport Meta Tag
-
-Pertama, tambahkan meta tag ini di \`<head>\` HTML:
-
-\`\`\`html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-\`\`\`
-
-Tanpa ini, website di HP akan tampil seperti di desktop (kecil dan harus zoom). Tag ini memastikan lebar viewport = lebar perangkat.
-
-## Media Queries
-
-Media query adalah inti dari responsive design — menerapkan CSS berbeda berdasarkan ukuran layar:
-
-\`\`\`css
-/* Default (desktop) */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Tablet */
-@media (max-width: 768px) {
-  .container {
-    padding: 0 16px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .container {
-    padding: 0 12px;
-  }
-}
-\`\`\`
-
-## Breakpoints Umum
+## Kriptografi vs Steganography
 
 \`\`\`text
-Mobile    : 320px - 480px
-Tablet    : 481px - 768px
-Laptop    : 769px - 1024px
-Desktop   : 1025px - 1200px
-Large     : 1201px+
+Kriptografi    → "Aku punya pesan rahasia, tapi kamu tidak bisa baca isinya"
+Steganography  → "Aku tidak punya pesan apa pun" (padahal ada)
+
+Kombinasi terbaik: encrypt dulu, lalu sembunyikan via steganography
 \`\`\`
 
-Breakpoints populer: **480px, 768px, 1024px, 1200px**.
+## Teknik Umum
 
-## Mobile-First Approach
-
-Pendekatan **mobile-first** menulis CSS untuk HP **dulu**, lalu scale up:
-
-\`\`\`css
-/* Default: Mobile */
-.grid {
-  grid-template-columns: 1fr;
-}
-
-/* Tablet dan lebih besar */
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
+\`\`\`text
+1. LSB (Least Significant Bit) → modifikasi bit terakhir pixel image
+2. Frequency domain            → modifikasi koefisien DCT (JPEG, MP3)
+3. Metadata/EXIF               → sisipkan di tag EXIF gambar
+4. Whitespace/zero-width       → karakter tak terlihat di text
+5. Network steganography       → sisipkan di header protocol (timing, TTL)
+6. Audio steganography         → modifikasi sample audio
+7. Video steganography         → modifikasi frame video
 \`\`\`
 
-Mobile-first lebih disarankan karena:
+## LSB (Least Significant Bit) — Paling Populer
 
-- HP adalah perangkat paling banyak digunakan
-- Kode lebih ringkas (override sedikit)
-- Lebih mudah ditambah fitur di layar besar
+Setiap pixel gambar RGB terdiri dari 3 byte (R, G, B). Bit terakhir tiap byte bisa diubah tanpa mengubah warna secara visual:
 
-## Media Query untuk Fitur Lain
-
-\`\`\`css
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #1a1a1a;
-    color: #f4f4f4;
-  }
-}
-
-/* Print */
-@media print {
-  .no-print { display: none; }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-  }
-}
+\`\`\`text
+Pixel asli:        R=11001100  G=10011010  B=11110001
+Sisipkan 'H'=01001000:
+  bit 0 → R: 11001100 (tidak berubah)
+  bit 1 → G: 10011011 (ubah LSB)
+  bit 0 → B: 11110001 (tidak berubah)
+  ... lanjut untuk bit berikutnya
 \`\`\`
 
-## Unit Responsif
+Kapasitas: 1 bit per channel per pixel. Gambar 1024×768 RGB bisa simpan ~295 KB pesan.
 
-Gunakan unit relatif, bukan fix:
+## Implementasi LSB dengan Python
 
-\`\`\`css
-/* Hindari: fix pixel */
-.bad { width: 1000px; font-size: 16px; }
+\`\`\`python
+from PIL import Image
+import numpy as np
 
-/* Gunakan: unit relatif */
-.good {
-  max-width: 1200px;     /* batas maksimum */
-  width: 100%;           /* tapi responsif */
-  font-size: 1rem;       /* relatif root */
-  padding: 2vw;          /* relatif viewport */
-}
+def text_to_bits(text):
+    return ''.join(format(ord(c), '08b') for c in text)
 
-/* Modern: clamp() */
-h1 {
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  /* minimum 1.5rem, ideal 4vw, maksimum 3rem */
-}
+def bits_to_text(bits):
+    chars = [bits[i:i+8] for i in range(0, len(bits), 8)]
+    return ''.join(chr(int(b, 2)) for b in chars)
+
+def encode_lsb(image_path, message, output_path):
+    img = Image.open(image_path).convert('RGB')
+    data = np.array(img)
+    bits = text_to_bits(message) + '00000000'  # null terminator
+    
+    flat = data.flatten()
+    if len(bits) > len(flat):
+        raise ValueError("Pesan terlalu besar untuk gambar ini")
+    
+    for i, bit in enumerate(bits):
+        flat[i] = (flat[i] & 0xFE) | int(bit)
+    
+    new_img = Image.fromarray(flat.reshape(data.shape), 'RGB')
+    new_img.save(output_path)
+    print(f"Pesan disisipkan ke {output_path}")
+
+def decode_lsb(image_path):
+    img = Image.open(image_path).convert('RGB')
+    flat = np.array(img).flatten()
+    bits = ''
+    for i in range(len(flat)):
+        bits += str(flat[i] & 1)
+        if len(bits) % 8 == 0:
+            char = chr(int(bits[-8:], 2))
+            if char == '\\x00':
+                return bits_to_text(bits[:-8])
+    return bits_to_text(bits)
+
+# Pakai
+encode_lsb('cover.png', 'Halo Dunia Rahasia', 'stego.png')
+print(decode_lsb('stego.png'))  # Halo Dunia Rahasia
 \`\`\`
 
-## Responsive Image
+## Pilih Format yang Tepat
 
-\`\`\`css
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+\`\`\`text
+Format yang BAIK untuk steganography:
+  PNG, BMP, TIFF → lossless, LSB tidak rusak
+  
+Format yang BURUK:
+  JPEG           → lossy compression, LSB rusak
+  MP3, WebP      → lossy, merusak pesan
+
+Lossless format menjaga bit pixel tetap sama persis setelah save.
 \`\`\`
 
-Atau gunakan \`<picture>\` untuk gambar berbeda per ukuran:
+## Steganography vs Watermarking
 
-\`\`\`html
-<picture>
-  <source media="(max-width: 600px)" srcset="small.jpg">
-  <source media="(max-width: 1200px)" srcset="medium.jpg">
-  <img src="large.jpg" alt="Hero image">
-</picture>
+\`\`\`text
+Steganography → pesan RAHASIA, sembunyi dari deteksi
+Watermarking  → TANDA kepemilikan, robust terhadap modifikasi
+
+Watermarking dipakai:
+  - Copyright foto/video
+  - Anti-piracy (cinema watermark)
+  -溯源 sumber kebocoran (tiap viewer punya watermark unik)
 \`\`\`
 
-## Responsive Navigation
+## Tool Populer
 
-Pola umum: navbar desktop, hamburger menu mobile:
+\`\`\`bash
+# Steghide — sisipkan & ekstrak pesan di image/audio
+sudo apt install steghide
+steghide embed -cf cover.jpg -ef secret.txt -p password123
+steghide extract -sf stego.jpg -p password123
 
-\`\`\`css
-.nav-menu {
-  display: flex;
-  gap: 24px;
-}
+# Stegsnow — whitespace steganography di text
+stegsnow -C -m "Pesan rahasia" -p "pass" input.txt output.txt
+stegsnow -C -p "pass" output.txt
 
-.hamburger {
-  display: none;
-}
+# Zsteg — deteksi LSB di PNG/BMP
+gem install zsteg
+zsteg stego.png
 
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none;       /* sembunyi di mobile */
-  }
+# Stegexpose — deteksi stego di gambar
+java -jar StegExpose.jar stego.png
 
-  .hamburger {
-    display: block;      /* tampilkan hamburger */
-  }
-
-  .nav-menu.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background: #333;
-    width: 200px;
-    padding: 20px;
-  }
-}
+# Binwalk — cari file tersembunyi di binary
+binwalk firmware.bin
+binwalk -e firmware.bin   # extract
 \`\`\`
 
-## Tools untuk Test Responsive
+## Deteksi Steganography (Steganalysis)
 
-- **DevTools** (F12) → Toggle device toolbar (Ctrl+Shift+M)
-- **BrowserStack** untuk tes di banyak device
-- Tes di device fisik sesering mungkin
+\`\`\`text
+Statistical analysis:
+  - Histogram analysis (LSB mengubah distribusi)
+  - Chi-square attack
+  - RS analysis (regular & singular groups)
+  - Sample pair analysis
 
-## Tips
+Visual analysis:
+  - Bandingkan dengan gambar asli (kalau ada)
+  - Lihat LSB plane (gambar dari bit terakhir)
+  - Noise pattern yang tidak natural
 
-- Selalu mulai dengan **mobile-first**
-- Gunakan **\`max-width\`** alih-alih \`width\` fix
-- Gambar: \`max-width: 100%; height: auto;\`
-- Test di **berbagai ukuran** layar
-- Jangan target device spesifik (iPhone, Samsung), tapi target **breakpoints**
-- Gunakan **Flexbox/Grid** yang otomatis responsif
+Metadata analysis:
+  - EXIF tool, exiftool
+  - Cek software yang dipakai, timestamp, GPS
+\`\`\`
 
-> Website yang tidak responsif di 2024 = kehilangan 50%+ pengguna. Wajib dikuasai!`,
+## LSB Plane Visualization
+
+\`\`\`python
+from PIL import Image
+import numpy as np
+
+img = np.array(Image.open('stego.png').convert('RGB'))
+# Ambil hanya LSB tiap channel, perbesar
+lsb_plane = (img & 1) * 255
+Image.fromarray(lsb_plane, 'RGB').save('lsb_plane.png')
+\`\`\`
+
+Jika LSB plane terlihat seperti noise acak → kemungkinan ada stego. Jika terlihat pola gambar asli → tidak ada stego LSB.
+
+## Use Case Steganography
+
+\`\`\`text
+Positive:
+  - Watermarking hak cipta
+  - Tagging dokumen untuk tracking leak
+  - Komunikasi rahasia di negara sensor (China, Iran)
+  - Hidden trigger di ML dataset (backdoor attack)
+
+Negative (malware):
+  - Sisipkan payload di gambar (PowerShell obfuscation)
+  - C2 communication via image upload/download
+  - Exfiltrate data lewat gambar yang tidak mencurigakan
+\`\`\`
+
+## Kasus Nyata
+
+\`\`\`text
+1. Operation Tripwire (2014) → APT pakai stego di gambar untuk C2
+2. Hamas terror plot (2014)   → pesan disembunyikan di foto di situs porno
+3. Snowden documents         → NSA pakai stego untuk covert comms
+4. Angler Exploit Kit        → payload disembunyikan di banner iklan
+5. Flickr malware            → exfil data via upload foto ke Flickr
+\`\`\`
+
+## Deteksi dengan Binwalk (Cari File di Dalam File)
+
+\`\`\`bash
+# Binwalk cari signature file di dalam binary
+$ binwalk firmware.bin
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+------------------------------------------------------------------
+0             0x0             PEM certificate
+1234          0x4D2           JPEG image data
+5678          0x162E          gzip compressed data
+
+# Extract semua yang ketemu
+binwalk -e firmware.bin
+ls _firmware.bin.extracted/
+\`\`\`
+
+Seringkali firmware IoT menyimpan file penting (config, key) tanpa enkripsi.
+
+## Aturan & Etika
+
+\`\`\`text
+1. Steganography tidak menggantikan enkripsi — kombinasi keduanya
+2. Jangan andalkan stego sebagai satu-satunya lapisan keamanan
+3. Stego di gambar yang dishare publik bisa dideteksi
+4. Untuk anti-forensik, stego efektif tapi tidak 100% tidak terdeteksi
+5. Hanya pakai di konteks legal — menyembunyikan data di perangkat milik orang lain tetap ilegal
+\`\`\`
+
+## Tantangan untuk Dipraktikkan
+
+1. Sisipkan pesan ke gambar cover dengan LSB (Python di atas)
+2. Extract kembali pesan tersebut
+3. Kompress gambar stego ke JPEG — apakah pesan selamat?
+4. Pakai zsteg untuk deteksi stego di gambar yang kamu buat
+5. Bandingkan ukuran file cover vs stego — apakah ada perbedaan?`,
     quiz: [
       {
-        question: "Apa fungsi meta viewport tag?",
+        question: "Apa perbedaan utama kriptografi dan steganography?",
         options: [
-          "Mengatur tema warna browser",
-          "Memastikan website tampil dengan lebar yang sesuai perangkat, bukan versi desktop diperkecil",
-          "Mempercepat loading website",
-          "Mengaktifkan JavaScript"
+          "Kriptografi menyembunyikan isi pesan, steganography menyembunyikan eksistensi pesan",
+          "Kriptografi pakai key, steganography tidak",
+          "Kriptografi untuk gambar, steganography untuk teks",
+          "Tidak ada perbedaan"
         ],
-        answer: 1,
-        explanation: "meta name='viewport' content='width=device-width, initial-scale=1.0' membuat lebar viewport = lebar perangkat, mencegah HP menampilkan versi desktop yang diperkecil."
+        answer: 0,
+        explanation: "Kriptografi membuat pesan tidak terbaca (eksistensi tetap kelihatan). Steganography menyembunyikan bahwa ada pesan sama sekali — pesan terlihat sebagai hal lain (gambar, audio)."
       },
       {
-        question: "Apa itu pendekatan mobile-first dalam responsive design?",
+        question: "Mengapa format JPEG TIDAK cocok untuk steganography LSB?",
         options: [
-          "Hanya mendesain untuk mobile",
-          "Menulis CSS untuk mobile dulu, lalu menambahkan media query min-width untuk layar lebih besar",
-          "Mendesain desktop dulu, lalu menyesuaikan mobile",
-          "Tidak perlu media query"
+          "Karena JPEG berukuran besar",
+          "Karena kompresi lossy JPEG merusak bit LSB yang disisipkan",
+          "Karena JPEG tidak bisa dikonversi",
+          "Karena JPEG tidak punya pixel"
         ],
         answer: 1,
-        explanation: "Mobile-first menulis CSS default untuk mobile, lalu override dengan @media (min-width: ...) untuk layar lebih besar. Lebih ringkas dan performa lebih baik."
+        explanation: "JPEG lossy — kompresi mengubah nilai pixel, sehingga LSB yang disisipkan ikut termodifikasi dan pesan hilang/rusak. Pakai format lossless seperti PNG, BMP, TIFF."
       },
       {
-        question: "Breakpoint umum untuk tablet adalah sekitar berapa px?",
-        options: ["320px", "480px", "768px", "1200px"],
-        answer: 2,
-        explanation: "Breakpoint 768px umumnya untuk tablet. 480px untuk mobile, 1024px untuk laptop, 1200px+ untuk desktop besar."
+        question: "Teknik deteksi steganography dengan menganalisis bit terakhir tiap pixel disebut?",
+        options: [
+          "Brute force",
+          "LSB plane visualization / statistical steganalysis",
+          "Rainbow table",
+          "Frequency analysis"
+        ],
+        answer: 1,
+        explanation: "LSB plane visualization melihat pola bit terakhir tiap pixel. Jika terlihat noise acak (bukan pola gambar), kemungkinan ada stego. Statistical test (chi-square, RS analysis) juga dipakai."
       }
     ]
   },
   {
     level: 3,
     order: 9,
-    title: "Project: Company Profile",
-    slug: "project-company-profile",
-    description: "Proyek membangun halaman company profile responsif dengan HTML semantic dan CSS modern.",
-    icon: "🏢",
+    title: "Project: Encrypt/Decrypt Tool",
+    slug: "project-encrypt-decrypt",
+    description: "Proyek akhir Level 3: bangun tool command-line untuk enkripsi file hybrid (AES + RSA) lengkap.",
+    icon: "🛠️",
     isProject: true,
-    content: `# Project: Company Profile
+    content: `# Project: Encrypt/Decrypt Tool
 
-Saatnya mengaplikasikan semua pengetahuan HTML dan CSS! Kamu akan membangun **company profile** profesional untuk perusahaan fiktif. Proyek ini menguji semua konsep Level 2 dan 3.
+Saatnya menggabungkan semua yang telah dipelajari di Level 3 untuk membangun **tool command-line** yang melakukan enkripsi file hybrid: AES-256-GCM untuk data + RSA-2048 untuk kunci.
 
 ## Tujuan Proyek
 
-Bangun halaman company profile yang **responsif**, **indah**, dan **modern** menggunakan HTML semantic + CSS (Flexbox, Grid, animasi, dan media queries).
+Bangun CLI tool \`cryptobox\` dengan fitur:
 
-## Spesifikasi
+1. **Generate keypair** RSA-2048 (public + private)
+2. **Encrypt file** dengan hybrid scheme:
+   - Generate AES-256 key random
+   - Encrypt file dengan AES-256-GCM
+   - Encrypt AES key dengan RSA public key
+   - Simpan: encrypted_key + nonce + ciphertext + tag → output file
+3. **Decrypt file** dengan private key:
+   - Decrypt AES key dengan RSA private key
+   - Decrypt ciphertext dengan AES-256-GCM
+4. **Sign file** dengan private key (RSA-PSS + SHA-256)
+5. **Verify signature** dengan public key
+6. **Hash file** untuk integritas (SHA-256)
 
-Company profile harus memiliki:
-
-1. **Header sticky** dengan logo, navigasi, dan tombol CTA
-2. **Hero section** dengan headline, subheadline, dan background
-3. **About section** — deskripsi perusahaan dengan gambar
-4. **Services section** — grid kartu layanan (3-6 services)
-5. **Stats section** — angka pencapaian (klien, proyek, tahun)
-6. **Team section** — grid foto + nama tim
-7. **Testimonials** — kartu kutipan pelanggan
-8. **Contact section** — form + info kontak
-9. **Footer** dengan link, social media, copyright
-
-## Struktur File
+## Skema Hybrid Encryption
 
 \`\`\`text
-company-profile/
-├── index.html
-├── css/
-│   ├── reset.css         → Reset default browser
-│   ├── variables.css     → CSS variables (warna, font, spacing)
-│   ├── style.css         → Style utama
-│   └── responsive.css    → Media queries
-└── images/
-    ├── logo.svg
-    ├── hero.jpg
-    ├── about.jpg
-    ├── team-1.jpg ... team-4.jpg
-    └── services-icon.svg
+[ENCRYPT]
+  File plaintext
+      ↓
+  AES-256-GCM encrypt (key K, nonce N)
+      ↓
+  Ciphertext C + tag T
+      ↓
+  RSA-OAEP encrypt(K) dengan public key
+      ↓
+  Encrypted key EK
+      ↓
+  Output: [EK (256 bytes) | N (12 bytes) | T (16 bytes) | C]
+
+[DECRYPT]
+  Output: [EK | N | T | C]
+      ↓
+  RSA-OAEP decrypt(EK) dengan private key → K
+      ↓
+  AES-256-GCM decrypt(C, N, T, K) → plaintext
 \`\`\`
 
-## Kerangka HTML
+## Tahap 1 — Setup Proyek
 
-\`\`\`html
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TechCorp - Solusi Digital Modern</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container header-inner">
-      <a href="#" class="logo">
-        <img src="images/logo.svg" alt="TechCorp Logo">
-      </a>
-      <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="#about">Tentang</a></li>
-          <li><a href="#services">Layanan</a></li>
-          <li><a href="#team">Tim</a></li>
-          <li><a href="#contact">Kontak</a></li>
-        </ul>
-      </nav>
-      <a href="#contact" class="btn btn-primary">Hubungi Kami</a>
-      <button class="hamburger" aria-label="Menu">☰</button>
-    </div>
-  </header>
+\`\`\`bash
+mkdir cryptobox && cd cryptobox
+python -m venv venv
+source venv/bin/activate
+pip install cryptography click
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-text">
-        <h1>Solusi Digital untuk Bisnis Modern</h1>
-        <p>Kami membantu perusahaan berkembang dengan teknologi terkini.</p>
-        <a href="#services" class="btn btn-primary">Lihat Layanan</a>
-      </div>
-      <div class="hero-image">
-        <img src="images/hero.jpg" alt="Ilustrasi solusi digital">
-      </div>
-    </div>
-  </section>
-
-  <!-- About, Services, Stats, Team, Testimonials, Contact... -->
-</body>
-</html>
+# Struktur
+cryptobox/
+├── cryptobox.py        # main CLI
+├── keys/               # folder keypair
+│   ├── public.pem
+│   └── private.pem
+└── README.md
 \`\`\`
 
-## CSS Variables
+## Tahap 2 — Generate Keypair
 
-\`\`\`css
-/* variables.css */
-:root {
-  /* Colors */
-  --color-primary: #3182ce;
-  --color-primary-dark: #2c5282;
-  --color-secondary: #ed8936;
-  --color-text: #2d3748;
-  --color-text-light: #718096;
-  --color-bg: #ffffff;
-  --color-bg-alt: #f7fafc;
-  --color-border: #e2e8f0;
+\`\`\`python
+# cryptobox.py
+import os
+import click
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-  /* Typography */
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
+KEY_DIR = "keys"
+PUB_KEY = os.path.join(KEY_DIR, "public.pem")
+PRIV_KEY = os.path.join(KEY_DIR, "private.pem")
 
-  /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 4rem;
+@click.group()
+def cli():
+    """Cryptobox - Hybrid encryption tool"""
+    pass
 
-  /* Layout */
-  --container-width: 1200px;
-  --border-radius: 8px;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-}
+@cli.command()
+def keygen():
+    """Generate RSA-2048 keypair"""
+    os.makedirs(KEY_DIR, exist_ok=True)
+    private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    
+    # Save private key (PEM, PKCS8, no encryption for simplicity)
+    with open(PRIV_KEY, "wb") as f:
+        f.write(private_key.private_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption()
+        ))
+    
+    # Save public key
+    with open(PUB_KEY, "wb") as f:
+        f.write(private_key.public_key().public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
+        ))
+    
+    click.echo(f"✓ Private key: {PRIV_KEY}")
+    click.echo(f"✓ Public key : {PUB_KEY}")
+
+if __name__ == "__main__":
+    cli()
 \`\`\`
 
-## Layout dengan Grid
+## Tahap 3 — Encrypt & Decrypt
 
-\`\`\`css
-/* Services Grid */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-md);
-}
+\`\`\`python
+def load_public_key():
+    with open(PUB_KEY, "rb") as f:
+        return serialization.load_pem_public_key(f.read())
 
-/* Team Grid */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-md);
-}
+def load_private_key():
+    with open(PRIV_KEY, "rb") as f:
+        return serialization.load_pem_private_key(f.read(), password=None)
 
-@media (max-width: 768px) {
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+@cli.command()
+@click.argument('input_file')
+@click.argument('output_file')
+def encrypt(input_file, output_file):
+    """Encrypt file with hybrid AES-256-GCM + RSA-2048"""
+    public_key = load_public_key()
+    
+    # Generate AES key & nonce
+    aes_key = AESGCM.generate_key(bit_length=256)
+    nonce = os.urandom(12)
+    aesgcm = AESGCM(aes_key)
+    
+    # Read & encrypt file
+    with open(input_file, "rb") as f:
+        plaintext = f.read()
+    ciphertext = aesgcm.encrypt(nonce, plaintext, None)
+    
+    # Tag is appended to ciphertext in AESGCM (last 16 bytes)
+    ct_data = ciphertext[:-16]
+    tag = ciphertext[-16:]
+    
+    # Encrypt AES key with RSA public key (OAEP)
+    encrypted_key = public_key.encrypt(
+        aes_key,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    
+    # Write output: [encrypted_key (256)] [nonce (12)] [tag (16)] [ciphertext]
+    with open(output_file, "wb") as f:
+        f.write(encrypted_key)
+        f.write(nonce)
+        f.write(tag)
+        f.write(ct_data)
+    
+    click.echo(f"✓ Encrypted {input_file} → {output_file}")
+    click.echo(f"  Original size: {len(plaintext)} bytes")
+    click.echo(f"  Encrypted size: {os.path.getsize(output_file)} bytes")
 
-@media (max-width: 480px) {
-  .team-grid {
-    grid-template-columns: 1fr;
-  }
-}
+@cli.command()
+@click.argument('input_file')
+@click.argument('output_file')
+def decrypt(input_file, output_file):
+    """Decrypt file with hybrid scheme"""
+    private_key = load_private_key()
+    
+    with open(input_file, "rb") as f:
+        data = f.read()
+    
+    # Parse: encrypted_key (256) | nonce (12) | tag (16) | ciphertext
+    encrypted_key = data[:256]
+    nonce = data[256:268]
+    tag = data[268:284]
+    ct_data = data[284:]
+    
+    # Decrypt AES key
+    aes_key = private_key.decrypt(
+        encrypted_key,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    
+    # Decrypt ciphertext
+    aesgcm = AESGCM(aes_key)
+    # AESGCM expects tag appended to ciphertext
+    ciphertext = ct_data + tag
+    plaintext = aesgcm.decrypt(nonce, ciphertext, None)
+    
+    with open(output_file, "wb") as f:
+        f.write(plaintext)
+    
+    click.echo(f"✓ Decrypted {input_file} → {output_file}")
 \`\`\`
 
-## Header Sticky + Flexbox
+## Tahap 4 — Sign & Verify
 
-\`\`\`css
-.header {
-  position: sticky;
-  top: 0;
-  background: var(--color-bg);
-  box-shadow: var(--shadow);
-  z-index: 100;
-}
+\`\`\`python
+import hashlib
 
-.container {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-sm);
-}
+@cli.command()
+@click.argument('input_file')
+@click.argument('signature_file')
+def sign(input_file, signature_file):
+    """Sign file with RSA-PSS (private key)"""
+    private_key = load_private_key()
+    
+    with open(input_file, "rb") as f:
+        data = f.read()
+    
+    signature = private_key.sign(
+        data,
+        padding.PSS(
+            mgf=padding.MGF1(hashes.SHA256()),
+            salt_length=padding.PSS.MAX_LENGTH
+        ),
+        hashes.SHA256()
+    )
+    
+    with open(signature_file, "wb") as f:
+        f.write(signature)
+    
+    click.echo(f"✓ Signed {input_file} → {signature_file}")
+    click.echo(f"  Signature size: {len(signature)} bytes")
 
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-sm) 0;
-}
+@cli.command()
+@click.argument('input_file')
+@click.argument('signature_file')
+def verify(input_file, signature_file):
+    """Verify file signature with public key"""
+    public_key = load_public_key()
+    
+    with open(input_file, "rb") as f:
+        data = f.read()
+    with open(signature_file, "rb") as f:
+        signature = f.read()
+    
+    try:
+        public_key.verify(
+            signature,
+            data,
+            padding.PSS(
+                mgf=padding.MGF1(hashes.SHA256()),
+                salt_length=padding.PSS.MAX_LENGTH
+            ),
+            hashes.SHA256()
+        )
+        click.echo("✓ Signature VALID — file asli & tidak diubah")
+    except Exception:
+        click.echo("✗ Signature INVALID — file dimodifikasi atau key salah")
 
-.nav-list {
-  display: flex;
-  gap: var(--spacing-md);
-  list-style: none;
-}
+@cli.command()
+@click.argument('input_file')
+def hash(input_file):
+    """Compute SHA-256 hash of file"""
+    h = hashlib.sha256()
+    with open(input_file, "rb") as f:
+        while chunk := f.read(8192):
+            h.update(chunk)
+    click.echo(f"{h.hexdigest()}  {input_file}")
 \`\`\`
 
-## Animasi Hover
+## Tahap 5 — Testing
 
-\`\`\`css
-.service-card {
-  padding: var(--spacing-md);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-}
+\`\`\`bash
+# Generate keypair
+python cryptobox.py keygen
 
-.service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow);
-}
+# Buat file test
+echo "Ini dokumen rahasia dari CodeRoom" > secret.txt
 
-.btn {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  font-weight: 500;
-  transition: var(--transition);
-}
+# Encrypt
+python cryptobox.py encrypt secret.txt secret.enc
+# Output: ✓ Encrypted secret.txt → secret.enc
 
-.btn-primary {
-  background: var(--color-primary);
-  color: white;
-}
+# Lihat file terenkripsi (binary)
+xxd secret.enc | head -5
 
-.btn-primary:hover {
-  background: var(--color-primary-dark);
-  transform: translateY(-2px);
-}
+# Decrypt
+python cryptobox.py decrypt secret.enc secret.dec
+cat secret.dec
+# Output: Ini dokumen rahasia dari CodeRoom
 
-/* Fade in saat load */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+# Sign
+python cryptobox.py sign secret.txt secret.sig
 
-.hero-text {
-  animation: fadeInUp 1s ease-out;
-}
-\`\`\`
+# Verify (file asli)
+python cryptobox.py verify secret.txt secret.sig
+# Output: ✓ Signature VALID
 
-## Responsive Navigation
+# Modifikasi file lalu verify
+echo " TAMPERED" >> secret.txt
+python cryptobox.py verify secret.txt secret.sig
+# Output: ✗ Signature INVALID
 
-\`\`\`css
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .nav-list {
-    display: none;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background: var(--color-bg);
-    padding: var(--spacing-md);
-    box-shadow: var(--shadow);
-  }
-
-  .nav-list.active {
-    display: flex;
-  }
-
-  .hamburger {
-    display: block;
-  }
-}
+# Hash
+python cryptobox.py hash secret.txt
+# Output: <hash>  secret.txt
 \`\`\`
 
 ## Konsep yang Diuji
 
-Proyek ini mengharuskanmu menerapkan:
+Proyek ini menggabungkan:
 
-- **HTML semantic**: \`<header>\`, \`<nav>\`, \`<section>\`, \`<article>\`, \`<footer>\`
-- **CSS Variables** untuk konsistensi
-- **Flexbox** untuk header, navbar, hero
-- **CSS Grid** untuk services, team, testimonials
-- **Responsive design**: mobile-first, media queries, hamburger menu
-- **Animasi**: transition, transform, @keyframes
-- **Tipografi**: Google Fonts, hirarki ukuran
-- **Box model**: padding, margin, border konsisten
+- **Symmetric encryption** (AES-256-GCM)
+- **Asymmetric encryption** (RSA-2048-OAEP)
+- **Hybrid encryption scheme** (TLS-like)
+- **Hash function** (SHA-256)
+- **Digital signature** (RSA-PSS)
+- **File I/O & binary parsing**
+- **Key management** (PEM serialization)
 
-## Tantangan Tambahan
+## Kriteria Self-Assessment
 
-1. Tambahkan **dark mode** toggle dengan \`prefers-color-scheme\`
-2. Implementasi **smooth scroll** untuk anchor link
-3. Tambahkan **scroll animation** (fade-in saat scroll) dengan CSS atau JS
-4. Optimasi gambar dengan \`<picture>\` dan \`srcset\`
-5. Validasi HTML/CSS di W3C Validator
-6. Test performa di Google PageSpeed Insights
+- [ ] \`keygen\` menghasilkan pasangan public/private key yang valid
+- [ ] \`encrypt\` menghasilkan file yang tidak bisa dibaca tanpa private key
+- [ ] \`decrypt\` mengembalikan file asli persis (byte-identical)
+- [ ] \`sign\` + \`verify\` mendeteksi modifikasi file
+- [ ] \`hash\` menghasilkan SHA-256 yang cocok dengan \`sha256sum\`
+- [ ] Code terstruktur, ada docstring & error handling
+- [ ] README.md dengan cara pakai
 
-## Kriteria Penilaian Diri
+## Tantangan Tambahan (Opsional)
 
-- ✅ Tampil baik di desktop, tablet, dan mobile
-- ✅ Semua elemen semantic digunakan benar
-- ✅ CSS terorganisir (variables, reset, style, responsive)
-- ✅ Konsistensi spacing, warna, dan tipografi
-- ✅ Animasi halus, tidak berlebihan
-- ✅ Form punya label dan input yang tepat
-- ✅ Accessibility: alt text, kontras warna, focus state
-- ✅ Kode rapi, ter-indentasi konsisten, ada komentar
+1. **Password protect private key** — encrypt private.pem dengan passphrase (PBKDF2 + AES)
+2. **Stream encryption** — file besar (>1 GB) tanpa load semua ke memory
+3. **Multiple recipients** — encrypt AES key dengan public key beberapa orang
+4. **Compression** — gzip sebelum encrypt (lebih hemat)
+5. **GUI** — buat interface dengan Tkinter atau web (Flask)
+6. **Web API** — expose sebagai REST endpoint dengan Flask/FastAPI
 
-> Proyek ini adalah showcase kemampuanmu. Jadikan portofolio pertama yang bangga!`,
+## Pertanyaan Refleksi
+
+1. Mengapa kita pakai hybrid scheme, bukan RSA langsung untuk encrypt file?  
+   *(Jawaban: RSA lambat & dibatasi ukuran input ~245 byte. AES untuk data besar, RSA untuk kunci saja.)*
+
+2. Mengapa AES-GCM lebih baik dari AES-CBC di proyek ini?  
+   *(Jawaban: GCM memberikan otentikasi (AEAD) — jika ciphertext diubah, decrypt gagal. CBC tidak.)*
+
+3. Mengapa signature dibuat dengan private key, bukan public key?  
+   *(Jawaban: hanya pemilik private key yang bisa sign → bukti otentik & non-repudiation.)*
+
+4. Apa risiko jika nonce AES-GCM di-reuse?  
+   *(Jawaban: catastrophic — dua ciphertext dengan key+nonce sama bisa di-XOR untuk reveal plaintext.)*
+
+5. Mengapa kita hash-then-sign, bukan sign file langsung?  
+   *(Jawaban: signature bekerja pada digest tetap (32 byte), efisien untuk file berukuran berapa pun.)*
+
+> Catatan etika: Tool ini untuk edukasi. Untuk produksi, pertimbangkan audit keamanan, key rotation, HSM untuk private key, dan standar seperti OpenPGP (RFC 4880) atau age encryption.`,
     quiz: [
       {
-        question: "Apa keuntungan menggunakan CSS Variables (custom properties)?",
+        question: "Mengapa skema hybrid (AES + RSA) dipakai alih-alih RSA langsung untuk enkripsi file?",
         options: [
-          "Membuat CSS lebih cepat dimuat",
-          "Memudahkan konsistensi dan pemeliharaan (ubah sekali, berlaku semua)",
-          "Mengganti fungsi JavaScript",
-          "Hanya untuk warna"
+          "Karena RSA tidak aman",
+          "RSA lambat & dibatasi ukuran input, AES cepat untuk data besar tapi butuh distribusi key yang diatasi RSA",
+          "Karena AES sudah deprecated",
+          "Karena hybrid lebih mudah diimplementasikan"
         ],
         answer: 1,
-        explanation: "CSS Variables menyimpan nilai (warna, spacing, font) di :root, sehingga ubah sekali langsung berlaku di seluruh kode. Sangat membantu konsistensi dan maintainability."
+        explanation: "RSA lambat dan hanya bisa encrypt ~245 byte (untuk RSA-2048 OAEP). AES cepat untuk data besar. Hybrid: RSA encrypt kunci AES, AES encrypt data. Inilah skema TLS."
       },
       {
-        question: "Layout mana yang paling cocok untuk grid kartu services yang responsif?",
+        question: "Pada proyek ini, signature dibuat dengan key mana?",
         options: [
-          "CSS Grid dengan repeat(auto-fit, minmax(280px, 1fr))",
-          "Flexbox dengan flex-direction: column",
-          "Float dengan clear: both",
-          "Table HTML"
-        ],
-        answer: 0,
-        explanation: "CSS Grid dengan auto-fit + minmax otomatis menyesuaikan jumlah kolom dengan lebar container, sangat ideal untuk kartu responsif."
-      },
-      {
-        question: "Bagaimana cara membuat header yang tetap tampil saat scroll?",
-        options: [
-          "position: fixed",
-          "position: sticky; top: 0",
-          "position: absolute",
-          "position: relative"
+          "Public key pengirim",
+          "Private key pengirim",
+          "Symmetric key",
+          "Public key penerima"
         ],
         answer: 1,
-        explanation: "position: sticky; top: 0 membuat header menempel saat scroll, namun tetap mengambil ruang di alur normal. Lebih fleksibel dari position: fixed."
+        explanation: "Signature dibuat dengan private key pengirim (hanya pengirim yang bisa), diverifikasi dengan public key pengirim (siapa saja bisa verifikasi). Memberi otentikasi & non-repudiation."
+      },
+      {
+        question: "Apa yang terjadi jika nonce AES-GCM di-reuse dengan key yang sama?",
+        options: [
+          "Tidak terjadi apa-apa",
+          "Ciphertext menjadi lebih pendek",
+          "Kerentanan kritis — dua ciphertext bisa di-XOR untuk reveal plaintext",
+          "Decrypt menjadi lebih cepat"
+        ],
+        answer: 2,
+        explanation: "Reuse nonce di GCM/CTR adalah catastrophic failure. Karena keystream dihasilkan dari (key, nonce), reuse berarti keystream sama → XOR dua ciphertext = XOR dua plaintext → leak isi."
       }
     ]
   }

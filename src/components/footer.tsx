@@ -15,7 +15,7 @@ export function Footer() {
           <div className="space-y-3">
             <Logo size="sm" />
             <p className="text-sm text-muted-foreground max-w-xs">
-              Platform belajar coding dari nol hingga mahir. Gratis, interaktif, dan lengkap.
+              Platform belajar cybersecurity dari nol hingga mahir. Gratis, interaktif, dan lengkap.
             </p>
           </div>
 
@@ -50,12 +50,12 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold">Level Belajar</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Level 1 — Dasar</li>
-              <li>Level 2 — HTML</li>
-              <li>Level 3 — CSS</li>
-              <li>Level 4 — JavaScript</li>
-              <li>Level 5 — Backend</li>
-              <li>Level 6 — Database</li>
+              <li>Level 1 — Dasar Cyber</li>
+              <li>Level 2 — Jaringan</li>
+              <li>Level 3 — Kriptografi</li>
+              <li>Level 4 — Web Security</li>
+              <li>Level 5 — Ethical Hacking</li>
+              <li>Level 6 — Forensik & Malware</li>
               <li>Level 7 — Project Akhir</li>
             </ul>
           </div>
@@ -91,7 +91,7 @@ export function Footer() {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} CodeRoom. Dibuat untuk pembelajaran.
+            © {new Date().getFullYear()} CyberRoom. Dibuat untuk pembelajaran.
           </p>
           <p className="flex items-center gap-1 text-xs text-muted-foreground">
             Dibuat dengan <Heart className="h-3 w-3 fill-primary text-primary" /> oleh developer Indonesia

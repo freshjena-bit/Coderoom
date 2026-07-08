@@ -83,7 +83,7 @@ export function AuthDialog() {
             <div className="relative h-16 w-16 overflow-hidden rounded-xl ring-1 ring-border/60 shadow-md">
               <Image
                 src="/logo-pgsi.jpg"
-                alt="CodeRoom"
+                alt="CyberRoom"
                 width={64}
                 height={64}
                 className="h-full w-full object-cover"
@@ -91,12 +91,12 @@ export function AuthDialog() {
             </div>
           </div>
           <DialogTitle className="text-center text-xl">
-            {tab === "login" ? "Masuk ke CodeRoom" : "Buat Akun Baru"}
+            {tab === "login" ? "Masuk ke CyberRoom" : "Buat Akun Baru"}
           </DialogTitle>
           <DialogDescription>
             {tab === "login"
               ? "Masuk untuk melanjutkan perjalanan belajar Anda"
-              : "Daftar gratis dan mulai belajar coding hari ini"}
+              : "Daftar gratis dan mulai belajar cybersecurity hari ini"}
           </DialogDescription>
         </DialogHeader>
 
