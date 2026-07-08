@@ -82,7 +82,7 @@ export function AuthDialog() {
           <div className="mb-2 flex justify-center">
             <div className="relative h-16 w-16 overflow-hidden rounded-xl ring-1 ring-border/60 shadow-md">
               <Image
-                src="/logo-pgsi.jpg"
+                src="/logo-cyberlab.jpg"
                 alt="CyberLab"
                 width={64}
                 height={64}

@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   keywords: ["belajar coding", "cybersecurity", "pemrograman", "web development", "jaringan", "database", "cloud", "AI", "IT"],
   authors: [{ name: "CyberLab" }],
   icons: {
-    icon: "/logo-pgsi.jpg",
-    appleIcon: "/logo-pgsi.jpg",
+    icon: "/logo-cyberlab.jpg",
+    appleIcon: "/logo-cyberlab.jpg",
   },
 };
 

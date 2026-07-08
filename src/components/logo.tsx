@@ -26,7 +26,7 @@ export function Logo({ size = "md", showText = true, className }: LogoProps) {
         )}
       >
         <Image
-          src="/logo-pgsi.jpg"
+          src="/logo-cyberlab.jpg"
           alt="CyberLab Logo"
           width={s.img}
           height={s.img}
