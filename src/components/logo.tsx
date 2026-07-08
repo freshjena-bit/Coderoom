@@ -27,7 +27,7 @@ export function Logo({ size = "md", showText = true, className }: LogoProps) {
       >
         <Image
           src="/logo-pgsi.jpg"
-          alt="CodeRoom Logo"
+          alt="CyberLab Logo"
           width={s.img}
           height={s.img}
           className="h-full w-full object-cover"
@@ -36,7 +36,7 @@ export function Logo({ size = "md", showText = true, className }: LogoProps) {
       </div>
       {showText && (
         <span>
-          Code<span className="text-primary">Room</span>
+          Cyber<span className="text-primary">Lab</span>
         </span>
       )}
     </div>

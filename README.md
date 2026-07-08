@@ -1,6 +1,6 @@
-# 🛡️ CyberRoom — Belajar Cybersecurity dari Nol
+# 🛡️ CyberLab — Belajar Cyber & IT dari Nol
 
-Platform belajar cybersecurity interaktif dengan materi terstruktur, quiz, project, dan sertifikat. Dibangun dengan Next.js 16, TypeScript, Tailwind CSS, dan PostgreSQL (Supabase).
+Platform belajar cyber & IT lengkap dengan materi terstruktur, quiz, project, dan sertifikat. Dibangun dengan Next.js 16, TypeScript, Tailwind CSS, dan PostgreSQL (Supabase).
 
 ## ✨ Fitur
 

@@ -125,7 +125,7 @@ export function HomeView() {
       {/* Features */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl">Kenapa CodeRoom?</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">Kenapa CyberLab?</h2>
           <p className="mt-4 text-muted-foreground">
             Semua yang Anda butuhkan untuk belajar cybersecurity dengan cara yang menyenangkan dan efektif
           </p>

@@ -19,7 +19,7 @@ async function main() {
   // Create admin user
   const adminUser = await db.user.create({
     data: {
-      name: "Admin CodeRoom",
+      name: "Admin CyberLab",
       email: "admin@coderoom.id",
       password: hashPassword("admin12345"),
       role: "ADMIN",

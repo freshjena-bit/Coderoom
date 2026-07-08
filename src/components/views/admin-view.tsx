@@ -98,7 +98,7 @@ export function AdminView() {
             </Badge>
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            Kelola pengguna, materi, dan forum CodeRoom
+            Kelola pengguna, materi, dan forum CyberLab
           </p>
         </div>
       </div>

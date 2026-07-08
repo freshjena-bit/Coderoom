@@ -16,10 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CodeRoom — Belajar Cyber & IT dari Nol",
+  title: "CyberLab — Belajar Cyber & IT dari Nol",
   description: "Platform belajar cyber & IT lengkap: Pemrograman, Web Development, Jaringan, Database, Cybersecurity, Cloud, AI. Dilengkapi quiz, project, dan sertifikat.",
   keywords: ["belajar coding", "cybersecurity", "pemrograman", "web development", "jaringan", "database", "cloud", "AI", "IT"],
-  authors: [{ name: "CodeRoom" }],
+  authors: [{ name: "CyberLab" }],
   icons: {
     icon: "/logo-pgsi.jpg",
     appleIcon: "/logo-pgsi.jpg",

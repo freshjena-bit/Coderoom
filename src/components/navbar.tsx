@@ -63,7 +63,7 @@ export function Navbar() {
         <button
           onClick={() => handleNav("home")}
           className="flex items-center transition-opacity hover:opacity-80"
-          aria-label="CodeRoom - Beranda"
+          aria-label="CyberLab - Beranda"
         >
           <Logo size="md" showText={true} className="hidden sm:flex" />
           <Logo size="md" showText={false} className="sm:hidden" />

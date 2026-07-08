@@ -92,7 +92,7 @@ export function Footer() {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} CodeRoom. Dibuat untuk pembelajaran.
+            © {new Date().getFullYear()} CyberLab. Dibuat untuk pembelajaran.
           </p>
           <p className="flex items-center gap-1 text-xs text-muted-foreground">
             Dibuat dengan <Heart className="h-3 w-3 fill-primary text-primary" /> oleh developer Indonesia
