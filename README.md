@@ -1,6 +1,6 @@
 # 🏠 CodeRoom — Belajar Coding dari Nol
 
-Platform belajar coding interaktif dengan materi terstruktur, quiz, project, dan sertifikat. Dibangun dengan Next.js 16, TypeScript, Tailwind CSS, dan MySQL.
+Platform belajar coding interaktif dengan materi terstruktur, quiz, project, dan sertifikat. Dibangun dengan Next.js 16, TypeScript, Tailwind CSS, dan PostgreSQL (Supabase).
 
 ## ✨ Fitur
 
@@ -13,6 +13,7 @@ Platform belajar coding interaktif dengan materi terstruktur, quiz, project, dan
 - 🌙 **Dark Mode** — Toggle tema terang/gelap
 - 📱 **Responsive** — Optimal di mobile, tablet, dan desktop
 - 🏆 **Sertifikat** — Download sertifikat setelah menyelesaikan 100% materi
+- ☁️ **Deploy ke Vercel** — Siap deploy dengan database Supabase
 
 ## 🛠️ Tech Stack
 
@@ -21,20 +22,20 @@ Platform belajar coding interaktif dengan materi terstruktur, quiz, project, dan
 | Framework | Next.js 16 (App Router) |
 | Bahasa | TypeScript 5 |
 | Styling | Tailwind CSS 4 + shadcn/ui |
-| Database | MySQL (MariaDB) |
+| Database | PostgreSQL (Supabase / lokal) |
 | ORM | Prisma |
 | State | Zustand + TanStack Query |
 | Auth | Custom session (scrypt + HMAC token, HTTP-only cookie) |
+| Deployment | Vercel |
 | Markdown | react-markdown + remark-gfm |
 | Icons | Lucide React |
 
 ## 📋 Persyaratan
 
-- Node.js 18+
-- Bun (runtime)
-- MySQL 8+ atau MariaDB 10+
+- Node.js 18+ atau Bun
+- PostgreSQL 14+ (lokal) atau akun Supabase (untuk production)
 
-## 🚀 Instalasi
+## 🚀 Quick Start (Local Development)
 
 ### 1. Clone repository
 
@@ -49,49 +50,102 @@ cd Coderoom
 bun install
 ```
 
-### 3. Setup database MySQL
+### 3. Setup database PostgreSQL
 
-Buat database dan user di MySQL:
+**Opsi A — PostgreSQL lokal:**
 
-```sql
-CREATE DATABASE coderoom CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'coderoom'@'localhost' IDENTIFIED BY 'coderoom_pass';
-GRANT ALL PRIVILEGES ON coderoom.* TO 'coderoom'@'localhost';
-FLUSH PRIVILEGES;
+```bash
+# Buat database dan user
+sudo -u postgres psql -c "CREATE DATABASE coderoom;"
+sudo -u postgres psql -c "CREATE USER coderoom WITH PASSWORD 'coderoom_pass';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE coderoom TO coderoom;"
+sudo -u postgres psql -c "ALTER DATABASE coderoom OWNER TO coderoom;"
 ```
 
-### 4. Konfigurasi environment
+**Opsi B — Supabase (gratis, recommended):**
+1. Daftar di [supabase.com](https://supabase.com) dan buat project baru
+2. Pergi ke **Project Settings → Database → Connection string**
+3. Copy connection string (format: `postgresql://postgres.[REF]:[PASSWORD]@...`)
 
-Salin `.env.example` ke `.env` dan sesuaikan:
+### 4. Konfigurasi environment
 
 ```bash
 cp .env.example .env
 ```
 
+Edit `.env` sesuai database Anda:
+
 ```env
-DATABASE_URL=mysql://coderoom:coderoom_pass@127.0.0.1:3306/coderoom
-SESSION_SECRET=your-secret-key-here
+# Untuk PostgreSQL lokal:
+DATABASE_URL=postgresql://coderoom:coderoom_pass@127.0.0.1:5432/coderoom
+DIRECT_URL=postgresql://coderoom:coderoom_pass@127.0.0.1:5432/coderoom
+
+# Untuk Supabase (lihat .env.example untuk format lengkap):
+# DATABASE_URL=postgresql://postgres.[REF]:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres
+# DIRECT_URL=postgresql://postgres.[REF]:[PASSWORD]@aws-0-[REGION].supabase.com:5432/postgres
+
+SESSION_SECRET=generate-random-string-here
 ```
 
-### 5. Push schema ke database
+### 5. Push schema & seed data
 
 ```bash
-bun run db:push
+bun run db:push     # Buat semua tabel di database
+bun run seed        # Isi 55 materi + akun admin
 ```
 
-### 6. Seed data awal (materi + admin account)
-
-```bash
-bun run prisma/seed.ts
-```
-
-### 7. Jalankan dev server
+### 6. Jalankan dev server
 
 ```bash
 bun run dev
 ```
 
 Buka `http://localhost:3000` di browser.
+
+## ☁️ Deploy ke Vercel + Supabase
+
+### Step 1: Buat database di Supabase
+
+1. Daftar/login di [supabase.com](https://supabase.com)
+2. Klik **New Project**, isi nama, password database, dan region
+3. Tunggu project selesai dibuat (~2 menit)
+4. Pergi ke **Project Settings → Database → Connection string**
+5. Copy dua URL ini:
+   - **Transaction URL** (port 6543, dengan pooling) → untuk `DATABASE_URL`
+   - **Session URL** (port 5432, direct) → untuk `DIRECT_URL`
+6. Ganti `[YOUR-PASSWORD]` dengan password database Anda
+
+### Step 2: Setup schema di Supabase
+
+Jalankan lokal dengan env Supabase:
+
+```bash
+# Set env sementara di terminal
+export DATABASE_URL="postgresql://postgres.[REF]:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres"
+export DIRECT_URL="postgresql://postgres.[REF]:[PASSWORD]@aws-0-[REGION].supabase.com:5432/postgres"
+
+# Push schema & seed data
+bun run db:push
+bun run seed
+```
+
+### Step 3: Deploy ke Vercel
+
+1. Pergi ke [vercel.com](https://vercel.com) dan login dengan GitHub
+2. Klik **Add New → Project**
+3. Import repository `freshjena-bit/Coderoom`
+4. Di **Environment Variables**, tambahkan:
+
+   | Name | Value |
+   |------|-------|
+   | `DATABASE_URL` | Transaction URL Supabase (port 6543) |
+   | `DIRECT_URL` | Session URL Supabase (port 5432) |
+   | `SESSION_SECRET` | String random (generate dengan `openssl rand -hex 32`) |
+
+5. Klik **Deploy** — tunggu 2-3 menit
+6. Selesai! 🎉 Aplikasi siap diakses
+
+> ℹ️ **Catatan:** Vercel akan otomatis menjalankan `postinstall` (generate Prisma client) dan `vercel-build` (next build) saat deploy.
 
 ## 🔑 Akun Admin
 
@@ -127,10 +181,14 @@ src/
 │   ├── api.ts            # Frontend API helpers
 │   └── admin.ts          # Admin guard + stats
 prisma/
-├── schema.prisma         # Database schema (MySQL)
+├── schema.prisma         # Database schema (PostgreSQL)
 ├── seed.ts               # Seed script
 ├── content-levels-1-3.ts # Materi Level 1-3
 └── content-levels-4-7.ts # Materi Level 4-7
+scripts/
+├── dev.sh                # Dev startup script (start PostgreSQL + Next.js)
+└── postinstall.sh        # Generate Prisma client (untuk Vercel)
+vercel.json               # Vercel deployment config
 ```
 
 ## 📚 Kurikulum (7 Level)
@@ -164,10 +222,20 @@ Dashboard admin (`/#/admin`) menampilkan:
 
 ```bash
 bun run dev        # Jalankan dev server (port 3000)
+bun run build      # Build untuk production
 bun run lint       # ESLint check
 bun run db:push    # Push schema ke database
 bun run db:generate # Generate Prisma client
+bun run seed       # Seed data (admin + 55 materi)
 ```
+
+## 🔧 Environment Variables
+
+| Variable | Wajib | Deskripsi |
+|----------|-------|-----------|
+| `DATABASE_URL` | ✅ | PostgreSQL connection string (Supabase Transaction URL untuk pooling) |
+| `DIRECT_URL` | ✅ | Direct PostgreSQL connection (Supabase Session URL, untuk migrasi) |
+| `SESSION_SECRET` | ✅ | Secret key untuk signing session tokens |
 
 ## 📄 Lisensi
 

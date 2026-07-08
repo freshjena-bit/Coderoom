@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -44,10 +45,10 @@ model Material {
   title       String
   slug        String   @unique
   description String   @db.Text
-  content     String   @db.LongText // markdown content
+  content     String   @db.Text // markdown content
   icon        String   // emoji or icon name
   isProject   Boolean  @default(false)
-  quiz        String   @db.LongText // JSON string of quiz questions
+  quiz        String   @db.Text // JSON string of quiz questions
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
