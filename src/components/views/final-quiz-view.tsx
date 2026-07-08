@@ -163,11 +163,10 @@ export function FinalQuizView() {
     };
   }, [phase, currentIndex, showFeedback, goToNext]);
 
-  // Redirect to WhatsApp with user info
-  const redirectToWhatsApp = () => {
-    if (!user) return;
-    setRedirecting(true);
-    const message = `🎉 SELAMAT! Saya telah LULUS Final Quiz CyberLab!
+  // Build WhatsApp message text
+  const buildWhatsAppMessage = () => {
+    if (!user) return "";
+    return `🎉 SELAMAT! Saya telah LULUS Final Quiz CyberLab!
 
 📋 Informasi Akun:
 • Nama: ${user.name}
@@ -180,7 +179,13 @@ export function FinalQuizView() {
 • Jawaban benar: ${correctCount}/${totalQuestions}
 
 Mohon informasi selanjutnya untuk pengambilan sertifikat. Terima kasih!`;
+  };
 
+  // Redirect to WhatsApp with user info
+  const redirectToWhatsApp = () => {
+    if (!user) return;
+    setRedirecting(true);
+    const message = buildWhatsAppMessage();
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
     setRedirecting(false);
@@ -302,6 +307,38 @@ Mohon informasi selanjutnya untuk pengambilan sertifikat. Terima kasih!`;
                   <Play className="mr-2 h-4 w-4" />
                   Mulai Final Quiz
                 </Button>
+
+                {/* Preview pesan WhatsApp yang akan dikirim jika lulus */}
+                <details className="group">
+                  <summary className="flex cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                    <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                    Lihat preview pesan WhatsApp yang akan dikirim
+                    <span className="ml-auto text-xs group-open:hidden">▼</span>
+                    <span className="ml-auto hidden text-xs group-open:inline">▲</span>
+                  </summary>
+                  <div className="mt-3 rounded-lg border border-[#25D366]/30 bg-[#25D366]/5 p-4">
+                    <div className="rounded-lg bg-white p-3 text-sm text-gray-800 shadow-sm dark:bg-zinc-900 dark:text-zinc-200">
+                      <pre className="whitespace-pre-wrap break-words font-sans text-xs leading-relaxed">
+{`🎉 SELAMAT! Saya telah LULUS Final Quiz CyberLab!
+
+📋 Informasi Akun:
+• Nama: ${user?.name || "[Nama Anda]"}
+• Email: ${user?.email || "[Email Anda]"}
+• Tanggal: [Tanggal Lulus]
+
+🏆 Hasil Final Quiz:
+• Skor: [Skor]%
+• Status: LULUS (min. ${PASSING_SCORE}%)
+• Jawaban benar: [X]/${progressData?.stats?.totalMaterials ? progressData.stats.totalMaterials * 3 : 246}
+
+Mohon informasi selanjutnya untuk pengambilan sertifikat. Terima kasih!`}
+                      </pre>
+                    </div>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      → Pesan ini akan dikirim ke: <strong>wa.me/{WHATSAPP_NUMBER}</strong> setelah Anda lulus Final Quiz
+                    </p>
+                  </div>
+                </details>
               </>
             )}
           </CardContent>
@@ -368,6 +405,23 @@ Mohon informasi selanjutnya untuk pengambilan sertifikat. Terima kasih!`;
                     Klik tombol di bawah untuk mengirim informasi kelulusan Anda via WhatsApp dan klaim sertifikat.
                   </p>
                 </div>
+
+                {/* WhatsApp message preview */}
+                <div className="rounded-lg border border-[#25D366]/30 bg-[#25D366]/5 p-4">
+                  <p className="mb-2 flex items-center gap-1.5 text-sm font-medium text-[#1ebe5d]">
+                    <MessageCircle className="h-4 w-4" />
+                    Preview Pesan WhatsApp
+                  </p>
+                  <div className="rounded-lg bg-white p-3 text-sm text-gray-800 shadow-sm dark:bg-zinc-900 dark:text-zinc-200">
+                    <pre className="whitespace-pre-wrap break-words font-sans text-xs leading-relaxed">
+                      {buildWhatsAppMessage()}
+                    </pre>
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    → Dikirim ke: wa.me/{WHATSAPP_NUMBER}
+                  </p>
+                </div>
+
                 <Button
                   onClick={redirectToWhatsApp}
                   className="w-full bg-[#25D366] text-white hover:bg-[#1ebe5d]"
