@@ -381,7 +381,7 @@ function QuizSection({
               <div className="mx-auto mb-1 flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                 <AlertCircle className="h-4 w-4 text-primary" />
               </div>
-              <p className="text-lg font-bold">30</p>
+              <p className="text-lg font-bold">≤30</p>
               <p className="text-xs text-muted-foreground">Soal</p>
             </div>
             <div className="rounded-lg border border-border/60 p-3 text-center">
@@ -405,9 +405,10 @@ function QuizSection({
               Penting!
             </p>
             <ul className="mt-1.5 space-y-1 text-xs text-amber-700/80 dark:text-amber-400/80">
+              <li>• Soal diambil dari materi ini + materi yang sudah kamu selesaikan</li>
               <li>• Soal diacak setiap kali mengulang — tidak bisa mencontek!</li>
               <li>• Jika waktu habis, soal otomatis lanjut (dijawab salah)</li>
-              <li>• Soal diambil dari semua materi di level yang sama</li>
+              <li>• Selesaikan lebih banyak materi untuk dapat pool soal lebih banyak!</li>
             </ul>
           </div>
           <Button
