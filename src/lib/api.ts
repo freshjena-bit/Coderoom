@@ -138,6 +138,8 @@ export interface QuizPoolResponse {
 export const quizApi = {
   getPool: (slug: string) =>
     api<QuizPoolResponse>(`/api/quiz/${slug}`),
+  getFinal: () =>
+    api<QuizPoolResponse & { isFinal: boolean }>(`/api/quiz/final`),
 };
 
 // Progress

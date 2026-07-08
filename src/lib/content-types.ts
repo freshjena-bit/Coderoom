@@ -28,4 +28,5 @@ export const LEVEL_INFO: Record<number, { title: string; subtitle: string; icon:
   6: { title: "Cybersecurity", subtitle: "Keamanan siber & ethical hacking", icon: "🛡️", color: "violet" },
   7: { title: "Cloud & DevOps", subtitle: "Docker, AWS, CI/CD & server", icon: "☁️", color: "amber" },
   8: { title: "AI & Machine Learning", subtitle: "Data science & neural networks", icon: "🤖", color: "rose" },
+  9: { title: "Final Quiz", subtitle: "Ujian akhir dari semua materi", icon: "🏆", color: "gold" },
 };

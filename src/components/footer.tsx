@@ -58,6 +58,7 @@ export function Footer() {
               <li>Level 6 — Cybersecurity</li>
               <li>Level 7 — Cloud & DevOps</li>
               <li>Level 8 — AI & Machine Learning</li>
+              <li>Level 9 — Final Quiz 🏆</li>
             </ul>
           </div>
 

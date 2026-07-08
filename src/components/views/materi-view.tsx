@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export function MateriView() {
-  const { goDetail, user, openAuth } = useAppStore();
+  const { goDetail, goFinalQuiz, user, openAuth } = useAppStore();
   const [search, setSearch] = useState("");
   const [activeLevel, setActiveLevel] = useState<number | null>(null);
 
@@ -63,6 +63,12 @@ export function MateriView() {
     const completed = levelMaterials.filter((m) => completedSlugs.has(m.slug)).length;
     return { total: levelMaterials.length, completed };
   };
+
+  // Check if all levels 1-8 are completed (for unlocking Final Quiz)
+  const levels1to8Materials = allMaterials.filter((m) => m.level >= 1 && m.level <= 8);
+  const totalMaterialsCount = levels1to8Materials.length;
+  const completedCount = levels1to8Materials.filter((m) => completedSlugs.has(m.slug)).length;
+  const allLevelsCompleted = user && totalMaterialsCount > 0 && completedCount >= totalMaterialsCount;
 
   const handleMaterialClick = (slug: string) => {
     if (!user) {
@@ -301,12 +307,63 @@ export function MateriView() {
           })}
       </div>
 
-      {filteredMaterials.length === 0 && (
+      {filteredMaterials.length === 0 && !search && (
         <div className="py-20 text-center">
           <BookOpen className="mx-auto h-12 w-12 text-muted-foreground/50" />
           <p className="mt-4 text-muted-foreground">
             Tidak ada materi yang ditemukan untuk "{search}"
           </p>
+        </div>
+      )}
+
+      {/* Final Quiz Section (Level 9) — only show when not searching */}
+      {!search && (!activeLevel || activeLevel === 9) && user && (
+        <div className="mt-10">
+          <Card className={cn(
+            "border-2 transition-all",
+            allLevelsCompleted ? "border-primary bg-primary/5" : "border-dashed border-border"
+          )}>
+            <CardContent className="flex flex-col items-center gap-4 p-6 text-center sm:flex-row sm:text-left">
+              <div className={cn(
+                "flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl",
+                allLevelsCompleted ? "bg-primary/15" : "bg-muted"
+              )}>
+                {allLevelsCompleted ? "🏆" : <Lock className="h-6 w-6 text-muted-foreground" />}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
+                  <Badge variant="secondary" className="text-xs">Level 9</Badge>
+                  {allLevelsCompleted ? (
+                    <Badge className="gap-1 bg-primary text-primary-foreground">
+                      <CheckCircle2 className="h-3 w-3" /> Terbuka
+                    </Badge>
+                  ) : (
+                    <Badge variant="secondary" className="gap-1">
+                      <Lock className="h-3 w-3" /> Terkunci
+                    </Badge>
+                  )}
+                </div>
+                <h3 className="mt-1.5 font-semibold text-lg">Final Quiz — Ujian Akhir</h3>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  {allLevelsCompleted
+                    ? "30 soal dari semua materi Level 1-8. Lulus untuk klaim sertifikat via WhatsApp!"
+                    : `Selesaikan semua materi Level 1-8 (${completedCount}/${totalMaterialsCount}) untuk membuka Final Quiz.`}
+                </p>
+              </div>
+              <Button
+                onClick={goFinalQuiz}
+                disabled={!allLevelsCompleted}
+                className={cn(
+                  "shrink-0",
+                  allLevelsCompleted && "bg-primary text-primary-foreground hover:bg-primary/90"
+                )}
+                variant={allLevelsCompleted ? "default" : "outline"}
+              >
+                {allLevelsCompleted ? "Mulai Final Quiz" : "Terkunci"}
+                {allLevelsCompleted && <ArrowRight className="ml-2 h-4 w-4" />}
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       )}
     </div>
