@@ -8,7 +8,7 @@ export interface QuizQuestion {
 }
 
 export interface MaterialData {
-  level: number;      // 1-7
+  level: number;      // 1-8
   order: number;      // order within level
   title: string;
   slug: string;       // unique, kebab-case
@@ -20,11 +20,12 @@ export interface MaterialData {
 }
 
 export const LEVEL_INFO: Record<number, { title: string; subtitle: string; icon: string; color: string }> = {
-  1: { title: "Dasar Cyber", subtitle: "Fondasi keamanan siber & etika", icon: "🛡️", color: "emerald" },
-  2: { title: "Jaringan", subtitle: "Protokol, scanning & analisis jaringan", icon: "🌐", color: "orange" },
-  3: { title: "Kriptografi", subtitle: "Enkripsi, hash & tanda tangan digital", icon: "🔐", color: "sky" },
-  4: { title: "Web Security", subtitle: "OWASP, XSS, SQL Injection & lainnya", icon: "🐛", color: "yellow" },
-  5: { title: "Ethical Hacking", subtitle: "Pentest, exploit & Metasploit", icon: "⚔️", color: "green" },
-  6: { title: "Forensik & Malware", subtitle: "Analisis malware & investigasi digital", icon: "🔍", color: "violet" },
-  7: { title: "Project Akhir", subtitle: "Bangun proyek keamanan nyata", icon: "🏆", color: "amber" },
+  1: { title: "Dasar IT & Teknologi", subtitle: "Fondasi IT, hardware & OS", icon: "💻", color: "emerald" },
+  2: { title: "Pemrograman", subtitle: "Logika & bahasa pemrograman", icon: "⌨️", color: "orange" },
+  3: { title: "Web Development", subtitle: "HTML, CSS, JavaScript & framework", icon: "🌐", color: "sky" },
+  4: { title: "Jaringan Komputer", subtitle: "Protokol, routing & infrastruktur", icon: "🔌", color: "yellow" },
+  5: { title: "Database", subtitle: "SQL, NoSQL & desain data", icon: "🗄️", color: "green" },
+  6: { title: "Cybersecurity", subtitle: "Keamanan siber & ethical hacking", icon: "🛡️", color: "violet" },
+  7: { title: "Cloud & DevOps", subtitle: "Docker, AWS, CI/CD & server", icon: "☁️", color: "amber" },
+  8: { title: "AI & Machine Learning", subtitle: "Data science & neural networks", icon: "🤖", color: "rose" },
 };

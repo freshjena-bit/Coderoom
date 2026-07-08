@@ -307,7 +307,7 @@ export function DashboardView() {
                     onClick={() => {
                       toast.success("Sertifikat diunduh! 🎉");
                       // Generate a simple certificate text file
-                      const cert = `SERTIFIKAT PENYELESAIAN\n\nDiberikan kepada:\n${user.name}\n\nAtas keberhasilan menyelesaikan seluruh materi\ndi CyberRoom - Belajar Cybersecurity dari Nol\n\nTanggal: ${new Date().toLocaleDateString("id-ID")}\nCompletion Rate: 100%`;
+                      const cert = `SERTIFIKAT PENYELESAIAN\n\nDiberikan kepada:\n${user.name}\n\nAtas keberhasilan menyelesaikan seluruh materi\ndi CodeRoom - Belajar Cybersecurity dari Nol\n\nTanggal: ${new Date().toLocaleDateString("id-ID")}\nCompletion Rate: 100%`;
                       const blob = new Blob([cert], { type: "text/plain" });
                       const url = URL.createObjectURL(blob);
                       const a = document.createElement("a");

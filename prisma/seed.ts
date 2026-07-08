@@ -1,7 +1,8 @@
 import { db } from "../src/lib/db";
 import { hashPassword } from "../src/lib/auth";
 import { contentLevels1to3 } from "./content-levels-1-3";
-import { contentLevels4to7 } from "./content-levels-4-7";
+import { contentLevels4to5 } from "./content-levels-4-5";
+import { contentLevels6to8 } from "./content-levels-6-8";
 
 async function main() {
   console.log("🌱 Seeding database...");
@@ -27,7 +28,7 @@ async function main() {
   console.log(`  ✓ Created admin user: ${adminUser.email}`);
 
   // Insert all materials
-  const allMaterials = [...contentLevels1to3, ...contentLevels4to7];
+  const allMaterials = [...contentLevels1to3, ...contentLevels4to5, ...contentLevels6to8];
   console.log(`  → Inserting ${allMaterials.length} materials...`);
 
   for (const mat of allMaterials) {
@@ -47,7 +48,7 @@ async function main() {
   }
 
   // Count by level
-  for (let lvl = 1; lvl <= 7; lvl++) {
+  for (let lvl = 1; lvl <= 8; lvl++) {
     const count = allMaterials.filter((m) => m.level === lvl).length;
     console.log(`    Level ${lvl}: ${count} materials`);
   }

@@ -50,13 +50,14 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold">Level Belajar</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Level 1 — Dasar Cyber</li>
-              <li>Level 2 — Jaringan</li>
-              <li>Level 3 — Kriptografi</li>
-              <li>Level 4 — Web Security</li>
-              <li>Level 5 — Ethical Hacking</li>
-              <li>Level 6 — Forensik & Malware</li>
-              <li>Level 7 — Project Akhir</li>
+              <li>Level 1 — Dasar IT & Teknologi</li>
+              <li>Level 2 — Pemrograman</li>
+              <li>Level 3 — Web Development</li>
+              <li>Level 4 — Jaringan Komputer</li>
+              <li>Level 5 — Database</li>
+              <li>Level 6 — Cybersecurity</li>
+              <li>Level 7 — Cloud & DevOps</li>
+              <li>Level 8 — AI & Machine Learning</li>
             </ul>
           </div>
 
@@ -91,7 +92,7 @@ export function Footer() {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} CyberRoom. Dibuat untuk pembelajaran.
+            © {new Date().getFullYear()} CodeRoom. Dibuat untuk pembelajaran.
           </p>
           <p className="flex items-center gap-1 text-xs text-muted-foreground">
             Dibuat dengan <Heart className="h-3 w-3 fill-primary text-primary" /> oleh developer Indonesia
