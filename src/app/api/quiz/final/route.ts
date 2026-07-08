@@ -83,13 +83,11 @@ export async function GET() {
     }
   }
 
-  // Shuffle all questions and pick 30
+  // Shuffle ALL questions — no limit, use every question from levels 1-8
   const shuffledQuestions = shuffle(allQuestions);
-  const maxQuestions = Math.min(30, shuffledQuestions.length);
-  const selectedQuestions = shuffledQuestions.slice(0, maxQuestions);
 
   // Also shuffle the answer options for each question (anti-cheating)
-  const finalQuestions = selectedQuestions.map((q) => shuffleQuestionOptions(q));
+  const finalQuestions = shuffledQuestions.map((q) => shuffleQuestionOptions(q));
 
   return NextResponse.json({
     materialId: "final",

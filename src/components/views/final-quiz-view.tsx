@@ -260,7 +260,9 @@ Mohon informasi selanjutnya untuk pengambilan sertifikat. Terima kasih!`;
                     <div className="mx-auto mb-1 flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                       <AlertCircle className="h-4 w-4 text-primary" />
                     </div>
-                    <p className="text-lg font-bold">30</p>
+                    <p className="text-lg font-bold">
+                      {progressData?.stats?.totalMaterials ? progressData.stats.totalMaterials * 3 : "SEMUA"}
+                    </p>
                     <p className="text-xs text-muted-foreground">Soal</p>
                   </div>
                   <div className="rounded-lg border border-border/60 p-3 text-center">
@@ -285,7 +287,7 @@ Mohon informasi selanjutnya untuk pengambilan sertifikat. Terima kasih!`;
                     Final Quiz
                   </p>
                   <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
-                    <li>• 30 soal diambil dari SEMUA materi Level 1-8 (diacak)</li>
+                    <li>• SEMUA soal dari materi Level 1-8 (±{progressData?.stats?.totalMaterials ? progressData.stats.totalMaterials * 3 : 246} soal, diacak)</li>
                     <li>• Soal & jawaban diacak setiap kali mengulang</li>
                     <li>• Jika lulus, Anda akan diarahkan ke WhatsApp untuk klaim sertifikat</li>
                     <li>• Jika waktu habis, soal otomatis lanjut (dijawab salah)</li>

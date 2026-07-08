@@ -346,7 +346,7 @@ export function MateriView() {
                 <h3 className="mt-1.5 font-semibold text-lg">Final Quiz — Ujian Akhir</h3>
                 <p className="mt-0.5 text-sm text-muted-foreground">
                   {allLevelsCompleted
-                    ? "30 soal dari semua materi Level 1-8. Lulus untuk klaim sertifikat via WhatsApp!"
+                    ? "SEMUA soal dari Level 1-8 (diacak). Lulus untuk klaim sertifikat via WhatsApp!"
                     : `Selesaikan semua materi Level 1-8 (${completedCount}/${totalMaterialsCount}) untuk membuka Final Quiz.`}
                 </p>
               </div>
