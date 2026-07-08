@@ -392,3 +392,40 @@ Work Log:
 
 Stage Summary:
 - 30 materials, all in Bahasa Indonesia, cybersecurity topic
+
+---
+Task ID: cyber-rebrand
+Agent: Z.ai Code (main orchestrator)
+Task: Change all materials to cybersecurity and rebrand to CyberRoom
+
+Work Log:
+- Updated LEVEL_INFO in content-types.ts: 7 cyber levels (Dasar Cyber, Jaringan, Kriptografi, Web Security, Ethical Hacking, Forensik & Malware, Project Akhir)
+- Delegated content generation to 2 subagents:
+  - Task cyber-1-3: 23 materials (5 Dasar Cyber + 9 Jaringan + 9 Kriptografi) — completed
+  - Task cyber-4-7: 31 materials (10 Web Security + 8 Ethical Hacking + 7 Forensik + 6 Project Akhir) — completed
+- Total: 54 cybersecurity materials, all in Bahasa Indonesia
+- Environment had been reset (no PostgreSQL/MariaDB running) — re-setup PostgreSQL 17 from scratch
+- Re-seeded PostgreSQL: 1 admin user + 54 cyber materials + 3 forum posts
+- Rebranded from "CodeRoom" to "CyberRoom" across all files:
+  - layout.tsx: title, description, keywords → cybersecurity
+  - logo.tsx: alt text + "Cyber<span>Room</span>"
+  - navbar.tsx: aria-label
+  - footer.tsx: brand text, level list (Dasar Cyber, Jaringan, Kriptografi, etc.), copyright
+  - auth-dialog.tsx: dialog title "Masuk ke CyberRoom", description
+  - home-view.tsx: hero headline "Belajar Cybersecurity dari Nol", features (network analysis, honeypot), CTA "Siap Menjadi Cybersecurity Professional?", stats (54 materi)
+  - materi-view.tsx: subtitle "54 materi cybersecurity"
+  - dashboard-view.tsx: certificate text "CyberRoom - Belajar Cybersecurity dari Nol"
+  - admin-view.tsx: "Kelola pengguna, materi, dan forum CyberRoom"
+- Updated README.md: title, description, curriculum table (54 materials, 7 cyber levels)
+- Verified via Agent Browser:
+  - Home: "CyberRoom" title, "Belajar Cybersecurity dari Nol" headline, 7 cyber level cards ✓
+  - Materi: Pengenalan Cybersecurity, CIA Triad, etc. ✓
+  - Detail: SQL Injection material with quiz ✓
+  - Admin dashboard: 54 materials, cyber stats ✓
+- Lint passes, pushed to GitHub (commit 6c2164a)
+
+Stage Summary:
+- Platform rebranded: CodeRoom → CyberRoom
+- 54 cybersecurity materials across 7 levels (was 55 coding materials)
+- All UI text updated to cybersecurity theme
+- GitHub repo updated: https://github.com/freshjena-bit/Coderoom
