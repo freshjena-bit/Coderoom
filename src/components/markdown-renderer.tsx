@@ -31,6 +31,24 @@ export function MarkdownRenderer({ content }: { content: string }) {
           pre({ children }) {
             return <>{children}</>;
           },
+          img({ src, alt, ...props }) {
+            return (
+              <figure className="my-6">
+                <img
+                  src={typeof src === "string" ? src : ""}
+                  alt={alt || ""}
+                  loading="lazy"
+                  className="w-full rounded-xl border border-border/60 shadow-md"
+                  {...props}
+                />
+                {alt && (
+                  <figcaption className="mt-2 text-center text-xs text-muted-foreground">
+                    {alt}
+                  </figcaption>
+                )}
+              </figure>
+            );
+          },
         }}
       >
         {content}
