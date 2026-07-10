@@ -11,7 +11,7 @@ import {
   CheckCircle2,
   Circle,
   Lock,
-  Download,
+  MessageCircle,
   ArrowRight,
   Star,
 } from "lucide-react";
@@ -277,7 +277,7 @@ export function DashboardView() {
 
         {/* Right column */}
         <div className="space-y-6">
-          {/* Certificate */}
+          {/* Certificate — claim via WhatsApp, no direct download */}
           <Card
             className={cn(
               "border-2",
@@ -300,25 +300,35 @@ export function DashboardView() {
               {canGetCertificate ? (
                 <>
                   <p className="mb-3 text-sm text-muted-foreground">
-                    Selamat! Anda berhak mendapatkan sertifikat penyelesaian.
+                    🎉 Selamat! Anda telah menyelesaikan semua materi. Klaim sertifikat Anda via WhatsApp.
                   </p>
                   <Button
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    className="w-full bg-[#25D366] text-white hover:bg-[#1ebe5d]"
                     onClick={() => {
-                      toast.success("Sertifikat diunduh! 🎉");
-                      // Generate a simple certificate text file
-                      const cert = `SERTIFIKAT PENYELESAIAN\n\nDiberikan kepada:\n${user.name}\n\nAtas keberhasilan menyelesaikan seluruh materi\ndi CyberLab - Belajar Cybersecurity dari Nol\n\nTanggal: ${new Date().toLocaleDateString("id-ID")}\nCompletion Rate: 100%`;
-                      const blob = new Blob([cert], { type: "text/plain" });
-                      const url = URL.createObjectURL(blob);
-                      const a = document.createElement("a");
-                      a.href = url;
-                      a.download = "sertifikat-coderoom.txt";
-                      a.click();
+                      const msg = `🎉 HALO! Saya ingin KLAIM SERTIFIKAT CyberLab!
+
+📋 Informasi Akun:
+• Nama: ${user.name}
+• Email: ${user.email}
+• Tanggal: ${new Date().toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" })}
+
+🏆 Status:
+• Completion Rate: 100%
+• Materi selesai: ${stats.completedCount}/${stats.totalMaterials}
+• Rata-rata Quiz: ${avgScore}%
+
+Saya telah menyelesaikan seluruh program CyberLab. Mohon informasi untuk pengambilan sertifikat. Terima kasih!`;
+                      const url = `https://wa.me/6283114593730?text=${encodeURIComponent(msg)}`;
+                      window.open(url, "_blank");
+                      toast.success("Mengarahkan ke WhatsApp...");
                     }}
                   >
-                    <Download className="mr-2 h-4 w-4" />
-                    Unduh Sertifikat
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    Klaim Sertifikat via WhatsApp
                   </Button>
+                  <p className="mt-2 text-center text-xs text-muted-foreground">
+                    → Sertifikat tidak bisa didownload langsung. Hubungi admin via WhatsApp.
+                  </p>
                 </>
               ) : (
                 <>
