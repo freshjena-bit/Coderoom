@@ -73,7 +73,7 @@ export async function getCurrentUser() {
   if (!payload) return null;
   const user = await db.user.findUnique({
     where: { id: payload.userId },
-    select: { id: true, name: true, email: true, role: true, banned: true, violationCount: true, createdAt: true },
+    select: { id: true, name: true, email: true, role: true, banned: true, violationCount: true, certificateId: true, certificateIssuedAt: true, createdAt: true },
   });
   // If user is banned, return null (treat as not logged in)
   if (user?.banned) return null;

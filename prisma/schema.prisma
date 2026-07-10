@@ -19,6 +19,8 @@ model User {
   role           String   @default("USER") // "USER" | "ADMIN"
   banned         Boolean  @default(false) // true if account banned for cheating
   violationCount Int      @default(0) // anti-cheat violation count (max 5)
+  certificateId  String?  @unique // unique certificate code (generated on 100% completion)
+  certificateIssuedAt DateTime? // when certificate was issued
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 

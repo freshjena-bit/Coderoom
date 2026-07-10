@@ -9,7 +9,9 @@ export type ViewName =
   | "dashboard"
   | "forum"
   | "admin"
-  | "finalQuiz";
+  | "finalQuiz"
+  | "certificate"
+  | "verify";
 
 export interface SafeUser {
   id: string;
@@ -18,6 +20,7 @@ export interface SafeUser {
   role: string; // "USER" | "ADMIN"
   banned: boolean;
   violationCount: number;
+  certificateId: string | null;
   createdAt: string;
 }
 
@@ -26,6 +29,7 @@ interface AppState {
   view: ViewName;
   materialSlug: string | null;
   forumPostId: string | null;
+  verifyCertId: string | null;
 
   // Auth
   user: SafeUser | null;
@@ -40,6 +44,8 @@ interface AppState {
   goForumPost: (id: string) => void;
   goAdmin: () => void;
   goFinalQuiz: () => void;
+  goCertificate: () => void;
+  goVerify: (certId: string) => void;
   goBack: () => void;
 
   setUser: (user: SafeUser | null) => void;
@@ -49,31 +55,37 @@ interface AppState {
   syncFromHash: () => void;
 }
 
-function parseHash(): Partial<Pick<AppState, "view" | "materialSlug" | "forumPostId">> {
+function parseHash(): Partial<Pick<AppState, "view" | "materialSlug" | "forumPostId" | "verifyCertId">> {
   const hash = window.location.hash.replace(/^#\/?/, "");
   const parts = hash.split("/").filter(Boolean);
 
-  if (parts.length === 0) return { view: "home", materialSlug: null, forumPostId: null };
+  if (parts.length === 0) return { view: "home", materialSlug: null, forumPostId: null, verifyCertId: null };
 
   if (parts[0] === "materi") {
-    if (parts[1]) return { view: "detail", materialSlug: parts[1], forumPostId: null };
-    return { view: "materi", materialSlug: null, forumPostId: null };
+    if (parts[1]) return { view: "detail", materialSlug: parts[1], forumPostId: null, verifyCertId: null };
+    return { view: "materi", materialSlug: null, forumPostId: null, verifyCertId: null };
   }
-  if (parts[0] === "dashboard") return { view: "dashboard", materialSlug: null, forumPostId: null };
-  if (parts[0] === "admin") return { view: "admin", materialSlug: null, forumPostId: null };
-  if (parts[0] === "final-quiz") return { view: "finalQuiz", materialSlug: null, forumPostId: null };
+  if (parts[0] === "dashboard") return { view: "dashboard", materialSlug: null, forumPostId: null, verifyCertId: null };
+  if (parts[0] === "admin") return { view: "admin", materialSlug: null, forumPostId: null, verifyCertId: null };
+  if (parts[0] === "final-quiz") return { view: "finalQuiz", materialSlug: null, forumPostId: null, verifyCertId: null };
+  if (parts[0] === "certificate") return { view: "certificate", materialSlug: null, forumPostId: null, verifyCertId: null };
+  if (parts[0] === "verify") {
+    if (parts[1]) return { view: "verify", materialSlug: null, forumPostId: null, verifyCertId: parts[1] };
+    return { view: "verify", materialSlug: null, forumPostId: null, verifyCertId: null };
+  }
   if (parts[0] === "forum") {
-    if (parts[1]) return { view: "forum", materialSlug: null, forumPostId: parts[1] };
-    return { view: "forum", materialSlug: null, forumPostId: null };
+    if (parts[1]) return { view: "forum", materialSlug: null, forumPostId: parts[1], verifyCertId: null };
+    return { view: "forum", materialSlug: null, forumPostId: null, verifyCertId: null };
   }
 
-  return { view: "home", materialSlug: null, forumPostId: null };
+  return { view: "home", materialSlug: null, forumPostId: null, verifyCertId: null };
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
   view: "home",
   materialSlug: null,
   forumPostId: null,
+  verifyCertId: null,
   user: null,
   authDialog: null,
 
@@ -114,7 +126,17 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
   goFinalQuiz: () => {
     window.location.hash = "/final-quiz";
-    set({ view: "finalQuiz", materialSlug: null, forumPostId: null });
+    set({ view: "finalQuiz", materialSlug: null, forumPostId: null, verifyCertId: null });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
+  goCertificate: () => {
+    window.location.hash = "/certificate";
+    set({ view: "certificate", materialSlug: null, forumPostId: null, verifyCertId: null });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
+  goVerify: (certId: string) => {
+    window.location.hash = `/verify/${certId}`;
+    set({ view: "verify", materialSlug: null, forumPostId: null, verifyCertId: certId });
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   goBack: () => {

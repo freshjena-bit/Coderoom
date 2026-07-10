@@ -14,6 +14,8 @@ import { DashboardView } from "@/components/views/dashboard-view";
 import { ForumView } from "@/components/views/forum-view";
 import { AdminView } from "@/components/views/admin-view";
 import { FinalQuizView } from "@/components/views/final-quiz-view";
+import { CertificateView } from "@/components/views/certificate-view";
+import { VerifyView } from "@/components/views/verify-view";
 
 export default function Home() {
   const { view, syncFromHash, setUser } = useAppStore();
@@ -38,6 +40,8 @@ export default function Home() {
         {view === "forum" && <ForumView />}
         {view === "admin" && <AdminView />}
         {view === "finalQuiz" && <FinalQuizView />}
+        {view === "certificate" && <CertificateView />}
+        {view === "verify" && <VerifyView />}
       </main>
       <Footer />
       <AuthDialog />

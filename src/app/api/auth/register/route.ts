@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
         password: hashPassword(password),
         role: "USER",
       },
-      select: { id: true, name: true, email: true, role: true, banned: true, violationCount: true },
+      select: { id: true, name: true, email: true, role: true, banned: true, violationCount: true, certificateId: true },
     });
 
     await setSessionCookie(user.id);

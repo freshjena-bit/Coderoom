@@ -13,6 +13,7 @@ import {
   X,
   LogOut,
   ShieldCheck,
+  Award,
 } from "lucide-react";
 import { useAppStore } from "@/lib/store";
 import { Logo } from "@/components/logo";
@@ -36,18 +37,19 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const { view, goHome, goMateri, goDashboard, goForum, goAdmin, user, openAuth, setUser } =
+  const { view, goHome, goMateri, goDashboard, goForum, goAdmin, goCertificate, user, openAuth, setUser } =
     useAppStore();
   const { setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleNav = (target: "home" | "materi" | "dashboard" | "forum" | "admin") => {
+  const handleNav = (target: "home" | "materi" | "dashboard" | "forum" | "admin" | "certificate") => {
     setMobileOpen(false);
     if (target === "home") goHome();
     else if (target === "materi") goMateri();
     else if (target === "dashboard") goDashboard();
     else if (target === "forum") goForum();
     else if (target === "admin") goAdmin();
+    else if (target === "certificate") goCertificate();
   };
 
   const handleLogout = async () => {
@@ -147,6 +149,10 @@ export function Navbar() {
                 <DropdownMenuItem onClick={() => handleNav("materi")}>
                   <BookOpen className="mr-2 h-4 w-4" />
                   Materi Belajar
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleNav("certificate")}>
+                  <Award className="mr-2 h-4 w-4" />
+                  Sertifikat
                 </DropdownMenuItem>
                 {user.role === "ADMIN" && (
                   <>

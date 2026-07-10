@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export function DashboardView() {
-  const { user, openAuth, goMateri, goDetail } = useAppStore();
+  const { user, openAuth, goMateri, goDetail, goCertificate } = useAppStore();
 
   const { data: progressData, isLoading } = useQuery({
     queryKey: ["progress"],
@@ -300,34 +300,17 @@ export function DashboardView() {
               {canGetCertificate ? (
                 <>
                   <p className="mb-3 text-sm text-muted-foreground">
-                    🎉 Selamat! Anda telah menyelesaikan semua materi. Klaim sertifikat Anda via WhatsApp.
+                    🎉 Selamat! Anda telah menyelesaikan semua materi.
                   </p>
                   <Button
-                    className="w-full bg-[#25D366] text-white hover:bg-[#1ebe5d]"
-                    onClick={() => {
-                      const msg = `🎉 HALO! Saya ingin KLAIM SERTIFIKAT CyberLab!
-
-📋 Informasi Akun:
-• Nama: ${user.name}
-• Email: ${user.email}
-• Tanggal: ${new Date().toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" })}
-
-🏆 Status:
-• Completion Rate: 100%
-• Materi selesai: ${stats.completedCount}/${stats.totalMaterials}
-• Rata-rata Quiz: ${avgScore}%
-
-Saya telah menyelesaikan seluruh program CyberLab. Mohon informasi untuk pengambilan sertifikat. Terima kasih!`;
-                      const url = `https://wa.me/6283114593730?text=${encodeURIComponent(msg)}`;
-                      window.open(url, "_blank");
-                      toast.success("Mengarahkan ke WhatsApp...");
-                    }}
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    onClick={goCertificate}
                   >
-                    <MessageCircle className="mr-2 h-4 w-4" />
-                    Klaim Sertifikat via WhatsApp
+                    <Award className="mr-2 h-4 w-4" />
+                    Lihat Sertifikat
                   </Button>
                   <p className="mt-2 text-center text-xs text-muted-foreground">
-                    → Sertifikat tidak bisa didownload langsung. Hubungi admin via WhatsApp.
+                    → Sertifikat berisi QR code untuk verifikasi keaslian
                   </p>
                 </>
               ) : (

@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     await setSessionCookie(user.id);
 
     return NextResponse.json({
-      user: { id: user.id, name: user.name, email: user.email, role: user.role, banned: user.banned, violationCount: user.violationCount },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role, banned: user.banned, violationCount: user.violationCount, certificateId: user.certificateId },
     });
   } catch (error) {
     console.error("Login error:", error);

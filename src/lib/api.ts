@@ -172,6 +172,51 @@ export const progressApi = {
     ),
 };
 
+// Certificate
+export interface CertificateInfo {
+  certificateId: string;
+  issuedAt: string | null;
+}
+
+export interface CertificateMeResponse {
+  user: { id: string; name: string; email: string } | null;
+  certificate: CertificateInfo | null;
+  stats: {
+    totalMaterials: number;
+    completedCount: number;
+    completionRate: number;
+    avgScore: number;
+  };
+}
+
+export interface CertificateVerifyResponse {
+  valid: boolean;
+  certificate?: {
+    certificateId: string;
+    name: string;
+    email: string;
+    issuedAt: string | null;
+    completionRate: number;
+    materialsCompleted: string;
+    avgQuizScore: number;
+    programName: string;
+    issuer: string;
+  };
+  error?: string;
+}
+
+export const certificateApi = {
+  generate: () =>
+    api<{ certificateId: string; issuedAt: string | null; name: string; message: string }>(
+      "/api/certificate/generate",
+      { method: "POST" }
+    ),
+  me: () =>
+    api<CertificateMeResponse>("/api/certificate/me"),
+  verify: (id: string) =>
+    api<CertificateVerifyResponse>(`/api/certificate/verify/${id}`),
+};
+
 // Forum
 export const forumApi = {
   list: () => api<{ posts: ForumPostSummary[] }>("/api/forum"),
