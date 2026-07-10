@@ -361,16 +361,21 @@ async function main() {
   await db.user.deleteMany();
   console.log("  ✓ Cleaned existing data");
 
-  // Create admin user
+  // Create admin user — credentials from environment variables (more secure)
+  const adminName = process.env.ADMIN_NAME || "Admin CyberLab";
+  const adminEmail = process.env.ADMIN_EMAIL || "admin@coderoom.id";
+  const adminPassword = process.env.ADMIN_PASSWORD || "admin12345";
+
   const adminUser = await db.user.create({
     data: {
-      name: "Admin CyberLab",
-      email: "admin@coderoom.id",
-      password: hashPassword("admin12345"),
+      name: adminName,
+      email: adminEmail.toLowerCase().trim(),
+      password: hashPassword(adminPassword),
       role: "ADMIN",
     },
   });
   console.log(`  ✓ Created admin user: ${adminUser.email}`);
+  console.log(`    (Credentials loaded from ADMIN_EMAIL / ADMIN_PASSWORD env vars)`);
 
   // Insert all materials with ENHANCED content
   const allMaterials = [...contentLevels1to3, ...contentLevels4to5, ...contentLevels6to8];

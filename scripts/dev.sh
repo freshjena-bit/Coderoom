@@ -12,7 +12,7 @@ bash /home/z/postgres/ensure-postgres.sh
 
 # 2. Load DATABASE_URL and DIRECT_URL from .env (overrides any shell env var)
 if [ -f .env ]; then
-  for var in DATABASE_URL DIRECT_URL SESSION_SECRET; do
+  for var in DATABASE_URL DIRECT_URL SESSION_SECRET ADMIN_NAME ADMIN_EMAIL ADMIN_PASSWORD; do
     VAL=$(grep "^${var}=" .env | head -1 | cut -d= -f2-)
     if [ -n "$VAL" ]; then
       export "$var=$VAL"
