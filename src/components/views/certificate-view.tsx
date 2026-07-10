@@ -1,11 +1,10 @@
 "use client";
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   Award,
   Lock,
   MessageCircle,
-  Download,
   ShieldCheck,
   QrCode,
   Copy,
@@ -26,8 +25,6 @@ const WHATSAPP_NUMBER = "6283114593730";
 
 export function CertificateView() {
   const { user, openAuth, goHome, goDashboard } = useAppStore();
-  const queryClient = useQueryClient();
-  const [generating, setGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const { data, isLoading } = useQuery({
@@ -73,19 +70,6 @@ export function CertificateView() {
   const qrCodeUrl = certificate
     ? `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(verifyUrl)}&bgcolor=ffffff&color=000000&margin=10`
     : "";
-
-  const handleGenerate = async () => {
-    setGenerating(true);
-    try {
-      await certificateApi.generate();
-      queryClient.invalidateQueries({ queryKey: ["certificate-me"] });
-      toast.success("Sertifikat berhasil dibuat! 🎉");
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Gagal membuat sertifikat");
-    } finally {
-      setGenerating(false);
-    }
-  };
 
   const handleCopyId = () => {
     if (certificate) {
@@ -144,24 +128,29 @@ Saya telah menyelesaikan seluruh program CyberLab. Mohon informasi untuk pengamb
         </Card>
       )}
 
-      {/* Eligible but no certificate yet */}
+      {/* Eligible but no certificate yet — user must claim via WhatsApp */}
       {canGetCertificate && !certificate && (
         <Card className="border-primary/30 bg-primary/5">
           <CardContent className="py-10 text-center">
             <Award className="mx-auto mb-3 h-12 w-12 text-primary" />
             <h2 className="text-xl font-bold text-primary">Selamat! Anda Berhak Mendapat Sertifikat!</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Anda telah menyelesaikan 100% materi. Generate sertifikat Anda sekarang.
+              Anda telah menyelesaikan 100% materi. Klaim sertifikat Anda via WhatsApp — admin akan
+              membuatkan sertifikat resmi dengan QR code verifikasi.
             </p>
             <Button
-              onClick={handleGenerate}
-              disabled={generating}
-              className="mt-5 bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={handleWhatsAppClaim}
+              className="mt-5 bg-[#25D366] text-white hover:bg-[#1ebe5d]"
               size="lg"
             >
-              <Award className="mr-2 h-4 w-4" />
-              {generating ? "Membuat..." : "Generate Sertifikat"}
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Klaim Sertifikat via WhatsApp
             </Button>
+            <p className="mt-3 text-xs text-muted-foreground">
+              → Admin akan memverifikasi kelulusan Anda dan membuat sertifikat dengan QR code.
+              <br />
+              Sertifikat berisi QR code yang bisa di-scan siapa saja untuk verifikasi keaslian.
+            </p>
           </CardContent>
         </Card>
       )}

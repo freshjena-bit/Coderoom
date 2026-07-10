@@ -22,6 +22,8 @@ export async function GET() {
       role: true,
       banned: true,
       violationCount: true,
+      certificateId: true,
+      certificateIssuedAt: true,
       createdAt: true,
       _count: {
         select: {

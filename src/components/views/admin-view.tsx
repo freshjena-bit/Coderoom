@@ -17,6 +17,9 @@ import {
   CheckCircle2,
   Search,
   AlertTriangle,
+  QrCode,
+  Copy,
+  ExternalLink,
 } from "lucide-react";
 import { useState } from "react";
 import { useAppStore } from "@/lib/store";
@@ -104,7 +107,7 @@ export function AdminView() {
       </div>
 
       <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5">
           <TabsTrigger value="overview" className="gap-1.5">
             <LayoutDashboard className="h-4 w-4" />
             <span className="hidden sm:inline">Overview</span>
@@ -121,6 +124,10 @@ export function AdminView() {
             <MessageSquare className="h-4 w-4" />
             <span className="hidden sm:inline">Forum</span>
           </TabsTrigger>
+          <TabsTrigger value="certificate" className="gap-1.5">
+            <Award className="h-4 w-4" />
+            <span className="hidden sm:inline">Sertifikat</span>
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="mt-6">
@@ -134,6 +141,9 @@ export function AdminView() {
         </TabsContent>
         <TabsContent value="forum" className="mt-6">
           <ForumTab />
+        </TabsContent>
+        <TabsContent value="certificate" className="mt-6">
+          <CertificateTab />
         </TabsContent>
       </Tabs>
     </div>
@@ -698,6 +708,213 @@ function ForumTab() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+    </div>
+  );
+}
+
+// ============ CERTIFICATE TAB (Admin) ============
+function CertificateTab() {
+  const queryClient = useQueryClient();
+  const { goVerify } = useAppStore();
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-users"],
+    queryFn: adminApi.users,
+  });
+  const [generating, setGenerating] = useState<string | null>(null);
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
+
+  const users = data?.users || [];
+  // Users eligible for certificate (100% completed)
+  const eligibleUsers = users.filter(
+    (u) => u._count.progress >= 82 && !u.banned
+  );
+  // Users who already have a certificate
+  const certifiedUsers = eligibleUsers.filter((u) => u.certificateId);
+
+  const handleGenerate = async (userId: string) => {
+    setGenerating(userId);
+    try {
+      const res = await fetch("/api/admin/certificate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal membuat sertifikat");
+      toast.success(`Sertifikat dibuat: ${data.certificateId}`);
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+      setSelectedUser(userId);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Gagal");
+    } finally {
+      setGenerating(null);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-3">
+        {[1, 2, 3].map((i) => (
+          <Skeleton key={i} className="h-20" />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="rounded-lg border border-primary/30 bg-primary/5 p-4">
+        <p className="flex items-center gap-2 font-medium text-primary">
+          <Award className="h-4 w-4" />
+          Manajemen Sertifikat
+        </p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Admin dapat membuat sertifikat (dengan QR code verifikasi) untuk user yang sudah menyelesaikan 100% materi.
+          User tidak bisa generate sendiri — harus klaim via WhatsApp, lalu admin buatkan di sini.
+        </p>
+      </div>
+
+      {eligibleUsers.length === 0 ? (
+        <Card className="border-dashed">
+          <CardContent className="py-12 text-center text-muted-foreground">
+            <Award className="mx-auto mb-2 h-10 w-10 text-muted-foreground/50" />
+            Belum ada user yang eligible untuk sertifikat.
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="space-y-2">
+          <p className="text-sm font-medium text-muted-foreground">
+            User Eligible ({eligibleUsers.length}) — Sudah sertifikat: {certifiedUsers.length}
+          </p>
+          {eligibleUsers.map((u) => {
+            const certId = u.certificateId;
+            const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+            const verifyUrl = certId ? `${baseUrl}/#/verify/${certId}` : "";
+            const qrUrl = certId
+              ? `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(verifyUrl)}&bgcolor=ffffff&color=000000&margin=5`
+              : "";
+            const isSelected = selectedUser === u.id;
+
+            return (
+              <Card key={u.id} className="border-border/60">
+                <CardContent className="p-4">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    {/* User info */}
+                    <div className="flex flex-1 items-center gap-3">
+                      <Avatar className="h-10 w-10 shrink-0">
+                        <AvatarFallback className="bg-primary/15 text-primary text-sm font-semibold">
+                          {u.name.charAt(0).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate font-medium">{u.name}</p>
+                        <p className="truncate text-xs text-muted-foreground">{u.email}</p>
+                        <div className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <CheckCircle2 className="h-3 w-3" />
+                            {u._count.progress} materi
+                          </span>
+                          {certId && (
+                            <Badge className="text-xs gap-1 bg-primary text-primary-foreground">
+                              <Award className="h-2.5 w-2.5" />
+                              Sertifikat
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-2">
+                      {certId ? (
+                        <>
+                          <code className="rounded bg-muted px-2 py-1 text-xs font-mono">{certId}</code>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setSelectedUser(isSelected ? null : u.id)}
+                          >
+                            <QrCode className="mr-1 h-3.5 w-3.5" />
+                            {isSelected ? "Sembunyikan" : "Lihat QR"}
+                          </Button>
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="h-8 w-8"
+                            onClick={() => goVerify(certId)}
+                            title="Buka halaman verifikasi"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </Button>
+                        </>
+                      ) : (
+                        <Button
+                          size="sm"
+                          className="bg-primary text-primary-foreground hover:bg-primary/90"
+                          disabled={generating === u.id}
+                          onClick={() => handleGenerate(u.id)}
+                        >
+                          {generating === u.id ? "Membuat..." : "Buat Sertifikat"}
+                          {generating !== u.id && <Award className="ml-1 h-3.5 w-3.5" />}
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* QR Code preview (expandable) */}
+                  {isSelected && certId && (
+                    <div className="mt-4 flex flex-col items-center gap-3 rounded-lg border border-border/60 bg-muted/30 p-4 sm:flex-row sm:items-start">
+                      <div className="rounded-lg border-2 border-primary/20 bg-white p-2">
+                        <img src={qrUrl} alt="QR Code" width={100} height={100} className="h-[100px] w-[100px]" />
+                      </div>
+                      <div className="flex-1 text-center sm:text-left">
+                        <p className="text-sm font-medium">QR Code Verifikasi Sertifikat</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Cetak QR code ini di sertifikat fisik. Saat di-scan, akan membuka halaman verifikasi
+                          yang menampilkan data sertifikat (nama, ID, completion, tanggal).
+                        </p>
+                        <div className="mt-2 space-y-1 text-xs">
+                          <p><span className="text-muted-foreground">ID Sertifikat:</span> <code className="font-mono font-bold">{certId}</code></p>
+                          <p><span className="text-muted-foreground">URL Verifikasi:</span> {verifyUrl}</p>
+                        </div>
+                        <div className="mt-3 flex gap-2 justify-center sm:justify-start">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              navigator.clipboard.writeText(verifyUrl);
+                              toast.success("URL verifikasi disalin!");
+                            }}
+                          >
+                            <Copy className="mr-1 h-3 w-3" />
+                            Copy URL
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => window.open(qrUrl, "_blank")}
+                          >
+                            <ExternalLink className="mr-1 h-3 w-3" />
+                            Buka QR
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => goVerify(certId)}
+                          >
+                            <ExternalLink className="mr-1 h-3 w-3" />
+                            Preview Verifikasi
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

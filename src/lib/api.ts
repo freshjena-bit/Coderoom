@@ -259,6 +259,8 @@ export interface AdminUser {
   role: string;
   banned: boolean;
   violationCount: number;
+  certificateId: string | null;
+  certificateIssuedAt: string | null;
   createdAt: string;
   createdAtFormatted: string;
   _count: { progress: number; forumPosts: number };
