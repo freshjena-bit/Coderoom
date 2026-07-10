@@ -26,6 +26,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useAntiCheat } from "@/lib/use-anti-cheat";
 
 const TIME_PER_QUESTION = 30;
 const PASSING_SCORE = 75;
@@ -250,6 +251,27 @@ function QuizSection({
   useEffect(() => { answersRef.current = answers; }, [answers]);
   useEffect(() => { questionsRef.current = questions; }, [questions]);
 
+  // Reset quiz to idle (called when anti-cheat detects violation)
+  const resetQuizToIdle = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setPhase("idle");
+    setQuestions([]);
+    setAnswers([]);
+    setCurrentIndex(0);
+    setSelectedAnswer(null);
+    setShowFeedback(false);
+    setTimeLeft(TIME_PER_QUESTION);
+  }, []);
+
+  // Anti-cheat: detect tab switch, window blur, navigation during quiz
+  useAntiCheat({
+    enabled: phase === "playing",
+    onViolation: resetQuizToIdle,
+  });
+
   const totalQuestions = questions.length;
   const correctCount = answers.filter((a, i) => a === questions[i]?.answer).length;
   const score = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
@@ -424,6 +446,20 @@ function QuizSection({
               <li>• Makin jauh belajar, makin banyak soal quiz (maks. 30 soal)</li>
               <li>• Soal diacak setiap kali mengulang — tidak bisa mencontek!</li>
               <li>• Jika waktu habis, soal otomatis lanjut (dijawab salah)</li>
+            </ul>
+          </div>
+
+          {/* Anti-cheat warning */}
+          <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
+            <p className="flex items-center gap-2 font-medium">
+              <AlertCircle className="h-4 w-4" />
+              Anti-Cheat Warning!
+            </p>
+            <ul className="mt-1.5 space-y-1 text-xs text-destructive/80">
+              <li>• Jangan ganti tab, minimize window, atau keluar dari quiz!</li>
+              <li>• Pelanggaran = quiz diulang dari awal</li>
+              <li>• 5x pelanggaran = akun diblokir permanen</li>
+              <li>• Hubungi admin via WhatsApp jika akun terblokir</li>
             </ul>
           </div>
           <Button

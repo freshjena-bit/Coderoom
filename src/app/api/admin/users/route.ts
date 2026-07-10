@@ -20,6 +20,8 @@ export async function GET() {
       name: true,
       email: true,
       role: true,
+      banned: true,
+      violationCount: true,
       createdAt: true,
       _count: {
         select: {

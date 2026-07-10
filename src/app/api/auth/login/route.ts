@@ -25,10 +25,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Block banned users
+    if (user.banned) {
+      return NextResponse.json(
+        {
+          error: `Akun Anda diblokir karena terdeteksi mencontek (${user.violationCount}x pelanggaran). Hubungi admin via WhatsApp: wa.me/6283114593730 untuk membuka kembali akun Anda.`,
+          banned: true,
+          violationCount: user.violationCount,
+        },
+        { status: 403 }
+      );
+    }
+
     await setSessionCookie(user.id);
 
     return NextResponse.json({
-      user: { id: user.id, name: user.name, email: user.email, role: user.role },
+      user: { id: user.id, name: user.name, email: user.email, role: user.role, banned: user.banned, violationCount: user.violationCount },
     });
   } catch (error) {
     console.error("Login error:", error);

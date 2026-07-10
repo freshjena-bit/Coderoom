@@ -376,6 +376,34 @@ function UsersTab() {
                         "User"
                       )}
                     </Badge>
+                    {u.banned && (
+                      <Badge variant="destructive" className="text-xs">
+                        🚫 Banned ({u.violationCount}x)
+                      </Badge>
+                    )}
+                    {!u.banned && u.violationCount > 0 && (
+                      <Badge variant="secondary" className="text-xs text-amber-600">
+                        ⚠️ {u.violationCount}/5 violations
+                      </Badge>
+                    )}
+                    {u.banned && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-primary hover:bg-primary/10"
+                        onClick={async () => {
+                          try {
+                            await fetch(`/api/admin/users/${u.id}/unban`, { method: "POST" });
+                            queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+                            toast.success("User berhasil di-unban");
+                          } catch {
+                            toast.error("Gagal unban user");
+                          }
+                        }}
+                      >
+                        Unban
+                      </Button>
+                    )}
                     <Button
                       size="sm"
                       variant="outline"

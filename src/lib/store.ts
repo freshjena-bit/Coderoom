@@ -16,6 +16,8 @@ export interface SafeUser {
   name: string;
   email: string;
   role: string; // "USER" | "ADMIN"
+  banned: boolean;
+  violationCount: number;
   createdAt: string;
 }
 

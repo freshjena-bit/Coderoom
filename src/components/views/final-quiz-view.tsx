@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useAntiCheat } from "@/lib/use-anti-cheat";
 
 const TIME_PER_QUESTION = 30;
 const PASSING_SCORE = 75;
@@ -45,6 +46,27 @@ export function FinalQuizView() {
 
   useEffect(() => { answersRef.current = answers; }, [answers]);
   useEffect(() => { questionsRef.current = questions; }, [questions]);
+
+  // Reset quiz to idle (called when anti-cheat detects violation)
+  const resetQuizToIdle = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setPhase("idle");
+    setQuestions([]);
+    setAnswers([]);
+    setCurrentIndex(0);
+    setSelectedAnswer(null);
+    setShowFeedback(false);
+    setTimeLeft(TIME_PER_QUESTION);
+  }, []);
+
+  // Anti-cheat: detect tab switch, window blur, navigation during quiz
+  useAntiCheat({
+    enabled: phase === "playing",
+    onViolation: resetQuizToIdle,
+  });
 
   const totalQuestions = questions.length;
   const correctCount = answers.filter((a, i) => a === questions[i]?.answer).length;

@@ -140,6 +140,25 @@ export const quizApi = {
     api<QuizPoolResponse>(`/api/quiz/${slug}`),
   getFinal: () =>
     api<QuizPoolResponse & { isFinal: boolean }>(`/api/quiz/final`),
+  reportViolation: (reason: string) =>
+    api<{
+      violationCount: number;
+      banned: boolean;
+      maxViolations: number;
+      remaining: number;
+      reason: string;
+      message: string;
+    }>("/api/quiz/violation", {
+      method: "POST",
+      body: JSON.stringify({ reason }),
+    }),
+  getViolationStatus: () =>
+    api<{
+      violationCount: number;
+      banned: boolean;
+      maxViolations: number;
+      remaining: number;
+    }>("/api/quiz/violation"),
 };
 
 // Progress
@@ -193,6 +212,8 @@ export interface AdminUser {
   name: string;
   email: string;
   role: string;
+  banned: boolean;
+  violationCount: number;
   createdAt: string;
   createdAtFormatted: string;
   _count: { progress: number; forumPosts: number };

@@ -49,7 +49,13 @@ export function AuthDialog() {
       if (user.role === "ADMIN") goAdmin();
       else goDashboard();
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Login gagal");
+      const message = err instanceof Error ? err.message : "Login gagal";
+      // Check if banned
+      if (message.includes("diblokir") || message.includes("WhatsApp")) {
+        toast.error(message, { duration: 10000 });
+      } else {
+        toast.error(message);
+      }
     } finally {
       setLoading(false);
     }
