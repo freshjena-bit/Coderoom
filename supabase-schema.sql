@@ -1,6 +1,7 @@
 -- ================================================
--- CyberLab Database Setup Script
--- Copy-paste ini ke Supabase SQL Editor lalu klik Run
+-- CyberLab Database Schema Setup
+-- Copy-paste ini ke Supabase SQL Editor → klik Run
+-- Setelah ini, deploy ke Vercel lalu buka /api/setup
 -- ================================================
 
 -- 1. DROP existing tables (jika ada)
@@ -12,6 +13,7 @@ DROP TABLE IF EXISTS "Material" CASCADE;
 DROP TABLE IF EXISTS "User" CASCADE;
 
 -- 2. CREATE TABLES
+
 CREATE TABLE "User" (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
@@ -78,5 +80,22 @@ CREATE TABLE "ForumPost" (
 CREATE INDEX "ForumPost_userId_idx" ON "ForumPost"("userId");
 
 CREATE TABLE "ForumReply" (
+    id TEXT PRIMARY KEY,
+    "postId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    content TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "ForumReply_postId_fkey" FOREIGN KEY ("postId") REFERENCES "ForumPost"(id) ON DELETE CASCADE,
+    CONSTRAINT "ForumReply_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"(id) ON DELETE CASCADE
+);
+CREATE INDEX "ForumReply_postId_idx" ON "ForumReply"("postId");
 
--- Schema selesai. Jalankan file supabase-seed-data.sql untuk insert data.
+-- ================================================
+-- SCHEMA SELESAI! 6 tabel berhasil dibuat.
+--
+-- LANGKAH SELANJUTNYA:
+-- 1. Deploy ke Vercel (set DATABASE_URL + DIRECT_URL di env vars)
+-- 2. Buka URL Vercel Anda + /api/setup
+--    Contoh: https://coderoom.vercel.app/api/setup
+-- 3. Data (82 materi + admin) otomatis terisi!
+-- ================================================
