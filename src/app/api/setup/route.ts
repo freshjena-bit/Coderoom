@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    // Always clean ALL data first (idempotent — safe to run multiple times)
+    // Always clean ALL data first (correct order: child tables first)
     await db.forumReply.deleteMany();
     await db.forumPost.deleteMany();
     await db.progress.deleteMany();
@@ -143,13 +143,23 @@ export async function POST(req: NextRequest) {
     await db.material.deleteMany();
     await db.user.deleteMany();
 
-    // Create admin user
+    // Create admin user (upsert to handle existing email)
     const adminName = process.env.ADMIN_NAME || "Admin CyberLab";
     const adminEmail = process.env.ADMIN_EMAIL || "admin@coderoom.id";
     const adminPassword = process.env.ADMIN_PASSWORD || "admin12345";
 
-    const adminUser = await db.user.create({
-      data: {
+    const adminUser = await db.user.upsert({
+      where: { email: adminEmail.toLowerCase().trim() },
+      update: {
+        name: adminName,
+        password: hashPassword(adminPassword),
+        role: "ADMIN",
+        banned: false,
+        violationCount: 0,
+        certificateId: null,
+        certificateIssuedAt: null,
+      },
+      create: {
         name: adminName,
         email: adminEmail.toLowerCase().trim(),
         password: hashPassword(adminPassword),
@@ -157,12 +167,23 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Insert all materials
+    // Insert all materials (upsert to handle existing slugs)
     const allMaterials = [...contentLevels1to3, ...contentLevels4to5, ...contentLevels6to8];
     for (const mat of allMaterials) {
       const enhancedContent = enhanceContent(mat);
-      await db.material.create({
-        data: {
+      await db.material.upsert({
+        where: { slug: mat.slug },
+        update: {
+          level: mat.level,
+          order: mat.order,
+          title: mat.title,
+          description: mat.description,
+          content: enhancedContent,
+          icon: mat.icon,
+          isProject: mat.isProject,
+          quiz: JSON.stringify(mat.quiz),
+        },
+        create: {
           level: mat.level,
           order: mat.order,
           title: mat.title,
