@@ -120,13 +120,13 @@ export default function SetupPage() {
             </div>
           )}
 
-          <div className="rounded-lg border border-border/60 bg-muted/30 p-3 text-xs text-muted-foreground">
-            <p className="font-medium">ℹ️ Info:</p>
+          <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 text-xs text-amber-700 dark:text-amber-400">
+            <p className="font-medium">⚠️ Perhatian:</p>
             <ul className="mt-1 space-y-0.5">
               <li>• Tombol ini akan mengisi database dengan 82 materi + akun admin</li>
-              <li>• Hanya perlu diklik SEKALI saja</li>
+              <li>• Data lama akan dihapus dan diisi ulang (reset total)</li>
               <li>• Login admin pakai email & password dari Environment Variables</li>
-              <li>• Jika sudah pernah setup, tidak akan mengisi ulang</li>
+              <li>• Aman diklik berkali-kali (selalu reset ke data awal)</li>
             </ul>
           </div>
         </CardContent>

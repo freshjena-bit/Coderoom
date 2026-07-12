@@ -129,22 +129,19 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    // Security: require a setup key if set, otherwise allow (first-time setup)
     const body = await req.json().catch(() => ({}));
     const setupKey = process.env.SETUP_KEY;
     if (setupKey && body.key !== setupKey) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    // Check if already seeded
-    const materialCount = await db.material.count();
-    if (materialCount > 0) {
-      return NextResponse.json({
-        status: "already_seeded",
-        message: `Database sudah berisi ${materialCount} materi. Tidak perlu setup lagi.`,
-        materialCount,
-      });
-    }
+    // Always clean ALL data first (idempotent — safe to run multiple times)
+    await db.forumReply.deleteMany();
+    await db.forumPost.deleteMany();
+    await db.progress.deleteMany();
+    await db.session.deleteMany();
+    await db.material.deleteMany();
+    await db.user.deleteMany();
 
     // Create admin user
     const adminName = process.env.ADMIN_NAME || "Admin CyberLab";
