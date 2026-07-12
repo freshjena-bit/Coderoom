@@ -1,4 +1,4 @@
-import { MaterialData } from "../src/lib/content-types";
+import { MaterialData } from "./content-types";
 
 export const contentLevels4to5: MaterialData[] = [
   // ============================================

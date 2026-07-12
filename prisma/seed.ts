@@ -1,8 +1,8 @@
 import { db } from "../src/lib/db";
 import { hashPassword } from "../src/lib/auth";
-import { contentLevels1to3 } from "./content-levels-1-3";
-import { contentLevels4to5 } from "./content-levels-4-5";
-import { contentLevels6to8 } from "./content-levels-6-8";
+import { contentLevels1to3 } from "../src/lib/content-levels-1-3";
+import { contentLevels4to5 } from "../src/lib/content-levels-4-5";
+import { contentLevels6to8 } from "../src/lib/content-levels-6-8";
 
 async function main() {
   console.log("🌱 Seeding database...");

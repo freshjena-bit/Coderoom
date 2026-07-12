@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { hashPassword } from "@/lib/auth";
-import { contentLevels1to3 } from "../../../prisma/content-levels-1-3";
-import { contentLevels4to5 } from "../../../prisma/content-levels-4-5";
-import { contentLevels6to8 } from "../../../prisma/content-levels-6-8";
+import { contentLevels1to3 } from "@/lib/content-levels-1-3";
+import { contentLevels4to5 } from "@/lib/content-levels-4-5";
+import { contentLevels6to8 } from "@/lib/content-levels-6-8";
 import type { MaterialData } from "@/lib/content-types";
 
 // Material-specific images

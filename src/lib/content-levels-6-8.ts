@@ -1,4 +1,4 @@
-import { MaterialData } from "../src/lib/content-types";
+import { MaterialData } from "./content-types";
 
 export const contentLevels6to8: MaterialData[] = [
   // ==================== LEVEL 6 - CYBERSECURITY (14) ====================
